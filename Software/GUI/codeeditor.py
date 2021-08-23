@@ -29,7 +29,7 @@ class CodeEditor(QPlainTextEdit):
 		painter.fillRect(event.rect(), Qt.lightGray)
 
 		block = self.firstVisibleBlock()
-		blockNumber = block.blockNumber();
+		blockNumber = block.blockNumber()
 		top = self.blockBoundingGeometry(block).translated(self.contentOffset()).top()
 		bottom = top + self.blockBoundingRect(block).height()
 
@@ -57,7 +57,7 @@ class CodeEditor(QPlainTextEdit):
 
 	@pyqtSlot(int)
 	def updateLineNumberAreaWidth(self, newBlockCount):
-		self.setViewportMargins(self.lineNumberAreaWidth(), 0, 0, 0);
+		self.setViewportMargins(self.lineNumberAreaWidth(), 0, 0, 0)
 
 	@pyqtSlot()
 	def highlightCurrentLine(self):
