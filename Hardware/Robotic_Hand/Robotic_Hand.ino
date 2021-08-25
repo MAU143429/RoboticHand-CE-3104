@@ -5,13 +5,19 @@ Servo servo2;
 Servo servo3;
 Servo servo4;
 Servo servo5;
+
 int salida = 2;
 
 
 void setup() {
   
-
+  Serial.begin(9600);
+  delay(30);
+  
+  // Asignacion del pin digital para sonido.
+  
   pinMode(salida,OUTPUT);
+  
   // Asignacion de los pines analogicos a cada uno de los servos
 
   servo1.attach(A4); // Pin analogico para el dedo pulgar  ---> 'P'
@@ -24,29 +30,27 @@ void setup() {
   servo3.write(0);
   servo4.write(180);
   servo5.write(180);
-  
-  
 }
+// Funcion move, permite mover los dedos recibiendo como parametro el dedo y el status de movimiento.
+void Move(String finger, String status_mov){
+  if(status_mov == "false"){
 
-void Move(char finger, bool status){
-  if(status == true){
-
-    if(finger == 'P'){
+    if(finger == "P"){
       servo1.write(180);
       tone (salida,1800,200);
-    }else if(finger == 'I'){
+    }else if(finger == "I"){
       servo2.write(180);
       tone (salida,2000,200);
-    }else if(finger == 'M'){
+    }else if(finger == "M"){
       servo3.write(180);
       tone (salida,2200,200);
-    }else if(finger == 'A'){
+    }else if(finger == "A"){
       servo4.write(0);
       tone (salida,2400,200);
-    }else if(finger == 'Q'){
+    }else if(finger == "Q"){
       servo5.write(0);
       tone (salida,2600,200);
-    }else if(finger == 'T'){
+    }else if(finger == "T"){
       servo1.write(180);
       servo2.write(180);
       servo3.write(180);
@@ -55,22 +59,22 @@ void Move(char finger, bool status){
       tone (salida,3000,200);
     }
   }else{
-    if(finger == 'P'){
+    if(finger == "P"){
       servo1.write(0);
       tone (salida,1800,200);
-    }else if(finger == 'I'){
+    }else if(finger == "I"){
       servo2.write(0);
       tone (salida,2000,200);
-    }else if(finger == 'M'){
+    }else if(finger == "M"){
       servo3.write(0);
       tone (salida,2200,200);
-    }else if(finger == 'A'){
+    }else if(finger == "A"){
       servo4.write(180);
       tone (salida,2400,200);
-    }else if(finger == 'Q'){
+    }else if(finger == "Q"){
       servo5.write(180);
       tone (salida,2600,200);
-    }else if(finger == 'T'){
+    }else if(finger == "T"){
       servo1.write(0);
       servo2.write(0);
       servo3.write(0);
@@ -81,7 +85,42 @@ void Move(char finger, bool status){
   }
 }
 
+// Recibe un timer que es la acnatidad de tiempo de delay y recibe una unidad.
+void Create_delays(int timer, String unit){
+
+  if(unit == "Seg"){
+    delay(timer*1000);
+  }else if(unit == "Min"){
+      delay(timer*10000);
+  }else{
+    delay(timer);
+  }
+}
+
+int pos1,pos2,pos3,delay_time;
+String cad,action,unit,finger,status_mov;
 void loop() {
+
+  if(Serial.available()){
+    cad = Serial.readString();
+    Serial.println(cad);
+    pos1 = cad.indexOf(',');
+    pos2 = cad.indexOf(';');
+    pos3 = cad.indexOf('/');
+    action  = cad.substring(0,pos1);
+    
+
+    if(action == "mov"){
+      finger = cad.substring(pos1+1,pos2);
+      status_mov = cad.substring(pos2+1,pos3);
+      Move(finger,status_mov);
+    }else{
+      delay_time = cad.substring(pos1+1,pos2).toInt();
+      unit = cad.substring(pos2+1,pos3);
+      Create_delays(delay_time,unit);
+    }
+  }
+
   /**
   tone (salida,1800,1000);
   servo1.write(180);
@@ -116,7 +155,7 @@ void loop() {
   delay(2000);
   servo5.write(0);
   delay(2000);
-  */
+  
   
   tone (salida,2000,5000);
   delay(5000);
@@ -153,6 +192,6 @@ void loop() {
   Move('Q',true);
   delay(6000);
   Move('T',false);
-  
+  */
  
 }
