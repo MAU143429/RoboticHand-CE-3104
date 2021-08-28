@@ -6,21 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1364</width>
-    <height>681</height>
+    <width>801</width>
+    <height>461</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="CodeEditor" name="textEdit">
+   <widget class="CodeEditor" name="codeEditor">
     <property name="geometry">
      <rect>
-      <x>3</x>
+      <x>0</x>
       <y>0</y>
-      <width>1361</width>
-      <height>681</height>
+      <width>671</width>
+      <height>321</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -32,7 +32,78 @@ color: rgb(255, 255, 255);</string>
      <string/>
     </property>
    </widget>
+   <widget class="QPlainTextEdit" name="output">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>321</y>
+      <width>671</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="plainText">
+     <string>&gt;&gt;&gt;
+</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="compileButton">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>0</y>
+      <width>131</width>
+      <height>231</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Compile</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="runButton">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>230</y>
+      <width>131</width>
+      <height>231</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Compile and Run</string>
+    </property>
+   </widget>
   </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>801</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionSave"/>
+    <addaction name="actionLoad"/>
+   </widget>
+   <addaction name="menuFile"/>
+  </widget>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionLoad">
+   <property name="text">
+    <string>Load</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -42,5 +113,22 @@ color: rgb(255, 255, 255);</string>
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>compileButton</sender>
+   <signal>clicked()</signal>
+   <receiver>codeEditor</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>732</x>
+     <y>13</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>666</x>
+     <y>145</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
