@@ -9,6 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QApplication, QWidget, QInputDialog, QFileDialog
+import os
 
 
 class Ui_MainWindow(object):
@@ -43,14 +45,19 @@ class Ui_MainWindow(object):
         MainWindow.setMenuBar(self.menuBar)
         self.actionSave = QtWidgets.QAction(MainWindow)
         self.actionSave.setObjectName("actionSave")
+        self.actionSave.setShortcut('Ctrl+S')
+        self.actionSave.triggered.connect(self.save)
         self.actionLoad = QtWidgets.QAction(MainWindow)
         self.actionLoad.setObjectName("actionLoad")
+        self.actionLoad.setShortcut('Ctrl+L')
+        self.actionLoad.triggered.connect(self.load)
         self.menuFile.addAction(self.actionSave)
         self.menuFile.addAction(self.actionLoad)
         self.menuBar.addAction(self.menuFile.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.compileButton.clicked.connect(self.test)
+        self.compileButton.clicked.connect(self.compile)
+        self.menuFile
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -64,7 +71,20 @@ class Ui_MainWindow(object):
         self.actionSave.setText(_translate("MainWindow", "Save"))
         self.actionLoad.setText(_translate("MainWindow", "Load"))
 
-    def test(self):
+    def save(self):
+        with open('Software/GUI/code.txt', 'w') as f:
+            code = self.codeEditor.toPlainText()
+            f.write(code)
+            f.close()
+
+    def load(self):
+        filename = QFileDialog.getOpenFileName()
+        path = filename[0]
+        with open(path, "r") as f:
+            self.codeEditor.setPlainText(f.read())
+            f.close()
+    def compile(self):
+        self.save()
         self.output.setPlainText(self.codeEditor.toPlainText())
 
 from codeeditor import CodeEditor
