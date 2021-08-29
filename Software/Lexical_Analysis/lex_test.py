@@ -23,7 +23,7 @@ t_MINUS   = r'-'
 t_TIMES   = r'\*'
 t_DIVIDE  = r'/'
 t_LPAREN  = r'\('
-t_RPAREN  = r'\)'
+t_RPAREN  = r'\)' 
 
 # A regular expression rule with some action code
 def t_NUMBER(t):
@@ -36,7 +36,7 @@ def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
-# A string containing ignored characters (spaces and tabs)
+# A string containing ignored characters (spaces, tabs and comments)
 t_ignore  = ' \t'
 t_ignore_COMMENT = r'\@.*'
 # Error handling rule
@@ -48,7 +48,7 @@ def t_error(t):
 lexer = lex.lex()
 
 # Test it out
-data = '''@comment
+data = '''4 + @comment
 3 + 4 * 10
 + -20 *2
 '''
