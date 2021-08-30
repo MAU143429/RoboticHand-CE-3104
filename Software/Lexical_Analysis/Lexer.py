@@ -38,9 +38,19 @@ class Lexer(object):
 
     literals = ['{', '}', ';', '(', ')', '+', '-', '*', '/', '=', '<', '>']
     def t_FN(self, t):
-        r'\fn'
+        r'fn'
         t.type = 'FN'
         t.value = 'fn'
+        return t
+    def t_IF(self, t):
+        r'if'
+        t.type = 'IF'
+        t.value = 'if'
+        return t
+    def t_ELSEIF(self, t):
+        r'else if'
+        t.type = 'ELSEIF'
+        t.value = 'else if'
         return t
     def t_ID(self, t):
         r'[a-zA-Z_][a-zA-Z_][a-zA-Z_][a-zA-Z_0-9+#+_+?]*'
@@ -83,7 +93,7 @@ m = Lexer()
 m.build()  
 # Test it out
 data = '''
-
+@commenta
 let esbueno?_# = 49;
 @declarar var
 let bc = True
@@ -93,6 +103,9 @@ while True{
 }
 loop{
     break;
+}
+if pat0 = 10{
+    let flap = False;
 }
 else if True{
     let acy# = 0;
