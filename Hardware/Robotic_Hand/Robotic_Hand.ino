@@ -17,8 +17,8 @@ void setup() {
   servo4.write(180);
   servo5.write(180);
   
-  Serial.begin(9600);
-  //delay(30);
+  tone (salida,2600,200);
+  
   
   // Asignacion del pin digital para sonido.
   
@@ -31,7 +31,7 @@ void setup() {
   servo3.attach(A2); // Pin analogico para el dedo medio   ---> 'M'
   servo4.attach(A1); // Pin analogico para el dedo anular  ---> 'A'
   servo5.attach(A0); // Pin analogico para el dedo meñique ---> 'Q' 
-  
+  Serial.begin(115200);
 }
 // Funcion move, permite mover los dedos recibiendo como parametro el dedo y el status de movimiento.
 void Move(String finger, String status_mov){
@@ -103,7 +103,42 @@ void Create_delays(int timer, String unit){
 int pos1,pos2,pos3,delay_time;
 String cad,action,unit,finger,status_mov;
 void loop() {
-  tone (salida,1800,1000);
+  
+  if(Serial.available()){
+    tone (salida,6000,400);
+    //Serial.println("HOLA SOY LA PLACA");
+    cad = Serial.readString(); // mov,T;false/
+    Serial.println("RECIBI ESTO DE PYTHON ---->"+ cad + "FINNN DE LA LINEA");
+    pos1 = cad.indexOf(',');
+    pos2 = cad.indexOf(';');
+    pos3 = cad.indexOf('/');
+    action  = cad.substring(0,pos1);
+   
+    
+    
+    if(action == "mov"){
+      finger = cad.substring(pos1+1,pos2);
+      status_mov = cad.substring(pos2+1,pos3);
+      Move(finger,status_mov);
+    }else if(action == "del"){
+      delay_time = cad.substring(pos1+1,pos2).toInt();
+      unit = cad.substring(pos2+1,pos3);
+      Create_delays(delay_time,unit);
+    }else{
+      tone (salida,2600,300);
+      delay(500);
+      tone (salida,2600,300);
+      delay(500);
+      tone (salida,2600,300);
+      delay(500);
+      tone (salida,2600,300);
+      delay(500);
+    }
+  }
+
+
+  /**
+   * tone (salida,1800,1000);
   servo1.write(180);
   delay(2000);
   servo1.write(0);
@@ -173,38 +208,7 @@ void loop() {
   Move("Q","true");
   delay(6000);
   Move("T","false");
-  if(Serial.available()){
-    tone (salida,6000,400);
-    //Serial.println("HOLA SOY LA PLACA");
-    cad = Serial.readString(); // mov,T;false/
-    //Serial.println("RECIBI ESTO DE PYTHON ---->"+ cad + "///////");
-    pos1 = cad.indexOf(',');
-    pos2 = cad.indexOf(';');
-    pos3 = cad.indexOf('/');
-    action  = cad.substring(0,pos1);
-   
-    
-    
-    if(action == "mov"){
-      finger = cad.substring(pos1+1,pos2);
-      status_mov = cad.substring(pos2+1,pos3);
-      Move(finger,status_mov);
-    }else if(action == "del"){
-      delay_time = cad.substring(pos1+1,pos2).toInt();
-      unit = cad.substring(pos2+1,pos3);
-      Create_delays(delay_time,unit);
-    }else{
-      tone (salida,2600,300);
-      delay(500);
-      tone (salida,2600,300);
-      delay(500);
-      tone (salida,2600,300);
-      delay(500);
-      tone (salida,2600,300);
-      delay(500);
-    }
-  }
-
+   */
  
   
  
