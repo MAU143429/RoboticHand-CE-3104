@@ -1,60 +1,44 @@
 import ply.lex as lex
+from Keywords import *
 import sys
 #Dictionary for keywords
-reserved = {
-        'if': 'IF',
-        'else if': 'ELSEIF',
-        'else': 'ELSE',
-        'while': 'WHILE',
-        'let': 'LET',
-        'for': 'FOR',
-        'loop': 'LOOP',
-        'fn': 'FN',
-        'integer': 'INTEGER',
-        'True': 'TRUE',
-        'False': 'FALSE',
-        'range': 'RANGE',
-        'break': 'BREAK',
-        'main': 'MAIN',
-        'return': 'RETURN',
 
-    }
+keywordsCollection = Keywords()
+readedTokens = []
 class Lexer(object):
-    global reserved
-    
-    # Regular expression rules for simple tokens
+    global keywordsCollection, readedTokens
+        # Regular expression rules for simple tokens
     t_EQEQ    = r'\=='
     t_ARROW   = r'\->'
     t_POINTS  = r'\..'
     # List of token names. 
-    tokens = (
-       'INT',
-       'EQEQ',
-       'ARROW',
-       'POINTS',
-       'ID',
-
-    ) + tuple(reserved.values())
-
-    literals = ['{', '}', ';', '(', ')', '+', '-', '*', '/', '=', '<', '>']
+    tokens = keywordsCollection.tokens
+    
+    literals = keywordsCollection.literals
     def t_FN(self, t):
         r'fn'
         t.type = 'FN'
         t.value = 'fn'
+        return t
+    def t_ELSEIF(self, t):
+        r'elseif'
+        t.type = 'ELSEIF'
+        t.value = 'elseif'
+        return t
+    def t_ELSE(self, t):
+        r'else'
+        t.type = 'ELSE'
+        t.value = 'else'
         return t
     def t_IF(self, t):
         r'if'
         t.type = 'IF'
         t.value = 'if'
         return t
-    def t_ELSEIF(self, t):
-        r'else if'
-        t.type = 'ELSEIF'
-        t.value = 'else if'
-        return t
+    
     def t_ID(self, t):
         r'[a-zA-Z_][a-zA-Z_][a-zA-Z_][a-zA-Z_0-9+#+_+?]*'
-        t.type = reserved.get(t.value,'ID')    # Check for reserved words
+        t.type = keywordsCollection.reserved.get(t.value,'ID')    # Check for reserved words
         return t
  # Define a rule so we can track line numbers
     def t_INT(self,t):
@@ -86,7 +70,8 @@ class Lexer(object):
              tok = self.lexer.token()
              if not tok:
                  break
-             print(tok)
+             readedTokens.append(tok)
+             
 
 # Build the lexer and try it out
 m = Lexer()
@@ -97,17 +82,16 @@ data = '''
 let esbueno?_# = 49;
 @declarar var
 let bc = True
-3 + 4 * 10;
 while True{
     let parte = 90
 }
 loop{
     break;
 }
-if pat0 = 10{
+if pat0 == 10{
     let flap = False;
 }
-else if True{
+elseif True{
     let acy# = 0;
 }
 fn main(){
@@ -116,3 +100,5 @@ fn main(){
 }
 '''         # Build the lexer
 m.test(data)     # Test it
+for tok in readedTokens:
+    print(tok)
