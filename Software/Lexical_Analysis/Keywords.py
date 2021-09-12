@@ -21,6 +21,9 @@ class Keywords:
         'break': 'BREAK',
         'main': 'MAIN',
         'return': 'RETURN',
+        'move' : 'MOVE',
+        'delay': 'DELAY',
+        
 
         }
         return reserved
@@ -34,7 +37,7 @@ class Keywords:
             )
         return tokens
     def getLiterals(self):
-        literals = ['{', '}', ';', '(', ')', '+', '-', '*', '/', '=', '<', '>']
+        literals = ['{', '}', ';', '(', ')','[', ']', '+', '-', '*', '/', '=', '<', '>', '"', ',', 'P', 'I', 'M', 'A', 'Q', 'T']
         return literals
     def getArrowRule(self):
         arrowRule = r'\=='
@@ -45,4 +48,3 @@ class Keywords:
     def getDotsRule(self):
         DotsRule = r'\..'
         return DotsRule
-

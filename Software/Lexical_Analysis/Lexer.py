@@ -7,11 +7,11 @@ import sys
 
 class LexicalAnalizer():
 
-    def __init__(self, sourceFile = None, debugLexer  = False):
+    def __init__(self, debugLexer  = False):
         super().__init__()
         self.keywordsCollection = Keywords()
         self.readedTokens = []
-        self.sourceFile = sourceFile
+        self.sourceFile = "Software/Lexical_Analysis/source.txt"
         self.debug = debugLexer
         self.Lexer = None
 
@@ -50,7 +50,7 @@ class LexicalAnalizer():
             return t
         
         def t_ID(t):
-            r'[a-zA-Z_][a-zA-Z_][a-zA-Z_][a-zA-Z_0-9+#+_+?]*'
+            r'[a-zA-Z_][a-zA-Z_][a-zA-Z_][a-zA-Z_0-9#_?]*'
             t.type = self.keywordsCollection.reserved.get(t.value,'ID') 
             if t.type == 'ID':
                 Column = 0
@@ -65,7 +65,7 @@ class LexicalAnalizer():
                         Column = self.FindColumn(source, t)
                 contents["TokenLocation"] = (t.lineno, t.lexpos, Column)
 
-                t.value = {"lexeme": t.value, "additional": contents}
+                #t.value = {"lexeme": t.value, "additional": contents}
 
             if self.debug == True:
                 print(t)
@@ -132,7 +132,7 @@ class LexicalAnalizer():
         print(source)
         print(arrow)
 
-lexer = LexicalAnalizer("Software\Lexical_Analysis\source.txt", False)
+lexer = LexicalAnalizer( False)
 lexer.BuildLexer()
 
 for Tok in lexer.Lexer:
