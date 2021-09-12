@@ -3,102 +3,135 @@ from Keywords import *
 import sys
 #Dictionary for keywords
 
-keywordsCollection = Keywords()
-readedTokens = []
-class Lexer(object):
-    global keywordsCollection, readedTokens
+
+class LexicalAnalizer():
+
+    def __init__(self, sourceFile = None, debugLexer  = False):
+        super().__init__()
+        self.keywordsCollection = Keywords()
+        self.readedTokens = []
+        self.sourceFile = sourceFile
+        self.debug = debugLexer
+        self.Lexer = None
+
+        # List of token names. 
+        self.tokens = self.keywordsCollection.tokens
+        
+        self.literals = self.keywordsCollection.literals
+
+    def BuildLexer(self):
         # Regular expression rules for simple tokens
-    t_EQEQ    = r'\=='
-    t_ARROW   = r'\->'
-    t_POINTS  = r'\..'
-    # List of token names. 
-    tokens = keywordsCollection.tokens
-    
-    literals = keywordsCollection.literals
-    def t_FN(self, t):
-        r'fn'
-        t.type = 'FN'
-        t.value = 'fn'
-        return t
-    def t_ELSEIF(self, t):
-        r'elseif'
-        t.type = 'ELSEIF'
-        t.value = 'elseif'
-        return t
-    def t_ELSE(self, t):
-        r'else'
-        t.type = 'ELSE'
-        t.value = 'else'
-        return t
-    def t_IF(self, t):
-        r'if'
-        t.type = 'IF'
-        t.value = 'if'
-        return t
-    
-    def t_ID(self, t):
-        r'[a-zA-Z_][a-zA-Z_][a-zA-Z_][a-zA-Z_0-9+#+_+?]*'
-        t.type = keywordsCollection.reserved.get(t.value,'ID')    # Check for reserved words
-        return t
- # Define a rule so we can track line numbers
-    def t_INT(self,t):
-        r'\d+'
-        t.value = int(t.value)
-        return t
+        tokens = self.tokens
+        literals = self.literals
+        t_EQEQ    = r'\=='
+        t_ARROW   = r'\->'
+        t_POINTS  = r'\..'
 
-    def t_newline(self,t):
-        r'\n+'
-        t.lexer.lineno += len(t.value)
+        def t_FN(t):
+            r'fn'
+            t.type = 'FN'
+            t.value = 'fn'
+            return t
+        def t_ELSEIF(t):
+            r'elseif'
+            t.type = 'ELSEIF'
+            t.value = 'elseif'
+            return t
+        def t_ELSE(t):
+            r'else'
+            t.type = 'ELSE'
+            t.value = 'else'
+            return t
+        def t_IF(t):
+            r'if'
+            t.type = 'IF'
+            t.value = 'if'
+            return t
+        
+        def t_ID(t):
+            r'[a-zA-Z_][a-zA-Z_][a-zA-Z_][a-zA-Z_0-9+#+_+?]*'
+            t.type = self.keywordsCollection.reserved.get(t.value,'ID') 
+            if t.type == 'ID':
+                Column = 0
 
-    # A string containing ignored characters
-    t_ignore  = ' \t'
-    t_ignore_COMMENT  = r'\@.*'
+                if len(str(t.value)) > 15:
+                    print("Warning: Identifier exceeds maximum length")
 
-    # Error handling rule
-    def t_error(self,t):
-        print("Illegal character '%s'" % t.value[0] ,"at line %s"% t.lexer.lineno)
-        t.lexer.skip(1)
+                contents = {}
+                if self.sourceFile is not None:
+                    with open(self.sourceFile) as file:
+                        source = file.read()
+                        Column = self.FindColumn(source, t)
+                contents["TokenLocation"] = (t.lineno, t.lexpos, Column)
 
-    # Build the lexer
-    def build(self,**kwargs):
-        self.lexer = lex.lex(module=self, **kwargs)
+                t.value = {"lexeme": t.value, "additional": contents}
 
-    # Test it output
-    def test(self,data):
-        self.lexer.input(data)
-        while True:
-             tok = self.lexer.token()
-             if not tok:
-                 break
-             readedTokens.append(tok)
-             
+            if self.debug == True:
+                print(t)
 
-# Build the lexer and try it out
-m = Lexer()
-m.build()  
-# Test it out
-data = '''
-@commenta
-let esbueno?_# = 49;
-@declarar var
-let bc = True
-while True{
-    let parte = 90
-}
-loop{
-    break;
-}
-if pat0 == 10{
-    let flap = False;
-}
-elseif True{
-    let acy# = 0;
-}
-fn main(){
-    return;
+            return t
+   
+        def t_INT(t):
+            r'\d+'
+            t.value = int(t.value)
+            return t
 
-}
-'''         # Build the lexer
-m.test(data)     # Test it
-for tok in readedTokens:
-    print(tok)
+        def t_newline(t):
+            r'\n+'
+            t.lexer.lineno += len(t.value)
+
+        # A string containing ignored characters
+        t_ignore  = ' \t'
+        t_ignore_COMMENT  = r'\@.*'
+
+        # Error handling rule
+        def t_error(t):
+            source = ""
+            Column = 0
+
+            if self.sourceFile is not None:
+                with open(self.sourceFile) as file:
+                    source = file.read()
+                    Column = self.FindColumn(source, t)
+            else:
+                source = t.lexer.lexdata
+                Column = self.FindColumn(source, t)
+
+            self.ErrorPrint(self.sourceFile, t.lineno, Column)
+
+            t.lexer.skip(1)
+        # Build the lexer
+        if self.sourceFile is not None:
+                with open(self.sourceFile) as file:
+                    source = file.read()
+                    self.Lexer = lex.lex()
+                    self.Lexer.input(source)
+        
+   
+    def FindColumn(self, input, token):
+        line_start = input.rfind('\n', 0, token.lexpos) + 1
+        return (token.lexpos - line_start) + 1
+
+    def ErrorPrint(self, Source, Lineno, Column):
+        arrow = ""
+
+        if self.sourceFile is not None:
+            print("\nInvalid token on line {}\n".format(Lineno))
+            #print line
+            with open(self.sourceFile) as file:
+                for i in range(0,Lineno):
+                    source = file.readline()
+            
+
+            #build arrow
+            for i in range(0,Column-1):
+                arrow += "-"
+            arrow += "^\n"
+        print(source)
+        print(arrow)
+
+lexer = LexicalAnalizer("Software\Lexical_Analysis\source.txt", False)
+lexer.BuildLexer()
+
+for Tok in lexer.Lexer:
+        print(Tok)

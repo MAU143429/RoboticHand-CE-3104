@@ -1,0 +1,20 @@
+@commenta
+let esbueno?_# = 49;
+@declarar var
+let bc = True
+while True{
+    let parte = 90
+}
+loop{
+    break;
+}
+if pat0 == 10{
+    let flap = False;
+}
+elseif True{
+    let acy# = 0;
+}
+fn main(){
+    return;
+
+}
