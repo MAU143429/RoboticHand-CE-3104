@@ -1,4 +1,5 @@
 import ply.lex as lex
+import Software.Syntantic.Parser as syntactic
 from Keywords import *
 import sys
 #Dictionary for keywords
@@ -106,6 +107,7 @@ class LexicalAnalizer():
                     source = file.read()
                     self.Lexer = lex.lex()
                     self.Lexer.input(source)
+                    syntactic.build(self.Lexer)
         
    
     def FindColumn(self, input, token):
