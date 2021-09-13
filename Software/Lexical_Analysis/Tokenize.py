@@ -49,8 +49,8 @@ t_RCRLBRACKET       = r'\}'
 literals = ['P', 'I', 'M', 'A', 'Q', 'T']
 #Token list
 tokens = [
-'INT',
 'ID',
+'INT',
 'WRONG_ID',
 'PLUS',
 'MINUS',
