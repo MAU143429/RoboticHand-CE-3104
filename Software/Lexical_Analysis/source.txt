@@ -19,4 +19,5 @@ fn main(){
 
 }
 let paaaaaaaaaaaaaaaaaaarte = 90
-Move(["I", "P"], True)
+Move(["I", "P"], True);
+Opera(+, 7, 8);

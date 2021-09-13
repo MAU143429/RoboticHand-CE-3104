@@ -33,9 +33,10 @@ def t_IF(t):
     t.value = 'if'
     return t
 
-
-
-
+def t_WRONG_ID(t):
+    r'[0-9]+[a-zA-Z_#_?]+'
+    t.type = reserved.get(t.value, "WRONG_ID")
+    t_error(t)
 
 def t_ID(t):
     r'[a-zA-Z_#_?][a-zA-Z_0-9#_?]*'
@@ -59,10 +60,6 @@ def t_INT(t):
          t.value = 0
     return t
 
-def t_WRONG_ID(t):
-    r'[0-9]+[a-zA-Z_0-9#_?]*'
-    t.type = reserved.get(t.value, "WRONG_ID")
-    t_error(t)
         
 def t_error(t):
     if t.type == "length_err":
