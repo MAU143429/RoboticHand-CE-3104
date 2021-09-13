@@ -1,9 +1,9 @@
 @commenta
-let esbueno?_# = 49;
+let 12esbueno?_# = 49;
 @declarar var
-let bc = True
+let lkbuu = True
 while True{
-    let parte = 90
+    let paaaaaaaaaaaaaaaaaaarte = 90
 }
 loop{
     break;
@@ -12,10 +12,11 @@ if pat0 == 10{
     let flap = False;
 }
 elseif True{
-    let acy# = 0;
+    let 11acy# = 0;
 }
 fn main(){
     return;
 
 }
-move(["I", "A"], True)
+let paaaaaaaaaaaaaaaaaaarte = 90
+Move(["I", "P"], True)

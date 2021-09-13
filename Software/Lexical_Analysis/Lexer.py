@@ -1,5 +1,5 @@
 import ply.lex as lex
-import Software.Syntantic.Parser as syntactic
+#import Software.Syntantic.Parser as syntactic
 from Keywords import *
 import sys
 #Dictionary for keywords
@@ -50,13 +50,14 @@ class LexicalAnalizer():
             return t
         
         def t_ID(t):
-            r'[a-zA-Z_][a-zA-Z_][a-zA-Z_][a-zA-Z_0-9#_?]*'
+            r'[a-zA-Z_#_?]{3}[a-zA-Z_0-9#_?]*'
             t.type = self.keywordsCollection.reserved.get(t.value,'ID') 
             if t.type == 'ID':
                 Column = 0
 
                 if len(str(t.value)) > 15:
-                    print("Warning: Identifier exceeds maximum length")
+                    t_error(t)
+                    return 
 
                 contents = {}
                 if self.sourceFile is not None:
@@ -101,13 +102,15 @@ class LexicalAnalizer():
             self.ErrorPrint(self.sourceFile, t.lineno, Column)
 
             t.lexer.skip(1)
+
+            
         # Build the lexer
         if self.sourceFile is not None:
                 with open(self.sourceFile) as file:
                     source = file.read()
                     self.Lexer = lex.lex()
                     self.Lexer.input(source)
-                    syntactic.build(self.Lexer)
+                    #syntactic.build(self.Lexer)
         
    
     def FindColumn(self, input, token):
@@ -118,7 +121,7 @@ class LexicalAnalizer():
         arrow = ""
 
         if self.sourceFile is not None:
-            print("\nInvalid token on line {}\n".format(Lineno))
+            print("\nInvalid token on line {} length must be between 3 and 15 characters\n".format(Lineno))
             #print line
             with open(self.sourceFile) as file:
                 for i in range(0,Lineno):
@@ -132,8 +135,9 @@ class LexicalAnalizer():
         print(source)
         print(arrow)
 
-lexer = LexicalAnalizer( False)
+lexer = LexicalAnalizer(False)
 lexer.BuildLexer()
+
 
 for Tok in lexer.Lexer:
         print(Tok)

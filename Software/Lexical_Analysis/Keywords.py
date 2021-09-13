@@ -39,12 +39,3 @@ class Keywords:
     def getLiterals(self):
         literals = ['{', '}', ';', '(', ')','[', ']', '+', '-', '*', '/', '=', '<', '>', '"', ',', 'P', 'I', 'M', 'A', 'Q', 'T']
         return literals
-    def getArrowRule(self):
-        arrowRule = r'\=='
-        return arrowRule
-    def getEqEqRule(self):
-        EqEqRule = r'\->'
-        return EqEqRule
-    def getDotsRule(self):
-        DotsRule = r'\..'
-        return DotsRule
