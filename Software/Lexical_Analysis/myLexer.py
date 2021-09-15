@@ -1,9 +1,9 @@
 import ply.lex as lex
 import ply.yacc as yacc
 from LexicalAnalizer import *
-from SyntacticAnalizer import *
+from Software.Syntactic.SyntacticAnalizer import *
 
-sourceFile = "Software/Lexical_Analysis/test.txt"
+sourceFile = "test.txt"
 def lex_test(sourceFile):
     lexer = lex.lex()
     parser = yacc.yacc()
