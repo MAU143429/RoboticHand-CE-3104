@@ -1,9 +1,9 @@
 import ply.lex as lex
 import ply.yacc as yacc
 from LexicalAnalizer import *
-from Software.Syntactic.SyntacticAnalizer import *
+from SyntacticAnalizer import *
 
-sourceFile = "test.txt"
+sourceFile = "Software/Lexical_Analysis/test.txt"
 def lex_test(sourceFile):
     lexer = lex.lex()
     parser = yacc.yacc()
@@ -11,16 +11,9 @@ def lex_test(sourceFile):
                 with open(sourceFile) as file:
                     source = file.read()
                     lexer.input(source)
-                    '''
-                    data = " "
-                    for line in file:
-                        data += '\n' + line
-                    print(data)
-                    '''
-                    print(source)
-                    parser.parse(source);
-    for Tok in lexer:
-        print(Tok)
+                    parser.parse(source)
+    #for Tok in lexer:
+    #    print(Tok)
 
 lex_test(sourceFile)
 
