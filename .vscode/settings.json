@@ -1,0 +1,7 @@
+{
+    "python.analysis.extraPaths": [
+        "./Software/Lexical_Analysis",
+        "./Software/Lexical_Analysis",
+        "./Software/Syntantic"
+    ]
+}
