@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'rightLETrightASSIGNleftPLUSMINUSleftTIMESDIVIDEleftLPARENRPARENARROW ASSIGN BREAK COMMA DELAY DIVIDE DOTDOT ELSE ELSEIF EQEQ FALSE FN FOR GT GTE ID IF INT INTEGER LCRLBRACKET LET LOOP LPAREN LSQRBRACKET LT LTE MAIN MINUS MOVE OPERA PLUS PRINT QUOT RANGE RCRLBRACKET RETURN RPAREN RSQRBRACKET SEMICOLON TIMES TRUE WHILE WRONG_ID\n    line : variable\n         | empty\n    \n    variable : LET ID ASSIGN expression SEMICOLON line\n    \n    expression : INT\n               | TRUE\n               | FALSE\n    \n    expression : ID\n    \n    empty :\n    '
+_lr_signature = 'rightLETrightASSIGNleftPLUSMINUSleftTIMESDIVIDEleftLPARENRPARENARROW ASSIGN BREAK COMMA DELAY DIVIDE DOTDOT ELSE ELSEIF EQEQ FALSE FN FOR GT GTE ID IF INT INTEGER LCRLBRACKET LET LOOP LPAREN LSQRBRACKET LT LTE MAIN MINUS MOVE OPERA PLUS PRINT QUOT RANGE RCRLBRACKET RETURN RPAREN RSQRBRACKET SEMICOLON TIMES TRUE WHILE WRONG_ID\n    line : variable\n         | delay\n         | empty\n    \n    variable : LET ID ASSIGN expression SEMICOLON line\n    \n    expression : INT\n               | TRUE\n               | FALSE\n    \n    expression : ID\n    \n    delay : DELAY line\n    \n    empty :\n    '
     
-_lr_action_items = {'LET':([0,12,],[4,4,]),'$end':([0,1,2,3,12,13,],[-8,0,-1,-2,-8,-3,]),'ID':([4,6,],[5,7,]),'ASSIGN':([5,],[6,]),'INT':([6,],[9,]),'TRUE':([6,],[10,]),'FALSE':([6,],[11,]),'SEMICOLON':([7,8,9,10,11,],[-7,12,-4,-5,-6,]),}
+_lr_action_items = {'LET':([0,6,15,],[5,5,5,]),'DELAY':([0,6,15,],[6,6,6,]),'$end':([0,1,2,3,4,6,8,15,16,],[-10,0,-1,-2,-3,-10,-9,-10,-4,]),'ID':([5,9,],[7,10,]),'ASSIGN':([7,],[9,]),'INT':([9,],[12,]),'TRUE':([9,],[13,]),'FALSE':([9,],[14,]),'SEMICOLON':([10,11,12,13,14,],[-8,15,-5,-6,-7,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'line':([0,12,],[1,13,]),'variable':([0,12,],[2,2,]),'empty':([0,12,],[3,3,]),'expression':([6,],[8,]),}
+_lr_goto_items = {'line':([0,6,15,],[1,8,16,]),'variable':([0,6,15,],[2,2,2,]),'delay':([0,6,15,],[3,3,3,]),'empty':([0,6,15,],[4,4,4,]),'expression':([9,],[11,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,12 +27,14 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> line","S'",1,None,None,None),
-  ('line -> variable','line',1,'p_program','SyntacticAnalizer.py',15),
-  ('line -> empty','line',1,'p_program','SyntacticAnalizer.py',16),
-  ('variable -> LET ID ASSIGN expression SEMICOLON line','variable',6,'p_variable','SyntacticAnalizer.py',22),
-  ('expression -> INT','expression',1,'p_expression','SyntacticAnalizer.py',28),
-  ('expression -> TRUE','expression',1,'p_expression','SyntacticAnalizer.py',29),
-  ('expression -> FALSE','expression',1,'p_expression','SyntacticAnalizer.py',30),
-  ('expression -> ID','expression',1,'p_expression_var','SyntacticAnalizer.py',36),
-  ('empty -> <empty>','empty',0,'p_empty','SyntacticAnalizer.py',46),
+  ('line -> variable','line',1,'p_program','SyntacticAnalizer.py',16),
+  ('line -> delay','line',1,'p_program','SyntacticAnalizer.py',17),
+  ('line -> empty','line',1,'p_program','SyntacticAnalizer.py',18),
+  ('variable -> LET ID ASSIGN expression SEMICOLON line','variable',6,'p_variable','SyntacticAnalizer.py',24),
+  ('expression -> INT','expression',1,'p_expression','SyntacticAnalizer.py',31),
+  ('expression -> TRUE','expression',1,'p_expression','SyntacticAnalizer.py',32),
+  ('expression -> FALSE','expression',1,'p_expression','SyntacticAnalizer.py',33),
+  ('expression -> ID','expression',1,'p_expression_var','SyntacticAnalizer.py',39),
+  ('delay -> DELAY line','delay',2,'p_delay','SyntacticAnalizer.py',45),
+  ('empty -> <empty>','empty',0,'p_empty','SyntacticAnalizer.py',57),
 ]

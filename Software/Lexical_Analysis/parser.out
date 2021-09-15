@@ -5,7 +5,6 @@ Unused terminals:
     ARROW
     BREAK
     COMMA
-    DELAY
     DIVIDE
     DOTDOT
     ELSE
@@ -43,37 +42,39 @@ Grammar
 
 Rule 0     S' -> line
 Rule 1     line -> variable
-Rule 2     line -> empty
-Rule 3     variable -> LET ID ASSIGN expression SEMICOLON line
-Rule 4     expression -> INT
-Rule 5     expression -> TRUE
-Rule 6     expression -> FALSE
-Rule 7     expression -> ID
-Rule 8     empty -> <empty>
+Rule 2     line -> delay
+Rule 3     line -> empty
+Rule 4     variable -> LET ID ASSIGN expression SEMICOLON line
+Rule 5     expression -> INT
+Rule 6     expression -> TRUE
+Rule 7     expression -> FALSE
+Rule 8     expression -> ID
+Rule 9     delay -> DELAY line
+Rule 10    empty -> <empty>
 
 Terminals, with rules where they appear
 
 ARROW                : 
-ASSIGN               : 3
+ASSIGN               : 4
 BREAK                : 
 COMMA                : 
-DELAY                : 
+DELAY                : 9
 DIVIDE               : 
 DOTDOT               : 
 ELSE                 : 
 ELSEIF               : 
 EQEQ                 : 
-FALSE                : 6
+FALSE                : 7
 FN                   : 
 FOR                  : 
 GT                   : 
 GTE                  : 
-ID                   : 3 7
+ID                   : 4 8
 IF                   : 
-INT                  : 4
+INT                  : 5
 INTEGER              : 
 LCRLBRACKET          : 
-LET                  : 3
+LET                  : 4
 LOOP                 : 
 LPAREN               : 
 LSQRBRACKET          : 
@@ -91,18 +92,19 @@ RCRLBRACKET          :
 RETURN               : 
 RPAREN               : 
 RSQRBRACKET          : 
-SEMICOLON            : 3
+SEMICOLON            : 4
 TIMES                : 
-TRUE                 : 5
+TRUE                 : 6
 WHILE                : 
 WRONG_ID             : 
 error                : 
 
 Nonterminals, with rules where they appear
 
-empty                : 2
-expression           : 3
-line                 : 3 0
+delay                : 2
+empty                : 3
+expression           : 4
+line                 : 4 9 0
 variable             : 1
 
 Parsing method: LALR
@@ -111,16 +113,20 @@ state 0
 
     (0) S' -> . line
     (1) line -> . variable
-    (2) line -> . empty
-    (3) variable -> . LET ID ASSIGN expression SEMICOLON line
-    (8) empty -> .
+    (2) line -> . delay
+    (3) line -> . empty
+    (4) variable -> . LET ID ASSIGN expression SEMICOLON line
+    (9) delay -> . DELAY line
+    (10) empty -> .
 
-    LET             shift and go to state 4
-    $end            reduce using rule 8 (empty -> .)
+    LET             shift and go to state 5
+    DELAY           shift and go to state 6
+    $end            reduce using rule 10 (empty -> .)
 
     line                           shift and go to state 1
     variable                       shift and go to state 2
-    empty                          shift and go to state 3
+    delay                          shift and go to state 3
+    empty                          shift and go to state 4
 
 state 1
 
@@ -137,93 +143,130 @@ state 2
 
 state 3
 
-    (2) line -> empty .
+    (2) line -> delay .
 
-    $end            reduce using rule 2 (line -> empty .)
+    $end            reduce using rule 2 (line -> delay .)
 
 
 state 4
 
-    (3) variable -> LET . ID ASSIGN expression SEMICOLON line
+    (3) line -> empty .
 
-    ID              shift and go to state 5
+    $end            reduce using rule 3 (line -> empty .)
 
 
 state 5
 
-    (3) variable -> LET ID . ASSIGN expression SEMICOLON line
+    (4) variable -> LET . ID ASSIGN expression SEMICOLON line
 
-    ASSIGN          shift and go to state 6
+    ID              shift and go to state 7
 
 
 state 6
 
-    (3) variable -> LET ID ASSIGN . expression SEMICOLON line
-    (4) expression -> . INT
-    (5) expression -> . TRUE
-    (6) expression -> . FALSE
-    (7) expression -> . ID
+    (9) delay -> DELAY . line
+    (1) line -> . variable
+    (2) line -> . delay
+    (3) line -> . empty
+    (4) variable -> . LET ID ASSIGN expression SEMICOLON line
+    (9) delay -> . DELAY line
+    (10) empty -> .
 
-    INT             shift and go to state 9
-    TRUE            shift and go to state 10
-    FALSE           shift and go to state 11
-    ID              shift and go to state 7
+    LET             shift and go to state 5
+    DELAY           shift and go to state 6
+    $end            reduce using rule 10 (empty -> .)
 
-    expression                     shift and go to state 8
+    line                           shift and go to state 8
+    variable                       shift and go to state 2
+    delay                          shift and go to state 3
+    empty                          shift and go to state 4
 
 state 7
 
-    (7) expression -> ID .
+    (4) variable -> LET ID . ASSIGN expression SEMICOLON line
 
-    SEMICOLON       reduce using rule 7 (expression -> ID .)
+    ASSIGN          shift and go to state 9
 
 
 state 8
 
-    (3) variable -> LET ID ASSIGN expression . SEMICOLON line
+    (9) delay -> DELAY line .
 
-    SEMICOLON       shift and go to state 12
+    $end            reduce using rule 9 (delay -> DELAY line .)
 
 
 state 9
 
-    (4) expression -> INT .
+    (4) variable -> LET ID ASSIGN . expression SEMICOLON line
+    (5) expression -> . INT
+    (6) expression -> . TRUE
+    (7) expression -> . FALSE
+    (8) expression -> . ID
 
-    SEMICOLON       reduce using rule 4 (expression -> INT .)
+    INT             shift and go to state 12
+    TRUE            shift and go to state 13
+    FALSE           shift and go to state 14
+    ID              shift and go to state 10
 
+    expression                     shift and go to state 11
 
 state 10
 
-    (5) expression -> TRUE .
+    (8) expression -> ID .
 
-    SEMICOLON       reduce using rule 5 (expression -> TRUE .)
+    SEMICOLON       reduce using rule 8 (expression -> ID .)
 
 
 state 11
 
-    (6) expression -> FALSE .
+    (4) variable -> LET ID ASSIGN expression . SEMICOLON line
 
-    SEMICOLON       reduce using rule 6 (expression -> FALSE .)
+    SEMICOLON       shift and go to state 15
 
 
 state 12
 
-    (3) variable -> LET ID ASSIGN expression SEMICOLON . line
-    (1) line -> . variable
-    (2) line -> . empty
-    (3) variable -> . LET ID ASSIGN expression SEMICOLON line
-    (8) empty -> .
+    (5) expression -> INT .
 
-    LET             shift and go to state 4
-    $end            reduce using rule 8 (empty -> .)
+    SEMICOLON       reduce using rule 5 (expression -> INT .)
 
-    line                           shift and go to state 13
-    variable                       shift and go to state 2
-    empty                          shift and go to state 3
 
 state 13
 
-    (3) variable -> LET ID ASSIGN expression SEMICOLON line .
+    (6) expression -> TRUE .
 
-    $end            reduce using rule 3 (variable -> LET ID ASSIGN expression SEMICOLON line .)
+    SEMICOLON       reduce using rule 6 (expression -> TRUE .)
+
+
+state 14
+
+    (7) expression -> FALSE .
+
+    SEMICOLON       reduce using rule 7 (expression -> FALSE .)
+
+
+state 15
+
+    (4) variable -> LET ID ASSIGN expression SEMICOLON . line
+    (1) line -> . variable
+    (2) line -> . delay
+    (3) line -> . empty
+    (4) variable -> . LET ID ASSIGN expression SEMICOLON line
+    (9) delay -> . DELAY line
+    (10) empty -> .
+
+    LET             shift and go to state 5
+    DELAY           shift and go to state 6
+    $end            reduce using rule 10 (empty -> .)
+
+    line                           shift and go to state 16
+    variable                       shift and go to state 2
+    delay                          shift and go to state 3
+    empty                          shift and go to state 4
+
+state 16
+
+    (4) variable -> LET ID ASSIGN expression SEMICOLON line .
+
+    $end            reduce using rule 4 (variable -> LET ID ASSIGN expression SEMICOLON line .)
 

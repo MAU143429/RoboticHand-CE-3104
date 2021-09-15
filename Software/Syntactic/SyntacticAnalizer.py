@@ -1,5 +1,6 @@
 import ply.yacc as yacc
 from Tokenize import tokens
+from Software.Semantic.Structures_Models import *
 from sys import stdin
 
 precedence = (
@@ -13,15 +14,17 @@ precedence = (
 def p_program(p):
     '''
     line : variable
+         | delay
          | empty
     '''
-    print(p[1])
+
     
 def p_variable(p):
     '''
     variable : LET ID ASSIGN expression SEMICOLON line
     '''
-    p[0] = (p[3], p[2], p[4])
+    line = p.lineno(2)
+    p[0] = Let(p[2], p[4],line)
 
 def p_expression(p):
     '''
@@ -36,6 +39,14 @@ def p_expression_var(p):
     expression : ID
     '''
     p[0] = ('let', p[1])
+
+def p_delay(p):
+    '''
+    delay : DELAY line
+    '''
+    p[0] = (p[3], p[2], p[4])
+
+
 
 def p_error(p):
     print("Syntax error found!", p)
