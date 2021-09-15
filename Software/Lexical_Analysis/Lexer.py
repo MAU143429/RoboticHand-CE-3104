@@ -11,7 +11,7 @@ class LexicalAnalizer():
         super().__init__()
         self.keywordsCollection = Keywords()
         self.readedTokens = []
-        self.sourceFile = "Software/Lexical_Analysis/source.txt"
+        self.sourceFile = "source.txt"
         self.debug = debugLexer
         self.Lexer = None
 

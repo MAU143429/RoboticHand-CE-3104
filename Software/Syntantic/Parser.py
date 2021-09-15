@@ -3,6 +3,10 @@ from Keywords import *
 
 
 
+syntax_error = False;
+semantic_error = False;
+
+
 def build(lex):
 
 
