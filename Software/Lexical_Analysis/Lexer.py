@@ -1,5 +1,5 @@
 import ply.lex as lex
-#import Software.Syntantic.Parser as syntactic
+#import Software.Syntactic.Parser as syntactic
 from Keywords import *
 import sys
 #Dictionary for keywords

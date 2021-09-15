@@ -1,2 +1,13 @@
-let esbueno?_# = 49;
-let lkbuu = True;
+Delay("5668678678");
+Delay("454545");
+Delay("5656");
+let mundo = var1;
+let hola = True;
+let python = True;
+let dfghf = 454;
+Delay("232323");
+Delay("65346837");
+let hjdft = 45232;
+Delay("78678");
+let dfdfdf = 1212;
+

@@ -1,1 +1,250 @@
 Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ARROW
+    BREAK
+    COMMA
+    DIVIDE
+    DOTDOT
+    ELSE
+    ELSEIF
+    EQEQ
+    FN
+    FOR
+    GT
+    GTE
+    IF
+    INTEGER
+    LCRLBRACKET
+    LOOP
+    LSQRBRACKET
+    LT
+    LTE
+    MAIN
+    MINUS
+    MOVE
+    OPERA
+    PLUS
+    PRINT
+    RANGE
+    RCRLBRACKET
+    RETURN
+    RSQRBRACKET
+    TIMES
+    WHILE
+    WRONG_ID
+
+Grammar
+
+Rule 0     S' -> line
+Rule 1     line -> variable
+Rule 2     variable -> LET ID ASSIGN expression SEMICOLON
+Rule 3     expression -> INT
+Rule 4     expression -> TRUE
+Rule 5     expression -> FALSE
+Rule 6     expression -> ID
+Rule 7     line -> DELAY LPAREN QUOT INT QUOT RPAREN SEMICOLON
+Rule 8     empty -> <empty>
+
+Terminals, with rules where they appear
+
+ARROW                : 
+ASSIGN               : 2
+BREAK                : 
+COMMA                : 
+DELAY                : 7
+DIVIDE               : 
+DOTDOT               : 
+ELSE                 : 
+ELSEIF               : 
+EQEQ                 : 
+FALSE                : 5
+FN                   : 
+FOR                  : 
+GT                   : 
+GTE                  : 
+ID                   : 2 6
+IF                   : 
+INT                  : 3 7
+INTEGER              : 
+LCRLBRACKET          : 
+LET                  : 2
+LOOP                 : 
+LPAREN               : 7
+LSQRBRACKET          : 
+LT                   : 
+LTE                  : 
+MAIN                 : 
+MINUS                : 
+MOVE                 : 
+OPERA                : 
+PLUS                 : 
+PRINT                : 
+QUOT                 : 7 7
+RANGE                : 
+RCRLBRACKET          : 
+RETURN               : 
+RPAREN               : 7
+RSQRBRACKET          : 
+SEMICOLON            : 2 7
+TIMES                : 
+TRUE                 : 4
+WHILE                : 
+WRONG_ID             : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+empty                : 
+expression           : 2
+line                 : 0
+variable             : 1
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . line
+    (1) line -> . variable
+    (7) line -> . DELAY LPAREN QUOT INT QUOT RPAREN SEMICOLON
+    (2) variable -> . LET ID ASSIGN expression SEMICOLON
+
+    DELAY           shift and go to state 3
+    LET             shift and go to state 4
+
+    line                           shift and go to state 1
+    variable                       shift and go to state 2
+
+state 1
+
+    (0) S' -> line .
+
+
+
+state 2
+
+    (1) line -> variable .
+
+    $end            reduce using rule 1 (line -> variable .)
+
+
+state 3
+
+    (7) line -> DELAY . LPAREN QUOT INT QUOT RPAREN SEMICOLON
+
+    LPAREN          shift and go to state 5
+
+
+state 4
+
+    (2) variable -> LET . ID ASSIGN expression SEMICOLON
+
+    ID              shift and go to state 6
+
+
+state 5
+
+    (7) line -> DELAY LPAREN . QUOT INT QUOT RPAREN SEMICOLON
+
+    QUOT            shift and go to state 7
+
+
+state 6
+
+    (2) variable -> LET ID . ASSIGN expression SEMICOLON
+
+    ASSIGN          shift and go to state 8
+
+
+state 7
+
+    (7) line -> DELAY LPAREN QUOT . INT QUOT RPAREN SEMICOLON
+
+    INT             shift and go to state 9
+
+
+state 8
+
+    (2) variable -> LET ID ASSIGN . expression SEMICOLON
+    (3) expression -> . INT
+    (4) expression -> . TRUE
+    (5) expression -> . FALSE
+    (6) expression -> . ID
+
+    INT             shift and go to state 12
+    TRUE            shift and go to state 13
+    FALSE           shift and go to state 14
+    ID              shift and go to state 10
+
+    expression                     shift and go to state 11
+
+state 9
+
+    (7) line -> DELAY LPAREN QUOT INT . QUOT RPAREN SEMICOLON
+
+    QUOT            shift and go to state 15
+
+
+state 10
+
+    (6) expression -> ID .
+
+    SEMICOLON       reduce using rule 6 (expression -> ID .)
+
+
+state 11
+
+    (2) variable -> LET ID ASSIGN expression . SEMICOLON
+
+    SEMICOLON       shift and go to state 16
+
+
+state 12
+
+    (3) expression -> INT .
+
+    SEMICOLON       reduce using rule 3 (expression -> INT .)
+
+
+state 13
+
+    (4) expression -> TRUE .
+
+    SEMICOLON       reduce using rule 4 (expression -> TRUE .)
+
+
+state 14
+
+    (5) expression -> FALSE .
+
+    SEMICOLON       reduce using rule 5 (expression -> FALSE .)
+
+
+state 15
+
+    (7) line -> DELAY LPAREN QUOT INT QUOT . RPAREN SEMICOLON
+
+    RPAREN          shift and go to state 17
+
+
+state 16
+
+    (2) variable -> LET ID ASSIGN expression SEMICOLON .
+
+    $end            reduce using rule 2 (variable -> LET ID ASSIGN expression SEMICOLON .)
+
+
+state 17
+
+    (7) line -> DELAY LPAREN QUOT INT QUOT RPAREN . SEMICOLON
+
+    SEMICOLON       shift and go to state 18
+
+
+state 18
+
+    (7) line -> DELAY LPAREN QUOT INT QUOT RPAREN SEMICOLON .
+
+    $end            reduce using rule 7 (line -> DELAY LPAREN QUOT INT QUOT RPAREN SEMICOLON .)
+
