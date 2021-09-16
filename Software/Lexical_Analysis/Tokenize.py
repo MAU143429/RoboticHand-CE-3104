@@ -29,9 +29,9 @@ reserved =  {
 
 # Regular expression rules for literals and simple tokens
 t_PLUS              = r'\+'
-t_MINUS             = r'-'
+t_MINUS             = r'\-'
 t_TIMES             = r'\*'
-t_DIVIDE            = r'/'
+t_DIVIDE            = r'\/'
 t_EXPR              = r'\!'
 t_EQEQ              = r'\=='
 t_LTE               = r'\<='
@@ -57,6 +57,7 @@ tokens = [
 'ID',
 'INT',
 'WRONG_ID',
+'ASTR',
 'PLUS',
 'MINUS',
 'TIMES',
@@ -78,6 +79,5 @@ tokens = [
 'QUOT',
 'LCRLBRACKET',
 'EXPR',
-'TMTM',
 'RCRLBRACKET'] + list(reserved.values())
 

@@ -38,6 +38,12 @@ def t_WRONG_ID(t):
     t.type = reserved.get(t.value, "WRONG_ID")
     t_error(t)
 
+def t_ASTR(t):
+    r'[*]{2}'
+    t.type = reserved.get(t.value, "ASTR")
+    t.value = '**'
+    return  t
+
 def t_ID(t):
     r'[a-zA-Z_#_?][a-zA-Z_0-9#_?]*'
     if 3 <= len(t.value) < 15:

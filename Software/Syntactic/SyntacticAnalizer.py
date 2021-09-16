@@ -103,7 +103,7 @@ def p_operators(p):
     operators : PLUS
               | MINUS
               | DIVIDE
-              | TIMES TIMES
+              | ASTR
               | TIMES
     '''
     p[0] = p[1]

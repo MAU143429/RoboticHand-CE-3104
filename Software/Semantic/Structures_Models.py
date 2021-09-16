@@ -7,8 +7,6 @@ class Let:
         self.line = line
         print("SE HA REGISTRADO EL LET  " + self.id + " CON EL VALOR DE " + str(self.value) + " EN LA LINEA " + str(self.line))
 
-
-
 class Del:
     def __init__(self, value, unit , line):
         self.value = value
@@ -28,4 +26,4 @@ class Opera:
         self.operand = operand
         self.operand2 = operand2
         self.line = line
-        print("SE DETECTO UN OPERA DE FORMA ( " + str(self.operator) + "," + str(self.operand) + ","+ str(self.operand2) + ") EN LA LINEA " + str(self.line))
+        print("SE DETECTO UN OPERA DE FORMA (" + str(self.operator) + "," + str(self.operand) + ","+ str(self.operand2) + ") EN LA LINEA " + str(self.line))

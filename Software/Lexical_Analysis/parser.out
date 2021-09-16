@@ -25,7 +25,6 @@ Unused terminals:
     RCRLBRACKET
     RETURN
     RSQRBRACKET
-    TMTM
     WHILE
     WRONG_ID
 
@@ -52,7 +51,7 @@ Rule 17    opera -> OPERA LPAREN operators COMMA operand COMMA operand RPAREN SE
 Rule 18    operators -> PLUS
 Rule 19    operators -> MINUS
 Rule 20    operators -> DIVIDE
-Rule 21    operators -> TIMES TIMES
+Rule 21    operators -> ASTR
 Rule 22    operators -> TIMES
 Rule 23    operand -> INT
 Rule 24    operand -> ID
@@ -63,6 +62,7 @@ Terminals, with rules where they appear
 
 ARROW                : 
 ASSIGN               : 6
+ASTR                 : 21
 BREAK                : 
 COMMA                : 11 17 17
 DELAY                : 11
@@ -104,8 +104,7 @@ RPAREN               : 11 15 17
 RSQRBRACKET          : 
 SEG                  : 14
 SEMICOLON            : 6 11 15 17
-TIMES                : 21 21 22
-TMTM                 : 
+TIMES                : 22
 TRUE                 : 8
 WHILE                : 
 WRONG_ID             : 
@@ -250,13 +249,14 @@ state 14
     (18) operators -> . PLUS
     (19) operators -> . MINUS
     (20) operators -> . DIVIDE
-    (21) operators -> . TIMES TIMES
+    (21) operators -> . ASTR
     (22) operators -> . TIMES
 
     PLUS            shift and go to state 19
     MINUS           shift and go to state 20
     DIVIDE          shift and go to state 21
-    TIMES           shift and go to state 22
+    ASTR            shift and go to state 22
+    TIMES           shift and go to state 23
 
     operators                      shift and go to state 18
 
@@ -268,32 +268,32 @@ state 15
     (9) expression -> . FALSE
     (10) expression -> . ID
 
-    INT             shift and go to state 25
-    TRUE            shift and go to state 26
-    FALSE           shift and go to state 27
-    ID              shift and go to state 23
+    INT             shift and go to state 26
+    TRUE            shift and go to state 27
+    FALSE           shift and go to state 28
+    ID              shift and go to state 24
 
-    expression                     shift and go to state 24
+    expression                     shift and go to state 25
 
 state 16
 
     (11) delay -> DELAY LPAREN INT . COMMA unit RPAREN SEMICOLON line
 
-    COMMA           shift and go to state 28
+    COMMA           shift and go to state 29
 
 
 state 17
 
     (15) println -> PRINT EXPR LPAREN . QUOT text QUOT RPAREN SEMICOLON line
 
-    QUOT            shift and go to state 29
+    QUOT            shift and go to state 30
 
 
 state 18
 
     (17) opera -> OPERA LPAREN operators . COMMA operand COMMA operand RPAREN SEMICOLON line
 
-    COMMA           shift and go to state 30
+    COMMA           shift and go to state 31
 
 
 state 19
@@ -319,49 +319,54 @@ state 21
 
 state 22
 
-    (21) operators -> TIMES . TIMES
-    (22) operators -> TIMES .
+    (21) operators -> ASTR .
 
-    TIMES           shift and go to state 31
-    COMMA           reduce using rule 22 (operators -> TIMES .)
+    COMMA           reduce using rule 21 (operators -> ASTR .)
 
 
 state 23
+
+    (22) operators -> TIMES .
+
+    COMMA           reduce using rule 22 (operators -> TIMES .)
+
+
+state 24
 
     (10) expression -> ID .
 
     SEMICOLON       reduce using rule 10 (expression -> ID .)
 
 
-state 24
+state 25
 
     (6) variable -> LET ID ASSIGN expression . SEMICOLON line
 
     SEMICOLON       shift and go to state 32
 
 
-state 25
+state 26
 
     (7) expression -> INT .
 
     SEMICOLON       reduce using rule 7 (expression -> INT .)
 
 
-state 26
+state 27
 
     (8) expression -> TRUE .
 
     SEMICOLON       reduce using rule 8 (expression -> TRUE .)
 
 
-state 27
+state 28
 
     (9) expression -> FALSE .
 
     SEMICOLON       reduce using rule 9 (expression -> FALSE .)
 
 
-state 28
+state 29
 
     (11) delay -> DELAY LPAREN INT COMMA . unit RPAREN SEMICOLON line
     (12) unit -> . QUOT MIN QUOT
@@ -372,7 +377,7 @@ state 28
 
     unit                           shift and go to state 33
 
-state 29
+state 30
 
     (15) println -> PRINT EXPR LPAREN QUOT . text QUOT RPAREN SEMICOLON line
     (16) text -> . ID
@@ -381,7 +386,7 @@ state 29
 
     text                           shift and go to state 35
 
-state 30
+state 31
 
     (17) opera -> OPERA LPAREN operators COMMA . operand COMMA operand RPAREN SEMICOLON line
     (23) operand -> . INT
@@ -393,13 +398,6 @@ state 30
     OPERA           shift and go to state 37
 
     operand                        shift and go to state 38
-
-state 31
-
-    (21) operators -> TIMES TIMES .
-
-    COMMA           reduce using rule 21 (operators -> TIMES TIMES .)
-
 
 state 32
 
