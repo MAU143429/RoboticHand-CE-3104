@@ -17,10 +17,11 @@ reserved =  {
     'break': 'BREAK',
     'main': 'MAIN',
     'return': 'RETURN',
-    'Move' : 'MOVE',
+    'Move': 'MOVE',
     'Delay': 'DELAY',
     'Opera': 'OPERA',
-    'Println!': 'PRINT'
+    'Println!': 'PRINT',
+    'in': 'IN'
 }
 
 # Regular expression rules for literals and simple tokens

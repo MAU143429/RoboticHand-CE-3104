@@ -33,6 +33,12 @@ def t_IF(t):
     t.value = 'if'
     return t
 
+def t_IN(t):
+    r'in'
+    t.type = 'IN'
+    t.value = 'in'
+    return t
+
 def t_WRONG_ID(t):
     r'[0-9]+[a-zA-Z_#_?]+'
     t.type = reserved.get(t.value, "WRONG_ID")

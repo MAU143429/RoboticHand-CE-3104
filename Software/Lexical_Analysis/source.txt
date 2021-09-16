@@ -2,6 +2,9 @@
 let 12esbueno?_# = 49;
 @declarar var
 let lkbuu = True
+for cifra in 1..11 {
+    let var2021 = 90
+}
 while True{
     let paaaaaaaaaaaaaaaaaaarte = 90
 }

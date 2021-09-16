@@ -1,6 +1,5 @@
-let mundo = var1;
-let hola = True;
-let python = True;
-let dfghf = 454;
-let hjdft = 45232;
-let dfdfdf = 1212;
+fn main {
+    let hola = True;
+    let python = True;
+    let dfghf = 454;
+}
