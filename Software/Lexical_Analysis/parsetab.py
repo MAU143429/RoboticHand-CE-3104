@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'rightLETrightASSIGNleftPLUSMINUSleftTIMESDIVIDEleftLPARENRPARENARROW ASSIGN BREAK COMMA DELAY DIVIDE DOTDOT ELSE ELSEIF EQEQ FALSE FN FOR GT GTE ID IF IN INT INTEGER LCRLBRACKET LET LOOP LPAREN LSQRBRACKET LT LTE MAIN MINUS MOVE OPERA PLUS PRINT QUOT RANGE RCRLBRACKET RETURN RPAREN RSQRBRACKET SEMICOLON TIMES TRUE WHILE WRONG_ID\n    main : FN MAIN LCRLBRACKET line RCRLBRACKET\n    \n    line : variable\n         | for\n         | move\n         | delay\n         | empty\n    \n    variable : LET ID ASSIGN expression SEMICOLON line\n    \n    expression : INT\n               | TRUE\n               | FALSE\n    \n    expression : ID\n    \n    for : FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET\n    \n    move : MOVE LPAREN  RPAREN\n    \n    delay : DELAY line\n    \n    empty :\n    '
+_lr_signature = 'rightLETrightASSIGNleftPLUSMINUSleftTIMESDIVIDEleftLPARENRPARENA ARROW ASSIGN BREAK COMMA DELAY DIVIDE DOTDOT ELSE ELSEIF EQEQ FALSE FN FOR GT GTE I ID IF IN INT INTEGER LCRLBRACKET LET LOOP LPAREN LSQRBRACKET LT LTE M MAIN MINUS MOVE OPERA P PLUS PRINT Q QUOT RANGE RCRLBRACKET RETURN RPAREN RSQRBRACKET SEMICOLON T TIMES TRUE WHILE WRONG_ID\n    main : FN MAIN LCRLBRACKET line RCRLBRACKET\n    \n    line : for\n         | variable\n         | move\n         | delay\n         | empty\n    \n    for : FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET\n    \n    variable : LET ID ASSIGN expression SEMICOLON line\n    \n    expression : ID\n    \n    expression : INT\n               | bool\n    \n    bool : TRUE\n         | FALSE\n    \n    move : MOVE LPAREN QUOT finger QUOT COMMA bool RPAREN SEMICOLON line\n    \n    finger : P\n           | I\n           | M\n           | A\n           | Q\n           | T\n    \n    delay : DELAY line\n    \n    empty :\n    '
     
-_lr_action_items = {'FN':([0,],[2,]),'$end':([1,15,],[0,-1,]),'MAIN':([2,],[3,]),'LCRLBRACKET':([3,32,],[4,33,]),'LET':([4,14,29,33,],[11,11,11,11,]),'FOR':([4,14,29,33,],[12,12,12,12,]),'MOVE':([4,14,29,33,],[13,13,13,13,]),'DELAY':([4,14,29,33,],[14,14,14,14,]),'RCRLBRACKET':([4,5,6,7,8,9,10,14,19,22,29,31,33,34,35,],[-15,15,-2,-3,-4,-5,-6,-15,-14,-13,-15,-7,-15,35,-12,]),'ID':([11,12,20,],[16,17,23,]),'LPAREN':([13,],[18,]),'ASSIGN':([16,],[20,]),'IN':([17,],[21,]),'RPAREN':([18,],[22,]),'INT':([20,21,30,],[25,28,32,]),'TRUE':([20,],[26,]),'FALSE':([20,],[27,]),'SEMICOLON':([23,24,25,26,27,],[-11,29,-8,-9,-10,]),'DOTDOT':([28,],[30,]),}
+_lr_action_items = {'FN':([0,],[2,]),'$end':([1,15,],[0,-1,]),'MAIN':([2,],[3,]),'LCRLBRACKET':([3,40,],[4,43,]),'FOR':([4,14,38,43,48,],[11,11,11,11,11,]),'LET':([4,14,38,43,48,],[12,12,12,12,12,]),'MOVE':([4,14,38,43,48,],[13,13,13,13,13,]),'DELAY':([4,14,38,43,48,],[14,14,14,14,14,]),'RCRLBRACKET':([4,5,6,7,8,9,10,14,19,38,41,43,45,47,48,49,],[-22,15,-2,-3,-4,-5,-6,-22,-21,-22,-8,-22,47,-7,-22,-14,]),'ID':([11,12,21,],[16,17,24,]),'LPAREN':([13,],[18,]),'IN':([16,],[20,]),'ASSIGN':([17,],[21,]),'QUOT':([18,30,31,32,33,34,35,36,],[22,39,-15,-16,-17,-18,-19,-20,]),'INT':([20,21,37,],[23,26,40,]),'TRUE':([21,42,],[28,28,]),'FALSE':([21,42,],[29,29,]),'P':([22,],[31,]),'I':([22,],[32,]),'M':([22,],[33,]),'A':([22,],[34,]),'Q':([22,],[35,]),'T':([22,],[36,]),'DOTDOT':([23,],[37,]),'SEMICOLON':([24,25,26,27,28,29,46,],[-9,38,-10,-11,-12,-13,48,]),'RPAREN':([28,29,44,],[-12,-13,46,]),'COMMA':([39,],[42,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'main':([0,],[1,]),'line':([4,14,29,33,],[5,19,31,34,]),'variable':([4,14,29,33,],[6,6,6,6,]),'for':([4,14,29,33,],[7,7,7,7,]),'move':([4,14,29,33,],[8,8,8,8,]),'delay':([4,14,29,33,],[9,9,9,9,]),'empty':([4,14,29,33,],[10,10,10,10,]),'expression':([20,],[24,]),}
+_lr_goto_items = {'main':([0,],[1,]),'line':([4,14,38,43,48,],[5,19,41,45,49,]),'for':([4,14,38,43,48,],[6,6,6,6,6,]),'variable':([4,14,38,43,48,],[7,7,7,7,7,]),'move':([4,14,38,43,48,],[8,8,8,8,8,]),'delay':([4,14,38,43,48,],[9,9,9,9,9,]),'empty':([4,14,38,43,48,],[10,10,10,10,10,]),'expression':([21,],[25,]),'bool':([21,42,],[27,44,]),'finger':([22,],[30,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,19 +27,26 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> main","S'",1,None,None,None),
-  ('main -> FN MAIN LCRLBRACKET line RCRLBRACKET','main',5,'p_main','SyntacticAnalizer.py',14),
-  ('line -> variable','line',1,'p_program','SyntacticAnalizer.py',19),
+  ('main -> FN MAIN LCRLBRACKET line RCRLBRACKET','main',5,'p_main','SyntacticAnalizer.py',15),
   ('line -> for','line',1,'p_program','SyntacticAnalizer.py',20),
-  ('line -> move','line',1,'p_program','SyntacticAnalizer.py',21),
-  ('line -> delay','line',1,'p_program','SyntacticAnalizer.py',22),
-  ('line -> empty','line',1,'p_program','SyntacticAnalizer.py',23),
-  ('variable -> LET ID ASSIGN expression SEMICOLON line','variable',6,'p_variable','SyntacticAnalizer.py',28),
-  ('expression -> INT','expression',1,'p_expression','SyntacticAnalizer.py',35),
-  ('expression -> TRUE','expression',1,'p_expression','SyntacticAnalizer.py',36),
-  ('expression -> FALSE','expression',1,'p_expression','SyntacticAnalizer.py',37),
-  ('expression -> ID','expression',1,'p_expression_var','SyntacticAnalizer.py',43),
-  ('for -> FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET','for',9,'p_for','SyntacticAnalizer.py',49),
-  ('move -> MOVE LPAREN RPAREN','move',3,'p_move','SyntacticAnalizer.py',54),
-  ('delay -> DELAY line','delay',2,'p_delay','SyntacticAnalizer.py',59),
-  ('empty -> <empty>','empty',0,'p_empty','SyntacticAnalizer.py',69),
+  ('line -> variable','line',1,'p_program','SyntacticAnalizer.py',21),
+  ('line -> move','line',1,'p_program','SyntacticAnalizer.py',22),
+  ('line -> delay','line',1,'p_program','SyntacticAnalizer.py',23),
+  ('line -> empty','line',1,'p_program','SyntacticAnalizer.py',24),
+  ('for -> FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET','for',9,'p_for','SyntacticAnalizer.py',29),
+  ('variable -> LET ID ASSIGN expression SEMICOLON line','variable',6,'p_variable','SyntacticAnalizer.py',34),
+  ('expression -> ID','expression',1,'p_expression_var','SyntacticAnalizer.py',41),
+  ('expression -> INT','expression',1,'p_expression','SyntacticAnalizer.py',47),
+  ('expression -> bool','expression',1,'p_expression','SyntacticAnalizer.py',48),
+  ('bool -> TRUE','bool',1,'p_expression_bool','SyntacticAnalizer.py',54),
+  ('bool -> FALSE','bool',1,'p_expression_bool','SyntacticAnalizer.py',55),
+  ('move -> MOVE LPAREN QUOT finger QUOT COMMA bool RPAREN SEMICOLON line','move',10,'p_move','SyntacticAnalizer.py',61),
+  ('finger -> P','finger',1,'p_finger','SyntacticAnalizer.py',68),
+  ('finger -> I','finger',1,'p_finger','SyntacticAnalizer.py',69),
+  ('finger -> M','finger',1,'p_finger','SyntacticAnalizer.py',70),
+  ('finger -> A','finger',1,'p_finger','SyntacticAnalizer.py',71),
+  ('finger -> Q','finger',1,'p_finger','SyntacticAnalizer.py',72),
+  ('finger -> T','finger',1,'p_finger','SyntacticAnalizer.py',73),
+  ('delay -> DELAY line','delay',2,'p_delay','SyntacticAnalizer.py',79),
+  ('empty -> <empty>','empty',0,'p_empty','SyntacticAnalizer.py',89),
 ]

@@ -1,4 +1,5 @@
 from Software.Lexical_Analysis.Tokenize import tokens
+from Software.Lexical_Analysis.Tokenize import literals
 from Software.Semantic.Structures_Models import *
 from sys import stdin
 
@@ -16,11 +17,16 @@ def p_main(p):
 
 def p_program(p):
     '''
-    line : variable
-         | for
+    line : for
+         | variable
          | move
          | delay
          | empty
+    '''
+
+def p_for(p):
+    '''
+    for : FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET
     '''
 
 def p_variable(p):
@@ -30,29 +36,43 @@ def p_variable(p):
     line = p.lineno(2)
     p[0] = Let(p[2], p[4], line)
 
-def p_expression(p):
-    '''
-    expression : INT
-               | TRUE
-               | FALSE
-    '''
-    p[0] = p[1]
-    
 def p_expression_var(p):
     '''
     expression : ID
     '''
     p[0] = ('let', p[1])
 
-def p_for(p):
+def p_expression(p):
     '''
-    for : FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET
+    expression : INT
+               | bool
     '''
+    p[0] = p[1]
+
+def p_expression_bool(p):
+    '''
+    bool : TRUE
+         | FALSE
+    '''
+    p[0] = p[1]
 
 def p_move(p):
     '''
-    move : MOVE LPAREN  RPAREN
+    move : MOVE LPAREN QUOT finger QUOT COMMA bool RPAREN SEMICOLON line
     '''
+    line = p.lineno(2)
+    p[0] = Move(p[4], p[7], line)
+
+def p_finger(p):
+    '''
+    finger : P
+           | I
+           | M
+           | A
+           | Q
+           | T
+    '''
+    p[0] = p[1]
 
 def p_delay(p):
     '''

@@ -73,5 +73,5 @@ tokens = [
 'DOTDOT',
 'QUOT',
 'LCRLBRACKET',
-'RCRLBRACKET'] + list(reserved.values())
+'RCRLBRACKET'] + list(reserved.values()) + literals
 

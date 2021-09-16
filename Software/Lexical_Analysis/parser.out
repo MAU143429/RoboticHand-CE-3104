@@ -4,7 +4,6 @@ Unused terminals:
 
     ARROW
     BREAK
-    COMMA
     DIVIDE
     ELSE
     ELSEIF
@@ -21,7 +20,6 @@ Unused terminals:
     OPERA
     PLUS
     PRINT
-    QUOT
     RANGE
     RETURN
     RSQRBRACKET
@@ -33,419 +31,89 @@ Grammar
 
 Rule 0     S' -> main
 Rule 1     main -> FN MAIN LCRLBRACKET line RCRLBRACKET
-Rule 2     line -> variable
-Rule 3     line -> for
+Rule 2     line -> for
+Rule 3     line -> variable
 Rule 4     line -> move
 Rule 5     line -> delay
-Rule 6     line -> empty
+Rule 6     for -> FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET
 Rule 7     variable -> LET ID ASSIGN expression SEMICOLON line
-Rule 8     expression -> INT
-Rule 9     expression -> TRUE
-Rule 10    expression -> FALSE
-Rule 11    expression -> ID
-Rule 12    for -> FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET
-Rule 13    move -> MOVE LPAREN RPAREN
-Rule 14    delay -> DELAY line
-Rule 15    empty -> <empty>
+Rule 8     expression -> ID
+Rule 9     expression -> INT
+Rule 10    expression -> bool
+Rule 11    bool -> TRUE
+Rule 12    bool -> FALSE
+Rule 13    move -> MOVE LPAREN QUOT finger QUOT COMMA bool RPAREN SEMICOLON line
+Rule 14    finger -> P
+Rule 15    finger -> I
+Rule 16    finger -> M
+Rule 17    finger -> A
+Rule 18    finger -> Q
+Rule 19    finger -> T
+Rule 20    delay -> DELAY line
 
 Terminals, with rules where they appear
 
+A                    : 17
 ARROW                : 
 ASSIGN               : 7
 BREAK                : 
-COMMA                : 
-DELAY                : 14
+COMMA                : 13
+DELAY                : 20
 DIVIDE               : 
-DOTDOT               : 12
+DOTDOT               : 6
 ELSE                 : 
 ELSEIF               : 
 EQEQ                 : 
-FALSE                : 10
+FALSE                : 12
 FN                   : 1
-FOR                  : 12
+FOR                  : 6
 GT                   : 
 GTE                  : 
-ID                   : 7 11 12
+I                    : 15
+ID                   : 6 7 8
 IF                   : 
-IN                   : 12
-INT                  : 8 12 12
+IN                   : 6
+INT                  : 6 6 9
 INTEGER              : 
-LCRLBRACKET          : 1 12
+LCRLBRACKET          : 1 6
 LET                  : 7
 LOOP                 : 
 LPAREN               : 13
 LSQRBRACKET          : 
 LT                   : 
 LTE                  : 
+M                    : 16
 MAIN                 : 1
 MINUS                : 
 MOVE                 : 13
 OPERA                : 
+P                    : 14
 PLUS                 : 
 PRINT                : 
-QUOT                 : 
+Q                    : 18
+QUOT                 : 13 13
 RANGE                : 
-RCRLBRACKET          : 1 12
+RCRLBRACKET          : 1 6
 RETURN               : 
 RPAREN               : 13
 RSQRBRACKET          : 
-SEMICOLON            : 7
+SEMICOLON            : 7 13
+T                    : 19
 TIMES                : 
-TRUE                 : 9
+TRUE                 : 11
 WHILE                : 
 WRONG_ID             : 
 error                : 
 
 Nonterminals, with rules where they appear
 
+bool                 : 10 13
 delay                : 5
-empty                : 6
 expression           : 7
-for                  : 3
-line                 : 1 7 12 14
+finger               : 13
+for                  : 2
+line                 : 1 6 7 13 20
 main                 : 0
 move                 : 4
-variable             : 2
-
-Parsing method: LALR
-
-state 0
-
-    (0) S' -> . main
-    (1) main -> . FN MAIN LCRLBRACKET line RCRLBRACKET
-
-    FN              shift and go to state 2
-
-    main                           shift and go to state 1
-
-state 1
-
-    (0) S' -> main .
-
-
-
-state 2
-
-    (1) main -> FN . MAIN LCRLBRACKET line RCRLBRACKET
-
-    MAIN            shift and go to state 3
-
-
-state 3
-
-    (1) main -> FN MAIN . LCRLBRACKET line RCRLBRACKET
-
-    LCRLBRACKET     shift and go to state 4
-
-
-state 4
-
-    (1) main -> FN MAIN LCRLBRACKET . line RCRLBRACKET
-    (2) line -> . variable
-    (3) line -> . for
-    (4) line -> . move
-    (5) line -> . delay
-    (6) line -> . empty
-    (7) variable -> . LET ID ASSIGN expression SEMICOLON line
-    (12) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET
-    (13) move -> . MOVE LPAREN RPAREN
-    (14) delay -> . DELAY line
-    (15) empty -> .
-
-    LET             shift and go to state 11
-    FOR             shift and go to state 12
-    MOVE            shift and go to state 13
-    DELAY           shift and go to state 14
-    RCRLBRACKET     reduce using rule 15 (empty -> .)
-
-    line                           shift and go to state 5
-    variable                       shift and go to state 6
-    for                            shift and go to state 7
-    move                           shift and go to state 8
-    delay                          shift and go to state 9
-    empty                          shift and go to state 10
-
-state 5
-
-    (1) main -> FN MAIN LCRLBRACKET line . RCRLBRACKET
-
-    RCRLBRACKET     shift and go to state 15
-
-
-state 6
-
-    (2) line -> variable .
-
-    RCRLBRACKET     reduce using rule 2 (line -> variable .)
-
-
-state 7
-
-    (3) line -> for .
-
-    RCRLBRACKET     reduce using rule 3 (line -> for .)
-
-
-state 8
-
-    (4) line -> move .
-
-    RCRLBRACKET     reduce using rule 4 (line -> move .)
-
-
-state 9
-
-    (5) line -> delay .
-
-    RCRLBRACKET     reduce using rule 5 (line -> delay .)
-
-
-state 10
-
-    (6) line -> empty .
-
-    RCRLBRACKET     reduce using rule 6 (line -> empty .)
-
-
-state 11
-
-    (7) variable -> LET . ID ASSIGN expression SEMICOLON line
-
-    ID              shift and go to state 16
-
-
-state 12
-
-    (12) for -> FOR . ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET
-
-    ID              shift and go to state 17
-
-
-state 13
-
-    (13) move -> MOVE . LPAREN RPAREN
-
-    LPAREN          shift and go to state 18
-
-
-state 14
-
-    (14) delay -> DELAY . line
-    (2) line -> . variable
-    (3) line -> . for
-    (4) line -> . move
-    (5) line -> . delay
-    (6) line -> . empty
-    (7) variable -> . LET ID ASSIGN expression SEMICOLON line
-    (12) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET
-    (13) move -> . MOVE LPAREN RPAREN
-    (14) delay -> . DELAY line
-    (15) empty -> .
-
-    LET             shift and go to state 11
-    FOR             shift and go to state 12
-    MOVE            shift and go to state 13
-    DELAY           shift and go to state 14
-    RCRLBRACKET     reduce using rule 15 (empty -> .)
-
-    line                           shift and go to state 19
-    variable                       shift and go to state 6
-    for                            shift and go to state 7
-    move                           shift and go to state 8
-    delay                          shift and go to state 9
-    empty                          shift and go to state 10
-
-state 15
-
-    (1) main -> FN MAIN LCRLBRACKET line RCRLBRACKET .
-
-    $end            reduce using rule 1 (main -> FN MAIN LCRLBRACKET line RCRLBRACKET .)
-
-
-state 16
-
-    (7) variable -> LET ID . ASSIGN expression SEMICOLON line
-
-    ASSIGN          shift and go to state 20
-
-
-state 17
-
-    (12) for -> FOR ID . IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET
-
-    IN              shift and go to state 21
-
-
-state 18
-
-    (13) move -> MOVE LPAREN . RPAREN
-
-    RPAREN          shift and go to state 22
-
-
-state 19
-
-    (14) delay -> DELAY line .
-
-    RCRLBRACKET     reduce using rule 14 (delay -> DELAY line .)
-
-
-state 20
-
-    (7) variable -> LET ID ASSIGN . expression SEMICOLON line
-    (8) expression -> . INT
-    (9) expression -> . TRUE
-    (10) expression -> . FALSE
-    (11) expression -> . ID
-
-    INT             shift and go to state 25
-    TRUE            shift and go to state 26
-    FALSE           shift and go to state 27
-    ID              shift and go to state 23
-
-    expression                     shift and go to state 24
-
-state 21
-
-    (12) for -> FOR ID IN . INT DOTDOT INT LCRLBRACKET line RCRLBRACKET
-
-    INT             shift and go to state 28
-
-
-state 22
-
-    (13) move -> MOVE LPAREN RPAREN .
-
-    RCRLBRACKET     reduce using rule 13 (move -> MOVE LPAREN RPAREN .)
-
-
-state 23
-
-    (11) expression -> ID .
-
-    SEMICOLON       reduce using rule 11 (expression -> ID .)
-
-
-state 24
-
-    (7) variable -> LET ID ASSIGN expression . SEMICOLON line
-
-    SEMICOLON       shift and go to state 29
-
-
-state 25
-
-    (8) expression -> INT .
-
-    SEMICOLON       reduce using rule 8 (expression -> INT .)
-
-
-state 26
-
-    (9) expression -> TRUE .
-
-    SEMICOLON       reduce using rule 9 (expression -> TRUE .)
-
-
-state 27
-
-    (10) expression -> FALSE .
-
-    SEMICOLON       reduce using rule 10 (expression -> FALSE .)
-
-
-state 28
-
-    (12) for -> FOR ID IN INT . DOTDOT INT LCRLBRACKET line RCRLBRACKET
-
-    DOTDOT          shift and go to state 30
-
-
-state 29
-
-    (7) variable -> LET ID ASSIGN expression SEMICOLON . line
-    (2) line -> . variable
-    (3) line -> . for
-    (4) line -> . move
-    (5) line -> . delay
-    (6) line -> . empty
-    (7) variable -> . LET ID ASSIGN expression SEMICOLON line
-    (12) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET
-    (13) move -> . MOVE LPAREN RPAREN
-    (14) delay -> . DELAY line
-    (15) empty -> .
-
-    LET             shift and go to state 11
-    FOR             shift and go to state 12
-    MOVE            shift and go to state 13
-    DELAY           shift and go to state 14
-    RCRLBRACKET     reduce using rule 15 (empty -> .)
-
-    line                           shift and go to state 31
-    variable                       shift and go to state 6
-    for                            shift and go to state 7
-    move                           shift and go to state 8
-    delay                          shift and go to state 9
-    empty                          shift and go to state 10
-
-state 30
-
-    (12) for -> FOR ID IN INT DOTDOT . INT LCRLBRACKET line RCRLBRACKET
-
-    INT             shift and go to state 32
-
-
-state 31
-
-    (7) variable -> LET ID ASSIGN expression SEMICOLON line .
-
-    RCRLBRACKET     reduce using rule 7 (variable -> LET ID ASSIGN expression SEMICOLON line .)
-
-
-state 32
-
-    (12) for -> FOR ID IN INT DOTDOT INT . LCRLBRACKET line RCRLBRACKET
-
-    LCRLBRACKET     shift and go to state 33
-
-
-state 33
-
-    (12) for -> FOR ID IN INT DOTDOT INT LCRLBRACKET . line RCRLBRACKET
-    (2) line -> . variable
-    (3) line -> . for
-    (4) line -> . move
-    (5) line -> . delay
-    (6) line -> . empty
-    (7) variable -> . LET ID ASSIGN expression SEMICOLON line
-    (12) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET
-    (13) move -> . MOVE LPAREN RPAREN
-    (14) delay -> . DELAY line
-    (15) empty -> .
-
-    LET             shift and go to state 11
-    FOR             shift and go to state 12
-    MOVE            shift and go to state 13
-    DELAY           shift and go to state 14
-    RCRLBRACKET     reduce using rule 15 (empty -> .)
-
-    line                           shift and go to state 34
-    variable                       shift and go to state 6
-    for                            shift and go to state 7
-    move                           shift and go to state 8
-    delay                          shift and go to state 9
-    empty                          shift and go to state 10
-
-state 34
-
-    (12) for -> FOR ID IN INT DOTDOT INT LCRLBRACKET line . RCRLBRACKET
-
-    RCRLBRACKET     shift and go to state 35
-
-
-state 35
-
-    (12) for -> FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET .
-
-    RCRLBRACKET     reduce using rule 12 (for -> FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET .)
+variable             : 3
 
