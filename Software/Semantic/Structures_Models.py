@@ -10,8 +10,22 @@ class Let:
 
 
 class Del:
+    def __init__(self, value, unit , line):
+        self.value = value
+        self.unit = unit
+        self.line = line
+        print("SE HA REGISTRADO EL DELAY CON DURACION DE " + str(self.value) + " " + str(self.unit) +  " EN LA LINEA " + str(self.line))
+
+class Print:
     def __init__(self, value, line):
         self.value = value
         self.line = line
-        print("SE HA REGISTRADO EL DELAY CON DURACION DE " + str(self.value) + " EN LA LINEA " + str(self.line))
+        print("SE IMPRIMIRA EN LA CONSOLA -->  " + str(self.value) + " EN LA LINEA " + str(self.line))
 
+class Opera:
+    def __init__(self, operator, operand, operand2, line):
+        self.operator = operator
+        self.operand = operand
+        self.operand2 = operand2
+        self.line = line
+        print("SE DETECTO UN OPERA DE FORMA ( " + str(self.operator) + "," + str(self.operand) + ","+ str(self.operand2) + ") EN LA LINEA " + str(self.line))

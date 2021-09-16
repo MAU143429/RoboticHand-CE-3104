@@ -4,8 +4,6 @@ Unused terminals:
 
     ARROW
     BREAK
-    COMMA
-    DIVIDE
     DOTDOT
     ELSE
     ELSEIF
@@ -18,23 +16,16 @@ Unused terminals:
     INTEGER
     LCRLBRACKET
     LOOP
-    LPAREN
     LSQRBRACKET
     LT
     LTE
     MAIN
-    MINUS
     MOVE
-    OPERA
-    PLUS
-    PRINT
-    QUOT
     RANGE
     RCRLBRACKET
     RETURN
-    RPAREN
     RSQRBRACKET
-    TIMES
+    TMTM
     WHILE
     WRONG_ID
 
@@ -43,58 +34,79 @@ Grammar
 Rule 0     S' -> line
 Rule 1     line -> variable
 Rule 2     line -> delay
-Rule 3     line -> empty
-Rule 4     variable -> LET ID ASSIGN expression SEMICOLON line
-Rule 5     expression -> INT
-Rule 6     expression -> TRUE
-Rule 7     expression -> FALSE
-Rule 8     expression -> ID
-Rule 9     delay -> DELAY line
-Rule 10    empty -> <empty>
+Rule 3     line -> println
+Rule 4     line -> opera
+Rule 5     line -> empty
+Rule 6     variable -> LET ID ASSIGN expression SEMICOLON line
+Rule 7     expression -> INT
+Rule 8     expression -> TRUE
+Rule 9     expression -> FALSE
+Rule 10    expression -> ID
+Rule 11    delay -> DELAY LPAREN INT COMMA unit RPAREN SEMICOLON line
+Rule 12    unit -> QUOT MIN QUOT
+Rule 13    unit -> QUOT MIL QUOT
+Rule 14    unit -> QUOT SEG QUOT
+Rule 15    println -> PRINT EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON line
+Rule 16    text -> ID
+Rule 17    opera -> OPERA LPAREN operators COMMA operand COMMA operand RPAREN SEMICOLON line
+Rule 18    operators -> PLUS
+Rule 19    operators -> MINUS
+Rule 20    operators -> DIVIDE
+Rule 21    operators -> TIMES TIMES
+Rule 22    operators -> TIMES
+Rule 23    operand -> INT
+Rule 24    operand -> ID
+Rule 25    operand -> OPERA
+Rule 26    empty -> <empty>
 
 Terminals, with rules where they appear
 
 ARROW                : 
-ASSIGN               : 4
+ASSIGN               : 6
 BREAK                : 
-COMMA                : 
-DELAY                : 9
-DIVIDE               : 
+COMMA                : 11 17 17
+DELAY                : 11
+DIVIDE               : 20
 DOTDOT               : 
 ELSE                 : 
 ELSEIF               : 
 EQEQ                 : 
-FALSE                : 7
+EXPR                 : 15
+FALSE                : 9
 FN                   : 
 FOR                  : 
 GT                   : 
 GTE                  : 
-ID                   : 4 8
+ID                   : 6 10 16 24
 IF                   : 
-INT                  : 5
+INT                  : 7 11 23
 INTEGER              : 
 LCRLBRACKET          : 
-LET                  : 4
+LET                  : 6
 LOOP                 : 
-LPAREN               : 
+LPAREN               : 11 15 17
 LSQRBRACKET          : 
 LT                   : 
 LTE                  : 
 MAIN                 : 
-MINUS                : 
+MIL                  : 13
+MIN                  : 12
+MINUS                : 19
 MOVE                 : 
-OPERA                : 
-PLUS                 : 
-PRINT                : 
-QUOT                 : 
+OPERA                : 17 25
+PLUS                 : 18
+PRINT                : 15
+QUOT                 : 12 12 13 13 14 14 15 15
 RANGE                : 
 RCRLBRACKET          : 
 RETURN               : 
-RPAREN               : 
+RPAREN               : 11 15 17
 RSQRBRACKET          : 
-SEMICOLON            : 4
-TIMES                : 
-TRUE                 : 6
+SEG                  : 14
+SEMICOLON            : 6 11 15 17
+TIMES                : 21 21 22
+TMTM                 : 
+TRUE                 : 8
 WHILE                : 
 WRONG_ID             : 
 error                : 
@@ -102,9 +114,15 @@ error                :
 Nonterminals, with rules where they appear
 
 delay                : 2
-empty                : 3
-expression           : 4
-line                 : 4 9 0
+empty                : 5
+expression           : 6
+line                 : 6 11 15 17 0
+opera                : 4
+operand              : 17 17
+operators            : 17
+println              : 3
+text                 : 15
+unit                 : 11
 variable             : 1
 
 Parsing method: LALR
@@ -114,19 +132,27 @@ state 0
     (0) S' -> . line
     (1) line -> . variable
     (2) line -> . delay
-    (3) line -> . empty
-    (4) variable -> . LET ID ASSIGN expression SEMICOLON line
-    (9) delay -> . DELAY line
-    (10) empty -> .
+    (3) line -> . println
+    (4) line -> . opera
+    (5) line -> . empty
+    (6) variable -> . LET ID ASSIGN expression SEMICOLON line
+    (11) delay -> . DELAY LPAREN INT COMMA unit RPAREN SEMICOLON line
+    (15) println -> . PRINT EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON line
+    (17) opera -> . OPERA LPAREN operators COMMA operand COMMA operand RPAREN SEMICOLON line
+    (26) empty -> .
 
-    LET             shift and go to state 5
-    DELAY           shift and go to state 6
-    $end            reduce using rule 10 (empty -> .)
+    LET             shift and go to state 7
+    DELAY           shift and go to state 8
+    PRINT           shift and go to state 9
+    OPERA           shift and go to state 10
+    $end            reduce using rule 26 (empty -> .)
 
     line                           shift and go to state 1
     variable                       shift and go to state 2
     delay                          shift and go to state 3
-    empty                          shift and go to state 4
+    println                        shift and go to state 4
+    opera                          shift and go to state 5
+    empty                          shift and go to state 6
 
 state 1
 
@@ -150,123 +176,516 @@ state 3
 
 state 4
 
-    (3) line -> empty .
+    (3) line -> println .
 
-    $end            reduce using rule 3 (line -> empty .)
+    $end            reduce using rule 3 (line -> println .)
 
 
 state 5
 
-    (4) variable -> LET . ID ASSIGN expression SEMICOLON line
+    (4) line -> opera .
 
-    ID              shift and go to state 7
+    $end            reduce using rule 4 (line -> opera .)
 
 
 state 6
 
-    (9) delay -> DELAY . line
-    (1) line -> . variable
-    (2) line -> . delay
-    (3) line -> . empty
-    (4) variable -> . LET ID ASSIGN expression SEMICOLON line
-    (9) delay -> . DELAY line
-    (10) empty -> .
+    (5) line -> empty .
 
-    LET             shift and go to state 5
-    DELAY           shift and go to state 6
-    $end            reduce using rule 10 (empty -> .)
+    $end            reduce using rule 5 (line -> empty .)
 
-    line                           shift and go to state 8
-    variable                       shift and go to state 2
-    delay                          shift and go to state 3
-    empty                          shift and go to state 4
 
 state 7
 
-    (4) variable -> LET ID . ASSIGN expression SEMICOLON line
+    (6) variable -> LET . ID ASSIGN expression SEMICOLON line
 
-    ASSIGN          shift and go to state 9
+    ID              shift and go to state 11
 
 
 state 8
 
-    (9) delay -> DELAY line .
+    (11) delay -> DELAY . LPAREN INT COMMA unit RPAREN SEMICOLON line
 
-    $end            reduce using rule 9 (delay -> DELAY line .)
+    LPAREN          shift and go to state 12
 
 
 state 9
 
-    (4) variable -> LET ID ASSIGN . expression SEMICOLON line
-    (5) expression -> . INT
-    (6) expression -> . TRUE
-    (7) expression -> . FALSE
-    (8) expression -> . ID
+    (15) println -> PRINT . EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON line
 
-    INT             shift and go to state 12
-    TRUE            shift and go to state 13
-    FALSE           shift and go to state 14
-    ID              shift and go to state 10
+    EXPR            shift and go to state 13
 
-    expression                     shift and go to state 11
 
 state 10
 
-    (8) expression -> ID .
+    (17) opera -> OPERA . LPAREN operators COMMA operand COMMA operand RPAREN SEMICOLON line
 
-    SEMICOLON       reduce using rule 8 (expression -> ID .)
+    LPAREN          shift and go to state 14
 
 
 state 11
 
-    (4) variable -> LET ID ASSIGN expression . SEMICOLON line
+    (6) variable -> LET ID . ASSIGN expression SEMICOLON line
 
-    SEMICOLON       shift and go to state 15
+    ASSIGN          shift and go to state 15
 
 
 state 12
 
-    (5) expression -> INT .
+    (11) delay -> DELAY LPAREN . INT COMMA unit RPAREN SEMICOLON line
 
-    SEMICOLON       reduce using rule 5 (expression -> INT .)
+    INT             shift and go to state 16
 
 
 state 13
 
-    (6) expression -> TRUE .
+    (15) println -> PRINT EXPR . LPAREN QUOT text QUOT RPAREN SEMICOLON line
 
-    SEMICOLON       reduce using rule 6 (expression -> TRUE .)
+    LPAREN          shift and go to state 17
 
 
 state 14
 
-    (7) expression -> FALSE .
+    (17) opera -> OPERA LPAREN . operators COMMA operand COMMA operand RPAREN SEMICOLON line
+    (18) operators -> . PLUS
+    (19) operators -> . MINUS
+    (20) operators -> . DIVIDE
+    (21) operators -> . TIMES TIMES
+    (22) operators -> . TIMES
 
-    SEMICOLON       reduce using rule 7 (expression -> FALSE .)
+    PLUS            shift and go to state 19
+    MINUS           shift and go to state 20
+    DIVIDE          shift and go to state 21
+    TIMES           shift and go to state 22
 
+    operators                      shift and go to state 18
 
 state 15
 
-    (4) variable -> LET ID ASSIGN expression SEMICOLON . line
-    (1) line -> . variable
-    (2) line -> . delay
-    (3) line -> . empty
-    (4) variable -> . LET ID ASSIGN expression SEMICOLON line
-    (9) delay -> . DELAY line
-    (10) empty -> .
+    (6) variable -> LET ID ASSIGN . expression SEMICOLON line
+    (7) expression -> . INT
+    (8) expression -> . TRUE
+    (9) expression -> . FALSE
+    (10) expression -> . ID
 
-    LET             shift and go to state 5
-    DELAY           shift and go to state 6
-    $end            reduce using rule 10 (empty -> .)
+    INT             shift and go to state 25
+    TRUE            shift and go to state 26
+    FALSE           shift and go to state 27
+    ID              shift and go to state 23
 
-    line                           shift and go to state 16
-    variable                       shift and go to state 2
-    delay                          shift and go to state 3
-    empty                          shift and go to state 4
+    expression                     shift and go to state 24
 
 state 16
 
-    (4) variable -> LET ID ASSIGN expression SEMICOLON line .
+    (11) delay -> DELAY LPAREN INT . COMMA unit RPAREN SEMICOLON line
 
-    $end            reduce using rule 4 (variable -> LET ID ASSIGN expression SEMICOLON line .)
+    COMMA           shift and go to state 28
+
+
+state 17
+
+    (15) println -> PRINT EXPR LPAREN . QUOT text QUOT RPAREN SEMICOLON line
+
+    QUOT            shift and go to state 29
+
+
+state 18
+
+    (17) opera -> OPERA LPAREN operators . COMMA operand COMMA operand RPAREN SEMICOLON line
+
+    COMMA           shift and go to state 30
+
+
+state 19
+
+    (18) operators -> PLUS .
+
+    COMMA           reduce using rule 18 (operators -> PLUS .)
+
+
+state 20
+
+    (19) operators -> MINUS .
+
+    COMMA           reduce using rule 19 (operators -> MINUS .)
+
+
+state 21
+
+    (20) operators -> DIVIDE .
+
+    COMMA           reduce using rule 20 (operators -> DIVIDE .)
+
+
+state 22
+
+    (21) operators -> TIMES . TIMES
+    (22) operators -> TIMES .
+
+    TIMES           shift and go to state 31
+    COMMA           reduce using rule 22 (operators -> TIMES .)
+
+
+state 23
+
+    (10) expression -> ID .
+
+    SEMICOLON       reduce using rule 10 (expression -> ID .)
+
+
+state 24
+
+    (6) variable -> LET ID ASSIGN expression . SEMICOLON line
+
+    SEMICOLON       shift and go to state 32
+
+
+state 25
+
+    (7) expression -> INT .
+
+    SEMICOLON       reduce using rule 7 (expression -> INT .)
+
+
+state 26
+
+    (8) expression -> TRUE .
+
+    SEMICOLON       reduce using rule 8 (expression -> TRUE .)
+
+
+state 27
+
+    (9) expression -> FALSE .
+
+    SEMICOLON       reduce using rule 9 (expression -> FALSE .)
+
+
+state 28
+
+    (11) delay -> DELAY LPAREN INT COMMA . unit RPAREN SEMICOLON line
+    (12) unit -> . QUOT MIN QUOT
+    (13) unit -> . QUOT MIL QUOT
+    (14) unit -> . QUOT SEG QUOT
+
+    QUOT            shift and go to state 34
+
+    unit                           shift and go to state 33
+
+state 29
+
+    (15) println -> PRINT EXPR LPAREN QUOT . text QUOT RPAREN SEMICOLON line
+    (16) text -> . ID
+
+    ID              shift and go to state 36
+
+    text                           shift and go to state 35
+
+state 30
+
+    (17) opera -> OPERA LPAREN operators COMMA . operand COMMA operand RPAREN SEMICOLON line
+    (23) operand -> . INT
+    (24) operand -> . ID
+    (25) operand -> . OPERA
+
+    INT             shift and go to state 39
+    ID              shift and go to state 40
+    OPERA           shift and go to state 37
+
+    operand                        shift and go to state 38
+
+state 31
+
+    (21) operators -> TIMES TIMES .
+
+    COMMA           reduce using rule 21 (operators -> TIMES TIMES .)
+
+
+state 32
+
+    (6) variable -> LET ID ASSIGN expression SEMICOLON . line
+    (1) line -> . variable
+    (2) line -> . delay
+    (3) line -> . println
+    (4) line -> . opera
+    (5) line -> . empty
+    (6) variable -> . LET ID ASSIGN expression SEMICOLON line
+    (11) delay -> . DELAY LPAREN INT COMMA unit RPAREN SEMICOLON line
+    (15) println -> . PRINT EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON line
+    (17) opera -> . OPERA LPAREN operators COMMA operand COMMA operand RPAREN SEMICOLON line
+    (26) empty -> .
+
+    LET             shift and go to state 7
+    DELAY           shift and go to state 8
+    PRINT           shift and go to state 9
+    OPERA           shift and go to state 10
+    $end            reduce using rule 26 (empty -> .)
+
+    line                           shift and go to state 41
+    variable                       shift and go to state 2
+    delay                          shift and go to state 3
+    println                        shift and go to state 4
+    opera                          shift and go to state 5
+    empty                          shift and go to state 6
+
+state 33
+
+    (11) delay -> DELAY LPAREN INT COMMA unit . RPAREN SEMICOLON line
+
+    RPAREN          shift and go to state 42
+
+
+state 34
+
+    (12) unit -> QUOT . MIN QUOT
+    (13) unit -> QUOT . MIL QUOT
+    (14) unit -> QUOT . SEG QUOT
+
+    MIN             shift and go to state 43
+    MIL             shift and go to state 44
+    SEG             shift and go to state 45
+
+
+state 35
+
+    (15) println -> PRINT EXPR LPAREN QUOT text . QUOT RPAREN SEMICOLON line
+
+    QUOT            shift and go to state 46
+
+
+state 36
+
+    (16) text -> ID .
+
+    QUOT            reduce using rule 16 (text -> ID .)
+
+
+state 37
+
+    (25) operand -> OPERA .
+
+    COMMA           reduce using rule 25 (operand -> OPERA .)
+    RPAREN          reduce using rule 25 (operand -> OPERA .)
+
+
+state 38
+
+    (17) opera -> OPERA LPAREN operators COMMA operand . COMMA operand RPAREN SEMICOLON line
+
+    COMMA           shift and go to state 47
+
+
+state 39
+
+    (23) operand -> INT .
+
+    COMMA           reduce using rule 23 (operand -> INT .)
+    RPAREN          reduce using rule 23 (operand -> INT .)
+
+
+state 40
+
+    (24) operand -> ID .
+
+    COMMA           reduce using rule 24 (operand -> ID .)
+    RPAREN          reduce using rule 24 (operand -> ID .)
+
+
+state 41
+
+    (6) variable -> LET ID ASSIGN expression SEMICOLON line .
+
+    $end            reduce using rule 6 (variable -> LET ID ASSIGN expression SEMICOLON line .)
+
+
+state 42
+
+    (11) delay -> DELAY LPAREN INT COMMA unit RPAREN . SEMICOLON line
+
+    SEMICOLON       shift and go to state 48
+
+
+state 43
+
+    (12) unit -> QUOT MIN . QUOT
+
+    QUOT            shift and go to state 49
+
+
+state 44
+
+    (13) unit -> QUOT MIL . QUOT
+
+    QUOT            shift and go to state 50
+
+
+state 45
+
+    (14) unit -> QUOT SEG . QUOT
+
+    QUOT            shift and go to state 51
+
+
+state 46
+
+    (15) println -> PRINT EXPR LPAREN QUOT text QUOT . RPAREN SEMICOLON line
+
+    RPAREN          shift and go to state 52
+
+
+state 47
+
+    (17) opera -> OPERA LPAREN operators COMMA operand COMMA . operand RPAREN SEMICOLON line
+    (23) operand -> . INT
+    (24) operand -> . ID
+    (25) operand -> . OPERA
+
+    INT             shift and go to state 39
+    ID              shift and go to state 40
+    OPERA           shift and go to state 37
+
+    operand                        shift and go to state 53
+
+state 48
+
+    (11) delay -> DELAY LPAREN INT COMMA unit RPAREN SEMICOLON . line
+    (1) line -> . variable
+    (2) line -> . delay
+    (3) line -> . println
+    (4) line -> . opera
+    (5) line -> . empty
+    (6) variable -> . LET ID ASSIGN expression SEMICOLON line
+    (11) delay -> . DELAY LPAREN INT COMMA unit RPAREN SEMICOLON line
+    (15) println -> . PRINT EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON line
+    (17) opera -> . OPERA LPAREN operators COMMA operand COMMA operand RPAREN SEMICOLON line
+    (26) empty -> .
+
+    LET             shift and go to state 7
+    DELAY           shift and go to state 8
+    PRINT           shift and go to state 9
+    OPERA           shift and go to state 10
+    $end            reduce using rule 26 (empty -> .)
+
+    line                           shift and go to state 54
+    variable                       shift and go to state 2
+    delay                          shift and go to state 3
+    println                        shift and go to state 4
+    opera                          shift and go to state 5
+    empty                          shift and go to state 6
+
+state 49
+
+    (12) unit -> QUOT MIN QUOT .
+
+    RPAREN          reduce using rule 12 (unit -> QUOT MIN QUOT .)
+
+
+state 50
+
+    (13) unit -> QUOT MIL QUOT .
+
+    RPAREN          reduce using rule 13 (unit -> QUOT MIL QUOT .)
+
+
+state 51
+
+    (14) unit -> QUOT SEG QUOT .
+
+    RPAREN          reduce using rule 14 (unit -> QUOT SEG QUOT .)
+
+
+state 52
+
+    (15) println -> PRINT EXPR LPAREN QUOT text QUOT RPAREN . SEMICOLON line
+
+    SEMICOLON       shift and go to state 55
+
+
+state 53
+
+    (17) opera -> OPERA LPAREN operators COMMA operand COMMA operand . RPAREN SEMICOLON line
+
+    RPAREN          shift and go to state 56
+
+
+state 54
+
+    (11) delay -> DELAY LPAREN INT COMMA unit RPAREN SEMICOLON line .
+
+    $end            reduce using rule 11 (delay -> DELAY LPAREN INT COMMA unit RPAREN SEMICOLON line .)
+
+
+state 55
+
+    (15) println -> PRINT EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON . line
+    (1) line -> . variable
+    (2) line -> . delay
+    (3) line -> . println
+    (4) line -> . opera
+    (5) line -> . empty
+    (6) variable -> . LET ID ASSIGN expression SEMICOLON line
+    (11) delay -> . DELAY LPAREN INT COMMA unit RPAREN SEMICOLON line
+    (15) println -> . PRINT EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON line
+    (17) opera -> . OPERA LPAREN operators COMMA operand COMMA operand RPAREN SEMICOLON line
+    (26) empty -> .
+
+    LET             shift and go to state 7
+    DELAY           shift and go to state 8
+    PRINT           shift and go to state 9
+    OPERA           shift and go to state 10
+    $end            reduce using rule 26 (empty -> .)
+
+    line                           shift and go to state 57
+    variable                       shift and go to state 2
+    delay                          shift and go to state 3
+    println                        shift and go to state 4
+    opera                          shift and go to state 5
+    empty                          shift and go to state 6
+
+state 56
+
+    (17) opera -> OPERA LPAREN operators COMMA operand COMMA operand RPAREN . SEMICOLON line
+
+    SEMICOLON       shift and go to state 58
+
+
+state 57
+
+    (15) println -> PRINT EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON line .
+
+    $end            reduce using rule 15 (println -> PRINT EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON line .)
+
+
+state 58
+
+    (17) opera -> OPERA LPAREN operators COMMA operand COMMA operand RPAREN SEMICOLON . line
+    (1) line -> . variable
+    (2) line -> . delay
+    (3) line -> . println
+    (4) line -> . opera
+    (5) line -> . empty
+    (6) variable -> . LET ID ASSIGN expression SEMICOLON line
+    (11) delay -> . DELAY LPAREN INT COMMA unit RPAREN SEMICOLON line
+    (15) println -> . PRINT EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON line
+    (17) opera -> . OPERA LPAREN operators COMMA operand COMMA operand RPAREN SEMICOLON line
+    (26) empty -> .
+
+    LET             shift and go to state 7
+    DELAY           shift and go to state 8
+    PRINT           shift and go to state 9
+    OPERA           shift and go to state 10
+    $end            reduce using rule 26 (empty -> .)
+
+    line                           shift and go to state 59
+    variable                       shift and go to state 2
+    delay                          shift and go to state 3
+    println                        shift and go to state 4
+    opera                          shift and go to state 5
+    empty                          shift and go to state 6
+
+state 59
+
+    (17) opera -> OPERA LPAREN operators COMMA operand COMMA operand RPAREN SEMICOLON line .
+
+    $end            reduce using rule 17 (opera -> OPERA LPAREN operators COMMA operand COMMA operand RPAREN SEMICOLON line .)
 

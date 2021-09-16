@@ -17,10 +17,14 @@ reserved =  {
     'break': 'BREAK',
     'main': 'MAIN',
     'return': 'RETURN',
-    'Move' : 'MOVE',
+    'Move': 'MOVE',
     'Delay': 'DELAY',
     'Opera': 'OPERA',
-    'Println!': 'PRINT'
+    'Println': 'PRINT',
+    'Mil': 'MIL',
+    'Min': 'MIN',
+    'Seg': 'SEG'
+
 }
 
 # Regular expression rules for literals and simple tokens
@@ -28,6 +32,7 @@ t_PLUS              = r'\+'
 t_MINUS             = r'-'
 t_TIMES             = r'\*'
 t_DIVIDE            = r'/'
+t_EXPR              = r'\!'
 t_EQEQ              = r'\=='
 t_LTE               = r'\<='
 t_GTE               = r'\=>'
@@ -72,5 +77,7 @@ tokens = [
 'DOTDOT',
 'QUOT',
 'LCRLBRACKET',
+'EXPR',
+'TMTM',
 'RCRLBRACKET'] + list(reserved.values())
 
