@@ -1,3 +1,4 @@
+from Hardware.Robotic_Hand.Translator import Translator
 
 
 class Let:
@@ -13,6 +14,8 @@ class Del:
         self.unit = unit
         self.line = line
         print("SE HA REGISTRADO EL DELAY CON DURACION DE " + str(self.value) + " " + str(self.unit) +  " EN LA LINEA " + str(self.line))
+        t = Translator()
+        t.Create_Delay(self.value,self.unit)
 
 class Print:
     def __init__(self, value, line):
