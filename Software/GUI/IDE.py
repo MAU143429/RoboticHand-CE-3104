@@ -12,9 +12,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QWidget, QInputDialog, QFileDialog
 from Hardware.Robotic_Hand.Translator import Translator
 from Hardware.Robotic_Hand.Translator import Execute
+from Software.GUI.codeeditor import CodeEditor
 from Software.Lexical_Analysis.myLexer import *
 import os
 import time
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -25,8 +27,8 @@ class Ui_MainWindow(object):
         self.codeEditor = CodeEditor(self.centralwidget)
         self.codeEditor.setGeometry(QtCore.QRect(0, 0, 671, 321))
         self.codeEditor.setStyleSheet("background-color: rgb(33, 33, 50);\n"
-"font: 75 15pt \"Consolas\";\n"
-"color: rgb(255, 255, 255);")
+                                      "font: 75 15pt \"Consolas\";\n"
+                                      "color: rgb(255, 255, 255);")
         self.codeEditor.setPlainText("")
         self.codeEditor.setObjectName("codeEditor")
         self.output = QtWidgets.QPlainTextEdit(self.centralwidget)
@@ -67,7 +69,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.output.setPlainText(_translate("MainWindow", ">>>\n"
-""))
+                                                          ""))
         self.compileButton.setText(_translate("MainWindow", "Compile"))
         self.runButton.setText(_translate("MainWindow", "Compile and Run"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
@@ -86,12 +88,13 @@ class Ui_MainWindow(object):
         with open(path, "r") as f:
             self.codeEditor.setPlainText(f.read())
             f.close()
+
     def compile(self):
         self.save()
-        #self.output.setPlainText(self.codeEditor.toPlainText())
+        # self.output.setPlainText(self.codeEditor.toPlainText())
+        time.sleep(1)
         t = Translator()
         t.Clean()
-        time.sleep(1)
         lex_test()
 
     def run_compile(self):
@@ -99,18 +102,14 @@ class Ui_MainWindow(object):
         self.output.setPlainText(self.codeEditor.toPlainText())
         t = Translator()
         t.Clean()
-        lex_test("source.txt")
-        #e = Execute
-        #e.execute()
-
-
-
-
-from codeeditor import CodeEditor
+        lex_test()
+        # e = Execute
+        # e.execute()
 
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()

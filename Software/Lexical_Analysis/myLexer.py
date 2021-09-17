@@ -3,11 +3,17 @@ import ply.yacc as yacc
 from Software.Syntactic.SyntacticAnalizer import *
 
 def lex_test():
-    sourceFile = "source.txt"
+    sourceFile = "../Lexical_Analysis/source.txt"
     if sourceFile is not None:
-                with open(sourceFile) as file:
+                with open(sourceFile, 'r') as file:
+                    print("Entrando al lexer...")
                     source = file.read()
+                    lexer = lex.lex()
                     lexer.input(source)
+                    print("Lexer listo")
+                    print("Entrando al parser...")
+                    parser = yacc.yacc()
+                    print("Saliendo del parser...")
                     parser.parse(source)
                     print("TERMINE DE COMPILAR")
 

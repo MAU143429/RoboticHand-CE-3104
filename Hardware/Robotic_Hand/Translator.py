@@ -81,7 +81,7 @@ class Execute:
             send = f.readlines()
         numline = 0
 
-        while(num < len(send)):
+        while(numline < len(send)):
             cad = send[numline]
             if(cad == " "):
                 step1 = cad.find(',')
@@ -93,7 +93,7 @@ class Execute:
                     timer = cad[step1+1:step2]
                     unit = cad[step2+1:step3]
                     serial_port.write(cad.encode())
-                    Create_delays(timer,unit)
+                    self.Create_delays(timer, unit)
                     result = serial_port.readline().decode()
                     print("MENSAJE DE LA PLACA---->" + result + "*********")
                     numline += 1
