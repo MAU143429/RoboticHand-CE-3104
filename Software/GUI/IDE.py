@@ -88,11 +88,11 @@ class Ui_MainWindow(object):
             f.close()
     def compile(self):
         self.save()
-        self.output.setPlainText(self.codeEditor.toPlainText())
-        #t = Translator()
-        #t.Clean()
+        #self.output.setPlainText(self.codeEditor.toPlainText())
+        t = Translator()
+        t.Clean()
         time.sleep(1)
-        lex_test("source.txt")
+        lex_test()
 
     def run_compile(self):
         self.save()
