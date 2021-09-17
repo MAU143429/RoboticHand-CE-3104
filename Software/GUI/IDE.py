@@ -99,12 +99,13 @@ class Ui_MainWindow(object):
 
     def run_compile(self):
         self.save()
-        self.output.setPlainText(self.codeEditor.toPlainText())
+        #self.output.setPlainText(self.codeEditor.toPlainText())
+        time.sleep(1)
         t = Translator()
         t.Clean()
         lex_test()
-        # e = Execute
-        # e.execute()
+        e = Execute
+        e.execute()
 
 
 if __name__ == "__main__":

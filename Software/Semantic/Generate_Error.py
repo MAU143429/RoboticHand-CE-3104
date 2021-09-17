@@ -5,7 +5,6 @@ from Software.Error_Log import ErrorLog
 class Generate_Error:
 
     def __init__(self, code , line=0):
-        Generate_Error(0,line)
         self.code = code
         self.line = line
         self.error = ErrorLog()

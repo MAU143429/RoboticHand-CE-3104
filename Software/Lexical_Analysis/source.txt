@@ -1,5 +1,5 @@
 fn main{
 	Delay(12, "Mil");
-	Delay(12, "Mil");
-	Delay(12, "Mil");
+	Delay(13, "Mil");
+	Delay(14, "Mil");
 }

@@ -3,7 +3,7 @@ from Hardware.Robotic_Hand.Translator import Translator
 class Let:
     def __init__(self, id, value, line):
         self.id = id
-        self.value = value
+        self.value = value  # Let num = 42;   # Let num = True;
         self.line = line
         print("SE HA REGISTRADO EL LET  " + self.id + " CON EL VALOR DE " + str(self.value) + " EN LA LINEA " + str(self.line))
 
@@ -12,6 +12,7 @@ class Del:
         self.value = value
         self.unit = unit
         self.line = line
+
         print("SE HA REGISTRADO EL DELAY CON DURACION DE " + str(self.value) + " " + str(self.unit) +  " EN LA LINEA " + str(self.line))
         t = Translator()
         t.Create_Delay(self.value,self.unit)

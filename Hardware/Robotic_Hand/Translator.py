@@ -25,7 +25,7 @@ class Translator:
     def Write(self, data):
         ReadData = Translator().ReadAll()
         file = open('../../Software/Lexical_Analysis/test.txt','w')
-        note = ReadData + "\n" + data
+        note = data + "\n" + ReadData
         file.write(note)
         print("LINE TRANSLATED")
         file.close()
