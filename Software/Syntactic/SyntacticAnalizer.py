@@ -25,7 +25,6 @@ def p_program(p):
          | move
          | delay
          | println
-         | opera
          | empty
     '''
 
@@ -119,13 +118,35 @@ def p_text(p):
 
 '''
 ###########################################################################
+REGLAS PARA LET
+###########################################################################
+'''
+def p_let(p):
+    '''
+    let : LET ID ASSIGN INT SEMICOLON line
+             | LET ID ASSIGN expression SEMICOLON line
+    '''
+    line = p.lineno(2)
+    p[0] = Let(p[2], p[4], line)
+
+
+def p_expression_bool(p):
+    '''
+    expression : TRUE
+               | FALSE
+               | ID
+               | opera
+    '''
+    p[0] = p[1]
+
+'''
+###########################################################################
 REGLAS PARA OPERA
 ###########################################################################
 '''
 def p_opera(p):
     '''
-    opera : OPERA LPAREN operator COMMA operand COMMA operand RPAREN SEMICOLON line
-          | OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+    opera : OPERA LPAREN operator COMMA operand COMMA operand RPAREN
     '''
     line = p.lineno(2)
     p[0] = Opera(p[3], p[5], p[7], line).Operate()
@@ -145,29 +166,6 @@ def p_operand(p):
     operand : INT
             | ID
             | opera
-    '''
-    p[0] = p[1]
-
-
-'''
-###########################################################################
-REGLAS PARA LET
-###########################################################################
-'''
-def p_let(p):
-    '''
-    let : LET ID ASSIGN INT SEMICOLON line
-             | LET ID ASSIGN expression SEMICOLON line
-    '''
-    line = p.lineno(2)
-    p[0] = Let(p[2], p[4], line)
-
-
-def p_expression_bool(p):
-    '''
-    expression : TRUE
-               | FALSE
-               | ID
     '''
     p[0] = p[1]
 
