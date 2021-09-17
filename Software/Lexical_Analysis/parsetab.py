@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'rightLETrightASSIGNleftPLUSMINUSleftTIMESDIVIDEleftLPARENRPARENA ARROW ASSIGN BREAK COMMA DELAY DIVIDE DOTDOT ELSE ELSEIF EQEQ FALSE FN FOR GT GTE I ID IF IN INT INTEGER LCRLBRACKET LET LOOP LPAREN LSQRBRACKET LT LTE M MAIN MINUS MOVE OPERA P PLUS PRINT Q QUOT RANGE RCRLBRACKET RETURN RPAREN RSQRBRACKET SEMICOLON T TIMES TRUE WHILE WRONG_ID\n    main : FN MAIN LCRLBRACKET line RCRLBRACKET\n    \n    line : loop\n         | for\n         | variable\n         | move\n         | delay\n         | empty\n    \n    loop : LOOP LCRLBRACKET line RCRLBRACKET line\n    \n    for : FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line\n    \n    move : MOVE line LPAREN QUOT ID QUOT COMMA bool RPAREN SEMICOLON line\n    \n    delay : DELAY line\n    \n    variable : LET ID ASSIGN expression SEMICOLON line\n    \n    expression : INT\n               | bool\n    \n    bool : TRUE\n         | FALSE\n         | ID\n    \n    finger : P\n           | I\n           | M\n           | A\n           | Q\n           | T\n    \n    empty :\n    '
+_lr_signature = 'rightLETrightASSIGNleftPLUSMINUSleftTIMESDIVIDEleftLPARENRPARENA ARROW ASSIGN BREAK COMMA DELAY DIVIDE DOTDOT ELSE ELSEIF EQEQ FALSE FN FOR GT GTE I ID IF IN INT INTEGER LCRLBRACKET LET LOOP LPAREN LSQRBRACKET LT LTE M MAIN MINUS MOVE OPERA P PLUS PRINT Q QUOT RANGE RCRLBRACKET RETURN RPAREN RSQRBRACKET SEMICOLON T TIMES TRUE WHILE WRONG_ID\n    main : FN MAIN LCRLBRACKET line RCRLBRACKET\n    \n    line : loop\n         | for\n         | variable\n         | move\n         | delay\n         | empty\n    \n    loop : LOOP LCRLBRACKET line RCRLBRACKET line\n    \n    for : FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line\n    \n    move : MOVE LPAREN QUOT ID QUOT COMMA expression RPAREN SEMICOLON line\n    \n    delay : DELAY line\n    \n    variable : LET ID ASSIGN INT SEMICOLON line\n             | LET ID ASSIGN expression SEMICOLON line\n    \n    expression : TRUE\n               | FALSE\n               | ID\n    \n    finger : P\n           | I\n           | M\n           | A\n           | Q\n           | T\n    \n    empty :\n    '
     
-_lr_action_items = {'FN':([0,],[2,]),'$end':([1,17,],[0,-1,]),'MAIN':([2,],[3,]),'LCRLBRACKET':([3,12,40,],[4,18,43,]),'LOOP':([4,15,16,18,27,38,43,47,50,],[12,12,12,12,12,12,12,12,12,]),'FOR':([4,15,16,18,27,38,43,47,50,],[13,13,13,13,13,13,13,13,13,]),'LET':([4,15,16,18,27,38,43,47,50,],[14,14,14,14,14,14,14,14,14,]),'MOVE':([4,15,16,18,27,38,43,47,50,],[15,15,15,15,15,15,15,15,15,]),'DELAY':([4,15,16,18,27,38,43,47,50,],[16,16,16,16,16,16,16,16,16,]),'RCRLBRACKET':([4,5,6,7,8,9,10,11,16,18,22,23,27,36,38,41,43,45,47,49,50,51,],[-24,17,-2,-3,-4,-5,-6,-7,-24,-24,-11,27,-24,-8,-24,-12,-24,47,-24,-9,-24,-10,]),'LPAREN':([6,7,8,9,10,11,15,16,21,22,27,36,38,41,47,49,50,51,],[-2,-3,-4,-5,-6,-7,-24,-24,26,-11,-24,-8,-24,-12,-24,-9,-24,-10,]),'ID':([13,14,25,35,44,],[19,20,29,39,29,]),'IN':([19,],[24,]),'ASSIGN':([20,],[25,]),'INT':([24,25,37,],[28,31,40,]),'TRUE':([25,44,],[33,33,]),'FALSE':([25,44,],[34,34,]),'QUOT':([26,39,],[35,42,]),'DOTDOT':([28,],[37,]),'SEMICOLON':([29,30,31,32,33,34,48,],[-17,38,-13,-14,-15,-16,50,]),'RPAREN':([29,33,34,46,],[-17,-15,-16,48,]),'COMMA':([42,],[44,]),}
+_lr_action_items = {'FN':([0,],[2,]),'$end':([1,17,],[0,-1,]),'MAIN':([2,],[3,]),'LCRLBRACKET':([3,12,40,],[4,18,44,]),'LOOP':([4,16,18,27,37,38,44,48,49,],[12,12,12,12,12,12,12,12,12,]),'FOR':([4,16,18,27,37,38,44,48,49,],[13,13,13,13,13,13,13,13,13,]),'LET':([4,16,18,27,37,38,44,48,49,],[14,14,14,14,14,14,14,14,14,]),'MOVE':([4,16,18,27,37,38,44,48,49,],[15,15,15,15,15,15,15,15,15,]),'DELAY':([4,16,18,27,37,38,44,48,49,],[16,16,16,16,16,16,16,16,16,]),'RCRLBRACKET':([4,5,6,7,8,9,10,11,16,18,22,23,27,35,37,38,41,42,44,46,48,49,50,51,],[-23,17,-2,-3,-4,-5,-6,-7,-23,-23,-11,27,-23,-8,-23,-23,-12,-13,-23,48,-23,-23,-9,-10,]),'ID':([13,14,25,26,43,],[19,20,29,34,29,]),'LPAREN':([15,],[21,]),'IN':([19,],[24,]),'ASSIGN':([20,],[25,]),'QUOT':([21,34,],[26,39,]),'INT':([24,25,36,],[28,30,40,]),'TRUE':([25,43,],[32,32,]),'FALSE':([25,43,],[33,33,]),'DOTDOT':([28,],[36,]),'SEMICOLON':([29,30,31,32,33,47,],[-16,37,38,-14,-15,49,]),'RPAREN':([29,32,33,45,],[-16,-14,-15,47,]),'COMMA':([39,],[43,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'main':([0,],[1,]),'line':([4,15,16,18,27,38,43,47,50,],[5,21,22,23,36,41,45,49,51,]),'loop':([4,15,16,18,27,38,43,47,50,],[6,6,6,6,6,6,6,6,6,]),'for':([4,15,16,18,27,38,43,47,50,],[7,7,7,7,7,7,7,7,7,]),'variable':([4,15,16,18,27,38,43,47,50,],[8,8,8,8,8,8,8,8,8,]),'move':([4,15,16,18,27,38,43,47,50,],[9,9,9,9,9,9,9,9,9,]),'delay':([4,15,16,18,27,38,43,47,50,],[10,10,10,10,10,10,10,10,10,]),'empty':([4,15,16,18,27,38,43,47,50,],[11,11,11,11,11,11,11,11,11,]),'expression':([25,],[30,]),'bool':([25,44,],[32,46,]),}
+_lr_goto_items = {'main':([0,],[1,]),'line':([4,16,18,27,37,38,44,48,49,],[5,22,23,35,41,42,46,50,51,]),'loop':([4,16,18,27,37,38,44,48,49,],[6,6,6,6,6,6,6,6,6,]),'for':([4,16,18,27,37,38,44,48,49,],[7,7,7,7,7,7,7,7,7,]),'variable':([4,16,18,27,37,38,44,48,49,],[8,8,8,8,8,8,8,8,8,]),'move':([4,16,18,27,37,38,44,48,49,],[9,9,9,9,9,9,9,9,9,]),'delay':([4,16,18,27,37,38,44,48,49,],[10,10,10,10,10,10,10,10,10,]),'empty':([4,16,18,27,37,38,44,48,49,],[11,11,11,11,11,11,11,11,11,]),'expression':([25,43,],[31,45,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -36,19 +36,18 @@ _lr_productions = [
   ('line -> empty','line',1,'p_program','SyntacticAnalizer.py',25),
   ('loop -> LOOP LCRLBRACKET line RCRLBRACKET line','loop',5,'p_loop','SyntacticAnalizer.py',29),
   ('for -> FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line','for',10,'p_for','SyntacticAnalizer.py',34),
-  ('move -> MOVE line LPAREN QUOT ID QUOT COMMA bool RPAREN SEMICOLON line','move',11,'p_move','SyntacticAnalizer.py',39),
-  ('delay -> DELAY line','delay',2,'p_delay','SyntacticAnalizer.py',46),
-  ('variable -> LET ID ASSIGN expression SEMICOLON line','variable',6,'p_variable','SyntacticAnalizer.py',52),
-  ('expression -> INT','expression',1,'p_expression','SyntacticAnalizer.py',59),
-  ('expression -> bool','expression',1,'p_expression','SyntacticAnalizer.py',60),
-  ('bool -> TRUE','bool',1,'p_expression_bool','SyntacticAnalizer.py',66),
-  ('bool -> FALSE','bool',1,'p_expression_bool','SyntacticAnalizer.py',67),
-  ('bool -> ID','bool',1,'p_expression_bool','SyntacticAnalizer.py',68),
-  ('finger -> P','finger',1,'p_finger','SyntacticAnalizer.py',74),
-  ('finger -> I','finger',1,'p_finger','SyntacticAnalizer.py',75),
-  ('finger -> M','finger',1,'p_finger','SyntacticAnalizer.py',76),
-  ('finger -> A','finger',1,'p_finger','SyntacticAnalizer.py',77),
-  ('finger -> Q','finger',1,'p_finger','SyntacticAnalizer.py',78),
-  ('finger -> T','finger',1,'p_finger','SyntacticAnalizer.py',79),
-  ('empty -> <empty>','empty',0,'p_empty','SyntacticAnalizer.py',89),
+  ('move -> MOVE LPAREN QUOT ID QUOT COMMA expression RPAREN SEMICOLON line','move',10,'p_move','SyntacticAnalizer.py',41),
+  ('delay -> DELAY line','delay',2,'p_delay','SyntacticAnalizer.py',48),
+  ('variable -> LET ID ASSIGN INT SEMICOLON line','variable',6,'p_variable','SyntacticAnalizer.py',54),
+  ('variable -> LET ID ASSIGN expression SEMICOLON line','variable',6,'p_variable','SyntacticAnalizer.py',55),
+  ('expression -> TRUE','expression',1,'p_expression_bool','SyntacticAnalizer.py',62),
+  ('expression -> FALSE','expression',1,'p_expression_bool','SyntacticAnalizer.py',63),
+  ('expression -> ID','expression',1,'p_expression_bool','SyntacticAnalizer.py',64),
+  ('finger -> P','finger',1,'p_finger','SyntacticAnalizer.py',70),
+  ('finger -> I','finger',1,'p_finger','SyntacticAnalizer.py',71),
+  ('finger -> M','finger',1,'p_finger','SyntacticAnalizer.py',72),
+  ('finger -> A','finger',1,'p_finger','SyntacticAnalizer.py',73),
+  ('finger -> Q','finger',1,'p_finger','SyntacticAnalizer.py',74),
+  ('finger -> T','finger',1,'p_finger','SyntacticAnalizer.py',75),
+  ('empty -> <empty>','empty',0,'p_empty','SyntacticAnalizer.py',86),
 ]
