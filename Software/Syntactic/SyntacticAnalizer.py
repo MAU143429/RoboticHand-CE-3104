@@ -17,17 +17,35 @@ def p_main(p):
 
 def p_program(p):
     '''
-    line : for
+    line : loop
+         | for
          | variable
          | move
          | delay
          | empty
     '''
+def p_loop(p):
+    '''
+    loop : LOOP LCRLBRACKET line RCRLBRACKET line
+    '''
 
 def p_for(p):
     '''
-    for : FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET
+    for : FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
     '''
+
+def p_move(p):
+    '''
+    move : MOVE line LPAREN QUOT ID QUOT COMMA bool RPAREN SEMICOLON line
+    '''
+    line = p.lineno(2)
+    p[0] = Move(p[5], p[8], line)
+
+def p_delay(p):
+    '''
+    delay : DELAY line
+    '''
+    p[0] = (p[3], p[2], p[4])
 
 def p_variable(p):
     '''
@@ -35,12 +53,6 @@ def p_variable(p):
     '''
     line = p.lineno(2)
     p[0] = Let(p[2], p[4], line)
-
-def p_expression_var(p):
-    '''
-    expression : ID
-    '''
-    p[0] = ('let', p[1])
 
 def p_expression(p):
     '''
@@ -53,15 +65,9 @@ def p_expression_bool(p):
     '''
     bool : TRUE
          | FALSE
+         | ID
     '''
     p[0] = p[1]
-
-def p_move(p):
-    '''
-    move : MOVE LPAREN QUOT finger QUOT COMMA bool RPAREN SEMICOLON line
-    '''
-    line = p.lineno(2)
-    p[0] = Move(p[4], p[7], line)
 
 def p_finger(p):
     '''
@@ -73,12 +79,6 @@ def p_finger(p):
            | T
     '''
     p[0] = p[1]
-
-def p_delay(p):
-    '''
-    delay : DELAY line
-    '''
-    p[0] = (p[3], p[2], p[4])
 
 def p_error(p):
     print("Syntax error found!", p)

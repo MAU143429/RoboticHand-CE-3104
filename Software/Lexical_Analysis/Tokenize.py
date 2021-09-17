@@ -4,7 +4,7 @@
 reserved =  {
     'elseif': 'ELSEIF',
     'else': 'ELSE',
-    'if': 'IF',   
+    'if': 'IF',
     'while': 'WHILE',
     'let': 'LET',
     'for': 'FOR',
