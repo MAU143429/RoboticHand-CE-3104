@@ -10,8 +10,11 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QWidget, QInputDialog, QFileDialog
+from Hardware.Robotic_Hand.Translator import Translator
+from Hardware.Robotic_Hand.Translator import Execute
+from Software.Lexical_Analysis.myLexer import *
 import os
-
+import time
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -72,7 +75,7 @@ class Ui_MainWindow(object):
         self.actionLoad.setText(_translate("MainWindow", "Load"))
 
     def save(self):
-        with open('Software/GUI/code.txt', 'w') as f:
+        with open('../Lexical_Analysis/source.txt', 'w') as f:
             code = self.codeEditor.toPlainText()
             f.write(code)
             f.close()
@@ -86,6 +89,22 @@ class Ui_MainWindow(object):
     def compile(self):
         self.save()
         self.output.setPlainText(self.codeEditor.toPlainText())
+        #t = Translator()
+        #t.Clean()
+        time.sleep(1)
+        lex_test("source.txt")
+
+    def run_compile(self):
+        self.save()
+        self.output.setPlainText(self.codeEditor.toPlainText())
+        t = Translator()
+        t.Clean()
+        lex_test("source.txt")
+        #e = Execute
+        #e.execute()
+
+
+
 
 from codeeditor import CodeEditor
 

@@ -14,5 +14,7 @@ class Generate_Error:
             e_msg = "SEMANTIC ERROR 0 ---> SYNTAX INCORRECT"
             parser.semantic_error = True;
             self.error.log_error(e_msg)
+
+
         
         

@@ -1,7 +1,7 @@
 import sys
 import os
-from Tokenize import *
-from Tokenize import reserved, tokens, literals
+from Software.Lexical_Analysis.Tokenize import *
+from Software.Lexical_Analysis.Tokenize import reserved, tokens, literals
 
 
 t_ignore  = ' \t'

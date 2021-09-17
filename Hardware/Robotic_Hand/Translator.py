@@ -5,11 +5,12 @@ import os
 class Translator:
 
     def __init__(self):
-        print("LINE TRANSLATED")
+        print("LOAD INFO....")
+
 
     def Read(self,num):
         msg = []
-        with open("Execute.txt") as f:
+        with open('../../Software/Lexical_Analysis/test.txt') as f:
             msg = f.readlines()
         if num >= len(msg):
             return " "
@@ -17,21 +18,24 @@ class Translator:
             return msg[num]
 
     def ReadAll(self):
-        with open("Execute.txt") as f:
+        with open('../../Software/Lexical_Analysis/test.txt','r') as f:
             msgfull = f.read()
             return msgfull
 
     def Write(self, data):
         ReadData = Translator().ReadAll()
-        file = open("Execute.txt")
-        data = ReadData + data
-        file.write(data.encode())
+        file = open('../../Software/Lexical_Analysis/test.txt','w')
+        note = ReadData + "\n" + data
+        file.write(note)
+        print("LINE TRANSLATED")
         file.close()
 
+
     def Clean(self):
-        file = open("Execute.txt", 'wb')
+        file = open('../../Software/Lexical_Analysis/test.txt', 'wb')
         clean_data = ""
         file.write(clean_data.encode())
+        print("CLEANING....")
         file.close()
 
     def Create_Delay(self, time,unit):
@@ -73,28 +77,31 @@ class Execute:
         serial_port = serial.Serial('COM5',115200,timeout = 1)
         time.sleep(2)
         send = []
-        with open('../Execute.txt') as f:
+        with open('../test.txt') as f:
             send = f.readlines()
         numline = 0
-        line = "********* FIRST LINE ***********"
-        while (line != " "):
+
+        while(num < len(send)):
             cad = send[numline]
-            step1 = cad.find(',')
-            step2 = cad.find(';')
-            step3 = cad.find('/')
-            action = cad[0:step1]
-            print("MENSAJE HACIA LA PLACA---->" + cad + "*********")
-            if action == "del":
-                timer = cad[step1+1:step2]
-                unit = cad[step2+1:step3]
-                serial_port.write(cad.encode())
-                Create_delays(timer,unit)
-                result = serial_port.readline().decode()
-                print("MENSAJE DE LA PLACA---->" + result + "*********")
-                numline += 1
+            if(cad == " "):
+                step1 = cad.find(',')
+                step2 = cad.find(';')
+                step3 = cad.find('/')
+                action = cad[0:step1]
+                print("MENSAJE HACIA LA PLACA---->" + cad + "*********")
+                if action == "del":
+                    timer = cad[step1+1:step2]
+                    unit = cad[step2+1:step3]
+                    serial_port.write(cad.encode())
+                    Create_delays(timer,unit)
+                    result = serial_port.readline().decode()
+                    print("MENSAJE DE LA PLACA---->" + result + "*********")
+                    numline += 1
+                else:
+                    serial_port.write(cad.encode())
+                    time.sleep(500)
+                    result = serial_port.readline().decode()
+                    print("MENSAJE DE LA PLACA---->" + result + "*********")
+                    numline += 1
             else:
-                serial_port.write(cad.encode())
-                time.sleep(500)
-                result = serial_port.readline().decode()
-                print("MENSAJE DE LA PLACA---->" + result + "*********")
                 numline += 1

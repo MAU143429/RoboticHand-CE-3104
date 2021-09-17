@@ -1,5 +1,6 @@
 import ply.yacc as yacc
-from Tokenize import tokens
+from Software.Lexical_Analysis.Tokenize import tokens
+from Software.Lexical_Analysis.LexicalAnalizer import *
 from Software.Semantic.Structures_Models import *
 from sys import stdin
 
