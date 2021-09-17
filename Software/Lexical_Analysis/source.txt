@@ -1,3 +1,0 @@
-Delay(434,"Seg");
-Delay(17000,"Mil");
-Delay(1,"Min");
