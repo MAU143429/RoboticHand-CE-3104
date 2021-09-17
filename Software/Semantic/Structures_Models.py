@@ -1,6 +1,5 @@
 from Hardware.Robotic_Hand.Translator import Translator
 
-
 class Let:
     def __init__(self, id, value, line):
         self.id = id
@@ -30,3 +29,24 @@ class Opera:
         self.operand2 = operand2
         self.line = line
         print("SE DETECTO UN OPERA DE FORMA (" + str(self.operator) + "," + str(self.operand) + ","+ str(self.operand2) + ") EN LA LINEA " + str(self.line))
+
+class Loop:
+    def __init__(self, line):
+        self.line = line
+        print("LOOP")
+
+class For:
+    def __init__(self, id, const1, range, const2, line):
+        self.id = id
+        self.const1 = const1
+        self.range = range
+        self.const2 = const2
+        self.line = line
+        print("FOR")
+
+class Move:
+    def __init__(self, finger, movement, line):
+        self.finger = finger
+        self.movement = movement
+        self.line = line
+        print("SE HA REGISTRADO EL METODO MOVE CON MOVIMIENTO " + str(self.movement) + " EN EL DEDO " + str(self.finger) + " EN LA LINEA " + str(self.line))

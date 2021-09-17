@@ -11,41 +11,54 @@ precedence = (
     ('left', 'TIMES', 'DIVIDE'),
     ('left', 'LPAREN', 'RPAREN'),
 )
+def p_main(p):
+    '''
+    main : FN MAIN LCRLBRACKET line RCRLBRACKET
+    '''
 
 def p_program(p):
     '''
-    line : variable
+    line : loop
+         | for
+         | variable
+         | move
          | delay
          | println
          | opera
          | empty
     '''
-
-'''
-###########################################################################
-REGLAS PARA LET
-###########################################################################
-'''
-def p_variable(p):
+def p_loop(p):
     '''
-    variable : LET ID ASSIGN expression SEMICOLON line
+    loop : LOOP LCRLBRACKET line RCRLBRACKET line
     '''
     line = p.lineno(2)
-    p[0] = Let(p[2], p[4],line)
+    p[0] = Loop(line)
 
-def p_expression(p):
+def p_for(p):
     '''
-    expression : INT
-               | TRUE
-               | FALSE
+    for : FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    '''
+    line = p.lineno(2)
+    p[0] = For(p[2], p[4], p[5], p[6], line)
+
+def p_move(p):
+    '''
+    move : MOVE LPAREN QUOT ID QUOT COMMA expression RPAREN SEMICOLON line
+    '''
+    line = p.lineno(2)
+    p[0] = Move(p[4], p[7], line)
+
+def p_finger(p):
+    '''
+    finger : P
+           | I
+           | M
+           | A
+           | Q
+           | T
     '''
     p[0] = p[1]
-    
-def p_expression_var(p):
-    '''
-    expression : ID
-    '''
-    p[0] = ('let', p[1])
+
 
 '''
 ###########################################################################
@@ -80,13 +93,35 @@ def p_println(p):
     line = p.lineno(2)
     p[0] = Print(p[5], line)
 
-
 def p_text(p):
     '''
     text : ID
 
     '''
     p[0] = p[1]
+
+'''
+###########################################################################
+REGLAS PARA LET
+###########################################################################
+'''
+    
+def p_variable(p):
+    '''
+    variable : LET ID ASSIGN INT SEMICOLON line
+             | LET ID ASSIGN expression SEMICOLON line
+    '''
+    line = p.lineno(2)
+    p[0] = Let(p[2], p[4], line)
+
+def p_expression_bool(p):
+    '''
+    expression : TRUE
+               | FALSE
+               | ID
+    '''
+    p[0] = p[1]
+
 '''
 ###########################################################################
 REGLAS PARA OPERA
@@ -120,7 +155,8 @@ def p_operand(p):
 def p_error(p):
 
     print("Syntax error found!", p)
-    print("Error on line " + str(p.lineno))
+    if not p == None:
+        print("Error on line " + str(p.lineno))
     
 def p_empty(p):
     '''

@@ -4,7 +4,7 @@
 reserved =  {
     'elseif': 'ELSEIF',
     'else': 'ELSE',
-    'if': 'IF',   
+    'if': 'IF',
     'while': 'WHILE',
     'let': 'LET',
     'for': 'FOR',
@@ -20,11 +20,12 @@ reserved =  {
     'Move': 'MOVE',
     'Delay': 'DELAY',
     'Opera': 'OPERA',
+
     'Println': 'PRINT',
     'Mil': 'MIL',
     'Min': 'MIN',
-    'Seg': 'SEG'
-
+    'Seg': 'SEG',
+    'in': 'IN'
 }
 
 # Regular expression rules for literals and simple tokens
@@ -79,5 +80,5 @@ tokens = [
 'QUOT',
 'LCRLBRACKET',
 'EXPR',
-'RCRLBRACKET'] + list(reserved.values())
+'RCRLBRACKET'] + list(reserved.values()) + literals
 
