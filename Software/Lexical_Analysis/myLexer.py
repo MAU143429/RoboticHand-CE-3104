@@ -3,7 +3,9 @@ import ply.yacc as yacc
 from Software.Syntactic.SyntacticAnalizer import *
 
 def lex_test():
-    sourceFile = "source.txt"
+    sourceFile = "test.txt"
+    lexer = lex.lex()
+    parser = yacc.yacc()
     if sourceFile is not None:
                 with open(sourceFile) as file:
                     source = file.read()
@@ -11,11 +13,12 @@ def lex_test():
                     parser.parse(source)
                     print("TERMINE DE COMPILAR")
 
-    else:
-        print("ESTA VACIO")
-    for Tok in lexer:
-        print(Tok)
+    #else:
+    #    print("ESTA VACIO")
+    #for Tok in lexer:
+    #    print(Tok)
 
+lex_test()
 
 
 

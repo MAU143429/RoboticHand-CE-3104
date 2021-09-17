@@ -11,28 +11,41 @@ precedence = (
     ('left', 'TIMES', 'DIVIDE'),
     ('left', 'LPAREN', 'RPAREN'),
 )
+
 def p_main(p):
     '''
-    main : FN MAIN LCRLBRACKET line RCRLBRACKET
+    main : FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
     '''
 
 def p_program(p):
     '''
     line : loop
          | for
-         | variable
+         | let
          | move
          | delay
          | println
          | opera
          | empty
     '''
+
+'''
+###########################################################################
+REGLAS PARA LOOP
+###########################################################################
+'''
 def p_loop(p):
     '''
     loop : LOOP LCRLBRACKET line RCRLBRACKET line
     '''
     line = p.lineno(2)
     p[0] = Loop(line)
+
+'''
+###########################################################################
+REGLAS PARA FOR
+###########################################################################
+'''
 
 def p_for(p):
     '''
@@ -41,6 +54,11 @@ def p_for(p):
     line = p.lineno(2)
     p[0] = For(p[2], p[4], p[5], p[6], line)
 
+'''
+###########################################################################
+REGLAS PARA MOVE
+###########################################################################
+'''
 def p_move(p):
     '''
     move : MOVE LPAREN QUOT ID QUOT COMMA expression RPAREN SEMICOLON line
@@ -58,7 +76,6 @@ def p_finger(p):
            | T
     '''
     p[0] = p[1]
-
 
 '''
 ###########################################################################
@@ -102,45 +119,24 @@ def p_text(p):
 
 '''
 ###########################################################################
-REGLAS PARA LET
-###########################################################################
-'''
-    
-def p_variable(p):
-    '''
-    variable : LET ID ASSIGN INT SEMICOLON line
-             | LET ID ASSIGN expression SEMICOLON line
-    '''
-    line = p.lineno(2)
-    p[0] = Let(p[2], p[4], line)
-
-def p_expression_bool(p):
-    '''
-    expression : TRUE
-               | FALSE
-               | ID
-    '''
-    p[0] = p[1]
-
-'''
-###########################################################################
 REGLAS PARA OPERA
 ###########################################################################
 '''
 def p_opera(p):
     '''
-    opera : OPERA LPAREN operators COMMA operand COMMA operand RPAREN SEMICOLON line
+    opera : OPERA LPAREN operator COMMA operand COMMA operand RPAREN SEMICOLON line
+          | OPERA LPAREN operator COMMA operand COMMA operand RPAREN
     '''
     line = p.lineno(2)
-    p[0] = Opera(p[3], p[5], p[7], line)
+    p[0] = Opera(p[3], p[5], p[7], line).Operate()
 
 def p_operators(p):
     '''
-    operators : PLUS
-              | MINUS
-              | DIVIDE
-              | ASTR
-              | TIMES
+    operator : PLUS
+             | MINUS
+             | DIVIDE
+             | ASTR
+             | TIMES
     '''
     p[0] = p[1]
 
@@ -148,7 +144,30 @@ def p_operand(p):
     '''
     operand : INT
             | ID
-            | OPERA
+            | opera
+    '''
+    p[0] = p[1]
+
+
+'''
+###########################################################################
+REGLAS PARA LET
+###########################################################################
+'''
+def p_let(p):
+    '''
+    let : LET ID ASSIGN INT SEMICOLON line
+             | LET ID ASSIGN expression SEMICOLON line
+    '''
+    line = p.lineno(2)
+    p[0] = Let(p[2], p[4], line)
+
+
+def p_expression_bool(p):
+    '''
+    expression : TRUE
+               | FALSE
+               | ID
     '''
     p[0] = p[1]
 

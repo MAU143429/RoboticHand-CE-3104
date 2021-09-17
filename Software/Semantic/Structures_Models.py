@@ -28,7 +28,24 @@ class Opera:
         self.operand = operand
         self.operand2 = operand2
         self.line = line
-        print("SE DETECTO UN OPERA DE FORMA (" + str(self.operator) + "," + str(self.operand) + ","+ str(self.operand2) + ") EN LA LINEA " + str(self.line))
+
+    def Operate(self):
+        result = None
+        if not isinstance(self.operand, int) and isinstance(self.operand2, int):
+            result = (self.operator, self.operand, self.operand2)
+        else:
+            if self.operator == "+":
+                result = self.operand + self.operand2
+            elif self.operator == "-":
+                result = self.operand - self.operand2
+            elif self.operator == "/":
+                result = self.operand / self.operand2
+            elif self.operator == "**":
+                result = self.operand ** self.operand2
+            elif self.operator == "*":
+                result = self.operand * self.operand2
+        print("SE DETECTO UN OPERA DE FORMA (" + str(self.operator) + "," + str(self.operand) + ","+ str(self.operand2) + ")" + " CON RESULTADO " + str(result) + " EN LA LINEA " + str(self.line))
+        return result
 
 class Loop:
     def __init__(self, line):
