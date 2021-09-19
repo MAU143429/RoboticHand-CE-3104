@@ -1,14 +1,3 @@
-fn main() {
-    let hola = True;
-    let dfghf = 454;
-    for cifra in 1..11 {
-        let var1 = Opera(-, Opera(+, 2, Opera(*, 3, 4)), 4);
-        let var2 = 90;
-        let var7 = Opera(+, var1, var2);
-    }
-    Move("P", True);
-    loop {
-        let var3 = 45;
-        let var4 = 33;
-    }
+fn main(){
+	Delay(5000, "Mil");
 }

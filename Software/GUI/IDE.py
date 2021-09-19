@@ -14,6 +14,7 @@ from Hardware.Robotic_Hand.Translator import Translator
 from Hardware.Robotic_Hand.Translator import Execute
 from Software.GUI.codeeditor import CodeEditor
 from Software.Lexical_Analysis.myLexer import *
+from threading import *
 import os
 import time
 
@@ -61,7 +62,8 @@ class Ui_MainWindow(object):
         self.menuBar.addAction(self.menuFile.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.compileButton.clicked.connect(self.compile)
+        self.compileButton.clicked.connect(self.start_compile)
+        self.runButton.clicked.connect(self.start_run_compile)
         self.menuFile
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -104,8 +106,28 @@ class Ui_MainWindow(object):
         t = Translator()
         t.Clean()
         lex_test()
-        e = Execute
+        print("VOY A ENVIAR LOS ARCHIVOS LA MANO")
+        time.sleep(1);
+        e = Execute()
         e.execute()
+        print("ARCHIVOS ENVIADOS")
+
+    def start_compile(self):
+
+        thread = Thread(target=self.compile(), args=())
+        thread.start()
+        thread.join()
+        print("HILOS ACTIVOS")
+
+
+
+    def start_run_compile(self):
+
+        thread1 = Thread(target=self.run_compile(), args=())
+        thread1.start()
+        thread1.join()
+        print("HILOS ACTIVOS")
+
 
 
 if __name__ == "__main__":

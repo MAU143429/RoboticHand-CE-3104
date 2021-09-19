@@ -45,54 +45,54 @@ Rule 19    unit -> QUOT MIN QUOT
 Rule 20    unit -> QUOT MIL QUOT
 Rule 21    unit -> QUOT SEG QUOT
 Rule 22    println -> PRINT EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON line
-Rule 23    println -> PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
-Rule 24    text -> ID
-Rule 25    let -> LET ID ASSIGN INT SEMICOLON line
-Rule 26    let -> LET ID ASSIGN expression SEMICOLON line
-Rule 27    expression -> TRUE
-Rule 28    expression -> FALSE
-Rule 29    expression -> ID
-Rule 30    expression -> opera
-Rule 31    opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN
-Rule 32    operator -> PLUS
-Rule 33    operator -> MINUS
-Rule 34    operator -> DIVIDE
-Rule 35    operator -> ASTR
-Rule 36    operator -> TIMES
-Rule 37    operand -> INT
-Rule 38    operand -> ID
-Rule 39    operand -> opera
+Rule 23    text -> ID
+Rule 24    let -> LET ID ASSIGN INT SEMICOLON line
+Rule 25    let -> LET ID ASSIGN expression SEMICOLON line
+Rule 26    expression -> TRUE
+Rule 27    expression -> FALSE
+Rule 28    expression -> ID
+Rule 29    expression -> opera
+Rule 30    opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+Rule 31    operator -> PLUS
+Rule 32    operator -> MINUS
+Rule 33    operator -> DIVIDE
+Rule 34    operator -> ASTR
+Rule 35    operator -> TIMES
+Rule 36    operand -> INT
+Rule 37    operand -> ID
+Rule 38    operand -> opera
+Rule 39    empty -> <empty>
 
 Terminals, with rules where they appear
 
 A                    : 15
 ARROW                : 
-ASSIGN               : 25 26
-ASTR                 : 35
+ASSIGN               : 24 25
+ASTR                 : 34
 BREAK                : 
-COMMA                : 11 18 31 31
+COMMA                : 11 18 30 30
 DELAY                : 18
-DIVIDE               : 34
+DIVIDE               : 33
 DOTDOT               : 10
 ELSE                 : 
 ELSEIF               : 
 EQEQ                 : 
-EXPR                 : 22 23
-FALSE                : 28
+EXPR                 : 22
+FALSE                : 27
 FN                   : 1
 FOR                  : 10
 GT                   : 
 GTE                  : 
 I                    : 13
-ID                   : 10 11 24 25 26 29 38
+ID                   : 10 11 23 24 25 28 37
 IF                   : 
 IN                   : 10
-INT                  : 10 10 18 25 37
+INT                  : 10 10 18 24 36
 INTEGER              : 
 LCRLBRACKET          : 1 9 10
-LET                  : 25 26
+LET                  : 24 25
 LOOP                 : 9
-LPAREN               : 1 11 18 22 23 31
+LPAREN               : 1 11 18 22 30
 LSQRBRACKET          : 
 LT                   : 
 LTE                  : 
@@ -100,25 +100,24 @@ M                    : 14
 MAIN                 : 1
 MIL                  : 20
 MIN                  : 19
-MINUS                : 33
+MINUS                : 32
 MOVE                 : 11
-OPERA                : 31
+OPERA                : 30
 P                    : 12
-PLUS                 : 32
-PRINT                : 22 23
+PLUS                 : 31
+PRINT                : 22
 Q                    : 16
 QUOT                 : 11 11 19 19 20 20 21 21 22 22
 RANGE                : 
 RCRLBRACKET          : 1 9 10
 RETURN               : 
-RPAREN               : 1 11 18 22 23 31
+RPAREN               : 1 11 18 22 30
 RSQRBRACKET          : 
 SEG                  : 21
-SEMICOLON            : 11 18 22 23 25 26
-STRING               : 23
+SEMICOLON            : 11 18 22 24 25
 T                    : 17
-TIMES                : 36
-TRUE                 : 27
+TIMES                : 35
+TRUE                 : 26
 WHILE                : 
 WRONG_ID             : 
 error                : 
@@ -127,18 +126,1044 @@ Nonterminals, with rules where they appear
 
 delay                : 6
 empty                : 8
-expression           : 11 26
+expression           : 11 25
 finger               : 
 for                  : 3
 let                  : 4
-line                 : 1 9 9 10 10 11 18 22 23 25 26
+line                 : 1 9 9 10 10 11 18 22 24 25
 loop                 : 2
 main                 : 0
 move                 : 5
-opera                : 30 39
-operand              : 31 31
-operator             : 31
+opera                : 29 38
+operand              : 30 30
+operator             : 30
 println              : 7
 text                 : 22
 unit                 : 18
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . main
+    (1) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
+
+    FN              shift and go to state 2
+
+    main                           shift and go to state 1
+
+state 1
+
+    (0) S' -> main .
+
+
+
+state 2
+
+    (1) main -> FN . MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
+
+    MAIN            shift and go to state 3
+
+
+state 3
+
+    (1) main -> FN MAIN . LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
+
+    LPAREN          shift and go to state 4
+
+
+state 4
+
+    (1) main -> FN MAIN LPAREN . RPAREN LCRLBRACKET line RCRLBRACKET
+
+    RPAREN          shift and go to state 5
+
+
+state 5
+
+    (1) main -> FN MAIN LPAREN RPAREN . LCRLBRACKET line RCRLBRACKET
+
+    LCRLBRACKET     shift and go to state 6
+
+
+state 6
+
+    (1) main -> FN MAIN LPAREN RPAREN LCRLBRACKET . line RCRLBRACKET
+    (2) line -> . loop
+    (3) line -> . for
+    (4) line -> . let
+    (5) line -> . move
+    (6) line -> . delay
+    (7) line -> . println
+    (8) line -> . empty
+    (9) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (10) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (24) let -> . LET ID ASSIGN INT SEMICOLON line
+    (25) let -> . LET ID ASSIGN expression SEMICOLON line
+    (11) move -> . MOVE LPAREN QUOT ID QUOT COMMA expression RPAREN SEMICOLON line
+    (18) delay -> . DELAY LPAREN INT COMMA unit RPAREN SEMICOLON line
+    (22) println -> . PRINT EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON line
+    (39) empty -> .
+
+    LOOP            shift and go to state 15
+    FOR             shift and go to state 16
+    LET             shift and go to state 17
+    MOVE            shift and go to state 18
+    DELAY           shift and go to state 19
+    PRINT           shift and go to state 20
+    RCRLBRACKET     reduce using rule 39 (empty -> .)
+
+    line                           shift and go to state 7
+    loop                           shift and go to state 8
+    for                            shift and go to state 9
+    let                            shift and go to state 10
+    move                           shift and go to state 11
+    delay                          shift and go to state 12
+    println                        shift and go to state 13
+    empty                          shift and go to state 14
+
+state 7
+
+    (1) main -> FN MAIN LPAREN RPAREN LCRLBRACKET line . RCRLBRACKET
+
+    RCRLBRACKET     shift and go to state 21
+
+
+state 8
+
+    (2) line -> loop .
+
+    RCRLBRACKET     reduce using rule 2 (line -> loop .)
+
+
+state 9
+
+    (3) line -> for .
+
+    RCRLBRACKET     reduce using rule 3 (line -> for .)
+
+
+state 10
+
+    (4) line -> let .
+
+    RCRLBRACKET     reduce using rule 4 (line -> let .)
+
+
+state 11
+
+    (5) line -> move .
+
+    RCRLBRACKET     reduce using rule 5 (line -> move .)
+
+
+state 12
+
+    (6) line -> delay .
+
+    RCRLBRACKET     reduce using rule 6 (line -> delay .)
+
+
+state 13
+
+    (7) line -> println .
+
+    RCRLBRACKET     reduce using rule 7 (line -> println .)
+
+
+state 14
+
+    (8) line -> empty .
+
+    RCRLBRACKET     reduce using rule 8 (line -> empty .)
+
+
+state 15
+
+    (9) loop -> LOOP . LCRLBRACKET line RCRLBRACKET line
+
+    LCRLBRACKET     shift and go to state 22
+
+
+state 16
+
+    (10) for -> FOR . ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+
+    ID              shift and go to state 23
+
+
+state 17
+
+    (24) let -> LET . ID ASSIGN INT SEMICOLON line
+    (25) let -> LET . ID ASSIGN expression SEMICOLON line
+
+    ID              shift and go to state 24
+
+
+state 18
+
+    (11) move -> MOVE . LPAREN QUOT ID QUOT COMMA expression RPAREN SEMICOLON line
+
+    LPAREN          shift and go to state 25
+
+
+state 19
+
+    (18) delay -> DELAY . LPAREN INT COMMA unit RPAREN SEMICOLON line
+
+    LPAREN          shift and go to state 26
+
+
+state 20
+
+    (22) println -> PRINT . EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON line
+
+    EXPR            shift and go to state 27
+
+
+state 21
+
+    (1) main -> FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET .
+
+    $end            reduce using rule 1 (main -> FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET .)
+
+
+state 22
+
+    (9) loop -> LOOP LCRLBRACKET . line RCRLBRACKET line
+    (2) line -> . loop
+    (3) line -> . for
+    (4) line -> . let
+    (5) line -> . move
+    (6) line -> . delay
+    (7) line -> . println
+    (8) line -> . empty
+    (9) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (10) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (24) let -> . LET ID ASSIGN INT SEMICOLON line
+    (25) let -> . LET ID ASSIGN expression SEMICOLON line
+    (11) move -> . MOVE LPAREN QUOT ID QUOT COMMA expression RPAREN SEMICOLON line
+    (18) delay -> . DELAY LPAREN INT COMMA unit RPAREN SEMICOLON line
+    (22) println -> . PRINT EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON line
+    (39) empty -> .
+
+    LOOP            shift and go to state 15
+    FOR             shift and go to state 16
+    LET             shift and go to state 17
+    MOVE            shift and go to state 18
+    DELAY           shift and go to state 19
+    PRINT           shift and go to state 20
+    RCRLBRACKET     reduce using rule 39 (empty -> .)
+
+    line                           shift and go to state 28
+    loop                           shift and go to state 8
+    for                            shift and go to state 9
+    let                            shift and go to state 10
+    move                           shift and go to state 11
+    delay                          shift and go to state 12
+    println                        shift and go to state 13
+    empty                          shift and go to state 14
+
+state 23
+
+    (10) for -> FOR ID . IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+
+    IN              shift and go to state 29
+
+
+state 24
+
+    (24) let -> LET ID . ASSIGN INT SEMICOLON line
+    (25) let -> LET ID . ASSIGN expression SEMICOLON line
+
+    ASSIGN          shift and go to state 30
+
+
+state 25
+
+    (11) move -> MOVE LPAREN . QUOT ID QUOT COMMA expression RPAREN SEMICOLON line
+
+    QUOT            shift and go to state 31
+
+
+state 26
+
+    (18) delay -> DELAY LPAREN . INT COMMA unit RPAREN SEMICOLON line
+
+    INT             shift and go to state 32
+
+
+state 27
+
+    (22) println -> PRINT EXPR . LPAREN QUOT text QUOT RPAREN SEMICOLON line
+
+    LPAREN          shift and go to state 33
+
+
+state 28
+
+    (9) loop -> LOOP LCRLBRACKET line . RCRLBRACKET line
+
+    RCRLBRACKET     shift and go to state 34
+
+
+state 29
+
+    (10) for -> FOR ID IN . INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+
+    INT             shift and go to state 35
+
+
+state 30
+
+    (24) let -> LET ID ASSIGN . INT SEMICOLON line
+    (25) let -> LET ID ASSIGN . expression SEMICOLON line
+    (26) expression -> . TRUE
+    (27) expression -> . FALSE
+    (28) expression -> . ID
+    (29) expression -> . opera
+    (30) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+
+    INT             shift and go to state 37
+    TRUE            shift and go to state 39
+    FALSE           shift and go to state 40
+    ID              shift and go to state 36
+    OPERA           shift and go to state 42
+
+    expression                     shift and go to state 38
+    opera                          shift and go to state 41
+
+state 31
+
+    (11) move -> MOVE LPAREN QUOT . ID QUOT COMMA expression RPAREN SEMICOLON line
+
+    ID              shift and go to state 43
+
+
+state 32
+
+    (18) delay -> DELAY LPAREN INT . COMMA unit RPAREN SEMICOLON line
+
+    COMMA           shift and go to state 44
+
+
+state 33
+
+    (22) println -> PRINT EXPR LPAREN . QUOT text QUOT RPAREN SEMICOLON line
+
+    QUOT            shift and go to state 45
+
+
+state 34
+
+    (9) loop -> LOOP LCRLBRACKET line RCRLBRACKET . line
+    (2) line -> . loop
+    (3) line -> . for
+    (4) line -> . let
+    (5) line -> . move
+    (6) line -> . delay
+    (7) line -> . println
+    (8) line -> . empty
+    (9) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (10) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (24) let -> . LET ID ASSIGN INT SEMICOLON line
+    (25) let -> . LET ID ASSIGN expression SEMICOLON line
+    (11) move -> . MOVE LPAREN QUOT ID QUOT COMMA expression RPAREN SEMICOLON line
+    (18) delay -> . DELAY LPAREN INT COMMA unit RPAREN SEMICOLON line
+    (22) println -> . PRINT EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON line
+    (39) empty -> .
+
+    LOOP            shift and go to state 15
+    FOR             shift and go to state 16
+    LET             shift and go to state 17
+    MOVE            shift and go to state 18
+    DELAY           shift and go to state 19
+    PRINT           shift and go to state 20
+    RCRLBRACKET     reduce using rule 39 (empty -> .)
+
+    line                           shift and go to state 46
+    loop                           shift and go to state 8
+    for                            shift and go to state 9
+    let                            shift and go to state 10
+    move                           shift and go to state 11
+    delay                          shift and go to state 12
+    println                        shift and go to state 13
+    empty                          shift and go to state 14
+
+state 35
+
+    (10) for -> FOR ID IN INT . DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+
+    DOTDOT          shift and go to state 47
+
+
+state 36
+
+    (28) expression -> ID .
+
+    SEMICOLON       reduce using rule 28 (expression -> ID .)
+    RPAREN          reduce using rule 28 (expression -> ID .)
+
+
+state 37
+
+    (24) let -> LET ID ASSIGN INT . SEMICOLON line
+
+    SEMICOLON       shift and go to state 48
+
+
+state 38
+
+    (25) let -> LET ID ASSIGN expression . SEMICOLON line
+
+    SEMICOLON       shift and go to state 49
+
+
+state 39
+
+    (26) expression -> TRUE .
+
+    SEMICOLON       reduce using rule 26 (expression -> TRUE .)
+    RPAREN          reduce using rule 26 (expression -> TRUE .)
+
+
+state 40
+
+    (27) expression -> FALSE .
+
+    SEMICOLON       reduce using rule 27 (expression -> FALSE .)
+    RPAREN          reduce using rule 27 (expression -> FALSE .)
+
+
+state 41
+
+    (29) expression -> opera .
+
+    SEMICOLON       reduce using rule 29 (expression -> opera .)
+    RPAREN          reduce using rule 29 (expression -> opera .)
+
+
+state 42
+
+    (30) opera -> OPERA . LPAREN operator COMMA operand COMMA operand RPAREN
+
+    LPAREN          shift and go to state 50
+
+
+state 43
+
+    (11) move -> MOVE LPAREN QUOT ID . QUOT COMMA expression RPAREN SEMICOLON line
+
+    QUOT            shift and go to state 51
+
+
+state 44
+
+    (18) delay -> DELAY LPAREN INT COMMA . unit RPAREN SEMICOLON line
+    (19) unit -> . QUOT MIN QUOT
+    (20) unit -> . QUOT MIL QUOT
+    (21) unit -> . QUOT SEG QUOT
+
+    QUOT            shift and go to state 53
+
+    unit                           shift and go to state 52
+
+state 45
+
+    (22) println -> PRINT EXPR LPAREN QUOT . text QUOT RPAREN SEMICOLON line
+    (23) text -> . ID
+
+    ID              shift and go to state 55
+
+    text                           shift and go to state 54
+
+state 46
+
+    (9) loop -> LOOP LCRLBRACKET line RCRLBRACKET line .
+
+    RCRLBRACKET     reduce using rule 9 (loop -> LOOP LCRLBRACKET line RCRLBRACKET line .)
+
+
+state 47
+
+    (10) for -> FOR ID IN INT DOTDOT . INT LCRLBRACKET line RCRLBRACKET line
+
+    INT             shift and go to state 56
+
+
+state 48
+
+    (24) let -> LET ID ASSIGN INT SEMICOLON . line
+    (2) line -> . loop
+    (3) line -> . for
+    (4) line -> . let
+    (5) line -> . move
+    (6) line -> . delay
+    (7) line -> . println
+    (8) line -> . empty
+    (9) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (10) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (24) let -> . LET ID ASSIGN INT SEMICOLON line
+    (25) let -> . LET ID ASSIGN expression SEMICOLON line
+    (11) move -> . MOVE LPAREN QUOT ID QUOT COMMA expression RPAREN SEMICOLON line
+    (18) delay -> . DELAY LPAREN INT COMMA unit RPAREN SEMICOLON line
+    (22) println -> . PRINT EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON line
+    (39) empty -> .
+
+    LOOP            shift and go to state 15
+    FOR             shift and go to state 16
+    LET             shift and go to state 17
+    MOVE            shift and go to state 18
+    DELAY           shift and go to state 19
+    PRINT           shift and go to state 20
+    RCRLBRACKET     reduce using rule 39 (empty -> .)
+
+    line                           shift and go to state 57
+    loop                           shift and go to state 8
+    for                            shift and go to state 9
+    let                            shift and go to state 10
+    move                           shift and go to state 11
+    delay                          shift and go to state 12
+    println                        shift and go to state 13
+    empty                          shift and go to state 14
+
+state 49
+
+    (25) let -> LET ID ASSIGN expression SEMICOLON . line
+    (2) line -> . loop
+    (3) line -> . for
+    (4) line -> . let
+    (5) line -> . move
+    (6) line -> . delay
+    (7) line -> . println
+    (8) line -> . empty
+    (9) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (10) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (24) let -> . LET ID ASSIGN INT SEMICOLON line
+    (25) let -> . LET ID ASSIGN expression SEMICOLON line
+    (11) move -> . MOVE LPAREN QUOT ID QUOT COMMA expression RPAREN SEMICOLON line
+    (18) delay -> . DELAY LPAREN INT COMMA unit RPAREN SEMICOLON line
+    (22) println -> . PRINT EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON line
+    (39) empty -> .
+
+    LOOP            shift and go to state 15
+    FOR             shift and go to state 16
+    LET             shift and go to state 17
+    MOVE            shift and go to state 18
+    DELAY           shift and go to state 19
+    PRINT           shift and go to state 20
+    RCRLBRACKET     reduce using rule 39 (empty -> .)
+
+    line                           shift and go to state 58
+    loop                           shift and go to state 8
+    for                            shift and go to state 9
+    let                            shift and go to state 10
+    move                           shift and go to state 11
+    delay                          shift and go to state 12
+    println                        shift and go to state 13
+    empty                          shift and go to state 14
+
+state 50
+
+    (30) opera -> OPERA LPAREN . operator COMMA operand COMMA operand RPAREN
+    (31) operator -> . PLUS
+    (32) operator -> . MINUS
+    (33) operator -> . DIVIDE
+    (34) operator -> . ASTR
+    (35) operator -> . TIMES
+
+    PLUS            shift and go to state 60
+    MINUS           shift and go to state 61
+    DIVIDE          shift and go to state 62
+    ASTR            shift and go to state 63
+    TIMES           shift and go to state 64
+
+    operator                       shift and go to state 59
+
+state 51
+
+    (11) move -> MOVE LPAREN QUOT ID QUOT . COMMA expression RPAREN SEMICOLON line
+
+    COMMA           shift and go to state 65
+
+
+state 52
+
+    (18) delay -> DELAY LPAREN INT COMMA unit . RPAREN SEMICOLON line
+
+    RPAREN          shift and go to state 66
+
+
+state 53
+
+    (19) unit -> QUOT . MIN QUOT
+    (20) unit -> QUOT . MIL QUOT
+    (21) unit -> QUOT . SEG QUOT
+
+    MIN             shift and go to state 67
+    MIL             shift and go to state 68
+    SEG             shift and go to state 69
+
+
+state 54
+
+    (22) println -> PRINT EXPR LPAREN QUOT text . QUOT RPAREN SEMICOLON line
+
+    QUOT            shift and go to state 70
+
+
+state 55
+
+    (23) text -> ID .
+
+    QUOT            reduce using rule 23 (text -> ID .)
+
+
+state 56
+
+    (10) for -> FOR ID IN INT DOTDOT INT . LCRLBRACKET line RCRLBRACKET line
+
+    LCRLBRACKET     shift and go to state 71
+
+
+state 57
+
+    (24) let -> LET ID ASSIGN INT SEMICOLON line .
+
+    RCRLBRACKET     reduce using rule 24 (let -> LET ID ASSIGN INT SEMICOLON line .)
+
+
+state 58
+
+    (25) let -> LET ID ASSIGN expression SEMICOLON line .
+
+    RCRLBRACKET     reduce using rule 25 (let -> LET ID ASSIGN expression SEMICOLON line .)
+
+
+state 59
+
+    (30) opera -> OPERA LPAREN operator . COMMA operand COMMA operand RPAREN
+
+    COMMA           shift and go to state 72
+
+
+state 60
+
+    (31) operator -> PLUS .
+
+    COMMA           reduce using rule 31 (operator -> PLUS .)
+
+
+state 61
+
+    (32) operator -> MINUS .
+
+    COMMA           reduce using rule 32 (operator -> MINUS .)
+
+
+state 62
+
+    (33) operator -> DIVIDE .
+
+    COMMA           reduce using rule 33 (operator -> DIVIDE .)
+
+
+state 63
+
+    (34) operator -> ASTR .
+
+    COMMA           reduce using rule 34 (operator -> ASTR .)
+
+
+state 64
+
+    (35) operator -> TIMES .
+
+    COMMA           reduce using rule 35 (operator -> TIMES .)
+
+
+state 65
+
+    (11) move -> MOVE LPAREN QUOT ID QUOT COMMA . expression RPAREN SEMICOLON line
+    (26) expression -> . TRUE
+    (27) expression -> . FALSE
+    (28) expression -> . ID
+    (29) expression -> . opera
+    (30) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+
+    TRUE            shift and go to state 39
+    FALSE           shift and go to state 40
+    ID              shift and go to state 36
+    OPERA           shift and go to state 42
+
+    expression                     shift and go to state 73
+    opera                          shift and go to state 41
+
+state 66
+
+    (18) delay -> DELAY LPAREN INT COMMA unit RPAREN . SEMICOLON line
+
+    SEMICOLON       shift and go to state 74
+
+
+state 67
+
+    (19) unit -> QUOT MIN . QUOT
+
+    QUOT            shift and go to state 75
+
+
+state 68
+
+    (20) unit -> QUOT MIL . QUOT
+
+    QUOT            shift and go to state 76
+
+
+state 69
+
+    (21) unit -> QUOT SEG . QUOT
+
+    QUOT            shift and go to state 77
+
+
+state 70
+
+    (22) println -> PRINT EXPR LPAREN QUOT text QUOT . RPAREN SEMICOLON line
+
+    RPAREN          shift and go to state 78
+
+
+state 71
+
+    (10) for -> FOR ID IN INT DOTDOT INT LCRLBRACKET . line RCRLBRACKET line
+    (2) line -> . loop
+    (3) line -> . for
+    (4) line -> . let
+    (5) line -> . move
+    (6) line -> . delay
+    (7) line -> . println
+    (8) line -> . empty
+    (9) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (10) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (24) let -> . LET ID ASSIGN INT SEMICOLON line
+    (25) let -> . LET ID ASSIGN expression SEMICOLON line
+    (11) move -> . MOVE LPAREN QUOT ID QUOT COMMA expression RPAREN SEMICOLON line
+    (18) delay -> . DELAY LPAREN INT COMMA unit RPAREN SEMICOLON line
+    (22) println -> . PRINT EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON line
+    (39) empty -> .
+
+    LOOP            shift and go to state 15
+    FOR             shift and go to state 16
+    LET             shift and go to state 17
+    MOVE            shift and go to state 18
+    DELAY           shift and go to state 19
+    PRINT           shift and go to state 20
+    RCRLBRACKET     reduce using rule 39 (empty -> .)
+
+    line                           shift and go to state 79
+    loop                           shift and go to state 8
+    for                            shift and go to state 9
+    let                            shift and go to state 10
+    move                           shift and go to state 11
+    delay                          shift and go to state 12
+    println                        shift and go to state 13
+    empty                          shift and go to state 14
+
+state 72
+
+    (30) opera -> OPERA LPAREN operator COMMA . operand COMMA operand RPAREN
+    (36) operand -> . INT
+    (37) operand -> . ID
+    (38) operand -> . opera
+    (30) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+
+    INT             shift and go to state 81
+    ID              shift and go to state 82
+    OPERA           shift and go to state 42
+
+    operand                        shift and go to state 80
+    opera                          shift and go to state 83
+
+state 73
+
+    (11) move -> MOVE LPAREN QUOT ID QUOT COMMA expression . RPAREN SEMICOLON line
+
+    RPAREN          shift and go to state 84
+
+
+state 74
+
+    (18) delay -> DELAY LPAREN INT COMMA unit RPAREN SEMICOLON . line
+    (2) line -> . loop
+    (3) line -> . for
+    (4) line -> . let
+    (5) line -> . move
+    (6) line -> . delay
+    (7) line -> . println
+    (8) line -> . empty
+    (9) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (10) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (24) let -> . LET ID ASSIGN INT SEMICOLON line
+    (25) let -> . LET ID ASSIGN expression SEMICOLON line
+    (11) move -> . MOVE LPAREN QUOT ID QUOT COMMA expression RPAREN SEMICOLON line
+    (18) delay -> . DELAY LPAREN INT COMMA unit RPAREN SEMICOLON line
+    (22) println -> . PRINT EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON line
+    (39) empty -> .
+
+    LOOP            shift and go to state 15
+    FOR             shift and go to state 16
+    LET             shift and go to state 17
+    MOVE            shift and go to state 18
+    DELAY           shift and go to state 19
+    PRINT           shift and go to state 20
+    RCRLBRACKET     reduce using rule 39 (empty -> .)
+
+    line                           shift and go to state 85
+    loop                           shift and go to state 8
+    for                            shift and go to state 9
+    let                            shift and go to state 10
+    move                           shift and go to state 11
+    delay                          shift and go to state 12
+    println                        shift and go to state 13
+    empty                          shift and go to state 14
+
+state 75
+
+    (19) unit -> QUOT MIN QUOT .
+
+    RPAREN          reduce using rule 19 (unit -> QUOT MIN QUOT .)
+
+
+state 76
+
+    (20) unit -> QUOT MIL QUOT .
+
+    RPAREN          reduce using rule 20 (unit -> QUOT MIL QUOT .)
+
+
+state 77
+
+    (21) unit -> QUOT SEG QUOT .
+
+    RPAREN          reduce using rule 21 (unit -> QUOT SEG QUOT .)
+
+
+state 78
+
+    (22) println -> PRINT EXPR LPAREN QUOT text QUOT RPAREN . SEMICOLON line
+
+    SEMICOLON       shift and go to state 86
+
+
+state 79
+
+    (10) for -> FOR ID IN INT DOTDOT INT LCRLBRACKET line . RCRLBRACKET line
+
+    RCRLBRACKET     shift and go to state 87
+
+
+state 80
+
+    (30) opera -> OPERA LPAREN operator COMMA operand . COMMA operand RPAREN
+
+    COMMA           shift and go to state 88
+
+
+state 81
+
+    (36) operand -> INT .
+
+    COMMA           reduce using rule 36 (operand -> INT .)
+    RPAREN          reduce using rule 36 (operand -> INT .)
+
+
+state 82
+
+    (37) operand -> ID .
+
+    COMMA           reduce using rule 37 (operand -> ID .)
+    RPAREN          reduce using rule 37 (operand -> ID .)
+
+
+state 83
+
+    (38) operand -> opera .
+
+    COMMA           reduce using rule 38 (operand -> opera .)
+    RPAREN          reduce using rule 38 (operand -> opera .)
+
+
+state 84
+
+    (11) move -> MOVE LPAREN QUOT ID QUOT COMMA expression RPAREN . SEMICOLON line
+
+    SEMICOLON       shift and go to state 89
+
+
+state 85
+
+    (18) delay -> DELAY LPAREN INT COMMA unit RPAREN SEMICOLON line .
+
+    RCRLBRACKET     reduce using rule 18 (delay -> DELAY LPAREN INT COMMA unit RPAREN SEMICOLON line .)
+
+
+state 86
+
+    (22) println -> PRINT EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON . line
+    (2) line -> . loop
+    (3) line -> . for
+    (4) line -> . let
+    (5) line -> . move
+    (6) line -> . delay
+    (7) line -> . println
+    (8) line -> . empty
+    (9) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (10) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (24) let -> . LET ID ASSIGN INT SEMICOLON line
+    (25) let -> . LET ID ASSIGN expression SEMICOLON line
+    (11) move -> . MOVE LPAREN QUOT ID QUOT COMMA expression RPAREN SEMICOLON line
+    (18) delay -> . DELAY LPAREN INT COMMA unit RPAREN SEMICOLON line
+    (22) println -> . PRINT EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON line
+    (39) empty -> .
+
+    LOOP            shift and go to state 15
+    FOR             shift and go to state 16
+    LET             shift and go to state 17
+    MOVE            shift and go to state 18
+    DELAY           shift and go to state 19
+    PRINT           shift and go to state 20
+    RCRLBRACKET     reduce using rule 39 (empty -> .)
+
+    line                           shift and go to state 90
+    loop                           shift and go to state 8
+    for                            shift and go to state 9
+    let                            shift and go to state 10
+    move                           shift and go to state 11
+    delay                          shift and go to state 12
+    println                        shift and go to state 13
+    empty                          shift and go to state 14
+
+state 87
+
+    (10) for -> FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET . line
+    (2) line -> . loop
+    (3) line -> . for
+    (4) line -> . let
+    (5) line -> . move
+    (6) line -> . delay
+    (7) line -> . println
+    (8) line -> . empty
+    (9) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (10) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (24) let -> . LET ID ASSIGN INT SEMICOLON line
+    (25) let -> . LET ID ASSIGN expression SEMICOLON line
+    (11) move -> . MOVE LPAREN QUOT ID QUOT COMMA expression RPAREN SEMICOLON line
+    (18) delay -> . DELAY LPAREN INT COMMA unit RPAREN SEMICOLON line
+    (22) println -> . PRINT EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON line
+    (39) empty -> .
+
+    LOOP            shift and go to state 15
+    FOR             shift and go to state 16
+    LET             shift and go to state 17
+    MOVE            shift and go to state 18
+    DELAY           shift and go to state 19
+    PRINT           shift and go to state 20
+    RCRLBRACKET     reduce using rule 39 (empty -> .)
+
+    line                           shift and go to state 91
+    loop                           shift and go to state 8
+    for                            shift and go to state 9
+    let                            shift and go to state 10
+    move                           shift and go to state 11
+    delay                          shift and go to state 12
+    println                        shift and go to state 13
+    empty                          shift and go to state 14
+
+state 88
+
+    (30) opera -> OPERA LPAREN operator COMMA operand COMMA . operand RPAREN
+    (36) operand -> . INT
+    (37) operand -> . ID
+    (38) operand -> . opera
+    (30) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+
+    INT             shift and go to state 81
+    ID              shift and go to state 82
+    OPERA           shift and go to state 42
+
+    operand                        shift and go to state 92
+    opera                          shift and go to state 83
+
+state 89
+
+    (11) move -> MOVE LPAREN QUOT ID QUOT COMMA expression RPAREN SEMICOLON . line
+    (2) line -> . loop
+    (3) line -> . for
+    (4) line -> . let
+    (5) line -> . move
+    (6) line -> . delay
+    (7) line -> . println
+    (8) line -> . empty
+    (9) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (10) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (24) let -> . LET ID ASSIGN INT SEMICOLON line
+    (25) let -> . LET ID ASSIGN expression SEMICOLON line
+    (11) move -> . MOVE LPAREN QUOT ID QUOT COMMA expression RPAREN SEMICOLON line
+    (18) delay -> . DELAY LPAREN INT COMMA unit RPAREN SEMICOLON line
+    (22) println -> . PRINT EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON line
+    (39) empty -> .
+
+    LOOP            shift and go to state 15
+    FOR             shift and go to state 16
+    LET             shift and go to state 17
+    MOVE            shift and go to state 18
+    DELAY           shift and go to state 19
+    PRINT           shift and go to state 20
+    RCRLBRACKET     reduce using rule 39 (empty -> .)
+
+    line                           shift and go to state 93
+    loop                           shift and go to state 8
+    for                            shift and go to state 9
+    let                            shift and go to state 10
+    move                           shift and go to state 11
+    delay                          shift and go to state 12
+    println                        shift and go to state 13
+    empty                          shift and go to state 14
+
+state 90
+
+    (22) println -> PRINT EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON line .
+
+    RCRLBRACKET     reduce using rule 22 (println -> PRINT EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON line .)
+
+
+state 91
+
+    (10) for -> FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line .
+
+    RCRLBRACKET     reduce using rule 10 (for -> FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line .)
+
+
+state 92
+
+    (30) opera -> OPERA LPAREN operator COMMA operand COMMA operand . RPAREN
+
+    RPAREN          shift and go to state 94
+
+
+state 93
+
+    (11) move -> MOVE LPAREN QUOT ID QUOT COMMA expression RPAREN SEMICOLON line .
+
+    RCRLBRACKET     reduce using rule 11 (move -> MOVE LPAREN QUOT ID QUOT COMMA expression RPAREN SEMICOLON line .)
+
+
+state 94
+
+    (30) opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .
+
+    SEMICOLON       reduce using rule 30 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
+    RPAREN          reduce using rule 30 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
+    COMMA           reduce using rule 30 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
 
