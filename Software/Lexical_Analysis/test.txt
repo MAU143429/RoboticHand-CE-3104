@@ -1,13 +1,1 @@
-fn main() {
-    let hola = True;
-    let dfghf = 454;
-    for cifra in 1..11 {
-        let var1 = Opera(-, Opera(+, 2, Opera(*, 3, 4)), 4);
-        let var2 = 90;
-    }
-    Move("P", True);
-    loop {
-        let var3 = 45;
-        let var4 = 33;
-    }
-}
+del,5000;Mil/

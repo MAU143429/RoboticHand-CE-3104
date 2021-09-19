@@ -31,7 +31,7 @@ void setup() {
   servo3.attach(A2); // Pin analogico para el dedo medio   ---> 'M'
   servo4.attach(A1); // Pin analogico para el dedo anular  ---> 'A'
   servo5.attach(A0); // Pin analogico para el dedo meñique ---> 'Q' 
-  Serial.begin(115200);
+  Serial.begin(9600);
 }
 // Funcion move, permite mover los dedos recibiendo como parametro el dedo y el status de movimiento.
 void Move(String finger, String status_mov){
