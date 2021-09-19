@@ -7,7 +7,11 @@ def lex_test():
     if sourceFile is not None:
                 with open(sourceFile, 'r') as file:
                     print("Entrando al lexer...")
-                    source = file.read()
+                    try:
+                        source = file.read()
+                    except EOFError as e:
+                        print(e)
+
                     lexer = lex.lex()
                     lexer.input(source)
                     print("Lexer listo")
@@ -21,6 +25,8 @@ def lex_test():
         print("ESTA VACIO")
     for Tok in lexer:
         print(Tok)
+
+lex_test()
 
 
 

@@ -3,7 +3,7 @@ from Software.Lexical_Analysis.Tokenize import tokens
 from Software.Lexical_Analysis.LexicalAnalizer import *
 from Software.Semantic.Structures_Models import *
 from sys import stdin
-
+from Software.Error_Log import ErrorLog
 precedence = (
     ('right', 'LET'),
     ('right', 'ASSIGN'),
@@ -104,6 +104,7 @@ REGLAS PARA PRINTLN!
 def p_println(p):
     '''
     println : PRINT EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON line
+            | PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
 
     '''
     line = p.lineno(2)
@@ -112,7 +113,6 @@ def p_println(p):
 def p_text(p):
     '''
     text : ID
-
     '''
     p[0] = p[1]
 
@@ -173,7 +173,10 @@ def p_error(p):
 
     print("Syntax error found!", p)
     if not p == None:
-        print("Error on line " + str(p.lineno))
+        error_text = "Syntax error found! Error at line " + str(p.lineno)
+        error = ErrorLog()
+        error.log_error(error_text)
+
     
 def p_empty(p):
     '''

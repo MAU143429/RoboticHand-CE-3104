@@ -8,12 +8,11 @@ semantic_error = False;
 
 
 def build(lex):
-
-
+    syntactic = yacc.yacc()
     def p_value(p):
         '''
         value : expresion
               | empty
         '''
 
-    syntactic = yacc.yacc()
+

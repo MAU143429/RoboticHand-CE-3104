@@ -1,5 +1,7 @@
 import sys
 import os
+
+from Software.Error_Log import ErrorLog
 from Software.Lexical_Analysis.Tokenize import *
 from Software.Lexical_Analysis.Tokenize import reserved, tokens, literals
 
@@ -49,6 +51,17 @@ def t_ASTR(t):
     t.type = reserved.get(t.value, "ASTR")
     t.value = '**'
     return  t
+# def t_STRING(t):
+#     r'\".*?\"'
+#
+#     flag   = t.value[1:-1]
+#     if flag in reserved:
+#         t.type = reserved.get(flag)
+#         t.value = flag
+#         return t
+#     else:
+#         t.type = reserved.get(t.value, "STRING")
+#         return t
 
 def t_ID(t):
     r'[a-zA-Z_#_?][a-zA-Z_0-9#_?]*'
@@ -68,17 +81,27 @@ def t_INT(t):
     try:
          t.value = int(t.value)
     except ValueError:
-         print ("Line %d: Number %s is too large!" % (t.lineno, t.value))
+         print("Line %d: Number %s is too large!" % (t.lineno, t.value))
          t.value = 0
     return t
 
-        
+
 def t_error(t):
     if t.type == "length_err":
-        print ("Lexical error at line "+str(t.lexer.lineno)+": ID length must be between 3 and 15")
+        error_text = "Lexical error at line "+str(t.lexer.lineno)+": ID length must be between 3 and 15"
+        print(error_text)
+        error = ErrorLog()
+        error.log_error(error_text)
         t.lexer.skip(1)
     elif t.type == "WRONG_ID":
-        print ("Lexical error at line "+str(t.lexer.lineno)+": Identifiers cannot start with a number")
+
+        error_text = "Lexical error at line "+str(t.lexer.lineno)+": Identifiers cannot start with a number"
+        print(error_text)
+        error = ErrorLog()
+        error.log_error(error_text)
     else:
-        print("Illegal character '%s'" % t.value[0])
+        error_text = "Illegal character '%s'" % t.value[0]
+        print(error_text)
+        error = ErrorLog()
+        error.log_error(error_text)
         t.lexer.skip(1)
