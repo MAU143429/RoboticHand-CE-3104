@@ -68,3 +68,5 @@ class Move:
         self.movement = movement
         self.line = line
         print("SE HA REGISTRADO EL METODO MOVE CON MOVIMIENTO " + str(self.movement) + " EN EL DEDO " + str(self.finger) + " EN LA LINEA " + str(self.line))
+        t = Translator()
+        t.Create_Move(self.finger, self.movement)
