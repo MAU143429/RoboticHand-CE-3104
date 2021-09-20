@@ -58,12 +58,12 @@ class Generate_Error:
 
         if self.code == 9:
             e_msg = "SYNTAX ERROR AT LINE " + str(self.line) + ". INVALID TIME SUFFIX"
-            parser.semantic_error = True
+            parser.syntax_error = True
             self.error.log_error(e_msg)
 
         if self.code == 10:
             e_msg = "SYNTAX ERROR AT LINE " + str(self.line) + ". INVALID FINGER KEYWORD"
-            parser.semantic_error = True
+            parser.syntax_error = True
             self.error.log_error(e_msg)
 
         

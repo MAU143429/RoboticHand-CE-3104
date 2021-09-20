@@ -11,11 +11,13 @@ fn main() {
     Delay(233, "Mil");
     Delay(233, "Seg");
     Delay(233, "Min");
+    Delay(233, "aaaa");
 
     Println!("hola mundo");
     Println!(var7);
     loop {
         let var3 = 45;
         let var4 = 33;
+
     }
 }
