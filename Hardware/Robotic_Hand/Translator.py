@@ -74,47 +74,43 @@ class Execute:
     
     '''
     def execute(self):
-        print("ABRIENDO PUERTO SERIAL")
         serial_port = serial.Serial('COM5',9600,timeout = 1)
         time.sleep(2)
-        print("PUERTO SERIAL ABIERTO")
         send = []
-        print("LEYENDO ARCHIVO TEST.TXT")
         with open('../../Software/Lexical_Analysis/test.txt','r') as f:
             send = f.readlines()
-            print("DENTRO DEL WITH")
-            print(send)
-            print(len(send))
-        print("ARCHIVO LEIDO Y ALMACENADO ")
-        print("ESTA ES LA INFORMACION QUE VOY A ENVIAR A LA PLACA ----->  ")
         numline = 0
+        result = "START"
+        first = True
         while(numline < len(send)):
-            cad = send[numline]
-            if(cad != " "):
-                step1 = cad.find(',')
-                step2 = cad.find(';')
-                step3 = cad.find('/')
-                action = cad[0:step1]
-                print("MENSAJE HACIA LA PLACA---->" + cad + "*********")
-                if action == "del":
-                    #timer = cad[step1+1:step2]
-                    #unit = cad[step2+1:step3]
-                    serial_port.write(cad.encode())
-                    print("MENSAJE DELAY ENVIADO A LA PLACA SATISFACTORIAMENTE")
-                    time.sleep(1)
-                    #self.Create_delays(timer, unit)
-                    result = serial_port.readline().decode('ascii')
-                    print("MENSAJE DE LA PLACA---->" + result + "*********")
-                    numline += 1
-                    print("ENVIO FINALIZADO")
+            if not first:
+                result = ">" + serial_port.readline().decode('ascii') + "<"
+                print("MENSAJE DE LA PLACA---->" + result + "tengo tab")
+
+            if result == "START" or result[1] == "D" or result[1] == "M" and result != "<":
+                print("SOY EL RESULTADO -----> " + result)
+                first = False
+                result = ""
+                cad = send[numline]
+                if(cad != " "):
+                    step1 = cad.find(',')
+                    step2 = cad.find(';')
+                    step3 = cad.find('/')
+                    action = cad[0:step1]
+                    print("MENSAJE HACIA LA PLACA---->" + cad)
+                    if action == "del":
+                        #timer = cad[step1+1:step2]
+                        #unit = cad[step2+1:step3]
+                        serial_port.write(cad.encode())
+                        print("MENSAJE DELAY ENVIADO A LA PLACA SATISFACTORIAMENTE")
+                        time.sleep(1)
+                        #self.Create_delays(timer, unit)
+                        numline += 1
+                    else:
+                        serial_port.write(cad.encode())
+                        print("MENSAJE MOVE ENVIADO A LA PLACA SATISFACTORIAMENTE")
+                        time.sleep(1)
+                        numline += 1
                 else:
-                    serial_port.write(cad.encode())
-                    print("MENSAJE MOVE ENVIADO A LA PLACA SATISFACTORIAMENTE")
-                    time.sleep(1)
-                    result = serial_port.readline().decode('ascii')
-                    print("MENSAJE DE LA PLACA---->" + result + "*********")
                     numline += 1
-                    print("ENVIO FINALIZADO")
-            else:
-                numline += 1
 
