@@ -16,7 +16,7 @@ fn main() {
     Println!("hola mundo");
     Println!(var7);
     loop {
-        let var3 = 45;
+        let var3 = var7;
         let var4 = 33;
 
     }

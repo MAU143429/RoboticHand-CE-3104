@@ -7,8 +7,6 @@ class MoveDelayCheck:
     def check(self):
 
         for chars in self.reserved:
-            print(chars)
-            print(self.word)
             if self.word[1:-1] == chars:
                 return True
         return False
