@@ -3,7 +3,7 @@ from Software.Lexical_Analysis.Tokenize import tokens
 from Software.Lexical_Analysis.LexicalAnalizer import *
 from Software.Semantic.Structures_Models import *
 from sys import stdin
-
+from Software.Error_Log import ErrorLog
 precedence = (
     ('right', 'LET'),
     ('right', 'ASSIGN'),
@@ -11,7 +11,8 @@ precedence = (
     ('left', 'TIMES', 'DIVIDE'),
     ('left', 'LPAREN', 'RPAREN'),
 )
-
+syntax_error = False
+semantic_error = False
 def p_main(p):
     '''
     main : FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
@@ -72,7 +73,7 @@ def p_moveList(p):
     moveList : MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
     '''
     line = p.lineno(2)
-    p[0] = Move(p[4], p[7], line)
+    p[0] = Move(p[3], p[5], line)
 
 def p_fingerList(p):
     '''
@@ -95,7 +96,7 @@ REGLAS PARA DELAY
 
 def p_delay(p):
     '''
-    delay : DELAY LPAREN INT COMMA unit RPAREN SEMICOLON line
+    delay : DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
     '''
     line = p.lineno(2)
     p[0] = Del(p[3],p[5],line)
@@ -114,16 +115,17 @@ REGLAS PARA PRINTLN!
 '''
 def p_println(p):
     '''
-    println : PRINT EXPR LPAREN QUOT text QUOT RPAREN SEMICOLON line
+    println : PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
+            | PRINT EXPR LPAREN ID RPAREN SEMICOLON line
+
 
     '''
     line = p.lineno(2)
-    p[0] = Print(p[5], line)
+    p[0] = Print(p[4], line)
 
 def p_text(p):
     '''
-    text : ID
-
+    text : QUOT ID QUOT
     '''
     p[0] = p[1]
 
@@ -224,7 +226,10 @@ def p_expression_bool(p):
 def p_error(p):
     print("Syntax error found!", p)
     if not p == None:
-        print("Error on line " + str(p.lineno))
+        error_text = "Syntax error found! Error at line " + str(p.lineno)
+        error = ErrorLog()
+        error.log_error(error_text)
+
     
 def p_empty(p):
     '''

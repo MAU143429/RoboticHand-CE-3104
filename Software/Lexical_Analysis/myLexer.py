@@ -2,12 +2,17 @@ import ply.lex as lex
 import ply.yacc as yacc
 from Software.Syntactic.SyntacticAnalizer import *
 
+
 def lex_test():
-    sourceFile = "../Lexical_Analysis/test.txt"
+    sourceFile = "../Lexical_Analysis/source.txt"
     if sourceFile is not None:
                 with open(sourceFile, 'r') as file:
                     print("Entrando al lexer...")
-                    source = file.read()
+                    try:
+                        source = file.read()
+                    except EOFError as e:
+                        print(e)
+
                     lexer = lex.lex()
                     lexer.input(source)
                     print("Lexer listo")
@@ -22,7 +27,7 @@ def lex_test():
     for Tok in lexer:
         print(Tok)
 
-lex_test()
+#lex_test()
 
 
 

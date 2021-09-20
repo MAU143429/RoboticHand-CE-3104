@@ -1,5 +1,6 @@
 from Hardware.Robotic_Hand.Translator import Translator
-
+from Software.Semantic.reserved import *
+from Software.Semantic.Generate_Error import *
 class Let:
     def __init__(self, id, value, line):
         self.id = id
@@ -13,9 +14,16 @@ class Del:
         self.unit = unit
         self.line = line
 
-        print("SE HA REGISTRADO EL DELAY CON DURACION DE " + str(self.value) + " " + str(self.unit) +  " EN LA LINEA " + str(self.line))
-        t = Translator()
-        t.Create_Delay(self.value,self.unit)
+        self.checker = MoveDelayCheck(self.unit)
+        if self.checker.check():
+            print("SE HA REGISTRADO EL DELAY CON DURACION DE " + str(self.value) + " " + self.unit +  " EN LA LINEA " + str(self.line))
+            t = Translator()
+            t.Create_Delay(self.value,self.unit)
+        else:
+            e_msg = "SYNTAX ERROR AT LINE " + str(self.line) + ". INVALID TIME SUFFIX"
+            print(e_msg)
+            errorHandler = Generate_Error(9, self.line)
+            errorHandler.Execute()
 
 class Print:
     def __init__(self, value, line):
@@ -67,4 +75,9 @@ class Move:
         self.finger = finger
         self.movement = movement
         self.line = line
-        print("SE HA REGISTRADO EL METODO MOVE CON MOVIMIENTO " + str(self.movement) + " EN EL DEDO " + str(self.finger) + " EN LA LINEA " + str(self.line))
+        self.checker = MoveDelayCheck(self.finger)
+        if self.checker.check():
+            print("SE HA REGISTRADO EL METODO MOVE CON MOVIMIENTO " + str(self.movement) + " EN EL DEDO " + str(self.finger) + " EN LA LINEA " + str(self.line))
+        else:
+            errorHandler = Generate_Error(10, self.line)
+            errorHandler.Execute()

@@ -106,11 +106,15 @@ class Ui_MainWindow(object):
         t = Translator()
         t.Clean()
         lex_test()
-        print("VOY A ENVIAR LOS ARCHIVOS LA MANO")
-        time.sleep(1);
-        e = Execute()
-        e.execute()
-        print("ARCHIVOS ENVIADOS")
+        if semantic_error or syntax_error:
+            error = ErrorLog()
+            print(error.log)
+        else:
+            print("VOY A ENVIAR LOS ARCHIVOS LA MANO")
+            time.sleep(1)
+            e = Execute()
+            e.execute()
+            print("ARCHIVOS ENVIADOS")
 
     def start_compile(self):
 

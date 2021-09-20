@@ -83,8 +83,10 @@ void Move(String finger, String status_mov){
       servo4.write(180);
       servo5.write(180);
       tone (salida,3000,200);
-    } 
+    }
+    
   }
+  Serial.println("M"); 
 }
 
 // Recibe un timer que es la acnatidad de tiempo de delay y recibe una unidad.
@@ -97,7 +99,7 @@ void Create_delays(int timer, String unit){
   }else{
     delay(timer);
   }
-  tone (salida,2000,timer);
+  Serial.println("D"); 
 }
 
 int pos1,pos2,pos3,delay_time;
@@ -107,8 +109,7 @@ void loop() {
   if(Serial.available()){
     tone (salida,6000,400);
     //Serial.println("HOLA SOY LA PLACA");
-    cad = Serial.readString(); // mov,T;false/
-    Serial.println("RECIBI ESTO DE PYTHON ---->"+ cad + "FINNN DE LA LINEA");
+    cad = Serial.readString(); // mov,T;false/ del,5000;Mil/
     pos1 = cad.indexOf(',');
     pos2 = cad.indexOf(';');
     pos3 = cad.indexOf('/');
