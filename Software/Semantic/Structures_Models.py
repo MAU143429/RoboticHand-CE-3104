@@ -76,7 +76,9 @@ class Move:
         self.movement = movement
         self.line = line
         self.checker = MoveDelayCheck(self.finger)
-        if self.checker.check():
+        if isinstance(finger, list):
+            print("SOY UNA LISTA DE DEDOS: " + str(finger))
+        elif self.checker.check():
             print("SE HA REGISTRADO EL METODO MOVE CON MOVIMIENTO " + str(self.movement) + " EN EL DEDO " + str(self.finger) + " EN LA LINEA " + str(self.line))
         else:
             errorHandler = Generate_Error(10, self.line)

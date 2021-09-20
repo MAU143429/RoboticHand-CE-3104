@@ -4,7 +4,7 @@ from Software.Syntactic.SyntacticAnalizer import *
 
 
 def lex_test():
-    sourceFile = "../Lexical_Analysis/source.txt"
+    sourceFile = "../Lexical_Analysis/test.txt"
     if sourceFile is not None:
                 with open(sourceFile, 'r') as file:
                     print("Entrando al lexer...")
@@ -27,7 +27,7 @@ def lex_test():
     for Tok in lexer:
         print(Tok)
 
-#lex_test()
+lex_test()
 
 
 

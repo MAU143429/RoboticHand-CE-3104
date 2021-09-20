@@ -63,7 +63,7 @@ REGLAS PARA MOVE
 '''
 def p_move(p):
     '''
-    move : MOVE LPAREN finger COMMA bool RPAREN SEMICOLON line
+    move : MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
     '''
     line = p.lineno(2)
     p[0] = Move(p[3], p[5], line)
@@ -73,20 +73,14 @@ def p_moveList(p):
     moveList : MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
     '''
     line = p.lineno(2)
-    p[0] = Move(p[3], p[5], line)
+    p[0] = Move(p[4], p[7], line)
 
 def p_fingerList(p):
     '''
-    fingerList : finger COMMA finger
-               | finger COMMA fingerList
+    fingerList : STRING COMMA STRING
+               | STRING COMMA fingerList
     '''
     p[0] = [p[1], p[3]]
-
-def p_finger(p):
-    '''
-    finger : QUOT ID QUOT
-    '''
-    p[0] = p[2]
 
 '''
 ###########################################################################
