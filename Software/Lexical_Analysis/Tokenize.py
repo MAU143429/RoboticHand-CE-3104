@@ -81,5 +81,5 @@ tokens = [
 'LCRLBRACKET',
 'EXPR',
 'RCRLBRACKET',
-'STRING'] + list(reserved.values()) + literals
+'STRING'] + list(reserved.values())
 

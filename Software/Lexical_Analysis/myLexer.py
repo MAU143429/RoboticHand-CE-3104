@@ -2,6 +2,7 @@ import ply.lex as lex
 import ply.yacc as yacc
 from Software.Syntactic.SyntacticAnalizer import *
 
+
 def lex_test():
     sourceFile = "../Lexical_Analysis/source.txt"
     if sourceFile is not None:

@@ -1,5 +1,5 @@
 import sys
-from Software.Syntactic import Parser as parser
+from Software.Syntactic import SyntacticAnalizer as parser
 from Software.Error_Log import ErrorLog
 
 class Generate_Error:
@@ -56,6 +56,15 @@ class Generate_Error:
             parser.semantic_error = True
             self.error.log_error(e_msg)
 
+        if self.code == 9:
+            e_msg = "SYNTAX ERROR AT LINE " + str(self.line) + ". INVALID TIME SUFFIX"
+            parser.semantic_error = True
+            self.error.log_error(e_msg)
+
+        if self.code == 10:
+            e_msg = "SYNTAX ERROR AT LINE " + str(self.line) + ". INVALID FINGER KEYWORD"
+            parser.semantic_error = True
+            self.error.log_error(e_msg)
 
         
         

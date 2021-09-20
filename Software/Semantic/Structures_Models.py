@@ -1,5 +1,6 @@
 from Hardware.Robotic_Hand.Translator import Translator
-
+from Software.Semantic.reserved import *
+from Software.Semantic.Generate_Error import *
 class Let:
     def __init__(self, id, value, line):
         self.id = id
@@ -67,6 +68,9 @@ class Move:
         self.finger = finger
         self.movement = movement
         self.line = line
-        print("SE HA REGISTRADO EL METODO MOVE CON MOVIMIENTO " + str(self.movement) + " EN EL DEDO " + str(self.finger) + " EN LA LINEA " + str(self.line))
-        t = Translator()
-        t.Create_Move(self.finger, self.movement)
+        self.checker = MoveDelayCheck(self.finger)
+        if self.checker.check():
+            print("SE HA REGISTRADO EL METODO MOVE CON MOVIMIENTO " + str(self.movement) + " EN EL DEDO " + str(self.finger) + " EN LA LINEA " + str(self.line))
+        else:
+            errorHandler = Generate_Error(10, self.line)
+            errorHandler.Execute()
