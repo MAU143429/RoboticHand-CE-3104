@@ -21,8 +21,10 @@ def p_program(p):
     '''
     line : loop
          | for
+         | if
          | let
          | move
+         | moveList
          | delay
          | println
          | empty
@@ -60,21 +62,30 @@ REGLAS PARA MOVE
 '''
 def p_move(p):
     '''
-    move : MOVE LPAREN QUOT ID QUOT COMMA expression RPAREN SEMICOLON line
+    move : MOVE LPAREN finger COMMA bool RPAREN SEMICOLON line
+    '''
+    line = p.lineno(2)
+    p[0] = Move(p[3], p[5], line)
+
+def p_moveList(p):
+    '''
+    moveList : MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
     '''
     line = p.lineno(2)
     p[0] = Move(p[4], p[7], line)
 
+def p_fingerList(p):
+    '''
+    fingerList : finger COMMA finger
+               | finger COMMA fingerList
+    '''
+    p[0] = [p[1], p[3]]
+
 def p_finger(p):
     '''
-    finger : P
-           | I
-           | M
-           | A
-           | Q
-           | T
+    finger : QUOT ID QUOT
     '''
-    p[0] = p[1]
+    p[0] = p[2]
 
 '''
 ###########################################################################
@@ -118,26 +129,59 @@ def p_text(p):
 
 '''
 ###########################################################################
+REGLAS PARA IF, ELSE IF and ELSE
+###########################################################################
+'''
+def p_elseiforelse(p):
+    '''
+    elseiforelse : elseif
+                 | else
+    '''
+
+def p_if(p):
+    '''
+    if : IF expression compare expression LCRLBRACKET line RCRLBRACKET line
+       | IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    '''
+
+def p_elseif(p):
+    '''
+    elseif : ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET line
+           | ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    '''
+
+def p_else(p):
+    '''
+    else : ELSE LCRLBRACKET line RCRLBRACKET line
+    '''
+
+def p_compare(p):
+    '''
+    compare : EQEQ
+            | LTE
+            | GTE
+            | LT
+            | GT
+    '''
+
+def p_expressions(p):
+    '''
+    expression : operand
+               | bool
+    '''
+
+'''
+###########################################################################
 REGLAS PARA LET
 ###########################################################################
 '''
 def p_let(p):
     '''
-    let : LET ID ASSIGN INT SEMICOLON line
-             | LET ID ASSIGN expression SEMICOLON line
+    let : LET ID ASSIGN operand SEMICOLON line
+        | LET ID ASSIGN bool SEMICOLON line
     '''
     line = p.lineno(2)
     p[0] = Let(p[2], p[4], line)
-
-
-def p_expression_bool(p):
-    '''
-    expression : TRUE
-               | FALSE
-               | ID
-               | opera
-    '''
-    p[0] = p[1]
 
 '''
 ###########################################################################
@@ -164,13 +208,20 @@ def p_operators(p):
 def p_operand(p):
     '''
     operand : INT
-            | ID
             | opera
+            | ID
+    '''
+    p[0] = p[1]
+
+def p_expression_bool(p):
+    '''
+    bool : TRUE
+         | FALSE
+         | ID
     '''
     p[0] = p[1]
 
 def p_error(p):
-
     print("Syntax error found!", p)
     if not p == None:
         print("Error on line " + str(p.lineno))
