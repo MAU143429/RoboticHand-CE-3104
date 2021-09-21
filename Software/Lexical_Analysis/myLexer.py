@@ -1,10 +1,10 @@
 import ply.lex as lex
 import ply.yacc as yacc
 from Software.Syntactic.SyntacticAnalizer import *
-from Software.SymbolsTable import *
 
 
 def lex_test():
+
     sourceFile = "../Lexical_Analysis/source.txt"
 
     if sourceFile is not None:
@@ -17,7 +17,6 @@ def lex_test():
 
             lexer = lex.lex()
             lexer.input(source)
-            myTable = SymbolsTable()
             clone = lexer.clone()
             clone.input(source)
 
@@ -27,6 +26,7 @@ def lex_test():
 
             parser = yacc.yacc()
             parser.parse(source)
+            myTable.printTable()
             print("Saliendo del parser...")
             print("TERMINE DE COMPILAR")
 

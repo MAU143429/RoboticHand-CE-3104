@@ -3,6 +3,7 @@ from Software.Lexical_Analysis.Tokenize import tokens
 from Software.Lexical_Analysis.LexicalAnalizer import *
 from Software.Semantic.Structures_Models import *
 from sys import stdin
+from Software.SymbolsTable import *
 from Software.Error_Log import ErrorLog
 precedence = (
     ('right', 'LET'),
@@ -13,6 +14,8 @@ precedence = (
 )
 syntax_error = False
 semantic_error = False
+myTable = SymbolsTable()
+
 def p_main(p):
     '''
     main : FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
@@ -177,6 +180,7 @@ def p_let(p):
         | LET ID ASSIGN bool SEMICOLON line
     '''
     line = p.lineno(2)
+    myTable.insertValue(p[4],p[2])
     p[0] = Let(p[2], p[4], line)
 
 '''
