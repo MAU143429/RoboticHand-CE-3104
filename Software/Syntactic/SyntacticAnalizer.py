@@ -217,13 +217,14 @@ def p_expression_bool(p):
     '''
     p[0] = p[1]
 
-def p_error(p):
-    print("Syntax error found!", p)
-    if not p == None:
-        error_text = "Syntax error found! Error at line " + str(p.lineno)
-        error = ErrorLog()
-        error.log_error(error_text)
 
+def p_error(p):
+    if p == None:
+        token = "end of file"
+    else:
+        token = f"{p.type}({p.value}) on line {p.lineno}"
+
+    print(f"Syntax error: Unexpected {token}")
     
 def p_empty(p):
     '''

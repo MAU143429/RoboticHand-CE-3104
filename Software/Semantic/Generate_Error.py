@@ -11,7 +11,7 @@ class Generate_Error:
 
     def Execute(self):
         if self.code == 0:
-            e_msg = "SEMANTIC ERROR 0 ---> SYNTAX INCORRECT"
+            e_msg = "SYNTAX ERROR 0 ---> SYNTAX INCORRECT"
             parser.semantic_error = True
             self.error.log_error(e_msg)
 
