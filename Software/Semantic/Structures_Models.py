@@ -21,7 +21,7 @@ class Del:
             t.Create_Delay(self.value,self.unit)
         else:
             e_msg = "SYNTAX ERROR AT LINE " + str(self.line) + ". INVALID TIME SUFFIX"
-            print(e_msg)
+            #print(e_msg)
             errorHandler = Generate_Error(9, self.line)
             errorHandler.Execute()
 

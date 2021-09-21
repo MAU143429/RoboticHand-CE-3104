@@ -1,3 +1,4 @@
+from colorama import init, Fore, Back, Style
 class SingletonMeta(type):
     _instances = {}
 
@@ -13,3 +14,10 @@ class ErrorLog(metaclass=SingletonMeta):
 
     def log_error(self, msg):
         self.log += msg + "\n"
+        print("SE AGREGO UN NUEVO ERROR --> " + self.log)
+
+    def print(self):
+        print(self.log)
+
+    def clean(self):
+        self.log = ""

@@ -59,6 +59,7 @@ class Generate_Error:
         if self.code == 9:
             e_msg = "SYNTAX ERROR AT LINE " + str(self.line) + ". INVALID TIME SUFFIX"
             parser.syntax_error = True
+            print(parser.syntax_error)
             self.error.log_error(e_msg)
 
         if self.code == 10:

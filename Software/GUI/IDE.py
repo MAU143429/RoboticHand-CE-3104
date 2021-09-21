@@ -93,22 +93,29 @@ class Ui_MainWindow(object):
 
     def compile(self):
         self.save()
-        # self.output.setPlainText(self.codeEditor.toPlainText())
+
         time.sleep(1)
         t = Translator()
+        error = ErrorLog()
+        error.clean()
         t.Clean()
         lex_test()
+        if error.log != " ":
+            self.output.setPlainText(error.print())
+        else:
+            print("NO HAY ERRORES")
 
     def run_compile(self):
         self.save()
         #self.output.setPlainText(self.codeEditor.toPlainText())
         time.sleep(1)
         t = Translator()
+        error = ErrorLog()
+        error.clean()
         t.Clean()
         lex_test()
-        if semantic_error or syntax_error:
-            error = ErrorLog()
-            print(error.log)
+        if error.log != " ":
+            error.print()
         else:
             print("VOY A ENVIAR LOS ARCHIVOS LA MANO")
             time.sleep(1)
@@ -117,6 +124,7 @@ class Ui_MainWindow(object):
             print("ARCHIVOS ENVIADOS")
 
     def start_compile(self):
+
 
         thread = Thread(target=self.compile(), args=())
         thread.start()
