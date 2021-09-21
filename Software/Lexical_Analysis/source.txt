@@ -6,5 +6,6 @@ fn main() {
         let var2 = 90;
         let var7 = var2;
     }
+
     Move("P", True);
 }
