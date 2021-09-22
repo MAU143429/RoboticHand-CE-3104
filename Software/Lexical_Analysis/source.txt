@@ -1,20 +1,7 @@
 fn main(){
-    while true{
-        let sum = true;
-        let res = false;
-        Move(["P", "A", "I"], sum);
-        Delay(5, "Seg");
-        if hola == true {
-            let var1 = true;
-            let var2 = false;
-        }
-        elseif hola == 23{
-            let var3 = true;
-        } else {
-            let var4 = false;
-        }
-        break
-        Println!(var3, var2, "patooooo");
-    }
+    let sum = true;
+    let hola = 49;
+    let var = sum;
+    let hola = sum;
 
 }

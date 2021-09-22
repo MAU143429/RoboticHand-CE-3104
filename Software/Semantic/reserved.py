@@ -11,7 +11,6 @@ class MoveDelayCheck:
             while(cont < len(self.word)):
 
                 for chars in self.fingers:
-                    print(self.word)
                     if self.word[cont][1:-1] == chars:
                         found = True
                         break

@@ -3,50 +3,34 @@ from Software.Semantic.reserved import *
 from Software.Semantic.Generate_Error import *
 from Software.Semantic.BooleanValue import *
 class Let:
-    def __init__(self, id, value, symbol_table, line):
+    def __init__(self, id, value,line,symbol_table,result):
         self.id = id
         self.value = value  # Let num = var1;   # Let num = True;
         self.line = line
         self.table = symbol_table
+        self.exist_var = result
         print("SE HA REGISTRADO EL LET  " + self.id + " CON EL VALOR DE " + str(self.value) + " EN LA LINEA " + str(self.line))
 
         '''
         EXISTANCE ANALYSIS
         '''
-        if isinstance(self.value, int):
-            self.table[self.id]["value"] = self.value
-
-        elif isinstance(validate_real_bool(self.value), bool):
-            self.table[self.id]["value"] = validate_bool(self.value)
-        else:
-            for var in self.table:
-                if var == str(id):
-                    found2 = False
-                    for var2 in self.table:
-                        if var2 == str(value):
-                            if (self.table[self.value]["type"]) != (self.table[self.id]["type"]):
-                                errorHandler = Generate_Error(4, self.line)
-                                errorHandler.Execute()
-                            else:
-                                found2 = True
-                                self.table[self.id]["value"] = self.table[self.value]["value"]
-                                print("SE HA REGISTRADO EL LET  " + self.id + " CON EL VALOR DE " + str(self.value) + " EN LA LINEA " + str(self.line))
-                                break
-                        else:
-                            pass
-                else:
-                    found3 = False
-                    for var2 in self.table:
-                        if var2 == str(value):
-                            found3 = True
-                            self.table.insertValue(self.table[self.value]["value"], str(self.id), self.line)
-                    if not found3:
-                        errorHandler = Generate_Error(5, self.line)
+        if self.exist_var:
+            found = False
+            for var in self.table:  
+                if var == str(value):
+                    if (self.table[self.value]["type"]) != (self.table[self.id]["type"]):
+                        errorHandler = Generate_Error(4, self.line)
                         errorHandler.Execute()
+                        found = True
+                    else:
+                        self.table[self.id]["value"] = self.table[self.value]["value"]
+                        found = True
+                        print("SE HA REGISTRADO EL LET  " + self.id + " CON EL VALOR DE " + str(self.value) + " EN LA LINEA " + str(self.line))
+                        break
 
-
-
-
+            if not found:
+                errorHandler = Generate_Error(5, self.line)
+                errorHandler.Execute()
 
 
 class Del:
@@ -122,7 +106,6 @@ class Move:
         self.final_movement = None
         self.line = line
         self.table = symbol_table
-        print(self.table)
         self.checker = MoveDelayCheck(self.finger)
 
         '''
@@ -132,7 +115,6 @@ class Move:
             self.final_movement = validate_bool(movement)
         else:
             for var in self.table:
-                print("ENTRE AL FOR")
                 if var == movement:
                     if isinstance(validate_real_bool(self.table[self.movement]["value"]),bool):
                         self.final_movement = self.table[self.movement]["value"]

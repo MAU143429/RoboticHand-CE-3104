@@ -254,8 +254,8 @@ def p_let(p):
     '''
 
     line = p.lineno(2)
-    myTable.insertValue(p[4],p[2], line)
-    p[0] = Let(p[2], p[4], line, myTable.table)
+    result = myTable.insertValue(p[4],p[2], line)
+    p[0] = Let(p[2], p[4], line, myTable.table,result)
 
 
 '''
