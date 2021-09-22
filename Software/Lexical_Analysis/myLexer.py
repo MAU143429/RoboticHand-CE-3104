@@ -19,12 +19,11 @@ def lex_test():
             clone.input(source)
 
             for token in clone:
+
                 myTable.insertToken(token.type, token.value)
-            myTable.printTable()
 
             parser = yacc.yacc()
             parser.parse(source)
-            myTable.printTable()
             print("Saliendo del parser...")
             print("TERMINE DE COMPILAR")
             print(" \n *********** ERRORES DE COMPILACION *********** \n")

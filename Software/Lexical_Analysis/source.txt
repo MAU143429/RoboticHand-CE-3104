@@ -1,8 +1,10 @@
 fn main(){
-    while True{
-        Move(["P", "A", "I"], True);
+    while true{
+        let sum = true;
+        let res = false;
+        Move(["P", "A", "I"], sum);
         Delay(5, "Seg");
-        if hola == True {
+        if hola == true {
             let var1 = true;
             let var2 = false;
         }
@@ -12,8 +14,7 @@ fn main(){
             let var4 = false;
         }
         break
-        Println!("Hola Mundo");
+        Println!(var3, var2, "patooooo");
     }
-    let sum = true;
-    let res = false;
+
 }
