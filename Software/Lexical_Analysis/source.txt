@@ -1,8 +1,10 @@
 fn main(){
+
     Move("P",true);
     Move("T",sum);
     Move("I",res);
     Move("M",true);
     let sum = true;
     let res = false;
+
 }

@@ -2,5 +2,21 @@ mov,"P";true/
 mov,"T";true/
 mov,"I";false/
 mov,"M";true/
+mov,"P";true/
+mov,"T";None/
+mov,"I";None/
+mov,"M";true/
+mov,"P";true/
+mov,"T";None/
+mov,"I";None/
+mov,"M";true/
+mov,"P";true/
+mov,"T";None/
+mov,"I";None/
+mov,"M";true/
+mov,"P";true/
+mov,"T";true/
+mov,"I";false/
+mov,"M";true/
 
 

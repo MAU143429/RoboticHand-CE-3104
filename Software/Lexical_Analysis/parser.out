@@ -3,148 +3,154 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 Unused terminals:
 
     ARROW
-    BREAK
     INTEGER
     RANGE
     RETURN
-    WHILE
     WRONG_ID
 
 Grammar
 
 Rule 0     S' -> main
 Rule 1     main -> FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
-Rule 2     line -> loop
-Rule 3     line -> for
-Rule 4     line -> if
-Rule 5     line -> let
-Rule 6     line -> move
-Rule 7     line -> moveList
-Rule 8     line -> delay
-Rule 9     line -> println
-Rule 10    line -> empty
-Rule 11    loop -> LOOP LCRLBRACKET line RCRLBRACKET line
-Rule 12    for -> FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
-Rule 13    move -> MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
-Rule 14    moveList -> MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
-Rule 15    fingerList -> STRING COMMA STRING
-Rule 16    fingerList -> STRING COMMA fingerList
-Rule 17    delay -> DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
-Rule 18    unit -> QUOT MIN QUOT
-Rule 19    unit -> QUOT MIL QUOT
-Rule 20    unit -> QUOT SEG QUOT
-Rule 21    println -> PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
-Rule 22    println -> PRINT EXPR LPAREN ID RPAREN SEMICOLON line
-Rule 23    text -> QUOT ID QUOT
-Rule 24    elseiforelse -> elseif
-Rule 25    elseiforelse -> else
-Rule 26    if -> IF expression compare expression LCRLBRACKET line RCRLBRACKET line
-Rule 27    if -> IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-Rule 28    elseif -> ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET line
-Rule 29    elseif -> ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-Rule 30    else -> ELSE LCRLBRACKET line RCRLBRACKET line
-Rule 31    compare -> EQEQ
-Rule 32    compare -> LTE
-Rule 33    compare -> GTE
-Rule 34    compare -> LT
-Rule 35    compare -> GT
-Rule 36    expression -> operand
-Rule 37    expression -> bool
-Rule 38    let -> LET ID ASSIGN operand SEMICOLON
-Rule 39    let -> LET ID ASSIGN bool SEMICOLON line
-Rule 40    opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN
-Rule 41    operator -> PLUS
-Rule 42    operator -> MINUS
-Rule 43    operator -> DIVIDE
-Rule 44    operator -> ASTR
-Rule 45    operator -> TIMES
-Rule 46    operand -> INT
-Rule 47    operand -> opera
-Rule 48    operand -> ID
-Rule 49    bool -> TRUE
-Rule 50    bool -> FALSE
-Rule 51    bool -> ID
-Rule 52    empty -> <empty>
+Rule 2     line -> main
+Rule 3     line -> loop
+Rule 4     line -> for
+Rule 5     line -> while
+Rule 6     line -> if
+Rule 7     line -> let
+Rule 8     line -> move
+Rule 9     line -> moveList
+Rule 10    line -> delay
+Rule 11    line -> println
+Rule 12    line -> break
+Rule 13    line -> empty
+Rule 14    loop -> LOOP LCRLBRACKET line RCRLBRACKET line
+Rule 15    for -> FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+Rule 16    while -> WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
+Rule 17    while -> WHILE TRUE LCRLBRACKET line RCRLBRACKET line
+Rule 18    let -> LET ID ASSIGN operand SEMICOLON
+Rule 19    let -> LET ID ASSIGN bool SEMICOLON line
+Rule 20    operand -> INT
+Rule 21    operand -> opera
+Rule 22    operand -> ID
+Rule 23    bool -> TRUE
+Rule 24    bool -> FALSE
+Rule 25    bool -> ID
+Rule 26    opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+Rule 27    operator -> PLUS
+Rule 28    operator -> MINUS
+Rule 29    operator -> DIVIDE
+Rule 30    operator -> ASTR
+Rule 31    operator -> TIMES
+Rule 32    move -> MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
+Rule 33    moveList -> MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+Rule 34    fingerList -> STRING COMMA STRING
+Rule 35    fingerList -> STRING COMMA fingerList
+Rule 36    delay -> DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
+Rule 37    unit -> QUOT MIN QUOT
+Rule 38    unit -> QUOT MIL QUOT
+Rule 39    unit -> QUOT SEG QUOT
+Rule 40    println -> PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
+Rule 41    println -> PRINT EXPR LPAREN ID RPAREN SEMICOLON line
+Rule 42    text -> QUOT ID QUOT
+Rule 43    elseiforelse -> elseif
+Rule 44    elseiforelse -> else
+Rule 45    if -> IF expression compare expression LCRLBRACKET line RCRLBRACKET line
+Rule 46    if -> IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+Rule 47    elseif -> ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET line
+Rule 48    elseif -> ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+Rule 49    else -> ELSE LCRLBRACKET line RCRLBRACKET line
+Rule 50    compare -> EQEQ
+Rule 51    compare -> LTE
+Rule 52    compare -> GTE
+Rule 53    compare -> LT
+Rule 54    compare -> GT
+Rule 55    expression -> operand
+Rule 56    expression -> bool
+Rule 57    break -> BREAK
+Rule 58    empty -> <empty>
 
 Terminals, with rules where they appear
 
 ARROW                : 
-ASSIGN               : 38 39
-ASTR                 : 44
-BREAK                : 
-COMMA                : 13 14 15 16 17 40 40
-DELAY                : 17
-DIVIDE               : 43
-DOTDOT               : 12
-ELSE                 : 30
-ELSEIF               : 28 29
-EQEQ                 : 31
-EXPR                 : 21 22
-FALSE                : 50
+ASSIGN               : 18 19
+ASTR                 : 30
+BREAK                : 57
+COMMA                : 26 26 32 33 34 35 36
+DELAY                : 36
+DIVIDE               : 29
+DOTDOT               : 15
+ELSE                 : 49
+ELSEIF               : 47 48
+EQEQ                 : 50
+EXPR                 : 40 41
+FALSE                : 24
 FN                   : 1
-FOR                  : 12
-GT                   : 35
-GTE                  : 33
-ID                   : 12 22 23 38 39 48 51
-IF                   : 26 27
-IN                   : 12
-INT                  : 12 12 17 46
+FOR                  : 15
+GT                   : 54
+GTE                  : 52
+ID                   : 15 18 19 22 25 41 42
+IF                   : 45 46
+IN                   : 15
+INT                  : 15 15 20 36
 INTEGER              : 
-LCRLBRACKET          : 1 11 12 26 27 28 29 30
-LET                  : 38 39
-LOOP                 : 11
-LPAREN               : 1 13 14 17 21 22 40
-LSQRBRACKET          : 14
-LT                   : 34
-LTE                  : 32
+LCRLBRACKET          : 1 14 15 16 17 45 46 47 48 49
+LET                  : 18 19
+LOOP                 : 14
+LPAREN               : 1 16 26 32 33 36 40 41
+LSQRBRACKET          : 33
+LT                   : 53
+LTE                  : 51
 MAIN                 : 1
-MIL                  : 19
-MIN                  : 18
-MINUS                : 42
-MOVE                 : 13 14
-OPERA                : 40
-PLUS                 : 41
-PRINT                : 21 22
-QUOT                 : 18 18 19 19 20 20 23 23
+MIL                  : 38
+MIN                  : 37
+MINUS                : 28
+MOVE                 : 32 33
+OPERA                : 26
+PLUS                 : 27
+PRINT                : 40 41
+QUOT                 : 37 37 38 38 39 39 42 42
 RANGE                : 
-RCRLBRACKET          : 1 11 12 26 27 28 29 30
+RCRLBRACKET          : 1 14 15 16 17 45 46 47 48 49
 RETURN               : 
-RPAREN               : 1 13 14 17 21 22 40
-RSQRBRACKET          : 14
-SEG                  : 20
-SEMICOLON            : 13 14 17 21 22 38 39
-STRING               : 13 15 15 16 17 21
-TIMES                : 45
-TRUE                 : 49
-WHILE                : 
+RPAREN               : 1 16 26 32 33 36 40 41
+RSQRBRACKET          : 33
+SEG                  : 39
+SEMICOLON            : 18 19 32 33 36 40 41
+STRING               : 32 34 34 35 36 40
+TIMES                : 31
+TRUE                 : 17 23
+WHILE                : 16 17
 WRONG_ID             : 
 error                : 
 
 Nonterminals, with rules where they appear
 
-bool                 : 13 14 37 39
-compare              : 26 27 28 29
-delay                : 8
-else                 : 25
-elseif               : 24
-elseiforelse         : 27 29
-empty                : 10
-expression           : 26 26 27 27 28 28 29 29
-fingerList           : 14 16
-for                  : 3
-if                   : 4
-let                  : 5
-line                 : 1 11 11 12 12 13 14 17 21 22 26 26 27 28 28 29 30 30 39
-loop                 : 2
-main                 : 0
-move                 : 6
-moveList             : 7
-opera                : 47
-operand              : 36 38 40 40
-operator             : 40
-println              : 9
+bool                 : 19 32 33 56
+break                : 12
+compare              : 16 45 46 47 48
+delay                : 10
+else                 : 44
+elseif               : 43
+elseiforelse         : 46 48
+empty                : 13
+expression           : 16 16 45 45 46 46 47 47 48 48
+fingerList           : 33 35
+for                  : 4
+if                   : 6
+let                  : 7
+line                 : 1 14 14 15 15 16 16 17 17 19 32 33 36 40 41 45 45 46 47 47 48 49 49
+loop                 : 3
+main                 : 2 0
+move                 : 8
+moveList             : 9
+opera                : 21
+operand              : 18 26 26 55
+operator             : 26
+println              : 11
 text                 : 
 unit                 : 
+while                : 5
 
 Parsing method: LALR
 
@@ -194,1818 +200,2428 @@ state 5
 state 6
 
     (1) main -> FN MAIN LPAREN RPAREN LCRLBRACKET . line RCRLBRACKET
-    (2) line -> . loop
-    (3) line -> . for
-    (4) line -> . if
-    (5) line -> . let
-    (6) line -> . move
-    (7) line -> . moveList
-    (8) line -> . delay
-    (9) line -> . println
-    (10) line -> . empty
-    (11) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
-    (12) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
-    (26) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
-    (27) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (38) let -> . LET ID ASSIGN operand SEMICOLON
-    (39) let -> . LET ID ASSIGN bool SEMICOLON line
-    (13) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
-    (14) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
-    (17) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
-    (21) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
-    (22) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
-    (52) empty -> .
+    (2) line -> . main
+    (3) line -> . loop
+    (4) line -> . for
+    (5) line -> . while
+    (6) line -> . if
+    (7) line -> . let
+    (8) line -> . move
+    (9) line -> . moveList
+    (10) line -> . delay
+    (11) line -> . println
+    (12) line -> . break
+    (13) line -> . empty
+    (1) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
+    (14) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (15) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (16) while -> . WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
+    (17) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET line
+    (45) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
+    (46) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (18) let -> . LET ID ASSIGN operand SEMICOLON
+    (19) let -> . LET ID ASSIGN bool SEMICOLON line
+    (32) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
+    (33) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+    (36) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
+    (40) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
+    (41) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
+    (57) break -> . BREAK
+    (58) empty -> .
 
-    LOOP            shift and go to state 17
-    FOR             shift and go to state 18
-    IF              shift and go to state 19
-    LET             shift and go to state 20
-    MOVE            shift and go to state 21
-    DELAY           shift and go to state 22
-    PRINT           shift and go to state 23
-    RCRLBRACKET     reduce using rule 52 (empty -> .)
+    FN              shift and go to state 2
+    LOOP            shift and go to state 20
+    FOR             shift and go to state 21
+    WHILE           shift and go to state 22
+    IF              shift and go to state 23
+    LET             shift and go to state 24
+    MOVE            shift and go to state 25
+    DELAY           shift and go to state 26
+    PRINT           shift and go to state 27
+    BREAK           shift and go to state 28
+    RCRLBRACKET     reduce using rule 58 (empty -> .)
 
     line                           shift and go to state 7
-    loop                           shift and go to state 8
-    for                            shift and go to state 9
-    if                             shift and go to state 10
-    let                            shift and go to state 11
-    move                           shift and go to state 12
-    moveList                       shift and go to state 13
-    delay                          shift and go to state 14
-    println                        shift and go to state 15
-    empty                          shift and go to state 16
+    main                           shift and go to state 8
+    loop                           shift and go to state 9
+    for                            shift and go to state 10
+    while                          shift and go to state 11
+    if                             shift and go to state 12
+    let                            shift and go to state 13
+    move                           shift and go to state 14
+    moveList                       shift and go to state 15
+    delay                          shift and go to state 16
+    println                        shift and go to state 17
+    break                          shift and go to state 18
+    empty                          shift and go to state 19
 
 state 7
 
     (1) main -> FN MAIN LPAREN RPAREN LCRLBRACKET line . RCRLBRACKET
 
-    RCRLBRACKET     shift and go to state 24
+    RCRLBRACKET     shift and go to state 29
 
 
 state 8
 
-    (2) line -> loop .
+    (2) line -> main .
 
-    RCRLBRACKET     reduce using rule 2 (line -> loop .)
+    RCRLBRACKET     reduce using rule 2 (line -> main .)
 
 
 state 9
 
-    (3) line -> for .
+    (3) line -> loop .
 
-    RCRLBRACKET     reduce using rule 3 (line -> for .)
+    RCRLBRACKET     reduce using rule 3 (line -> loop .)
 
 
 state 10
 
-    (4) line -> if .
+    (4) line -> for .
 
-    RCRLBRACKET     reduce using rule 4 (line -> if .)
+    RCRLBRACKET     reduce using rule 4 (line -> for .)
 
 
 state 11
 
-    (5) line -> let .
+    (5) line -> while .
 
-    RCRLBRACKET     reduce using rule 5 (line -> let .)
+    RCRLBRACKET     reduce using rule 5 (line -> while .)
 
 
 state 12
 
-    (6) line -> move .
+    (6) line -> if .
 
-    RCRLBRACKET     reduce using rule 6 (line -> move .)
+    RCRLBRACKET     reduce using rule 6 (line -> if .)
 
 
 state 13
 
-    (7) line -> moveList .
+    (7) line -> let .
 
-    RCRLBRACKET     reduce using rule 7 (line -> moveList .)
+    RCRLBRACKET     reduce using rule 7 (line -> let .)
 
 
 state 14
 
-    (8) line -> delay .
+    (8) line -> move .
 
-    RCRLBRACKET     reduce using rule 8 (line -> delay .)
+    RCRLBRACKET     reduce using rule 8 (line -> move .)
 
 
 state 15
 
-    (9) line -> println .
+    (9) line -> moveList .
 
-    RCRLBRACKET     reduce using rule 9 (line -> println .)
+    RCRLBRACKET     reduce using rule 9 (line -> moveList .)
 
 
 state 16
 
-    (10) line -> empty .
+    (10) line -> delay .
 
-    RCRLBRACKET     reduce using rule 10 (line -> empty .)
+    RCRLBRACKET     reduce using rule 10 (line -> delay .)
 
 
 state 17
 
-    (11) loop -> LOOP . LCRLBRACKET line RCRLBRACKET line
+    (11) line -> println .
 
-    LCRLBRACKET     shift and go to state 25
+    RCRLBRACKET     reduce using rule 11 (line -> println .)
 
 
 state 18
 
-    (12) for -> FOR . ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (12) line -> break .
 
-    ID              shift and go to state 26
+    RCRLBRACKET     reduce using rule 12 (line -> break .)
 
 
 state 19
 
-    (26) if -> IF . expression compare expression LCRLBRACKET line RCRLBRACKET line
-    (27) if -> IF . expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (36) expression -> . operand
-    (37) expression -> . bool
-    (46) operand -> . INT
-    (47) operand -> . opera
-    (48) operand -> . ID
-    (49) bool -> . TRUE
-    (50) bool -> . FALSE
-    (51) bool -> . ID
-    (40) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+    (13) line -> empty .
 
-    INT             shift and go to state 30
-    ID              shift and go to state 32
-    TRUE            shift and go to state 33
-    FALSE           shift and go to state 34
-    OPERA           shift and go to state 35
+    RCRLBRACKET     reduce using rule 13 (line -> empty .)
 
-    expression                     shift and go to state 27
-    operand                        shift and go to state 28
-    bool                           shift and go to state 29
-    opera                          shift and go to state 31
 
 state 20
 
-    (38) let -> LET . ID ASSIGN operand SEMICOLON
-    (39) let -> LET . ID ASSIGN bool SEMICOLON line
+    (14) loop -> LOOP . LCRLBRACKET line RCRLBRACKET line
 
-    ID              shift and go to state 36
+    LCRLBRACKET     shift and go to state 30
 
 
 state 21
 
-    (13) move -> MOVE . LPAREN STRING COMMA bool RPAREN SEMICOLON line
-    (14) moveList -> MOVE . LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+    (15) for -> FOR . ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
 
-    LPAREN          shift and go to state 37
+    ID              shift and go to state 31
 
 
 state 22
 
-    (17) delay -> DELAY . LPAREN INT COMMA STRING RPAREN SEMICOLON line
+    (16) while -> WHILE . LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
+    (17) while -> WHILE . TRUE LCRLBRACKET line RCRLBRACKET line
 
-    LPAREN          shift and go to state 38
+    LPAREN          shift and go to state 32
+    TRUE            shift and go to state 33
 
 
 state 23
 
-    (21) println -> PRINT . EXPR LPAREN STRING RPAREN SEMICOLON line
-    (22) println -> PRINT . EXPR LPAREN ID RPAREN SEMICOLON line
+    (45) if -> IF . expression compare expression LCRLBRACKET line RCRLBRACKET line
+    (46) if -> IF . expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (55) expression -> . operand
+    (56) expression -> . bool
+    (20) operand -> . INT
+    (21) operand -> . opera
+    (22) operand -> . ID
+    (23) bool -> . TRUE
+    (24) bool -> . FALSE
+    (25) bool -> . ID
+    (26) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
 
-    EXPR            shift and go to state 39
+    INT             shift and go to state 37
+    ID              shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    OPERA           shift and go to state 42
 
+    expression                     shift and go to state 34
+    operand                        shift and go to state 35
+    bool                           shift and go to state 36
+    opera                          shift and go to state 38
 
 state 24
 
-    (1) main -> FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET .
+    (18) let -> LET . ID ASSIGN operand SEMICOLON
+    (19) let -> LET . ID ASSIGN bool SEMICOLON line
 
-    $end            reduce using rule 1 (main -> FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET .)
+    ID              shift and go to state 43
 
 
 state 25
 
-    (11) loop -> LOOP LCRLBRACKET . line RCRLBRACKET line
-    (2) line -> . loop
-    (3) line -> . for
-    (4) line -> . if
-    (5) line -> . let
-    (6) line -> . move
-    (7) line -> . moveList
-    (8) line -> . delay
-    (9) line -> . println
-    (10) line -> . empty
-    (11) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
-    (12) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
-    (26) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
-    (27) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (38) let -> . LET ID ASSIGN operand SEMICOLON
-    (39) let -> . LET ID ASSIGN bool SEMICOLON line
-    (13) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
-    (14) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
-    (17) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
-    (21) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
-    (22) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
-    (52) empty -> .
+    (32) move -> MOVE . LPAREN STRING COMMA bool RPAREN SEMICOLON line
+    (33) moveList -> MOVE . LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
 
-    LOOP            shift and go to state 17
-    FOR             shift and go to state 18
-    IF              shift and go to state 19
-    LET             shift and go to state 20
-    MOVE            shift and go to state 21
-    DELAY           shift and go to state 22
-    PRINT           shift and go to state 23
-    RCRLBRACKET     reduce using rule 52 (empty -> .)
+    LPAREN          shift and go to state 44
 
-    line                           shift and go to state 40
-    loop                           shift and go to state 8
-    for                            shift and go to state 9
-    if                             shift and go to state 10
-    let                            shift and go to state 11
-    move                           shift and go to state 12
-    moveList                       shift and go to state 13
-    delay                          shift and go to state 14
-    println                        shift and go to state 15
-    empty                          shift and go to state 16
 
 state 26
 
-    (12) for -> FOR ID . IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (36) delay -> DELAY . LPAREN INT COMMA STRING RPAREN SEMICOLON line
 
-    IN              shift and go to state 41
+    LPAREN          shift and go to state 45
 
 
 state 27
 
-    (26) if -> IF expression . compare expression LCRLBRACKET line RCRLBRACKET line
-    (27) if -> IF expression . compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (31) compare -> . EQEQ
-    (32) compare -> . LTE
-    (33) compare -> . GTE
-    (34) compare -> . LT
-    (35) compare -> . GT
+    (40) println -> PRINT . EXPR LPAREN STRING RPAREN SEMICOLON line
+    (41) println -> PRINT . EXPR LPAREN ID RPAREN SEMICOLON line
 
-    EQEQ            shift and go to state 43
-    LTE             shift and go to state 44
-    GTE             shift and go to state 45
-    LT              shift and go to state 46
-    GT              shift and go to state 47
+    EXPR            shift and go to state 46
 
-    compare                        shift and go to state 42
 
 state 28
 
-    (36) expression -> operand .
+    (57) break -> BREAK .
 
-    EQEQ            reduce using rule 36 (expression -> operand .)
-    LTE             reduce using rule 36 (expression -> operand .)
-    GTE             reduce using rule 36 (expression -> operand .)
-    LT              reduce using rule 36 (expression -> operand .)
-    GT              reduce using rule 36 (expression -> operand .)
-    LCRLBRACKET     reduce using rule 36 (expression -> operand .)
+    RCRLBRACKET     reduce using rule 57 (break -> BREAK .)
 
 
 state 29
 
-    (37) expression -> bool .
+    (1) main -> FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET .
 
-    EQEQ            reduce using rule 37 (expression -> bool .)
-    LTE             reduce using rule 37 (expression -> bool .)
-    GTE             reduce using rule 37 (expression -> bool .)
-    LT              reduce using rule 37 (expression -> bool .)
-    GT              reduce using rule 37 (expression -> bool .)
-    LCRLBRACKET     reduce using rule 37 (expression -> bool .)
+    $end            reduce using rule 1 (main -> FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET .)
+    RCRLBRACKET     reduce using rule 1 (main -> FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET .)
 
 
 state 30
 
-    (46) operand -> INT .
+    (14) loop -> LOOP LCRLBRACKET . line RCRLBRACKET line
+    (2) line -> . main
+    (3) line -> . loop
+    (4) line -> . for
+    (5) line -> . while
+    (6) line -> . if
+    (7) line -> . let
+    (8) line -> . move
+    (9) line -> . moveList
+    (10) line -> . delay
+    (11) line -> . println
+    (12) line -> . break
+    (13) line -> . empty
+    (1) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
+    (14) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (15) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (16) while -> . WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
+    (17) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET line
+    (45) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
+    (46) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (18) let -> . LET ID ASSIGN operand SEMICOLON
+    (19) let -> . LET ID ASSIGN bool SEMICOLON line
+    (32) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
+    (33) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+    (36) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
+    (40) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
+    (41) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
+    (57) break -> . BREAK
+    (58) empty -> .
 
-    EQEQ            reduce using rule 46 (operand -> INT .)
-    LTE             reduce using rule 46 (operand -> INT .)
-    GTE             reduce using rule 46 (operand -> INT .)
-    LT              reduce using rule 46 (operand -> INT .)
-    GT              reduce using rule 46 (operand -> INT .)
-    LCRLBRACKET     reduce using rule 46 (operand -> INT .)
-    SEMICOLON       reduce using rule 46 (operand -> INT .)
-    COMMA           reduce using rule 46 (operand -> INT .)
-    RPAREN          reduce using rule 46 (operand -> INT .)
+    FN              shift and go to state 2
+    LOOP            shift and go to state 20
+    FOR             shift and go to state 21
+    WHILE           shift and go to state 22
+    IF              shift and go to state 23
+    LET             shift and go to state 24
+    MOVE            shift and go to state 25
+    DELAY           shift and go to state 26
+    PRINT           shift and go to state 27
+    BREAK           shift and go to state 28
+    RCRLBRACKET     reduce using rule 58 (empty -> .)
 
+    line                           shift and go to state 47
+    main                           shift and go to state 8
+    loop                           shift and go to state 9
+    for                            shift and go to state 10
+    while                          shift and go to state 11
+    if                             shift and go to state 12
+    let                            shift and go to state 13
+    move                           shift and go to state 14
+    moveList                       shift and go to state 15
+    delay                          shift and go to state 16
+    println                        shift and go to state 17
+    break                          shift and go to state 18
+    empty                          shift and go to state 19
 
 state 31
 
-    (47) operand -> opera .
+    (15) for -> FOR ID . IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
 
-    EQEQ            reduce using rule 47 (operand -> opera .)
-    LTE             reduce using rule 47 (operand -> opera .)
-    GTE             reduce using rule 47 (operand -> opera .)
-    LT              reduce using rule 47 (operand -> opera .)
-    GT              reduce using rule 47 (operand -> opera .)
-    LCRLBRACKET     reduce using rule 47 (operand -> opera .)
-    SEMICOLON       reduce using rule 47 (operand -> opera .)
-    COMMA           reduce using rule 47 (operand -> opera .)
-    RPAREN          reduce using rule 47 (operand -> opera .)
+    IN              shift and go to state 48
 
 
 state 32
 
-    (48) operand -> ID .
-    (51) bool -> ID .
+    (16) while -> WHILE LPAREN . expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
+    (55) expression -> . operand
+    (56) expression -> . bool
+    (20) operand -> . INT
+    (21) operand -> . opera
+    (22) operand -> . ID
+    (23) bool -> . TRUE
+    (24) bool -> . FALSE
+    (25) bool -> . ID
+    (26) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
 
-  ! reduce/reduce conflict for EQEQ resolved using rule 48 (operand -> ID .)
-  ! reduce/reduce conflict for LTE resolved using rule 48 (operand -> ID .)
-  ! reduce/reduce conflict for GTE resolved using rule 48 (operand -> ID .)
-  ! reduce/reduce conflict for LT resolved using rule 48 (operand -> ID .)
-  ! reduce/reduce conflict for GT resolved using rule 48 (operand -> ID .)
-  ! reduce/reduce conflict for LCRLBRACKET resolved using rule 48 (operand -> ID .)
-  ! reduce/reduce conflict for SEMICOLON resolved using rule 48 (operand -> ID .)
-    EQEQ            reduce using rule 48 (operand -> ID .)
-    LTE             reduce using rule 48 (operand -> ID .)
-    GTE             reduce using rule 48 (operand -> ID .)
-    LT              reduce using rule 48 (operand -> ID .)
-    GT              reduce using rule 48 (operand -> ID .)
-    LCRLBRACKET     reduce using rule 48 (operand -> ID .)
-    SEMICOLON       reduce using rule 48 (operand -> ID .)
+    INT             shift and go to state 37
+    ID              shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    OPERA           shift and go to state 42
 
-  ! EQEQ            [ reduce using rule 51 (bool -> ID .) ]
-  ! LTE             [ reduce using rule 51 (bool -> ID .) ]
-  ! GTE             [ reduce using rule 51 (bool -> ID .) ]
-  ! LT              [ reduce using rule 51 (bool -> ID .) ]
-  ! GT              [ reduce using rule 51 (bool -> ID .) ]
-  ! LCRLBRACKET     [ reduce using rule 51 (bool -> ID .) ]
-  ! SEMICOLON       [ reduce using rule 51 (bool -> ID .) ]
-
+    expression                     shift and go to state 49
+    operand                        shift and go to state 35
+    bool                           shift and go to state 36
+    opera                          shift and go to state 38
 
 state 33
 
-    (49) bool -> TRUE .
+    (17) while -> WHILE TRUE . LCRLBRACKET line RCRLBRACKET line
 
-    EQEQ            reduce using rule 49 (bool -> TRUE .)
-    LTE             reduce using rule 49 (bool -> TRUE .)
-    GTE             reduce using rule 49 (bool -> TRUE .)
-    LT              reduce using rule 49 (bool -> TRUE .)
-    GT              reduce using rule 49 (bool -> TRUE .)
-    LCRLBRACKET     reduce using rule 49 (bool -> TRUE .)
-    SEMICOLON       reduce using rule 49 (bool -> TRUE .)
-    RPAREN          reduce using rule 49 (bool -> TRUE .)
+    LCRLBRACKET     shift and go to state 50
 
 
 state 34
 
-    (50) bool -> FALSE .
+    (45) if -> IF expression . compare expression LCRLBRACKET line RCRLBRACKET line
+    (46) if -> IF expression . compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (50) compare -> . EQEQ
+    (51) compare -> . LTE
+    (52) compare -> . GTE
+    (53) compare -> . LT
+    (54) compare -> . GT
 
-    EQEQ            reduce using rule 50 (bool -> FALSE .)
-    LTE             reduce using rule 50 (bool -> FALSE .)
-    GTE             reduce using rule 50 (bool -> FALSE .)
-    LT              reduce using rule 50 (bool -> FALSE .)
-    GT              reduce using rule 50 (bool -> FALSE .)
-    LCRLBRACKET     reduce using rule 50 (bool -> FALSE .)
-    SEMICOLON       reduce using rule 50 (bool -> FALSE .)
-    RPAREN          reduce using rule 50 (bool -> FALSE .)
+    EQEQ            shift and go to state 52
+    LTE             shift and go to state 53
+    GTE             shift and go to state 54
+    LT              shift and go to state 55
+    GT              shift and go to state 56
 
+    compare                        shift and go to state 51
 
 state 35
 
-    (40) opera -> OPERA . LPAREN operator COMMA operand COMMA operand RPAREN
+    (55) expression -> operand .
 
-    LPAREN          shift and go to state 48
+    EQEQ            reduce using rule 55 (expression -> operand .)
+    LTE             reduce using rule 55 (expression -> operand .)
+    GTE             reduce using rule 55 (expression -> operand .)
+    LT              reduce using rule 55 (expression -> operand .)
+    GT              reduce using rule 55 (expression -> operand .)
+    LCRLBRACKET     reduce using rule 55 (expression -> operand .)
+    RPAREN          reduce using rule 55 (expression -> operand .)
 
 
 state 36
 
-    (38) let -> LET ID . ASSIGN operand SEMICOLON
-    (39) let -> LET ID . ASSIGN bool SEMICOLON line
+    (56) expression -> bool .
 
-    ASSIGN          shift and go to state 49
+    EQEQ            reduce using rule 56 (expression -> bool .)
+    LTE             reduce using rule 56 (expression -> bool .)
+    GTE             reduce using rule 56 (expression -> bool .)
+    LT              reduce using rule 56 (expression -> bool .)
+    GT              reduce using rule 56 (expression -> bool .)
+    LCRLBRACKET     reduce using rule 56 (expression -> bool .)
+    RPAREN          reduce using rule 56 (expression -> bool .)
 
 
 state 37
 
-    (13) move -> MOVE LPAREN . STRING COMMA bool RPAREN SEMICOLON line
-    (14) moveList -> MOVE LPAREN . LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+    (20) operand -> INT .
 
-    STRING          shift and go to state 50
-    LSQRBRACKET     shift and go to state 51
+    EQEQ            reduce using rule 20 (operand -> INT .)
+    LTE             reduce using rule 20 (operand -> INT .)
+    GTE             reduce using rule 20 (operand -> INT .)
+    LT              reduce using rule 20 (operand -> INT .)
+    GT              reduce using rule 20 (operand -> INT .)
+    LCRLBRACKET     reduce using rule 20 (operand -> INT .)
+    SEMICOLON       reduce using rule 20 (operand -> INT .)
+    RPAREN          reduce using rule 20 (operand -> INT .)
+    COMMA           reduce using rule 20 (operand -> INT .)
 
 
 state 38
 
-    (17) delay -> DELAY LPAREN . INT COMMA STRING RPAREN SEMICOLON line
+    (21) operand -> opera .
 
-    INT             shift and go to state 52
+    EQEQ            reduce using rule 21 (operand -> opera .)
+    LTE             reduce using rule 21 (operand -> opera .)
+    GTE             reduce using rule 21 (operand -> opera .)
+    LT              reduce using rule 21 (operand -> opera .)
+    GT              reduce using rule 21 (operand -> opera .)
+    LCRLBRACKET     reduce using rule 21 (operand -> opera .)
+    SEMICOLON       reduce using rule 21 (operand -> opera .)
+    RPAREN          reduce using rule 21 (operand -> opera .)
+    COMMA           reduce using rule 21 (operand -> opera .)
 
 
 state 39
 
-    (21) println -> PRINT EXPR . LPAREN STRING RPAREN SEMICOLON line
-    (22) println -> PRINT EXPR . LPAREN ID RPAREN SEMICOLON line
+    (22) operand -> ID .
+    (25) bool -> ID .
 
-    LPAREN          shift and go to state 53
+  ! reduce/reduce conflict for EQEQ resolved using rule 22 (operand -> ID .)
+  ! reduce/reduce conflict for LTE resolved using rule 22 (operand -> ID .)
+  ! reduce/reduce conflict for GTE resolved using rule 22 (operand -> ID .)
+  ! reduce/reduce conflict for LT resolved using rule 22 (operand -> ID .)
+  ! reduce/reduce conflict for GT resolved using rule 22 (operand -> ID .)
+  ! reduce/reduce conflict for LCRLBRACKET resolved using rule 22 (operand -> ID .)
+  ! reduce/reduce conflict for SEMICOLON resolved using rule 22 (operand -> ID .)
+  ! reduce/reduce conflict for RPAREN resolved using rule 22 (operand -> ID .)
+    EQEQ            reduce using rule 22 (operand -> ID .)
+    LTE             reduce using rule 22 (operand -> ID .)
+    GTE             reduce using rule 22 (operand -> ID .)
+    LT              reduce using rule 22 (operand -> ID .)
+    GT              reduce using rule 22 (operand -> ID .)
+    LCRLBRACKET     reduce using rule 22 (operand -> ID .)
+    SEMICOLON       reduce using rule 22 (operand -> ID .)
+    RPAREN          reduce using rule 22 (operand -> ID .)
+
+  ! EQEQ            [ reduce using rule 25 (bool -> ID .) ]
+  ! LTE             [ reduce using rule 25 (bool -> ID .) ]
+  ! GTE             [ reduce using rule 25 (bool -> ID .) ]
+  ! LT              [ reduce using rule 25 (bool -> ID .) ]
+  ! GT              [ reduce using rule 25 (bool -> ID .) ]
+  ! LCRLBRACKET     [ reduce using rule 25 (bool -> ID .) ]
+  ! SEMICOLON       [ reduce using rule 25 (bool -> ID .) ]
+  ! RPAREN          [ reduce using rule 25 (bool -> ID .) ]
 
 
 state 40
 
-    (11) loop -> LOOP LCRLBRACKET line . RCRLBRACKET line
+    (23) bool -> TRUE .
 
-    RCRLBRACKET     shift and go to state 54
+    EQEQ            reduce using rule 23 (bool -> TRUE .)
+    LTE             reduce using rule 23 (bool -> TRUE .)
+    GTE             reduce using rule 23 (bool -> TRUE .)
+    LT              reduce using rule 23 (bool -> TRUE .)
+    GT              reduce using rule 23 (bool -> TRUE .)
+    LCRLBRACKET     reduce using rule 23 (bool -> TRUE .)
+    SEMICOLON       reduce using rule 23 (bool -> TRUE .)
+    RPAREN          reduce using rule 23 (bool -> TRUE .)
 
 
 state 41
 
-    (12) for -> FOR ID IN . INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (24) bool -> FALSE .
 
-    INT             shift and go to state 55
+    EQEQ            reduce using rule 24 (bool -> FALSE .)
+    LTE             reduce using rule 24 (bool -> FALSE .)
+    GTE             reduce using rule 24 (bool -> FALSE .)
+    LT              reduce using rule 24 (bool -> FALSE .)
+    GT              reduce using rule 24 (bool -> FALSE .)
+    LCRLBRACKET     reduce using rule 24 (bool -> FALSE .)
+    SEMICOLON       reduce using rule 24 (bool -> FALSE .)
+    RPAREN          reduce using rule 24 (bool -> FALSE .)
 
 
 state 42
 
-    (26) if -> IF expression compare . expression LCRLBRACKET line RCRLBRACKET line
-    (27) if -> IF expression compare . expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (36) expression -> . operand
-    (37) expression -> . bool
-    (46) operand -> . INT
-    (47) operand -> . opera
-    (48) operand -> . ID
-    (49) bool -> . TRUE
-    (50) bool -> . FALSE
-    (51) bool -> . ID
-    (40) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+    (26) opera -> OPERA . LPAREN operator COMMA operand COMMA operand RPAREN
 
-    INT             shift and go to state 30
-    ID              shift and go to state 32
-    TRUE            shift and go to state 33
-    FALSE           shift and go to state 34
-    OPERA           shift and go to state 35
+    LPAREN          shift and go to state 57
 
-    expression                     shift and go to state 56
-    operand                        shift and go to state 28
-    bool                           shift and go to state 29
-    opera                          shift and go to state 31
 
 state 43
 
-    (31) compare -> EQEQ .
+    (18) let -> LET ID . ASSIGN operand SEMICOLON
+    (19) let -> LET ID . ASSIGN bool SEMICOLON line
 
-    INT             reduce using rule 31 (compare -> EQEQ .)
-    ID              reduce using rule 31 (compare -> EQEQ .)
-    TRUE            reduce using rule 31 (compare -> EQEQ .)
-    FALSE           reduce using rule 31 (compare -> EQEQ .)
-    OPERA           reduce using rule 31 (compare -> EQEQ .)
+    ASSIGN          shift and go to state 58
 
 
 state 44
 
-    (32) compare -> LTE .
+    (32) move -> MOVE LPAREN . STRING COMMA bool RPAREN SEMICOLON line
+    (33) moveList -> MOVE LPAREN . LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
 
-    INT             reduce using rule 32 (compare -> LTE .)
-    ID              reduce using rule 32 (compare -> LTE .)
-    TRUE            reduce using rule 32 (compare -> LTE .)
-    FALSE           reduce using rule 32 (compare -> LTE .)
-    OPERA           reduce using rule 32 (compare -> LTE .)
+    STRING          shift and go to state 59
+    LSQRBRACKET     shift and go to state 60
 
 
 state 45
 
-    (33) compare -> GTE .
+    (36) delay -> DELAY LPAREN . INT COMMA STRING RPAREN SEMICOLON line
 
-    INT             reduce using rule 33 (compare -> GTE .)
-    ID              reduce using rule 33 (compare -> GTE .)
-    TRUE            reduce using rule 33 (compare -> GTE .)
-    FALSE           reduce using rule 33 (compare -> GTE .)
-    OPERA           reduce using rule 33 (compare -> GTE .)
+    INT             shift and go to state 61
 
 
 state 46
 
-    (34) compare -> LT .
+    (40) println -> PRINT EXPR . LPAREN STRING RPAREN SEMICOLON line
+    (41) println -> PRINT EXPR . LPAREN ID RPAREN SEMICOLON line
 
-    INT             reduce using rule 34 (compare -> LT .)
-    ID              reduce using rule 34 (compare -> LT .)
-    TRUE            reduce using rule 34 (compare -> LT .)
-    FALSE           reduce using rule 34 (compare -> LT .)
-    OPERA           reduce using rule 34 (compare -> LT .)
+    LPAREN          shift and go to state 62
 
 
 state 47
 
-    (35) compare -> GT .
+    (14) loop -> LOOP LCRLBRACKET line . RCRLBRACKET line
 
-    INT             reduce using rule 35 (compare -> GT .)
-    ID              reduce using rule 35 (compare -> GT .)
-    TRUE            reduce using rule 35 (compare -> GT .)
-    FALSE           reduce using rule 35 (compare -> GT .)
-    OPERA           reduce using rule 35 (compare -> GT .)
+    RCRLBRACKET     shift and go to state 63
 
 
 state 48
 
-    (40) opera -> OPERA LPAREN . operator COMMA operand COMMA operand RPAREN
-    (41) operator -> . PLUS
-    (42) operator -> . MINUS
-    (43) operator -> . DIVIDE
-    (44) operator -> . ASTR
-    (45) operator -> . TIMES
+    (15) for -> FOR ID IN . INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
 
-    PLUS            shift and go to state 58
-    MINUS           shift and go to state 59
-    DIVIDE          shift and go to state 60
-    ASTR            shift and go to state 61
-    TIMES           shift and go to state 62
+    INT             shift and go to state 64
 
-    operator                       shift and go to state 57
 
 state 49
 
-    (38) let -> LET ID ASSIGN . operand SEMICOLON
-    (39) let -> LET ID ASSIGN . bool SEMICOLON line
-    (46) operand -> . INT
-    (47) operand -> . opera
-    (48) operand -> . ID
-    (49) bool -> . TRUE
-    (50) bool -> . FALSE
-    (51) bool -> . ID
-    (40) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+    (16) while -> WHILE LPAREN expression . compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
+    (50) compare -> . EQEQ
+    (51) compare -> . LTE
+    (52) compare -> . GTE
+    (53) compare -> . LT
+    (54) compare -> . GT
 
-    INT             shift and go to state 30
-    ID              shift and go to state 32
-    TRUE            shift and go to state 33
-    FALSE           shift and go to state 34
-    OPERA           shift and go to state 35
+    EQEQ            shift and go to state 52
+    LTE             shift and go to state 53
+    GTE             shift and go to state 54
+    LT              shift and go to state 55
+    GT              shift and go to state 56
 
-    operand                        shift and go to state 63
-    bool                           shift and go to state 64
-    opera                          shift and go to state 31
+    compare                        shift and go to state 65
 
 state 50
 
-    (13) move -> MOVE LPAREN STRING . COMMA bool RPAREN SEMICOLON line
+    (17) while -> WHILE TRUE LCRLBRACKET . line RCRLBRACKET line
+    (2) line -> . main
+    (3) line -> . loop
+    (4) line -> . for
+    (5) line -> . while
+    (6) line -> . if
+    (7) line -> . let
+    (8) line -> . move
+    (9) line -> . moveList
+    (10) line -> . delay
+    (11) line -> . println
+    (12) line -> . break
+    (13) line -> . empty
+    (1) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
+    (14) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (15) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (16) while -> . WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
+    (17) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET line
+    (45) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
+    (46) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (18) let -> . LET ID ASSIGN operand SEMICOLON
+    (19) let -> . LET ID ASSIGN bool SEMICOLON line
+    (32) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
+    (33) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+    (36) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
+    (40) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
+    (41) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
+    (57) break -> . BREAK
+    (58) empty -> .
 
-    COMMA           shift and go to state 65
+    FN              shift and go to state 2
+    LOOP            shift and go to state 20
+    FOR             shift and go to state 21
+    WHILE           shift and go to state 22
+    IF              shift and go to state 23
+    LET             shift and go to state 24
+    MOVE            shift and go to state 25
+    DELAY           shift and go to state 26
+    PRINT           shift and go to state 27
+    BREAK           shift and go to state 28
+    RCRLBRACKET     reduce using rule 58 (empty -> .)
 
+    line                           shift and go to state 66
+    main                           shift and go to state 8
+    loop                           shift and go to state 9
+    for                            shift and go to state 10
+    while                          shift and go to state 11
+    if                             shift and go to state 12
+    let                            shift and go to state 13
+    move                           shift and go to state 14
+    moveList                       shift and go to state 15
+    delay                          shift and go to state 16
+    println                        shift and go to state 17
+    break                          shift and go to state 18
+    empty                          shift and go to state 19
 
 state 51
 
-    (14) moveList -> MOVE LPAREN LSQRBRACKET . fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
-    (15) fingerList -> . STRING COMMA STRING
-    (16) fingerList -> . STRING COMMA fingerList
+    (45) if -> IF expression compare . expression LCRLBRACKET line RCRLBRACKET line
+    (46) if -> IF expression compare . expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (55) expression -> . operand
+    (56) expression -> . bool
+    (20) operand -> . INT
+    (21) operand -> . opera
+    (22) operand -> . ID
+    (23) bool -> . TRUE
+    (24) bool -> . FALSE
+    (25) bool -> . ID
+    (26) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
 
-    STRING          shift and go to state 67
+    INT             shift and go to state 37
+    ID              shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    OPERA           shift and go to state 42
 
-    fingerList                     shift and go to state 66
+    expression                     shift and go to state 67
+    operand                        shift and go to state 35
+    bool                           shift and go to state 36
+    opera                          shift and go to state 38
 
 state 52
 
-    (17) delay -> DELAY LPAREN INT . COMMA STRING RPAREN SEMICOLON line
+    (50) compare -> EQEQ .
 
-    COMMA           shift and go to state 68
+    INT             reduce using rule 50 (compare -> EQEQ .)
+    ID              reduce using rule 50 (compare -> EQEQ .)
+    TRUE            reduce using rule 50 (compare -> EQEQ .)
+    FALSE           reduce using rule 50 (compare -> EQEQ .)
+    OPERA           reduce using rule 50 (compare -> EQEQ .)
 
 
 state 53
 
-    (21) println -> PRINT EXPR LPAREN . STRING RPAREN SEMICOLON line
-    (22) println -> PRINT EXPR LPAREN . ID RPAREN SEMICOLON line
+    (51) compare -> LTE .
 
-    STRING          shift and go to state 69
-    ID              shift and go to state 70
+    INT             reduce using rule 51 (compare -> LTE .)
+    ID              reduce using rule 51 (compare -> LTE .)
+    TRUE            reduce using rule 51 (compare -> LTE .)
+    FALSE           reduce using rule 51 (compare -> LTE .)
+    OPERA           reduce using rule 51 (compare -> LTE .)
 
 
 state 54
 
-    (11) loop -> LOOP LCRLBRACKET line RCRLBRACKET . line
-    (2) line -> . loop
-    (3) line -> . for
-    (4) line -> . if
-    (5) line -> . let
-    (6) line -> . move
-    (7) line -> . moveList
-    (8) line -> . delay
-    (9) line -> . println
-    (10) line -> . empty
-    (11) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
-    (12) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
-    (26) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
-    (27) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (38) let -> . LET ID ASSIGN operand SEMICOLON
-    (39) let -> . LET ID ASSIGN bool SEMICOLON line
-    (13) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
-    (14) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
-    (17) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
-    (21) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
-    (22) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
-    (52) empty -> .
+    (52) compare -> GTE .
 
-    LOOP            shift and go to state 17
-    FOR             shift and go to state 18
-    IF              shift and go to state 19
-    LET             shift and go to state 20
-    MOVE            shift and go to state 21
-    DELAY           shift and go to state 22
-    PRINT           shift and go to state 23
-    RCRLBRACKET     reduce using rule 52 (empty -> .)
+    INT             reduce using rule 52 (compare -> GTE .)
+    ID              reduce using rule 52 (compare -> GTE .)
+    TRUE            reduce using rule 52 (compare -> GTE .)
+    FALSE           reduce using rule 52 (compare -> GTE .)
+    OPERA           reduce using rule 52 (compare -> GTE .)
 
-    line                           shift and go to state 71
-    loop                           shift and go to state 8
-    for                            shift and go to state 9
-    if                             shift and go to state 10
-    let                            shift and go to state 11
-    move                           shift and go to state 12
-    moveList                       shift and go to state 13
-    delay                          shift and go to state 14
-    println                        shift and go to state 15
-    empty                          shift and go to state 16
 
 state 55
 
-    (12) for -> FOR ID IN INT . DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (53) compare -> LT .
 
-    DOTDOT          shift and go to state 72
+    INT             reduce using rule 53 (compare -> LT .)
+    ID              reduce using rule 53 (compare -> LT .)
+    TRUE            reduce using rule 53 (compare -> LT .)
+    FALSE           reduce using rule 53 (compare -> LT .)
+    OPERA           reduce using rule 53 (compare -> LT .)
 
 
 state 56
 
-    (26) if -> IF expression compare expression . LCRLBRACKET line RCRLBRACKET line
-    (27) if -> IF expression compare expression . LCRLBRACKET line RCRLBRACKET elseiforelse
+    (54) compare -> GT .
 
-    LCRLBRACKET     shift and go to state 73
+    INT             reduce using rule 54 (compare -> GT .)
+    ID              reduce using rule 54 (compare -> GT .)
+    TRUE            reduce using rule 54 (compare -> GT .)
+    FALSE           reduce using rule 54 (compare -> GT .)
+    OPERA           reduce using rule 54 (compare -> GT .)
 
 
 state 57
 
-    (40) opera -> OPERA LPAREN operator . COMMA operand COMMA operand RPAREN
+    (26) opera -> OPERA LPAREN . operator COMMA operand COMMA operand RPAREN
+    (27) operator -> . PLUS
+    (28) operator -> . MINUS
+    (29) operator -> . DIVIDE
+    (30) operator -> . ASTR
+    (31) operator -> . TIMES
 
-    COMMA           shift and go to state 74
+    PLUS            shift and go to state 69
+    MINUS           shift and go to state 70
+    DIVIDE          shift and go to state 71
+    ASTR            shift and go to state 72
+    TIMES           shift and go to state 73
 
+    operator                       shift and go to state 68
 
 state 58
 
-    (41) operator -> PLUS .
+    (18) let -> LET ID ASSIGN . operand SEMICOLON
+    (19) let -> LET ID ASSIGN . bool SEMICOLON line
+    (20) operand -> . INT
+    (21) operand -> . opera
+    (22) operand -> . ID
+    (23) bool -> . TRUE
+    (24) bool -> . FALSE
+    (25) bool -> . ID
+    (26) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
 
-    COMMA           reduce using rule 41 (operator -> PLUS .)
+    INT             shift and go to state 37
+    ID              shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    OPERA           shift and go to state 42
 
+    operand                        shift and go to state 74
+    bool                           shift and go to state 75
+    opera                          shift and go to state 38
 
 state 59
 
-    (42) operator -> MINUS .
+    (32) move -> MOVE LPAREN STRING . COMMA bool RPAREN SEMICOLON line
 
-    COMMA           reduce using rule 42 (operator -> MINUS .)
+    COMMA           shift and go to state 76
 
 
 state 60
 
-    (43) operator -> DIVIDE .
+    (33) moveList -> MOVE LPAREN LSQRBRACKET . fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+    (34) fingerList -> . STRING COMMA STRING
+    (35) fingerList -> . STRING COMMA fingerList
 
-    COMMA           reduce using rule 43 (operator -> DIVIDE .)
+    STRING          shift and go to state 78
 
+    fingerList                     shift and go to state 77
 
 state 61
 
-    (44) operator -> ASTR .
+    (36) delay -> DELAY LPAREN INT . COMMA STRING RPAREN SEMICOLON line
 
-    COMMA           reduce using rule 44 (operator -> ASTR .)
+    COMMA           shift and go to state 79
 
 
 state 62
 
-    (45) operator -> TIMES .
+    (40) println -> PRINT EXPR LPAREN . STRING RPAREN SEMICOLON line
+    (41) println -> PRINT EXPR LPAREN . ID RPAREN SEMICOLON line
 
-    COMMA           reduce using rule 45 (operator -> TIMES .)
+    STRING          shift and go to state 80
+    ID              shift and go to state 81
 
 
 state 63
 
-    (38) let -> LET ID ASSIGN operand . SEMICOLON
+    (14) loop -> LOOP LCRLBRACKET line RCRLBRACKET . line
+    (2) line -> . main
+    (3) line -> . loop
+    (4) line -> . for
+    (5) line -> . while
+    (6) line -> . if
+    (7) line -> . let
+    (8) line -> . move
+    (9) line -> . moveList
+    (10) line -> . delay
+    (11) line -> . println
+    (12) line -> . break
+    (13) line -> . empty
+    (1) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
+    (14) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (15) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (16) while -> . WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
+    (17) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET line
+    (45) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
+    (46) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (18) let -> . LET ID ASSIGN operand SEMICOLON
+    (19) let -> . LET ID ASSIGN bool SEMICOLON line
+    (32) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
+    (33) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+    (36) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
+    (40) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
+    (41) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
+    (57) break -> . BREAK
+    (58) empty -> .
 
-    SEMICOLON       shift and go to state 75
+    FN              shift and go to state 2
+    LOOP            shift and go to state 20
+    FOR             shift and go to state 21
+    WHILE           shift and go to state 22
+    IF              shift and go to state 23
+    LET             shift and go to state 24
+    MOVE            shift and go to state 25
+    DELAY           shift and go to state 26
+    PRINT           shift and go to state 27
+    BREAK           shift and go to state 28
+    RCRLBRACKET     reduce using rule 58 (empty -> .)
 
+    line                           shift and go to state 82
+    main                           shift and go to state 8
+    loop                           shift and go to state 9
+    for                            shift and go to state 10
+    while                          shift and go to state 11
+    if                             shift and go to state 12
+    let                            shift and go to state 13
+    move                           shift and go to state 14
+    moveList                       shift and go to state 15
+    delay                          shift and go to state 16
+    println                        shift and go to state 17
+    break                          shift and go to state 18
+    empty                          shift and go to state 19
 
 state 64
 
-    (39) let -> LET ID ASSIGN bool . SEMICOLON line
+    (15) for -> FOR ID IN INT . DOTDOT INT LCRLBRACKET line RCRLBRACKET line
 
-    SEMICOLON       shift and go to state 76
+    DOTDOT          shift and go to state 83
 
 
 state 65
 
-    (13) move -> MOVE LPAREN STRING COMMA . bool RPAREN SEMICOLON line
-    (49) bool -> . TRUE
-    (50) bool -> . FALSE
-    (51) bool -> . ID
+    (16) while -> WHILE LPAREN expression compare . expression RPAREN LCRLBRACKET line RCRLBRACKET line
+    (55) expression -> . operand
+    (56) expression -> . bool
+    (20) operand -> . INT
+    (21) operand -> . opera
+    (22) operand -> . ID
+    (23) bool -> . TRUE
+    (24) bool -> . FALSE
+    (25) bool -> . ID
+    (26) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
 
-    TRUE            shift and go to state 33
-    FALSE           shift and go to state 34
-    ID              shift and go to state 78
+    INT             shift and go to state 37
+    ID              shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    OPERA           shift and go to state 42
 
-    bool                           shift and go to state 77
+    expression                     shift and go to state 84
+    operand                        shift and go to state 35
+    bool                           shift and go to state 36
+    opera                          shift and go to state 38
 
 state 66
 
-    (14) moveList -> MOVE LPAREN LSQRBRACKET fingerList . RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+    (17) while -> WHILE TRUE LCRLBRACKET line . RCRLBRACKET line
 
-    RSQRBRACKET     shift and go to state 79
+    RCRLBRACKET     shift and go to state 85
 
 
 state 67
 
-    (15) fingerList -> STRING . COMMA STRING
-    (16) fingerList -> STRING . COMMA fingerList
+    (45) if -> IF expression compare expression . LCRLBRACKET line RCRLBRACKET line
+    (46) if -> IF expression compare expression . LCRLBRACKET line RCRLBRACKET elseiforelse
 
-    COMMA           shift and go to state 80
+    LCRLBRACKET     shift and go to state 86
 
 
 state 68
 
-    (17) delay -> DELAY LPAREN INT COMMA . STRING RPAREN SEMICOLON line
+    (26) opera -> OPERA LPAREN operator . COMMA operand COMMA operand RPAREN
 
-    STRING          shift and go to state 81
+    COMMA           shift and go to state 87
 
 
 state 69
 
-    (21) println -> PRINT EXPR LPAREN STRING . RPAREN SEMICOLON line
+    (27) operator -> PLUS .
 
-    RPAREN          shift and go to state 82
+    COMMA           reduce using rule 27 (operator -> PLUS .)
 
 
 state 70
 
-    (22) println -> PRINT EXPR LPAREN ID . RPAREN SEMICOLON line
+    (28) operator -> MINUS .
 
-    RPAREN          shift and go to state 83
+    COMMA           reduce using rule 28 (operator -> MINUS .)
 
 
 state 71
 
-    (11) loop -> LOOP LCRLBRACKET line RCRLBRACKET line .
+    (29) operator -> DIVIDE .
 
-    RCRLBRACKET     reduce using rule 11 (loop -> LOOP LCRLBRACKET line RCRLBRACKET line .)
+    COMMA           reduce using rule 29 (operator -> DIVIDE .)
 
 
 state 72
 
-    (12) for -> FOR ID IN INT DOTDOT . INT LCRLBRACKET line RCRLBRACKET line
+    (30) operator -> ASTR .
 
-    INT             shift and go to state 84
+    COMMA           reduce using rule 30 (operator -> ASTR .)
 
 
 state 73
 
-    (26) if -> IF expression compare expression LCRLBRACKET . line RCRLBRACKET line
-    (27) if -> IF expression compare expression LCRLBRACKET . line RCRLBRACKET elseiforelse
-    (2) line -> . loop
-    (3) line -> . for
-    (4) line -> . if
-    (5) line -> . let
-    (6) line -> . move
-    (7) line -> . moveList
-    (8) line -> . delay
-    (9) line -> . println
-    (10) line -> . empty
-    (11) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
-    (12) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
-    (26) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
-    (27) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (38) let -> . LET ID ASSIGN operand SEMICOLON
-    (39) let -> . LET ID ASSIGN bool SEMICOLON line
-    (13) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
-    (14) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
-    (17) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
-    (21) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
-    (22) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
-    (52) empty -> .
+    (31) operator -> TIMES .
 
-    LOOP            shift and go to state 17
-    FOR             shift and go to state 18
-    IF              shift and go to state 19
-    LET             shift and go to state 20
-    MOVE            shift and go to state 21
-    DELAY           shift and go to state 22
-    PRINT           shift and go to state 23
-    RCRLBRACKET     reduce using rule 52 (empty -> .)
+    COMMA           reduce using rule 31 (operator -> TIMES .)
 
-    line                           shift and go to state 85
-    loop                           shift and go to state 8
-    for                            shift and go to state 9
-    if                             shift and go to state 10
-    let                            shift and go to state 11
-    move                           shift and go to state 12
-    moveList                       shift and go to state 13
-    delay                          shift and go to state 14
-    println                        shift and go to state 15
-    empty                          shift and go to state 16
 
 state 74
 
-    (40) opera -> OPERA LPAREN operator COMMA . operand COMMA operand RPAREN
-    (46) operand -> . INT
-    (47) operand -> . opera
-    (48) operand -> . ID
-    (40) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+    (18) let -> LET ID ASSIGN operand . SEMICOLON
 
-    INT             shift and go to state 30
-    ID              shift and go to state 87
-    OPERA           shift and go to state 35
+    SEMICOLON       shift and go to state 88
 
-    operand                        shift and go to state 86
-    opera                          shift and go to state 31
 
 state 75
 
-    (38) let -> LET ID ASSIGN operand SEMICOLON .
+    (19) let -> LET ID ASSIGN bool . SEMICOLON line
 
-    RCRLBRACKET     reduce using rule 38 (let -> LET ID ASSIGN operand SEMICOLON .)
+    SEMICOLON       shift and go to state 89
 
 
 state 76
 
-    (39) let -> LET ID ASSIGN bool SEMICOLON . line
-    (2) line -> . loop
-    (3) line -> . for
-    (4) line -> . if
-    (5) line -> . let
-    (6) line -> . move
-    (7) line -> . moveList
-    (8) line -> . delay
-    (9) line -> . println
-    (10) line -> . empty
-    (11) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
-    (12) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
-    (26) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
-    (27) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (38) let -> . LET ID ASSIGN operand SEMICOLON
-    (39) let -> . LET ID ASSIGN bool SEMICOLON line
-    (13) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
-    (14) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
-    (17) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
-    (21) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
-    (22) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
-    (52) empty -> .
+    (32) move -> MOVE LPAREN STRING COMMA . bool RPAREN SEMICOLON line
+    (23) bool -> . TRUE
+    (24) bool -> . FALSE
+    (25) bool -> . ID
 
-    LOOP            shift and go to state 17
-    FOR             shift and go to state 18
-    IF              shift and go to state 19
-    LET             shift and go to state 20
-    MOVE            shift and go to state 21
-    DELAY           shift and go to state 22
-    PRINT           shift and go to state 23
-    RCRLBRACKET     reduce using rule 52 (empty -> .)
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    ID              shift and go to state 91
 
-    line                           shift and go to state 88
-    loop                           shift and go to state 8
-    for                            shift and go to state 9
-    if                             shift and go to state 10
-    let                            shift and go to state 11
-    move                           shift and go to state 12
-    moveList                       shift and go to state 13
-    delay                          shift and go to state 14
-    println                        shift and go to state 15
-    empty                          shift and go to state 16
+    bool                           shift and go to state 90
 
 state 77
 
-    (13) move -> MOVE LPAREN STRING COMMA bool . RPAREN SEMICOLON line
+    (33) moveList -> MOVE LPAREN LSQRBRACKET fingerList . RSQRBRACKET COMMA bool RPAREN SEMICOLON line
 
-    RPAREN          shift and go to state 89
+    RSQRBRACKET     shift and go to state 92
 
 
 state 78
 
-    (51) bool -> ID .
+    (34) fingerList -> STRING . COMMA STRING
+    (35) fingerList -> STRING . COMMA fingerList
 
-    RPAREN          reduce using rule 51 (bool -> ID .)
+    COMMA           shift and go to state 93
 
 
 state 79
 
-    (14) moveList -> MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET . COMMA bool RPAREN SEMICOLON line
+    (36) delay -> DELAY LPAREN INT COMMA . STRING RPAREN SEMICOLON line
 
-    COMMA           shift and go to state 90
+    STRING          shift and go to state 94
 
 
 state 80
 
-    (15) fingerList -> STRING COMMA . STRING
-    (16) fingerList -> STRING COMMA . fingerList
-    (15) fingerList -> . STRING COMMA STRING
-    (16) fingerList -> . STRING COMMA fingerList
+    (40) println -> PRINT EXPR LPAREN STRING . RPAREN SEMICOLON line
 
-    STRING          shift and go to state 91
+    RPAREN          shift and go to state 95
 
-    fingerList                     shift and go to state 92
 
 state 81
 
-    (17) delay -> DELAY LPAREN INT COMMA STRING . RPAREN SEMICOLON line
+    (41) println -> PRINT EXPR LPAREN ID . RPAREN SEMICOLON line
 
-    RPAREN          shift and go to state 93
+    RPAREN          shift and go to state 96
 
 
 state 82
 
-    (21) println -> PRINT EXPR LPAREN STRING RPAREN . SEMICOLON line
+    (14) loop -> LOOP LCRLBRACKET line RCRLBRACKET line .
 
-    SEMICOLON       shift and go to state 94
+    RCRLBRACKET     reduce using rule 14 (loop -> LOOP LCRLBRACKET line RCRLBRACKET line .)
 
 
 state 83
 
-    (22) println -> PRINT EXPR LPAREN ID RPAREN . SEMICOLON line
+    (15) for -> FOR ID IN INT DOTDOT . INT LCRLBRACKET line RCRLBRACKET line
 
-    SEMICOLON       shift and go to state 95
+    INT             shift and go to state 97
 
 
 state 84
 
-    (12) for -> FOR ID IN INT DOTDOT INT . LCRLBRACKET line RCRLBRACKET line
+    (16) while -> WHILE LPAREN expression compare expression . RPAREN LCRLBRACKET line RCRLBRACKET line
 
-    LCRLBRACKET     shift and go to state 96
+    RPAREN          shift and go to state 98
 
 
 state 85
 
-    (26) if -> IF expression compare expression LCRLBRACKET line . RCRLBRACKET line
-    (27) if -> IF expression compare expression LCRLBRACKET line . RCRLBRACKET elseiforelse
+    (17) while -> WHILE TRUE LCRLBRACKET line RCRLBRACKET . line
+    (2) line -> . main
+    (3) line -> . loop
+    (4) line -> . for
+    (5) line -> . while
+    (6) line -> . if
+    (7) line -> . let
+    (8) line -> . move
+    (9) line -> . moveList
+    (10) line -> . delay
+    (11) line -> . println
+    (12) line -> . break
+    (13) line -> . empty
+    (1) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
+    (14) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (15) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (16) while -> . WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
+    (17) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET line
+    (45) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
+    (46) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (18) let -> . LET ID ASSIGN operand SEMICOLON
+    (19) let -> . LET ID ASSIGN bool SEMICOLON line
+    (32) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
+    (33) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+    (36) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
+    (40) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
+    (41) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
+    (57) break -> . BREAK
+    (58) empty -> .
 
-    RCRLBRACKET     shift and go to state 97
+    FN              shift and go to state 2
+    LOOP            shift and go to state 20
+    FOR             shift and go to state 21
+    WHILE           shift and go to state 22
+    IF              shift and go to state 23
+    LET             shift and go to state 24
+    MOVE            shift and go to state 25
+    DELAY           shift and go to state 26
+    PRINT           shift and go to state 27
+    BREAK           shift and go to state 28
+    RCRLBRACKET     reduce using rule 58 (empty -> .)
 
+    line                           shift and go to state 99
+    main                           shift and go to state 8
+    loop                           shift and go to state 9
+    for                            shift and go to state 10
+    while                          shift and go to state 11
+    if                             shift and go to state 12
+    let                            shift and go to state 13
+    move                           shift and go to state 14
+    moveList                       shift and go to state 15
+    delay                          shift and go to state 16
+    println                        shift and go to state 17
+    break                          shift and go to state 18
+    empty                          shift and go to state 19
 
 state 86
 
-    (40) opera -> OPERA LPAREN operator COMMA operand . COMMA operand RPAREN
+    (45) if -> IF expression compare expression LCRLBRACKET . line RCRLBRACKET line
+    (46) if -> IF expression compare expression LCRLBRACKET . line RCRLBRACKET elseiforelse
+    (2) line -> . main
+    (3) line -> . loop
+    (4) line -> . for
+    (5) line -> . while
+    (6) line -> . if
+    (7) line -> . let
+    (8) line -> . move
+    (9) line -> . moveList
+    (10) line -> . delay
+    (11) line -> . println
+    (12) line -> . break
+    (13) line -> . empty
+    (1) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
+    (14) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (15) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (16) while -> . WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
+    (17) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET line
+    (45) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
+    (46) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (18) let -> . LET ID ASSIGN operand SEMICOLON
+    (19) let -> . LET ID ASSIGN bool SEMICOLON line
+    (32) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
+    (33) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+    (36) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
+    (40) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
+    (41) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
+    (57) break -> . BREAK
+    (58) empty -> .
 
-    COMMA           shift and go to state 98
+    FN              shift and go to state 2
+    LOOP            shift and go to state 20
+    FOR             shift and go to state 21
+    WHILE           shift and go to state 22
+    IF              shift and go to state 23
+    LET             shift and go to state 24
+    MOVE            shift and go to state 25
+    DELAY           shift and go to state 26
+    PRINT           shift and go to state 27
+    BREAK           shift and go to state 28
+    RCRLBRACKET     reduce using rule 58 (empty -> .)
 
+    line                           shift and go to state 100
+    main                           shift and go to state 8
+    loop                           shift and go to state 9
+    for                            shift and go to state 10
+    while                          shift and go to state 11
+    if                             shift and go to state 12
+    let                            shift and go to state 13
+    move                           shift and go to state 14
+    moveList                       shift and go to state 15
+    delay                          shift and go to state 16
+    println                        shift and go to state 17
+    break                          shift and go to state 18
+    empty                          shift and go to state 19
 
 state 87
 
-    (48) operand -> ID .
+    (26) opera -> OPERA LPAREN operator COMMA . operand COMMA operand RPAREN
+    (20) operand -> . INT
+    (21) operand -> . opera
+    (22) operand -> . ID
+    (26) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
 
-    COMMA           reduce using rule 48 (operand -> ID .)
-    RPAREN          reduce using rule 48 (operand -> ID .)
+    INT             shift and go to state 37
+    ID              shift and go to state 102
+    OPERA           shift and go to state 42
 
+    operand                        shift and go to state 101
+    opera                          shift and go to state 38
 
 state 88
 
-    (39) let -> LET ID ASSIGN bool SEMICOLON line .
+    (18) let -> LET ID ASSIGN operand SEMICOLON .
 
-    RCRLBRACKET     reduce using rule 39 (let -> LET ID ASSIGN bool SEMICOLON line .)
+    RCRLBRACKET     reduce using rule 18 (let -> LET ID ASSIGN operand SEMICOLON .)
 
 
 state 89
 
-    (13) move -> MOVE LPAREN STRING COMMA bool RPAREN . SEMICOLON line
+    (19) let -> LET ID ASSIGN bool SEMICOLON . line
+    (2) line -> . main
+    (3) line -> . loop
+    (4) line -> . for
+    (5) line -> . while
+    (6) line -> . if
+    (7) line -> . let
+    (8) line -> . move
+    (9) line -> . moveList
+    (10) line -> . delay
+    (11) line -> . println
+    (12) line -> . break
+    (13) line -> . empty
+    (1) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
+    (14) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (15) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (16) while -> . WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
+    (17) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET line
+    (45) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
+    (46) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (18) let -> . LET ID ASSIGN operand SEMICOLON
+    (19) let -> . LET ID ASSIGN bool SEMICOLON line
+    (32) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
+    (33) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+    (36) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
+    (40) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
+    (41) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
+    (57) break -> . BREAK
+    (58) empty -> .
 
-    SEMICOLON       shift and go to state 99
+    FN              shift and go to state 2
+    LOOP            shift and go to state 20
+    FOR             shift and go to state 21
+    WHILE           shift and go to state 22
+    IF              shift and go to state 23
+    LET             shift and go to state 24
+    MOVE            shift and go to state 25
+    DELAY           shift and go to state 26
+    PRINT           shift and go to state 27
+    BREAK           shift and go to state 28
+    RCRLBRACKET     reduce using rule 58 (empty -> .)
 
+    line                           shift and go to state 103
+    main                           shift and go to state 8
+    loop                           shift and go to state 9
+    for                            shift and go to state 10
+    while                          shift and go to state 11
+    if                             shift and go to state 12
+    let                            shift and go to state 13
+    move                           shift and go to state 14
+    moveList                       shift and go to state 15
+    delay                          shift and go to state 16
+    println                        shift and go to state 17
+    break                          shift and go to state 18
+    empty                          shift and go to state 19
 
 state 90
 
-    (14) moveList -> MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA . bool RPAREN SEMICOLON line
-    (49) bool -> . TRUE
-    (50) bool -> . FALSE
-    (51) bool -> . ID
+    (32) move -> MOVE LPAREN STRING COMMA bool . RPAREN SEMICOLON line
 
-    TRUE            shift and go to state 33
-    FALSE           shift and go to state 34
-    ID              shift and go to state 78
+    RPAREN          shift and go to state 104
 
-    bool                           shift and go to state 100
 
 state 91
 
-    (15) fingerList -> STRING COMMA STRING .
-    (15) fingerList -> STRING . COMMA STRING
-    (16) fingerList -> STRING . COMMA fingerList
+    (25) bool -> ID .
 
-    RSQRBRACKET     reduce using rule 15 (fingerList -> STRING COMMA STRING .)
-    COMMA           shift and go to state 80
+    RPAREN          reduce using rule 25 (bool -> ID .)
 
 
 state 92
 
-    (16) fingerList -> STRING COMMA fingerList .
+    (33) moveList -> MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET . COMMA bool RPAREN SEMICOLON line
 
-    RSQRBRACKET     reduce using rule 16 (fingerList -> STRING COMMA fingerList .)
+    COMMA           shift and go to state 105
 
 
 state 93
 
-    (17) delay -> DELAY LPAREN INT COMMA STRING RPAREN . SEMICOLON line
+    (34) fingerList -> STRING COMMA . STRING
+    (35) fingerList -> STRING COMMA . fingerList
+    (34) fingerList -> . STRING COMMA STRING
+    (35) fingerList -> . STRING COMMA fingerList
 
-    SEMICOLON       shift and go to state 101
+    STRING          shift and go to state 106
 
+    fingerList                     shift and go to state 107
 
 state 94
 
-    (21) println -> PRINT EXPR LPAREN STRING RPAREN SEMICOLON . line
-    (2) line -> . loop
-    (3) line -> . for
-    (4) line -> . if
-    (5) line -> . let
-    (6) line -> . move
-    (7) line -> . moveList
-    (8) line -> . delay
-    (9) line -> . println
-    (10) line -> . empty
-    (11) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
-    (12) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
-    (26) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
-    (27) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (38) let -> . LET ID ASSIGN operand SEMICOLON
-    (39) let -> . LET ID ASSIGN bool SEMICOLON line
-    (13) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
-    (14) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
-    (17) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
-    (21) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
-    (22) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
-    (52) empty -> .
+    (36) delay -> DELAY LPAREN INT COMMA STRING . RPAREN SEMICOLON line
 
-    LOOP            shift and go to state 17
-    FOR             shift and go to state 18
-    IF              shift and go to state 19
-    LET             shift and go to state 20
-    MOVE            shift and go to state 21
-    DELAY           shift and go to state 22
-    PRINT           shift and go to state 23
-    RCRLBRACKET     reduce using rule 52 (empty -> .)
+    RPAREN          shift and go to state 108
 
-    line                           shift and go to state 102
-    loop                           shift and go to state 8
-    for                            shift and go to state 9
-    if                             shift and go to state 10
-    let                            shift and go to state 11
-    move                           shift and go to state 12
-    moveList                       shift and go to state 13
-    delay                          shift and go to state 14
-    println                        shift and go to state 15
-    empty                          shift and go to state 16
 
 state 95
 
-    (22) println -> PRINT EXPR LPAREN ID RPAREN SEMICOLON . line
-    (2) line -> . loop
-    (3) line -> . for
-    (4) line -> . if
-    (5) line -> . let
-    (6) line -> . move
-    (7) line -> . moveList
-    (8) line -> . delay
-    (9) line -> . println
-    (10) line -> . empty
-    (11) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
-    (12) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
-    (26) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
-    (27) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (38) let -> . LET ID ASSIGN operand SEMICOLON
-    (39) let -> . LET ID ASSIGN bool SEMICOLON line
-    (13) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
-    (14) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
-    (17) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
-    (21) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
-    (22) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
-    (52) empty -> .
+    (40) println -> PRINT EXPR LPAREN STRING RPAREN . SEMICOLON line
 
-    LOOP            shift and go to state 17
-    FOR             shift and go to state 18
-    IF              shift and go to state 19
-    LET             shift and go to state 20
-    MOVE            shift and go to state 21
-    DELAY           shift and go to state 22
-    PRINT           shift and go to state 23
-    RCRLBRACKET     reduce using rule 52 (empty -> .)
+    SEMICOLON       shift and go to state 109
 
-    line                           shift and go to state 103
-    loop                           shift and go to state 8
-    for                            shift and go to state 9
-    if                             shift and go to state 10
-    let                            shift and go to state 11
-    move                           shift and go to state 12
-    moveList                       shift and go to state 13
-    delay                          shift and go to state 14
-    println                        shift and go to state 15
-    empty                          shift and go to state 16
 
 state 96
 
-    (12) for -> FOR ID IN INT DOTDOT INT LCRLBRACKET . line RCRLBRACKET line
-    (2) line -> . loop
-    (3) line -> . for
-    (4) line -> . if
-    (5) line -> . let
-    (6) line -> . move
-    (7) line -> . moveList
-    (8) line -> . delay
-    (9) line -> . println
-    (10) line -> . empty
-    (11) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
-    (12) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
-    (26) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
-    (27) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (38) let -> . LET ID ASSIGN operand SEMICOLON
-    (39) let -> . LET ID ASSIGN bool SEMICOLON line
-    (13) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
-    (14) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
-    (17) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
-    (21) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
-    (22) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
-    (52) empty -> .
+    (41) println -> PRINT EXPR LPAREN ID RPAREN . SEMICOLON line
 
-    LOOP            shift and go to state 17
-    FOR             shift and go to state 18
-    IF              shift and go to state 19
-    LET             shift and go to state 20
-    MOVE            shift and go to state 21
-    DELAY           shift and go to state 22
-    PRINT           shift and go to state 23
-    RCRLBRACKET     reduce using rule 52 (empty -> .)
+    SEMICOLON       shift and go to state 110
 
-    line                           shift and go to state 104
-    loop                           shift and go to state 8
-    for                            shift and go to state 9
-    if                             shift and go to state 10
-    let                            shift and go to state 11
-    move                           shift and go to state 12
-    moveList                       shift and go to state 13
-    delay                          shift and go to state 14
-    println                        shift and go to state 15
-    empty                          shift and go to state 16
 
 state 97
 
-    (26) if -> IF expression compare expression LCRLBRACKET line RCRLBRACKET . line
-    (27) if -> IF expression compare expression LCRLBRACKET line RCRLBRACKET . elseiforelse
-    (2) line -> . loop
-    (3) line -> . for
-    (4) line -> . if
-    (5) line -> . let
-    (6) line -> . move
-    (7) line -> . moveList
-    (8) line -> . delay
-    (9) line -> . println
-    (10) line -> . empty
-    (24) elseiforelse -> . elseif
-    (25) elseiforelse -> . else
-    (11) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
-    (12) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
-    (26) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
-    (27) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (38) let -> . LET ID ASSIGN operand SEMICOLON
-    (39) let -> . LET ID ASSIGN bool SEMICOLON line
-    (13) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
-    (14) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
-    (17) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
-    (21) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
-    (22) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
-    (52) empty -> .
-    (28) elseif -> . ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET line
-    (29) elseif -> . ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (30) else -> . ELSE LCRLBRACKET line RCRLBRACKET line
+    (15) for -> FOR ID IN INT DOTDOT INT . LCRLBRACKET line RCRLBRACKET line
 
-    LOOP            shift and go to state 17
-    FOR             shift and go to state 18
-    IF              shift and go to state 19
-    LET             shift and go to state 20
-    MOVE            shift and go to state 21
-    DELAY           shift and go to state 22
-    PRINT           shift and go to state 23
-    RCRLBRACKET     reduce using rule 52 (empty -> .)
-    ELSEIF          shift and go to state 109
-    ELSE            shift and go to state 110
+    LCRLBRACKET     shift and go to state 111
 
-    line                           shift and go to state 105
-    elseiforelse                   shift and go to state 106
-    loop                           shift and go to state 8
-    for                            shift and go to state 9
-    if                             shift and go to state 10
-    let                            shift and go to state 11
-    move                           shift and go to state 12
-    moveList                       shift and go to state 13
-    delay                          shift and go to state 14
-    println                        shift and go to state 15
-    empty                          shift and go to state 16
-    elseif                         shift and go to state 107
-    else                           shift and go to state 108
 
 state 98
 
-    (40) opera -> OPERA LPAREN operator COMMA operand COMMA . operand RPAREN
-    (46) operand -> . INT
-    (47) operand -> . opera
-    (48) operand -> . ID
-    (40) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+    (16) while -> WHILE LPAREN expression compare expression RPAREN . LCRLBRACKET line RCRLBRACKET line
 
-    INT             shift and go to state 30
-    ID              shift and go to state 87
-    OPERA           shift and go to state 35
+    LCRLBRACKET     shift and go to state 112
 
-    operand                        shift and go to state 111
-    opera                          shift and go to state 31
 
 state 99
 
-    (13) move -> MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON . line
-    (2) line -> . loop
-    (3) line -> . for
-    (4) line -> . if
-    (5) line -> . let
-    (6) line -> . move
-    (7) line -> . moveList
-    (8) line -> . delay
-    (9) line -> . println
-    (10) line -> . empty
-    (11) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
-    (12) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
-    (26) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
-    (27) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (38) let -> . LET ID ASSIGN operand SEMICOLON
-    (39) let -> . LET ID ASSIGN bool SEMICOLON line
-    (13) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
-    (14) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
-    (17) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
-    (21) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
-    (22) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
-    (52) empty -> .
+    (17) while -> WHILE TRUE LCRLBRACKET line RCRLBRACKET line .
 
-    LOOP            shift and go to state 17
-    FOR             shift and go to state 18
-    IF              shift and go to state 19
-    LET             shift and go to state 20
-    MOVE            shift and go to state 21
-    DELAY           shift and go to state 22
-    PRINT           shift and go to state 23
-    RCRLBRACKET     reduce using rule 52 (empty -> .)
+    RCRLBRACKET     reduce using rule 17 (while -> WHILE TRUE LCRLBRACKET line RCRLBRACKET line .)
 
-    line                           shift and go to state 112
-    loop                           shift and go to state 8
-    for                            shift and go to state 9
-    if                             shift and go to state 10
-    let                            shift and go to state 11
-    move                           shift and go to state 12
-    moveList                       shift and go to state 13
-    delay                          shift and go to state 14
-    println                        shift and go to state 15
-    empty                          shift and go to state 16
 
 state 100
 
-    (14) moveList -> MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool . RPAREN SEMICOLON line
+    (45) if -> IF expression compare expression LCRLBRACKET line . RCRLBRACKET line
+    (46) if -> IF expression compare expression LCRLBRACKET line . RCRLBRACKET elseiforelse
 
-    RPAREN          shift and go to state 113
+    RCRLBRACKET     shift and go to state 113
 
 
 state 101
 
-    (17) delay -> DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON . line
-    (2) line -> . loop
-    (3) line -> . for
-    (4) line -> . if
-    (5) line -> . let
-    (6) line -> . move
-    (7) line -> . moveList
-    (8) line -> . delay
-    (9) line -> . println
-    (10) line -> . empty
-    (11) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
-    (12) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
-    (26) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
-    (27) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (38) let -> . LET ID ASSIGN operand SEMICOLON
-    (39) let -> . LET ID ASSIGN bool SEMICOLON line
-    (13) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
-    (14) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
-    (17) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
-    (21) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
-    (22) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
-    (52) empty -> .
+    (26) opera -> OPERA LPAREN operator COMMA operand . COMMA operand RPAREN
 
-    LOOP            shift and go to state 17
-    FOR             shift and go to state 18
-    IF              shift and go to state 19
-    LET             shift and go to state 20
-    MOVE            shift and go to state 21
-    DELAY           shift and go to state 22
-    PRINT           shift and go to state 23
-    RCRLBRACKET     reduce using rule 52 (empty -> .)
+    COMMA           shift and go to state 114
 
-    line                           shift and go to state 114
-    loop                           shift and go to state 8
-    for                            shift and go to state 9
-    if                             shift and go to state 10
-    let                            shift and go to state 11
-    move                           shift and go to state 12
-    moveList                       shift and go to state 13
-    delay                          shift and go to state 14
-    println                        shift and go to state 15
-    empty                          shift and go to state 16
 
 state 102
 
-    (21) println -> PRINT EXPR LPAREN STRING RPAREN SEMICOLON line .
+    (22) operand -> ID .
 
-    RCRLBRACKET     reduce using rule 21 (println -> PRINT EXPR LPAREN STRING RPAREN SEMICOLON line .)
+    COMMA           reduce using rule 22 (operand -> ID .)
+    RPAREN          reduce using rule 22 (operand -> ID .)
 
 
 state 103
 
-    (22) println -> PRINT EXPR LPAREN ID RPAREN SEMICOLON line .
+    (19) let -> LET ID ASSIGN bool SEMICOLON line .
 
-    RCRLBRACKET     reduce using rule 22 (println -> PRINT EXPR LPAREN ID RPAREN SEMICOLON line .)
+    RCRLBRACKET     reduce using rule 19 (let -> LET ID ASSIGN bool SEMICOLON line .)
 
 
 state 104
 
-    (12) for -> FOR ID IN INT DOTDOT INT LCRLBRACKET line . RCRLBRACKET line
+    (32) move -> MOVE LPAREN STRING COMMA bool RPAREN . SEMICOLON line
 
-    RCRLBRACKET     shift and go to state 115
+    SEMICOLON       shift and go to state 115
 
 
 state 105
 
-    (26) if -> IF expression compare expression LCRLBRACKET line RCRLBRACKET line .
+    (33) moveList -> MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA . bool RPAREN SEMICOLON line
+    (23) bool -> . TRUE
+    (24) bool -> . FALSE
+    (25) bool -> . ID
 
-    RCRLBRACKET     reduce using rule 26 (if -> IF expression compare expression LCRLBRACKET line RCRLBRACKET line .)
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    ID              shift and go to state 91
 
+    bool                           shift and go to state 116
 
 state 106
 
-    (27) if -> IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse .
+    (34) fingerList -> STRING COMMA STRING .
+    (34) fingerList -> STRING . COMMA STRING
+    (35) fingerList -> STRING . COMMA fingerList
 
-    RCRLBRACKET     reduce using rule 27 (if -> IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse .)
+    RSQRBRACKET     reduce using rule 34 (fingerList -> STRING COMMA STRING .)
+    COMMA           shift and go to state 93
 
 
 state 107
 
-    (24) elseiforelse -> elseif .
+    (35) fingerList -> STRING COMMA fingerList .
 
-    RCRLBRACKET     reduce using rule 24 (elseiforelse -> elseif .)
+    RSQRBRACKET     reduce using rule 35 (fingerList -> STRING COMMA fingerList .)
 
 
 state 108
 
-    (25) elseiforelse -> else .
+    (36) delay -> DELAY LPAREN INT COMMA STRING RPAREN . SEMICOLON line
 
-    RCRLBRACKET     reduce using rule 25 (elseiforelse -> else .)
+    SEMICOLON       shift and go to state 117
 
 
 state 109
 
-    (28) elseif -> ELSEIF . expression compare expression LCRLBRACKET line RCRLBRACKET line
-    (29) elseif -> ELSEIF . expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (36) expression -> . operand
-    (37) expression -> . bool
-    (46) operand -> . INT
-    (47) operand -> . opera
-    (48) operand -> . ID
-    (49) bool -> . TRUE
-    (50) bool -> . FALSE
-    (51) bool -> . ID
-    (40) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+    (40) println -> PRINT EXPR LPAREN STRING RPAREN SEMICOLON . line
+    (2) line -> . main
+    (3) line -> . loop
+    (4) line -> . for
+    (5) line -> . while
+    (6) line -> . if
+    (7) line -> . let
+    (8) line -> . move
+    (9) line -> . moveList
+    (10) line -> . delay
+    (11) line -> . println
+    (12) line -> . break
+    (13) line -> . empty
+    (1) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
+    (14) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (15) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (16) while -> . WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
+    (17) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET line
+    (45) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
+    (46) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (18) let -> . LET ID ASSIGN operand SEMICOLON
+    (19) let -> . LET ID ASSIGN bool SEMICOLON line
+    (32) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
+    (33) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+    (36) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
+    (40) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
+    (41) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
+    (57) break -> . BREAK
+    (58) empty -> .
 
-    INT             shift and go to state 30
-    ID              shift and go to state 32
-    TRUE            shift and go to state 33
-    FALSE           shift and go to state 34
-    OPERA           shift and go to state 35
+    FN              shift and go to state 2
+    LOOP            shift and go to state 20
+    FOR             shift and go to state 21
+    WHILE           shift and go to state 22
+    IF              shift and go to state 23
+    LET             shift and go to state 24
+    MOVE            shift and go to state 25
+    DELAY           shift and go to state 26
+    PRINT           shift and go to state 27
+    BREAK           shift and go to state 28
+    RCRLBRACKET     reduce using rule 58 (empty -> .)
 
-    expression                     shift and go to state 116
-    operand                        shift and go to state 28
-    bool                           shift and go to state 29
-    opera                          shift and go to state 31
+    line                           shift and go to state 118
+    main                           shift and go to state 8
+    loop                           shift and go to state 9
+    for                            shift and go to state 10
+    while                          shift and go to state 11
+    if                             shift and go to state 12
+    let                            shift and go to state 13
+    move                           shift and go to state 14
+    moveList                       shift and go to state 15
+    delay                          shift and go to state 16
+    println                        shift and go to state 17
+    break                          shift and go to state 18
+    empty                          shift and go to state 19
 
 state 110
 
-    (30) else -> ELSE . LCRLBRACKET line RCRLBRACKET line
+    (41) println -> PRINT EXPR LPAREN ID RPAREN SEMICOLON . line
+    (2) line -> . main
+    (3) line -> . loop
+    (4) line -> . for
+    (5) line -> . while
+    (6) line -> . if
+    (7) line -> . let
+    (8) line -> . move
+    (9) line -> . moveList
+    (10) line -> . delay
+    (11) line -> . println
+    (12) line -> . break
+    (13) line -> . empty
+    (1) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
+    (14) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (15) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (16) while -> . WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
+    (17) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET line
+    (45) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
+    (46) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (18) let -> . LET ID ASSIGN operand SEMICOLON
+    (19) let -> . LET ID ASSIGN bool SEMICOLON line
+    (32) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
+    (33) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+    (36) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
+    (40) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
+    (41) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
+    (57) break -> . BREAK
+    (58) empty -> .
 
-    LCRLBRACKET     shift and go to state 117
+    FN              shift and go to state 2
+    LOOP            shift and go to state 20
+    FOR             shift and go to state 21
+    WHILE           shift and go to state 22
+    IF              shift and go to state 23
+    LET             shift and go to state 24
+    MOVE            shift and go to state 25
+    DELAY           shift and go to state 26
+    PRINT           shift and go to state 27
+    BREAK           shift and go to state 28
+    RCRLBRACKET     reduce using rule 58 (empty -> .)
 
+    line                           shift and go to state 119
+    main                           shift and go to state 8
+    loop                           shift and go to state 9
+    for                            shift and go to state 10
+    while                          shift and go to state 11
+    if                             shift and go to state 12
+    let                            shift and go to state 13
+    move                           shift and go to state 14
+    moveList                       shift and go to state 15
+    delay                          shift and go to state 16
+    println                        shift and go to state 17
+    break                          shift and go to state 18
+    empty                          shift and go to state 19
 
 state 111
 
-    (40) opera -> OPERA LPAREN operator COMMA operand COMMA operand . RPAREN
+    (15) for -> FOR ID IN INT DOTDOT INT LCRLBRACKET . line RCRLBRACKET line
+    (2) line -> . main
+    (3) line -> . loop
+    (4) line -> . for
+    (5) line -> . while
+    (6) line -> . if
+    (7) line -> . let
+    (8) line -> . move
+    (9) line -> . moveList
+    (10) line -> . delay
+    (11) line -> . println
+    (12) line -> . break
+    (13) line -> . empty
+    (1) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
+    (14) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (15) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (16) while -> . WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
+    (17) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET line
+    (45) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
+    (46) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (18) let -> . LET ID ASSIGN operand SEMICOLON
+    (19) let -> . LET ID ASSIGN bool SEMICOLON line
+    (32) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
+    (33) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+    (36) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
+    (40) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
+    (41) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
+    (57) break -> . BREAK
+    (58) empty -> .
 
-    RPAREN          shift and go to state 118
+    FN              shift and go to state 2
+    LOOP            shift and go to state 20
+    FOR             shift and go to state 21
+    WHILE           shift and go to state 22
+    IF              shift and go to state 23
+    LET             shift and go to state 24
+    MOVE            shift and go to state 25
+    DELAY           shift and go to state 26
+    PRINT           shift and go to state 27
+    BREAK           shift and go to state 28
+    RCRLBRACKET     reduce using rule 58 (empty -> .)
 
+    line                           shift and go to state 120
+    main                           shift and go to state 8
+    loop                           shift and go to state 9
+    for                            shift and go to state 10
+    while                          shift and go to state 11
+    if                             shift and go to state 12
+    let                            shift and go to state 13
+    move                           shift and go to state 14
+    moveList                       shift and go to state 15
+    delay                          shift and go to state 16
+    println                        shift and go to state 17
+    break                          shift and go to state 18
+    empty                          shift and go to state 19
 
 state 112
 
-    (13) move -> MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line .
+    (16) while -> WHILE LPAREN expression compare expression RPAREN LCRLBRACKET . line RCRLBRACKET line
+    (2) line -> . main
+    (3) line -> . loop
+    (4) line -> . for
+    (5) line -> . while
+    (6) line -> . if
+    (7) line -> . let
+    (8) line -> . move
+    (9) line -> . moveList
+    (10) line -> . delay
+    (11) line -> . println
+    (12) line -> . break
+    (13) line -> . empty
+    (1) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
+    (14) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (15) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (16) while -> . WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
+    (17) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET line
+    (45) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
+    (46) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (18) let -> . LET ID ASSIGN operand SEMICOLON
+    (19) let -> . LET ID ASSIGN bool SEMICOLON line
+    (32) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
+    (33) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+    (36) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
+    (40) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
+    (41) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
+    (57) break -> . BREAK
+    (58) empty -> .
 
-    RCRLBRACKET     reduce using rule 13 (move -> MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line .)
+    FN              shift and go to state 2
+    LOOP            shift and go to state 20
+    FOR             shift and go to state 21
+    WHILE           shift and go to state 22
+    IF              shift and go to state 23
+    LET             shift and go to state 24
+    MOVE            shift and go to state 25
+    DELAY           shift and go to state 26
+    PRINT           shift and go to state 27
+    BREAK           shift and go to state 28
+    RCRLBRACKET     reduce using rule 58 (empty -> .)
 
+    line                           shift and go to state 121
+    main                           shift and go to state 8
+    loop                           shift and go to state 9
+    for                            shift and go to state 10
+    while                          shift and go to state 11
+    if                             shift and go to state 12
+    let                            shift and go to state 13
+    move                           shift and go to state 14
+    moveList                       shift and go to state 15
+    delay                          shift and go to state 16
+    println                        shift and go to state 17
+    break                          shift and go to state 18
+    empty                          shift and go to state 19
 
 state 113
 
-    (14) moveList -> MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN . SEMICOLON line
+    (45) if -> IF expression compare expression LCRLBRACKET line RCRLBRACKET . line
+    (46) if -> IF expression compare expression LCRLBRACKET line RCRLBRACKET . elseiforelse
+    (2) line -> . main
+    (3) line -> . loop
+    (4) line -> . for
+    (5) line -> . while
+    (6) line -> . if
+    (7) line -> . let
+    (8) line -> . move
+    (9) line -> . moveList
+    (10) line -> . delay
+    (11) line -> . println
+    (12) line -> . break
+    (13) line -> . empty
+    (43) elseiforelse -> . elseif
+    (44) elseiforelse -> . else
+    (1) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
+    (14) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (15) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (16) while -> . WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
+    (17) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET line
+    (45) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
+    (46) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (18) let -> . LET ID ASSIGN operand SEMICOLON
+    (19) let -> . LET ID ASSIGN bool SEMICOLON line
+    (32) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
+    (33) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+    (36) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
+    (40) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
+    (41) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
+    (57) break -> . BREAK
+    (58) empty -> .
+    (47) elseif -> . ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET line
+    (48) elseif -> . ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (49) else -> . ELSE LCRLBRACKET line RCRLBRACKET line
 
-    SEMICOLON       shift and go to state 119
+    FN              shift and go to state 2
+    LOOP            shift and go to state 20
+    FOR             shift and go to state 21
+    WHILE           shift and go to state 22
+    IF              shift and go to state 23
+    LET             shift and go to state 24
+    MOVE            shift and go to state 25
+    DELAY           shift and go to state 26
+    PRINT           shift and go to state 27
+    BREAK           shift and go to state 28
+    RCRLBRACKET     reduce using rule 58 (empty -> .)
+    ELSEIF          shift and go to state 126
+    ELSE            shift and go to state 127
 
+    line                           shift and go to state 122
+    elseiforelse                   shift and go to state 123
+    main                           shift and go to state 8
+    loop                           shift and go to state 9
+    for                            shift and go to state 10
+    while                          shift and go to state 11
+    if                             shift and go to state 12
+    let                            shift and go to state 13
+    move                           shift and go to state 14
+    moveList                       shift and go to state 15
+    delay                          shift and go to state 16
+    println                        shift and go to state 17
+    break                          shift and go to state 18
+    empty                          shift and go to state 19
+    elseif                         shift and go to state 124
+    else                           shift and go to state 125
 
 state 114
 
-    (17) delay -> DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line .
+    (26) opera -> OPERA LPAREN operator COMMA operand COMMA . operand RPAREN
+    (20) operand -> . INT
+    (21) operand -> . opera
+    (22) operand -> . ID
+    (26) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
 
-    RCRLBRACKET     reduce using rule 17 (delay -> DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line .)
+    INT             shift and go to state 37
+    ID              shift and go to state 102
+    OPERA           shift and go to state 42
 
+    operand                        shift and go to state 128
+    opera                          shift and go to state 38
 
 state 115
 
-    (12) for -> FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET . line
-    (2) line -> . loop
-    (3) line -> . for
-    (4) line -> . if
-    (5) line -> . let
-    (6) line -> . move
-    (7) line -> . moveList
-    (8) line -> . delay
-    (9) line -> . println
-    (10) line -> . empty
-    (11) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
-    (12) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
-    (26) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
-    (27) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (38) let -> . LET ID ASSIGN operand SEMICOLON
-    (39) let -> . LET ID ASSIGN bool SEMICOLON line
-    (13) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
-    (14) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
-    (17) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
-    (21) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
-    (22) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
-    (52) empty -> .
+    (32) move -> MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON . line
+    (2) line -> . main
+    (3) line -> . loop
+    (4) line -> . for
+    (5) line -> . while
+    (6) line -> . if
+    (7) line -> . let
+    (8) line -> . move
+    (9) line -> . moveList
+    (10) line -> . delay
+    (11) line -> . println
+    (12) line -> . break
+    (13) line -> . empty
+    (1) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
+    (14) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (15) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (16) while -> . WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
+    (17) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET line
+    (45) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
+    (46) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (18) let -> . LET ID ASSIGN operand SEMICOLON
+    (19) let -> . LET ID ASSIGN bool SEMICOLON line
+    (32) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
+    (33) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+    (36) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
+    (40) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
+    (41) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
+    (57) break -> . BREAK
+    (58) empty -> .
 
-    LOOP            shift and go to state 17
-    FOR             shift and go to state 18
-    IF              shift and go to state 19
-    LET             shift and go to state 20
-    MOVE            shift and go to state 21
-    DELAY           shift and go to state 22
-    PRINT           shift and go to state 23
-    RCRLBRACKET     reduce using rule 52 (empty -> .)
+    FN              shift and go to state 2
+    LOOP            shift and go to state 20
+    FOR             shift and go to state 21
+    WHILE           shift and go to state 22
+    IF              shift and go to state 23
+    LET             shift and go to state 24
+    MOVE            shift and go to state 25
+    DELAY           shift and go to state 26
+    PRINT           shift and go to state 27
+    BREAK           shift and go to state 28
+    RCRLBRACKET     reduce using rule 58 (empty -> .)
 
-    line                           shift and go to state 120
-    loop                           shift and go to state 8
-    for                            shift and go to state 9
-    if                             shift and go to state 10
-    let                            shift and go to state 11
-    move                           shift and go to state 12
-    moveList                       shift and go to state 13
-    delay                          shift and go to state 14
-    println                        shift and go to state 15
-    empty                          shift and go to state 16
+    line                           shift and go to state 129
+    main                           shift and go to state 8
+    loop                           shift and go to state 9
+    for                            shift and go to state 10
+    while                          shift and go to state 11
+    if                             shift and go to state 12
+    let                            shift and go to state 13
+    move                           shift and go to state 14
+    moveList                       shift and go to state 15
+    delay                          shift and go to state 16
+    println                        shift and go to state 17
+    break                          shift and go to state 18
+    empty                          shift and go to state 19
 
 state 116
 
-    (28) elseif -> ELSEIF expression . compare expression LCRLBRACKET line RCRLBRACKET line
-    (29) elseif -> ELSEIF expression . compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (31) compare -> . EQEQ
-    (32) compare -> . LTE
-    (33) compare -> . GTE
-    (34) compare -> . LT
-    (35) compare -> . GT
+    (33) moveList -> MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool . RPAREN SEMICOLON line
 
-    EQEQ            shift and go to state 43
-    LTE             shift and go to state 44
-    GTE             shift and go to state 45
-    LT              shift and go to state 46
-    GT              shift and go to state 47
+    RPAREN          shift and go to state 130
 
-    compare                        shift and go to state 121
 
 state 117
 
-    (30) else -> ELSE LCRLBRACKET . line RCRLBRACKET line
-    (2) line -> . loop
-    (3) line -> . for
-    (4) line -> . if
-    (5) line -> . let
-    (6) line -> . move
-    (7) line -> . moveList
-    (8) line -> . delay
-    (9) line -> . println
-    (10) line -> . empty
-    (11) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
-    (12) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
-    (26) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
-    (27) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (38) let -> . LET ID ASSIGN operand SEMICOLON
-    (39) let -> . LET ID ASSIGN bool SEMICOLON line
-    (13) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
-    (14) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
-    (17) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
-    (21) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
-    (22) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
-    (52) empty -> .
+    (36) delay -> DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON . line
+    (2) line -> . main
+    (3) line -> . loop
+    (4) line -> . for
+    (5) line -> . while
+    (6) line -> . if
+    (7) line -> . let
+    (8) line -> . move
+    (9) line -> . moveList
+    (10) line -> . delay
+    (11) line -> . println
+    (12) line -> . break
+    (13) line -> . empty
+    (1) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
+    (14) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (15) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (16) while -> . WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
+    (17) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET line
+    (45) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
+    (46) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (18) let -> . LET ID ASSIGN operand SEMICOLON
+    (19) let -> . LET ID ASSIGN bool SEMICOLON line
+    (32) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
+    (33) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+    (36) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
+    (40) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
+    (41) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
+    (57) break -> . BREAK
+    (58) empty -> .
 
-    LOOP            shift and go to state 17
-    FOR             shift and go to state 18
-    IF              shift and go to state 19
-    LET             shift and go to state 20
-    MOVE            shift and go to state 21
-    DELAY           shift and go to state 22
-    PRINT           shift and go to state 23
-    RCRLBRACKET     reduce using rule 52 (empty -> .)
+    FN              shift and go to state 2
+    LOOP            shift and go to state 20
+    FOR             shift and go to state 21
+    WHILE           shift and go to state 22
+    IF              shift and go to state 23
+    LET             shift and go to state 24
+    MOVE            shift and go to state 25
+    DELAY           shift and go to state 26
+    PRINT           shift and go to state 27
+    BREAK           shift and go to state 28
+    RCRLBRACKET     reduce using rule 58 (empty -> .)
 
-    line                           shift and go to state 122
-    loop                           shift and go to state 8
-    for                            shift and go to state 9
-    if                             shift and go to state 10
-    let                            shift and go to state 11
-    move                           shift and go to state 12
-    moveList                       shift and go to state 13
-    delay                          shift and go to state 14
-    println                        shift and go to state 15
-    empty                          shift and go to state 16
+    line                           shift and go to state 131
+    main                           shift and go to state 8
+    loop                           shift and go to state 9
+    for                            shift and go to state 10
+    while                          shift and go to state 11
+    if                             shift and go to state 12
+    let                            shift and go to state 13
+    move                           shift and go to state 14
+    moveList                       shift and go to state 15
+    delay                          shift and go to state 16
+    println                        shift and go to state 17
+    break                          shift and go to state 18
+    empty                          shift and go to state 19
 
 state 118
 
-    (40) opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .
+    (40) println -> PRINT EXPR LPAREN STRING RPAREN SEMICOLON line .
 
-    EQEQ            reduce using rule 40 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
-    LTE             reduce using rule 40 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
-    GTE             reduce using rule 40 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
-    LT              reduce using rule 40 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
-    GT              reduce using rule 40 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
-    LCRLBRACKET     reduce using rule 40 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
-    SEMICOLON       reduce using rule 40 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
-    COMMA           reduce using rule 40 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
-    RPAREN          reduce using rule 40 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
+    RCRLBRACKET     reduce using rule 40 (println -> PRINT EXPR LPAREN STRING RPAREN SEMICOLON line .)
 
 
 state 119
 
-    (14) moveList -> MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON . line
-    (2) line -> . loop
-    (3) line -> . for
-    (4) line -> . if
-    (5) line -> . let
-    (6) line -> . move
-    (7) line -> . moveList
-    (8) line -> . delay
-    (9) line -> . println
-    (10) line -> . empty
-    (11) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
-    (12) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
-    (26) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
-    (27) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (38) let -> . LET ID ASSIGN operand SEMICOLON
-    (39) let -> . LET ID ASSIGN bool SEMICOLON line
-    (13) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
-    (14) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
-    (17) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
-    (21) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
-    (22) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
-    (52) empty -> .
+    (41) println -> PRINT EXPR LPAREN ID RPAREN SEMICOLON line .
 
-    LOOP            shift and go to state 17
-    FOR             shift and go to state 18
-    IF              shift and go to state 19
-    LET             shift and go to state 20
-    MOVE            shift and go to state 21
-    DELAY           shift and go to state 22
-    PRINT           shift and go to state 23
-    RCRLBRACKET     reduce using rule 52 (empty -> .)
+    RCRLBRACKET     reduce using rule 41 (println -> PRINT EXPR LPAREN ID RPAREN SEMICOLON line .)
 
-    line                           shift and go to state 123
-    loop                           shift and go to state 8
-    for                            shift and go to state 9
-    if                             shift and go to state 10
-    let                            shift and go to state 11
-    move                           shift and go to state 12
-    moveList                       shift and go to state 13
-    delay                          shift and go to state 14
-    println                        shift and go to state 15
-    empty                          shift and go to state 16
 
 state 120
 
-    (12) for -> FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line .
+    (15) for -> FOR ID IN INT DOTDOT INT LCRLBRACKET line . RCRLBRACKET line
 
-    RCRLBRACKET     reduce using rule 12 (for -> FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line .)
+    RCRLBRACKET     shift and go to state 132
 
 
 state 121
 
-    (28) elseif -> ELSEIF expression compare . expression LCRLBRACKET line RCRLBRACKET line
-    (29) elseif -> ELSEIF expression compare . expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (36) expression -> . operand
-    (37) expression -> . bool
-    (46) operand -> . INT
-    (47) operand -> . opera
-    (48) operand -> . ID
-    (49) bool -> . TRUE
-    (50) bool -> . FALSE
-    (51) bool -> . ID
-    (40) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+    (16) while -> WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line . RCRLBRACKET line
 
-    INT             shift and go to state 30
-    ID              shift and go to state 32
-    TRUE            shift and go to state 33
-    FALSE           shift and go to state 34
-    OPERA           shift and go to state 35
+    RCRLBRACKET     shift and go to state 133
 
-    expression                     shift and go to state 124
-    operand                        shift and go to state 28
-    bool                           shift and go to state 29
-    opera                          shift and go to state 31
 
 state 122
 
-    (30) else -> ELSE LCRLBRACKET line . RCRLBRACKET line
+    (45) if -> IF expression compare expression LCRLBRACKET line RCRLBRACKET line .
 
-    RCRLBRACKET     shift and go to state 125
+    RCRLBRACKET     reduce using rule 45 (if -> IF expression compare expression LCRLBRACKET line RCRLBRACKET line .)
 
 
 state 123
 
-    (14) moveList -> MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line .
+    (46) if -> IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse .
 
-    RCRLBRACKET     reduce using rule 14 (moveList -> MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line .)
+    RCRLBRACKET     reduce using rule 46 (if -> IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse .)
 
 
 state 124
 
-    (28) elseif -> ELSEIF expression compare expression . LCRLBRACKET line RCRLBRACKET line
-    (29) elseif -> ELSEIF expression compare expression . LCRLBRACKET line RCRLBRACKET elseiforelse
+    (43) elseiforelse -> elseif .
 
-    LCRLBRACKET     shift and go to state 126
+    RCRLBRACKET     reduce using rule 43 (elseiforelse -> elseif .)
 
 
 state 125
 
-    (30) else -> ELSE LCRLBRACKET line RCRLBRACKET . line
-    (2) line -> . loop
-    (3) line -> . for
-    (4) line -> . if
-    (5) line -> . let
-    (6) line -> . move
-    (7) line -> . moveList
-    (8) line -> . delay
-    (9) line -> . println
-    (10) line -> . empty
-    (11) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
-    (12) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
-    (26) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
-    (27) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (38) let -> . LET ID ASSIGN operand SEMICOLON
-    (39) let -> . LET ID ASSIGN bool SEMICOLON line
-    (13) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
-    (14) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
-    (17) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
-    (21) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
-    (22) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
-    (52) empty -> .
+    (44) elseiforelse -> else .
 
-    LOOP            shift and go to state 17
-    FOR             shift and go to state 18
-    IF              shift and go to state 19
-    LET             shift and go to state 20
-    MOVE            shift and go to state 21
-    DELAY           shift and go to state 22
-    PRINT           shift and go to state 23
-    RCRLBRACKET     reduce using rule 52 (empty -> .)
+    RCRLBRACKET     reduce using rule 44 (elseiforelse -> else .)
 
-    line                           shift and go to state 127
-    loop                           shift and go to state 8
-    for                            shift and go to state 9
-    if                             shift and go to state 10
-    let                            shift and go to state 11
-    move                           shift and go to state 12
-    moveList                       shift and go to state 13
-    delay                          shift and go to state 14
-    println                        shift and go to state 15
-    empty                          shift and go to state 16
 
 state 126
 
-    (28) elseif -> ELSEIF expression compare expression LCRLBRACKET . line RCRLBRACKET line
-    (29) elseif -> ELSEIF expression compare expression LCRLBRACKET . line RCRLBRACKET elseiforelse
-    (2) line -> . loop
-    (3) line -> . for
-    (4) line -> . if
-    (5) line -> . let
-    (6) line -> . move
-    (7) line -> . moveList
-    (8) line -> . delay
-    (9) line -> . println
-    (10) line -> . empty
-    (11) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
-    (12) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
-    (26) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
-    (27) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (38) let -> . LET ID ASSIGN operand SEMICOLON
-    (39) let -> . LET ID ASSIGN bool SEMICOLON line
-    (13) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
-    (14) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
-    (17) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
-    (21) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
-    (22) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
-    (52) empty -> .
+    (47) elseif -> ELSEIF . expression compare expression LCRLBRACKET line RCRLBRACKET line
+    (48) elseif -> ELSEIF . expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (55) expression -> . operand
+    (56) expression -> . bool
+    (20) operand -> . INT
+    (21) operand -> . opera
+    (22) operand -> . ID
+    (23) bool -> . TRUE
+    (24) bool -> . FALSE
+    (25) bool -> . ID
+    (26) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
 
-    LOOP            shift and go to state 17
-    FOR             shift and go to state 18
-    IF              shift and go to state 19
-    LET             shift and go to state 20
-    MOVE            shift and go to state 21
-    DELAY           shift and go to state 22
-    PRINT           shift and go to state 23
-    RCRLBRACKET     reduce using rule 52 (empty -> .)
+    INT             shift and go to state 37
+    ID              shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    OPERA           shift and go to state 42
 
-    line                           shift and go to state 128
-    loop                           shift and go to state 8
-    for                            shift and go to state 9
-    if                             shift and go to state 10
-    let                            shift and go to state 11
-    move                           shift and go to state 12
-    moveList                       shift and go to state 13
-    delay                          shift and go to state 14
-    println                        shift and go to state 15
-    empty                          shift and go to state 16
+    expression                     shift and go to state 134
+    operand                        shift and go to state 35
+    bool                           shift and go to state 36
+    opera                          shift and go to state 38
 
 state 127
 
-    (30) else -> ELSE LCRLBRACKET line RCRLBRACKET line .
+    (49) else -> ELSE . LCRLBRACKET line RCRLBRACKET line
 
-    RCRLBRACKET     reduce using rule 30 (else -> ELSE LCRLBRACKET line RCRLBRACKET line .)
+    LCRLBRACKET     shift and go to state 135
 
 
 state 128
 
-    (28) elseif -> ELSEIF expression compare expression LCRLBRACKET line . RCRLBRACKET line
-    (29) elseif -> ELSEIF expression compare expression LCRLBRACKET line . RCRLBRACKET elseiforelse
+    (26) opera -> OPERA LPAREN operator COMMA operand COMMA operand . RPAREN
 
-    RCRLBRACKET     shift and go to state 129
+    RPAREN          shift and go to state 136
 
 
 state 129
 
-    (28) elseif -> ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET . line
-    (29) elseif -> ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET . elseiforelse
-    (2) line -> . loop
-    (3) line -> . for
-    (4) line -> . if
-    (5) line -> . let
-    (6) line -> . move
-    (7) line -> . moveList
-    (8) line -> . delay
-    (9) line -> . println
-    (10) line -> . empty
-    (24) elseiforelse -> . elseif
-    (25) elseiforelse -> . else
-    (11) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
-    (12) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
-    (26) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
-    (27) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (38) let -> . LET ID ASSIGN operand SEMICOLON
-    (39) let -> . LET ID ASSIGN bool SEMICOLON line
-    (13) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
-    (14) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
-    (17) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
-    (21) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
-    (22) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
-    (52) empty -> .
-    (28) elseif -> . ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET line
-    (29) elseif -> . ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (30) else -> . ELSE LCRLBRACKET line RCRLBRACKET line
+    (32) move -> MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line .
 
-    LOOP            shift and go to state 17
-    FOR             shift and go to state 18
-    IF              shift and go to state 19
-    LET             shift and go to state 20
-    MOVE            shift and go to state 21
-    DELAY           shift and go to state 22
-    PRINT           shift and go to state 23
-    RCRLBRACKET     reduce using rule 52 (empty -> .)
-    ELSEIF          shift and go to state 109
-    ELSE            shift and go to state 110
+    RCRLBRACKET     reduce using rule 32 (move -> MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line .)
 
-    line                           shift and go to state 130
-    elseiforelse                   shift and go to state 131
-    loop                           shift and go to state 8
-    for                            shift and go to state 9
-    if                             shift and go to state 10
-    let                            shift and go to state 11
-    move                           shift and go to state 12
-    moveList                       shift and go to state 13
-    delay                          shift and go to state 14
-    println                        shift and go to state 15
-    empty                          shift and go to state 16
-    elseif                         shift and go to state 107
-    else                           shift and go to state 108
 
 state 130
 
-    (28) elseif -> ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET line .
+    (33) moveList -> MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN . SEMICOLON line
 
-    RCRLBRACKET     reduce using rule 28 (elseif -> ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET line .)
+    SEMICOLON       shift and go to state 137
 
 
 state 131
 
-    (29) elseif -> ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse .
+    (36) delay -> DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line .
 
-    RCRLBRACKET     reduce using rule 29 (elseif -> ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse .)
+    RCRLBRACKET     reduce using rule 36 (delay -> DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line .)
+
+
+state 132
+
+    (15) for -> FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET . line
+    (2) line -> . main
+    (3) line -> . loop
+    (4) line -> . for
+    (5) line -> . while
+    (6) line -> . if
+    (7) line -> . let
+    (8) line -> . move
+    (9) line -> . moveList
+    (10) line -> . delay
+    (11) line -> . println
+    (12) line -> . break
+    (13) line -> . empty
+    (1) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
+    (14) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (15) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (16) while -> . WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
+    (17) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET line
+    (45) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
+    (46) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (18) let -> . LET ID ASSIGN operand SEMICOLON
+    (19) let -> . LET ID ASSIGN bool SEMICOLON line
+    (32) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
+    (33) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+    (36) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
+    (40) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
+    (41) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
+    (57) break -> . BREAK
+    (58) empty -> .
+
+    FN              shift and go to state 2
+    LOOP            shift and go to state 20
+    FOR             shift and go to state 21
+    WHILE           shift and go to state 22
+    IF              shift and go to state 23
+    LET             shift and go to state 24
+    MOVE            shift and go to state 25
+    DELAY           shift and go to state 26
+    PRINT           shift and go to state 27
+    BREAK           shift and go to state 28
+    RCRLBRACKET     reduce using rule 58 (empty -> .)
+
+    line                           shift and go to state 138
+    main                           shift and go to state 8
+    loop                           shift and go to state 9
+    for                            shift and go to state 10
+    while                          shift and go to state 11
+    if                             shift and go to state 12
+    let                            shift and go to state 13
+    move                           shift and go to state 14
+    moveList                       shift and go to state 15
+    delay                          shift and go to state 16
+    println                        shift and go to state 17
+    break                          shift and go to state 18
+    empty                          shift and go to state 19
+
+state 133
+
+    (16) while -> WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET . line
+    (2) line -> . main
+    (3) line -> . loop
+    (4) line -> . for
+    (5) line -> . while
+    (6) line -> . if
+    (7) line -> . let
+    (8) line -> . move
+    (9) line -> . moveList
+    (10) line -> . delay
+    (11) line -> . println
+    (12) line -> . break
+    (13) line -> . empty
+    (1) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
+    (14) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (15) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (16) while -> . WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
+    (17) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET line
+    (45) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
+    (46) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (18) let -> . LET ID ASSIGN operand SEMICOLON
+    (19) let -> . LET ID ASSIGN bool SEMICOLON line
+    (32) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
+    (33) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+    (36) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
+    (40) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
+    (41) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
+    (57) break -> . BREAK
+    (58) empty -> .
+
+    FN              shift and go to state 2
+    LOOP            shift and go to state 20
+    FOR             shift and go to state 21
+    WHILE           shift and go to state 22
+    IF              shift and go to state 23
+    LET             shift and go to state 24
+    MOVE            shift and go to state 25
+    DELAY           shift and go to state 26
+    PRINT           shift and go to state 27
+    BREAK           shift and go to state 28
+    RCRLBRACKET     reduce using rule 58 (empty -> .)
+
+    line                           shift and go to state 139
+    main                           shift and go to state 8
+    loop                           shift and go to state 9
+    for                            shift and go to state 10
+    while                          shift and go to state 11
+    if                             shift and go to state 12
+    let                            shift and go to state 13
+    move                           shift and go to state 14
+    moveList                       shift and go to state 15
+    delay                          shift and go to state 16
+    println                        shift and go to state 17
+    break                          shift and go to state 18
+    empty                          shift and go to state 19
+
+state 134
+
+    (47) elseif -> ELSEIF expression . compare expression LCRLBRACKET line RCRLBRACKET line
+    (48) elseif -> ELSEIF expression . compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (50) compare -> . EQEQ
+    (51) compare -> . LTE
+    (52) compare -> . GTE
+    (53) compare -> . LT
+    (54) compare -> . GT
+
+    EQEQ            shift and go to state 52
+    LTE             shift and go to state 53
+    GTE             shift and go to state 54
+    LT              shift and go to state 55
+    GT              shift and go to state 56
+
+    compare                        shift and go to state 140
+
+state 135
+
+    (49) else -> ELSE LCRLBRACKET . line RCRLBRACKET line
+    (2) line -> . main
+    (3) line -> . loop
+    (4) line -> . for
+    (5) line -> . while
+    (6) line -> . if
+    (7) line -> . let
+    (8) line -> . move
+    (9) line -> . moveList
+    (10) line -> . delay
+    (11) line -> . println
+    (12) line -> . break
+    (13) line -> . empty
+    (1) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
+    (14) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (15) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (16) while -> . WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
+    (17) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET line
+    (45) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
+    (46) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (18) let -> . LET ID ASSIGN operand SEMICOLON
+    (19) let -> . LET ID ASSIGN bool SEMICOLON line
+    (32) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
+    (33) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+    (36) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
+    (40) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
+    (41) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
+    (57) break -> . BREAK
+    (58) empty -> .
+
+    FN              shift and go to state 2
+    LOOP            shift and go to state 20
+    FOR             shift and go to state 21
+    WHILE           shift and go to state 22
+    IF              shift and go to state 23
+    LET             shift and go to state 24
+    MOVE            shift and go to state 25
+    DELAY           shift and go to state 26
+    PRINT           shift and go to state 27
+    BREAK           shift and go to state 28
+    RCRLBRACKET     reduce using rule 58 (empty -> .)
+
+    line                           shift and go to state 141
+    main                           shift and go to state 8
+    loop                           shift and go to state 9
+    for                            shift and go to state 10
+    while                          shift and go to state 11
+    if                             shift and go to state 12
+    let                            shift and go to state 13
+    move                           shift and go to state 14
+    moveList                       shift and go to state 15
+    delay                          shift and go to state 16
+    println                        shift and go to state 17
+    break                          shift and go to state 18
+    empty                          shift and go to state 19
+
+state 136
+
+    (26) opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .
+
+    EQEQ            reduce using rule 26 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
+    LTE             reduce using rule 26 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
+    GTE             reduce using rule 26 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
+    LT              reduce using rule 26 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
+    GT              reduce using rule 26 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
+    LCRLBRACKET     reduce using rule 26 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
+    SEMICOLON       reduce using rule 26 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
+    RPAREN          reduce using rule 26 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
+    COMMA           reduce using rule 26 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
+
+
+state 137
+
+    (33) moveList -> MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON . line
+    (2) line -> . main
+    (3) line -> . loop
+    (4) line -> . for
+    (5) line -> . while
+    (6) line -> . if
+    (7) line -> . let
+    (8) line -> . move
+    (9) line -> . moveList
+    (10) line -> . delay
+    (11) line -> . println
+    (12) line -> . break
+    (13) line -> . empty
+    (1) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
+    (14) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (15) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (16) while -> . WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
+    (17) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET line
+    (45) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
+    (46) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (18) let -> . LET ID ASSIGN operand SEMICOLON
+    (19) let -> . LET ID ASSIGN bool SEMICOLON line
+    (32) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
+    (33) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+    (36) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
+    (40) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
+    (41) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
+    (57) break -> . BREAK
+    (58) empty -> .
+
+    FN              shift and go to state 2
+    LOOP            shift and go to state 20
+    FOR             shift and go to state 21
+    WHILE           shift and go to state 22
+    IF              shift and go to state 23
+    LET             shift and go to state 24
+    MOVE            shift and go to state 25
+    DELAY           shift and go to state 26
+    PRINT           shift and go to state 27
+    BREAK           shift and go to state 28
+    RCRLBRACKET     reduce using rule 58 (empty -> .)
+
+    line                           shift and go to state 142
+    main                           shift and go to state 8
+    loop                           shift and go to state 9
+    for                            shift and go to state 10
+    while                          shift and go to state 11
+    if                             shift and go to state 12
+    let                            shift and go to state 13
+    move                           shift and go to state 14
+    moveList                       shift and go to state 15
+    delay                          shift and go to state 16
+    println                        shift and go to state 17
+    break                          shift and go to state 18
+    empty                          shift and go to state 19
+
+state 138
+
+    (15) for -> FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line .
+
+    RCRLBRACKET     reduce using rule 15 (for -> FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line .)
+
+
+state 139
+
+    (16) while -> WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line .
+
+    RCRLBRACKET     reduce using rule 16 (while -> WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line .)
+
+
+state 140
+
+    (47) elseif -> ELSEIF expression compare . expression LCRLBRACKET line RCRLBRACKET line
+    (48) elseif -> ELSEIF expression compare . expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (55) expression -> . operand
+    (56) expression -> . bool
+    (20) operand -> . INT
+    (21) operand -> . opera
+    (22) operand -> . ID
+    (23) bool -> . TRUE
+    (24) bool -> . FALSE
+    (25) bool -> . ID
+    (26) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+
+    INT             shift and go to state 37
+    ID              shift and go to state 39
+    TRUE            shift and go to state 40
+    FALSE           shift and go to state 41
+    OPERA           shift and go to state 42
+
+    expression                     shift and go to state 143
+    operand                        shift and go to state 35
+    bool                           shift and go to state 36
+    opera                          shift and go to state 38
+
+state 141
+
+    (49) else -> ELSE LCRLBRACKET line . RCRLBRACKET line
+
+    RCRLBRACKET     shift and go to state 144
+
+
+state 142
+
+    (33) moveList -> MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line .
+
+    RCRLBRACKET     reduce using rule 33 (moveList -> MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line .)
+
+
+state 143
+
+    (47) elseif -> ELSEIF expression compare expression . LCRLBRACKET line RCRLBRACKET line
+    (48) elseif -> ELSEIF expression compare expression . LCRLBRACKET line RCRLBRACKET elseiforelse
+
+    LCRLBRACKET     shift and go to state 145
+
+
+state 144
+
+    (49) else -> ELSE LCRLBRACKET line RCRLBRACKET . line
+    (2) line -> . main
+    (3) line -> . loop
+    (4) line -> . for
+    (5) line -> . while
+    (6) line -> . if
+    (7) line -> . let
+    (8) line -> . move
+    (9) line -> . moveList
+    (10) line -> . delay
+    (11) line -> . println
+    (12) line -> . break
+    (13) line -> . empty
+    (1) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
+    (14) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (15) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (16) while -> . WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
+    (17) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET line
+    (45) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
+    (46) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (18) let -> . LET ID ASSIGN operand SEMICOLON
+    (19) let -> . LET ID ASSIGN bool SEMICOLON line
+    (32) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
+    (33) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+    (36) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
+    (40) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
+    (41) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
+    (57) break -> . BREAK
+    (58) empty -> .
+
+    FN              shift and go to state 2
+    LOOP            shift and go to state 20
+    FOR             shift and go to state 21
+    WHILE           shift and go to state 22
+    IF              shift and go to state 23
+    LET             shift and go to state 24
+    MOVE            shift and go to state 25
+    DELAY           shift and go to state 26
+    PRINT           shift and go to state 27
+    BREAK           shift and go to state 28
+    RCRLBRACKET     reduce using rule 58 (empty -> .)
+
+    line                           shift and go to state 146
+    main                           shift and go to state 8
+    loop                           shift and go to state 9
+    for                            shift and go to state 10
+    while                          shift and go to state 11
+    if                             shift and go to state 12
+    let                            shift and go to state 13
+    move                           shift and go to state 14
+    moveList                       shift and go to state 15
+    delay                          shift and go to state 16
+    println                        shift and go to state 17
+    break                          shift and go to state 18
+    empty                          shift and go to state 19
+
+state 145
+
+    (47) elseif -> ELSEIF expression compare expression LCRLBRACKET . line RCRLBRACKET line
+    (48) elseif -> ELSEIF expression compare expression LCRLBRACKET . line RCRLBRACKET elseiforelse
+    (2) line -> . main
+    (3) line -> . loop
+    (4) line -> . for
+    (5) line -> . while
+    (6) line -> . if
+    (7) line -> . let
+    (8) line -> . move
+    (9) line -> . moveList
+    (10) line -> . delay
+    (11) line -> . println
+    (12) line -> . break
+    (13) line -> . empty
+    (1) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
+    (14) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (15) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (16) while -> . WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
+    (17) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET line
+    (45) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
+    (46) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (18) let -> . LET ID ASSIGN operand SEMICOLON
+    (19) let -> . LET ID ASSIGN bool SEMICOLON line
+    (32) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
+    (33) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+    (36) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
+    (40) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
+    (41) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
+    (57) break -> . BREAK
+    (58) empty -> .
+
+    FN              shift and go to state 2
+    LOOP            shift and go to state 20
+    FOR             shift and go to state 21
+    WHILE           shift and go to state 22
+    IF              shift and go to state 23
+    LET             shift and go to state 24
+    MOVE            shift and go to state 25
+    DELAY           shift and go to state 26
+    PRINT           shift and go to state 27
+    BREAK           shift and go to state 28
+    RCRLBRACKET     reduce using rule 58 (empty -> .)
+
+    line                           shift and go to state 147
+    main                           shift and go to state 8
+    loop                           shift and go to state 9
+    for                            shift and go to state 10
+    while                          shift and go to state 11
+    if                             shift and go to state 12
+    let                            shift and go to state 13
+    move                           shift and go to state 14
+    moveList                       shift and go to state 15
+    delay                          shift and go to state 16
+    println                        shift and go to state 17
+    break                          shift and go to state 18
+    empty                          shift and go to state 19
+
+state 146
+
+    (49) else -> ELSE LCRLBRACKET line RCRLBRACKET line .
+
+    RCRLBRACKET     reduce using rule 49 (else -> ELSE LCRLBRACKET line RCRLBRACKET line .)
+
+
+state 147
+
+    (47) elseif -> ELSEIF expression compare expression LCRLBRACKET line . RCRLBRACKET line
+    (48) elseif -> ELSEIF expression compare expression LCRLBRACKET line . RCRLBRACKET elseiforelse
+
+    RCRLBRACKET     shift and go to state 148
+
+
+state 148
+
+    (47) elseif -> ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET . line
+    (48) elseif -> ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET . elseiforelse
+    (2) line -> . main
+    (3) line -> . loop
+    (4) line -> . for
+    (5) line -> . while
+    (6) line -> . if
+    (7) line -> . let
+    (8) line -> . move
+    (9) line -> . moveList
+    (10) line -> . delay
+    (11) line -> . println
+    (12) line -> . break
+    (13) line -> . empty
+    (43) elseiforelse -> . elseif
+    (44) elseiforelse -> . else
+    (1) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
+    (14) loop -> . LOOP LCRLBRACKET line RCRLBRACKET line
+    (15) for -> . FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    (16) while -> . WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
+    (17) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET line
+    (45) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET line
+    (46) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (18) let -> . LET ID ASSIGN operand SEMICOLON
+    (19) let -> . LET ID ASSIGN bool SEMICOLON line
+    (32) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
+    (33) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+    (36) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
+    (40) println -> . PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
+    (41) println -> . PRINT EXPR LPAREN ID RPAREN SEMICOLON line
+    (57) break -> . BREAK
+    (58) empty -> .
+    (47) elseif -> . ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET line
+    (48) elseif -> . ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    (49) else -> . ELSE LCRLBRACKET line RCRLBRACKET line
+
+    FN              shift and go to state 2
+    LOOP            shift and go to state 20
+    FOR             shift and go to state 21
+    WHILE           shift and go to state 22
+    IF              shift and go to state 23
+    LET             shift and go to state 24
+    MOVE            shift and go to state 25
+    DELAY           shift and go to state 26
+    PRINT           shift and go to state 27
+    BREAK           shift and go to state 28
+    RCRLBRACKET     reduce using rule 58 (empty -> .)
+    ELSEIF          shift and go to state 126
+    ELSE            shift and go to state 127
+
+    line                           shift and go to state 149
+    elseiforelse                   shift and go to state 150
+    main                           shift and go to state 8
+    loop                           shift and go to state 9
+    for                            shift and go to state 10
+    while                          shift and go to state 11
+    if                             shift and go to state 12
+    let                            shift and go to state 13
+    move                           shift and go to state 14
+    moveList                       shift and go to state 15
+    delay                          shift and go to state 16
+    println                        shift and go to state 17
+    break                          shift and go to state 18
+    empty                          shift and go to state 19
+    elseif                         shift and go to state 124
+    else                           shift and go to state 125
+
+state 149
+
+    (47) elseif -> ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET line .
+
+    RCRLBRACKET     reduce using rule 47 (elseif -> ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET line .)
+
+
+state 150
+
+    (48) elseif -> ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse .
+
+    RCRLBRACKET     reduce using rule 48 (elseif -> ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: reduce/reduce conflict in state 32 resolved using rule (operand -> ID)
-WARNING: rejected rule (bool -> ID) in state 32
+WARNING: reduce/reduce conflict in state 39 resolved using rule (operand -> ID)
+WARNING: rejected rule (bool -> ID) in state 39
