@@ -28,7 +28,7 @@ class SymbolsTable:
 
     def insertValue(self, value, name):
         exist = False
-        print("SOY EL VALUE ----> "+ str(value))  #let sum = 43  ---> let sum1 = sum
+        print("SOY EL VALUE ----> "+ str(value))
         for var in self.table:
             if var == name:
                 if self.table[name]["value"] == None:

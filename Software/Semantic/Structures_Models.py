@@ -1,12 +1,15 @@
 from Hardware.Robotic_Hand.Translator import Translator
 from Software.Semantic.reserved import *
 from Software.Semantic.Generate_Error import *
+from Software.Semantic.BooleanValue import *
 class Let:
     def __init__(self, id, value, line):
         self.id = id
         self.value = value  # Let num = 42;   # Let num = True;
         self.line = line
         print("SE HA REGISTRADO EL LET  " + self.id + " CON EL VALOR DE " + str(self.value) + " EN LA LINEA " + str(self.line))
+
+
 
 class Del:
     def __init__(self, value, unit , line):
@@ -15,7 +18,7 @@ class Del:
         self.line = line
 
         self.checker = MoveDelayCheck(self.unit)
-        if self.checker.check():
+        if self.checker.check_units():
             print("SE HA REGISTRADO EL DELAY CON DURACION DE " + str(self.value) + " " + self.unit +  " EN LA LINEA " + str(self.line))
             t = Translator()
             t.Create_Delay(self.value,self.unit)
@@ -76,15 +79,54 @@ class While:
         print("WHILE")
 
 class Move:
-    def __init__(self, finger, movement, line):
+    def __init__(self, finger, movement,symbol_table, line):
         self.finger = finger
         self.movement = movement
+        self.final_movement = None
         self.line = line
+        self.table = symbol_table
+        print(self.table)
         self.checker = MoveDelayCheck(self.finger)
-        if isinstance(finger, list):
-            print("SOY UNA LISTA DE DEDOS: " + str(finger))
-        elif self.checker.check():
-            print("SE HA REGISTRADO EL METODO MOVE CON MOVIMIENTO " + str(self.movement) + " EN EL DEDO " + str(self.finger) + " EN LA LINEA " + str(self.line))
+
+        '''
+        MOVEMENT ANALYSIS
+        '''
+        if isinstance(validate_real_bool(movement), bool):
+            self.final_movement = validate_bool(movement)
+        else:
+            for var in self.table:
+                print("ENTRE AL FOR")
+                if var == movement:
+                    if isinstance(validate_real_bool(self.table[self.movement]["value"]),bool):
+                        self.final_movement = self.table[self.movement]["value"]
+                        print("EL VALOR DE FINAL MOVEMENT COMO ---> " + self.final_movement)
+                        break
+                    else:
+                        errorHandler = Generate_Error(12, self.line)
+                        errorHandler.Execute()
+
+            if self.final_movement == None:
+                errorHandler = Generate_Error(5, self.line)
+                errorHandler.Execute()
+        '''
+        FINGER ANALYSIS
+        '''
+        if isinstance(finger, list): # SI INGRESA UNA LISTA DE DEDOS
+            if self.checker.check_fingers():
+                t = Translator()
+                cont = 0
+                while(cont < len(finger)):
+                    t.Create_Move(finger[cont], self.final_movement)
+                    cont += 1
+            else:
+                errorHandler = Generate_Error(11, self.line)
+                errorHandler.Execute()
+
+        elif self.checker.check_fingers(): # SI NO ES LISTA
+            print("SE HA REGISTRADO EL METODO MOVE CON MOVIMIENTO " + str(self.final_movement) + " EN EL DEDO " + str(self.finger) + " EN LA LINEA " + str(self.line))
+            t = Translator()
+            t.Create_Move(self.finger,self.final_movement)
         else:
             errorHandler = Generate_Error(10, self.line)
             errorHandler.Execute()
+

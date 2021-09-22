@@ -91,14 +91,14 @@ def p_move(p):
     move : MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
     '''
     line = p.lineno(2)
-    p[0] = Move(p[3], p[5], line)
+    p[0] = Move(p[3], p[5],myTable.table, line)
 
 def p_moveList(p):
     '''
     moveList : MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
     '''
     line = p.lineno(2)
-    p[0] = Move(p[4], p[7], line)
+    p[0] = Move(p[4], p[7],myTable.table,line)
 
 def p_fingerList(p):
     '''
@@ -198,7 +198,7 @@ REGLAS PARA LET
 '''
 def p_let(p):
     '''
-    let : LET ID ASSIGN operand SEMICOLON line
+    let : LET ID ASSIGN operand SEMICOLON
         | LET ID ASSIGN bool SEMICOLON line
     '''
     line = p.lineno(2)
