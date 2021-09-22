@@ -24,22 +24,17 @@ def p_main(p):
 def p_program(p):
     '''
     line : main
-         | loop
-         | for
-         | while
-         | if
-         | let
-         | move
-         | moveList
-         | delay
-         | println
-         | break
+         | loop line
+         | for line
+         | while line
+         | if line
+         | let line
+         | move line
+         | moveList line
+         | delay line
+         | println line
+         | break line
          | empty
-    '''
-
-def p_main(p):
-    '''
-    main : FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
     '''
 
 '''
@@ -49,7 +44,7 @@ REGLAS PARA LOOP
 '''
 def p_loop(p):
     '''
-    loop : LOOP LCRLBRACKET line RCRLBRACKET line
+    loop : LOOP LCRLBRACKET line RCRLBRACKET
     '''
     line = p.lineno(2)
     p[0] = Loop(line)
@@ -62,7 +57,7 @@ REGLAS PARA FOR
 
 def p_for(p):
     '''
-    for : FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET line
+    for : FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET
     '''
     line = p.lineno(2)
     p[0] = For(p[2], p[4], p[5], p[6], line)
@@ -75,8 +70,8 @@ REGLAS PARA WHILE
 
 def p_while(p):
     '''
-    while : WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
-          | WHILE TRUE LCRLBRACKET line RCRLBRACKET line
+    while : WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET
+          | WHILE TRUE LCRLBRACKET line RCRLBRACKET
     '''
     line = p.lineno(2)
     p[0] = While(line)
@@ -88,14 +83,14 @@ REGLAS PARA MOVE
 '''
 def p_move(p):
     '''
-    move : MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON line
+    move : MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON
     '''
     line = p.lineno(2)
     p[0] = Move(p[3], p[5], line)
 
 def p_moveList(p):
     '''
-    moveList : MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
+    moveList : MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON
     '''
     line = p.lineno(2)
     p[0] = Move(simpleListBuilder().createList(p[4]), p[7], line)
@@ -115,7 +110,7 @@ REGLAS PARA DELAY
 
 def p_delay(p):
     '''
-    delay : DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
+    delay : DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON
     '''
     line = p.lineno(2)
     p[0] = Del(p[3],p[5],line)
@@ -134,10 +129,8 @@ REGLAS PARA PRINTLN!
 '''
 def p_println(p):
     '''
-    println : PRINT EXPR LPAREN STRING RPAREN SEMICOLON line
-            | PRINT EXPR LPAREN ID RPAREN SEMICOLON line
-
-
+    println : PRINT EXPR LPAREN STRING RPAREN SEMICOLON
+            | PRINT EXPR LPAREN ID RPAREN SEMICOLON
     '''
     line = p.lineno(2)
     p[0] = Print(p[4], line)
@@ -161,7 +154,7 @@ def p_elseiforelse(p):
 
 def p_if(p):
     '''
-    if : IF expression compare expression LCRLBRACKET line RCRLBRACKET line
+    if : IF expression compare expression LCRLBRACKET line RCRLBRACKET
        | IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
     '''
 
@@ -198,11 +191,11 @@ REGLAS PARA LET
 '''
 def p_let(p):
     '''
-    let : LET ID ASSIGN operand SEMICOLON line
-        | LET ID ASSIGN bool SEMICOLON line
+    let : LET ID ASSIGN operand SEMICOLON
+        | LET ID ASSIGN bool SEMICOLON
     '''
     line = p.lineno(2)
-    myTable.insertValue(p[4],p[2])
+    myTable.insertValue(p[4], p[2])
     p[0] = Let(p[2], p[4], line)
 
 '''

@@ -1,11 +1,19 @@
-fn main() {
-    let hola = True;
-    let dfghf = 454;
-    for cifra in 1..11 {
-        let var1 = Opera(-, Opera(+, 2, Opera(*, 3, 4)), 4);
-        let var2 = 90;
-        let var7 = var2;
+fn main(){
+    while True{
+        Move(["P", "A", "I"], True);
+        Delay(5, "Seg");
+        if hola == True {
+            let var1 = true;
+            let var2 = false;
+        }
+        elseif hola == 23{
+            let var3 = true;
+        } else {
+            let var4 = false;
+        }
+        break
+        Println!("Hola Mundo");
     }
-
-    Move("P", True);
+    let sum = true;
+    let res = false;
 }

@@ -4,7 +4,7 @@ from Software.Syntactic.SyntacticAnalizer import *
 
 
 def lex_test():
-    sourceFile = "../Lexical_Analysis/test.txt"
+    sourceFile = "../Lexical_Analysis/source.txt"
     if sourceFile is not None:
         with open(sourceFile, 'r') as file:
             print("Entrando al lexer...")
