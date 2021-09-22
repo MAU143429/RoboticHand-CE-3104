@@ -18,11 +18,18 @@ class SymbolsTable:
     def insertToken(self, key, name):
         key = str(key)
         if key == "ID":
-            self.table[name] = {
-                "type": None,
-                "value": None,
-                "scope": None,
-            }
+            exist = False
+            for var in self.table:
+                if var == name:
+                    exist = True
+                    break
+            if not exist:
+                self.table[name] = {
+                    "type": None,
+                    "value": None,
+                    "scope": None,
+                }
+                print("Soy: " + str(name))
 
         elif key == "MAIN":
             self.mainCounter += 1
