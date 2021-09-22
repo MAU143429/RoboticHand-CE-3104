@@ -3,11 +3,49 @@ from Software.Semantic.reserved import *
 from Software.Semantic.Generate_Error import *
 from Software.Semantic.BooleanValue import *
 class Let:
-    def __init__(self, id, value, line):
+    def __init__(self, id, value, symbol_table, line):
         self.id = id
-        self.value = value  # Let num = 42;   # Let num = True;
+        self.value = value  # Let num = var1;   # Let num = True;
         self.line = line
+        self.table = symbol_table
         print("SE HA REGISTRADO EL LET  " + self.id + " CON EL VALOR DE " + str(self.value) + " EN LA LINEA " + str(self.line))
+
+        '''
+        EXISTANCE ANALYSIS
+        '''
+        if isinstance(self.value, int):
+            self.table[self.id]["value"] = self.value
+
+        elif isinstance(validate_real_bool(self.value), bool):
+            self.table[self.id]["value"] = validate_bool(self.value)
+        else:
+            for var in self.table:
+                if var == str(id):
+                    found2 = False
+                    for var2 in self.table:
+                        if var2 == str(value):
+                            if (self.table[self.value]["type"]) != (self.table[self.id]["type"]):
+                                errorHandler = Generate_Error(4, self.line)
+                                errorHandler.Execute()
+                            else:
+                                found2 = True
+                                self.table[self.id]["value"] = self.table[self.value]["value"]
+                                print("SE HA REGISTRADO EL LET  " + self.id + " CON EL VALOR DE " + str(self.value) + " EN LA LINEA " + str(self.line))
+                                break
+                        else:
+                            pass
+                else:
+                    found3 = False
+                    for var2 in self.table:
+                        if var2 == str(value):
+                            found3 = True
+                            self.table.insertValue(self.table[self.value]["value"], str(self.id), self.line)
+                    if not found3:
+                        errorHandler = Generate_Error(5, self.line)
+                        errorHandler.Execute()
+
+
+
 
 
 

@@ -2,6 +2,8 @@ from Software.Lexical_Analysis.Tokenize import *
 from Software.Semantic.BooleanValue import validate_bool
 import pprint
 
+from Software.Semantic.Generate_Error import Generate_Error
+
 
 class SymbolsTable:
     def __init__(self):
@@ -30,7 +32,7 @@ class SymbolsTable:
         else:
             pass
 
-    def insertValue(self, value, name):
+    def insertValue(self, value, name, line):
         exist = False
         print("SOY EL VALUE ----> "+ str(value))
         for var in self.table:
@@ -43,16 +45,23 @@ class SymbolsTable:
         if not exist:
             t_value = value
             for var in self.table:
+                # let sum = 49;
+                # let sum = var1;
                 if var == str(value):
                     new_value = self.table[var]["value"]
                     t_value = new_value
 
-            if validate_bool(t_value):
-                self.table[name]["value"] = validate_bool(t_value)
-                self.table[name]["type"] = bool
+            if t_value == value:
+                errorHandler = Generate_Error(5, self.line)
+                errorHandler.Execute()
+
             else:
-                self.table[name]["value"] = t_value
-                self.table[name]["type"] = int
+                if validate_bool(t_value):
+                    self.table[name]["value"] = validate_bool(t_value)
+                    self.table[name]["type"] = bool
+                else:
+                    self.table[name]["value"] = t_value
+                    self.table[name]["type"] = int
 
 
 

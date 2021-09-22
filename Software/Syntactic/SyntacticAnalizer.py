@@ -194,9 +194,10 @@ def p_let(p):
     let : LET ID ASSIGN operand SEMICOLON
         | LET ID ASSIGN bool SEMICOLON
     '''
+
     line = p.lineno(2)
-    myTable.insertValue(p[4], p[2])
-    p[0] = Let(p[2], p[4], line)
+    myTable.insertValue(p[4],p[2], line)
+    p[0] = Let(p[2], p[4], line, myTable.table)
 
 '''
 ###########################################################################
