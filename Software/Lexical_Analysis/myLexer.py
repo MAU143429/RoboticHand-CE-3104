@@ -27,6 +27,10 @@ def lex_test():
             myTable.printTable()
             print("Saliendo del parser...")
             print("TERMINE DE COMPILAR")
+            print(" \n *********** ERRORES DE COMPILACION *********** \n")
+            error = ErrorLog()
+            error.print()
+            print(" \n ******************* FIN ********************** \n")
 
     else:
         print("ESTA VACIO")

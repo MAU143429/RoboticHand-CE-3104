@@ -8,6 +8,10 @@ class SymbolsTable:
         self.table = {}
         self.mainCounter = 0
 
+    def Clean(self):
+        self.table = {}
+        self.mainCounter = 0
+
     def insertToken(self, key, name):
         key = str(key)
         if key == "ID":

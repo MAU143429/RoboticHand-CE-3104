@@ -95,11 +95,14 @@ class Ui_MainWindow(object):
         self.save()
         time.sleep(1)
         t = Translator()
+        t.Clean()
         error = ErrorLog()
         error.clean()
-        t.Clean()
+        myTable.Clean()
         lex_test()
         if error.log != "":
+            print(" \n ERRORES DE COMPILACION \n")
+            error.print()
             self.output.setPlainText(error.print())
         else:
             print("NO HAY ERRORES")
@@ -109,9 +112,10 @@ class Ui_MainWindow(object):
         #self.output.setPlainText(self.codeEditor.toPlainText())
         time.sleep(1)
         t = Translator()
+        t.Clean()
         error = ErrorLog()
         error.clean()
-        t.Clean()
+        myTable.Clean()
         lex_test()
         print("VOY A EJECUTAR EL CODIGO")
         if error.log != "":

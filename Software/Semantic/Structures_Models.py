@@ -12,11 +12,11 @@ class Let:
 
 
 class Del:
-    def __init__(self, value, unit , line):
+    def __init__(self, value, unit ,table, line):
         self.value = value
         self.unit = unit
         self.line = line
-
+        self.table = table
         self.checker = MoveDelayCheck(self.unit)
         if self.checker.check_units():
             print("SE HA REGISTRADO EL DELAY CON DURACION DE " + str(self.value) + " " + self.unit +  " EN LA LINEA " + str(self.line))
@@ -24,7 +24,6 @@ class Del:
             t.Create_Delay(self.value,self.unit)
         else:
             e_msg = "SYNTAX ERROR AT LINE " + str(self.line) + ". INVALID TIME SUFFIX"
-            #print(e_msg)
             errorHandler = Generate_Error(9, self.line)
             errorHandler.Execute()
 

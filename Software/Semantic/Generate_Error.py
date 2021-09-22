@@ -77,5 +77,10 @@ class Generate_Error:
             parser.syntax_error = True
             self.error.log_error(e_msg)
 
+        if self.code == 13:
+            e_msg = "SEMANTIC ERROR AT LINE " + str(self.line) + ". INVALID TIME VALUE"
+            parser.syntax_error = True
+            self.error.log_error(e_msg)
+
         
         

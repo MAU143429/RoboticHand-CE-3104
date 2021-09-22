@@ -1,6 +1,7 @@
 fn main(){
 
-    Move("P",true);
+    Move(["P","A","M","s","A"],true);
+    Delay(1000,"Mil");
     Move("T",sum);
     Move("I",res);
     Move("M",true);

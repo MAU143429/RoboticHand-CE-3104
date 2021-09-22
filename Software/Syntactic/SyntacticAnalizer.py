@@ -118,7 +118,7 @@ def p_delay(p):
     delay : DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON line
     '''
     line = p.lineno(2)
-    p[0] = Del(p[3],p[5],line)
+    p[0] = Del(p[3],p[5],myTable.table,line)
 
 def p_unit(p):
     '''
@@ -255,6 +255,8 @@ def p_error(p):
         token = f"{p.type}({p.value}) on line {p.lineno}"
 
     print(f"Syntax error: Unexpected {token}")
+    error = ErrorLog()
+    error.log_error(f"Syntax error: Unexpected {token}")
     
 def p_empty(p):
     '''
