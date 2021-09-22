@@ -70,6 +70,11 @@ class For:
         self.line = line
         print("FOR")
 
+class While:
+    def __init__(self, line):
+        self.line = line
+        print("WHILE")
+
 class Move:
     def __init__(self, finger, movement, line):
         self.finger = finger

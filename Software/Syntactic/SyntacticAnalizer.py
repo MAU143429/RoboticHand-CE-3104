@@ -23,15 +23,23 @@ def p_main(p):
 
 def p_program(p):
     '''
-    line : loop
+    line : main
+         | loop
          | for
+         | while
          | if
          | let
          | move
          | moveList
          | delay
          | println
+         | break
          | empty
+    '''
+
+def p_main(p):
+    '''
+    main : FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
     '''
 
 '''
@@ -58,6 +66,20 @@ def p_for(p):
     '''
     line = p.lineno(2)
     p[0] = For(p[2], p[4], p[5], p[6], line)
+
+'''
+###########################################################################
+REGLAS PARA WHILE
+###########################################################################
+'''
+
+def p_while(p):
+    '''
+    while : WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET line
+          | WHILE TRUE LCRLBRACKET line RCRLBRACKET line
+    '''
+    line = p.lineno(2)
+    p[0] = While(line)
 
 '''
 ###########################################################################
@@ -221,6 +243,10 @@ def p_expression_bool(p):
     '''
     p[0] = p[1]
 
+def p_break(p):
+    '''
+    break : BREAK
+    '''
 
 def p_error(p):
     if p == None:
