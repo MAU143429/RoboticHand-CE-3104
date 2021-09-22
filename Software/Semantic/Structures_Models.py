@@ -130,3 +130,12 @@ class Move:
             errorHandler = Generate_Error(10, self.line)
             errorHandler.Execute()
 
+class simpleListBuilder:
+    def createList(self, fingers):
+        simpleList = []
+        for i in fingers:
+            if isinstance(i, list):
+                simpleList += self.createList(i)
+            else:
+                simpleList.append(i)
+        return simpleList

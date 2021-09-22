@@ -98,7 +98,7 @@ def p_moveList(p):
     moveList : MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON line
     '''
     line = p.lineno(2)
-    p[0] = Move(p[4], p[7],myTable.table,line)
+    p[0] = Move(simpleListBuilder().createList(p[4]), p[7], myTable.table,line)
 
 def p_fingerList(p):
     '''
