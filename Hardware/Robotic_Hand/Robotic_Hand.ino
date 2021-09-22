@@ -105,6 +105,14 @@ void Create_delays(int timer, String unit){
 int pos1,pos2,pos3,delay_time;
 String cad,action,unit,finger,status_mov;
 void loop() {
+
+  
+
+  servo1.write(0);
+  servo2.write(0);
+  servo3.write(0);
+  servo4.write(180);
+  servo5.write(180);
   
   if(Serial.available()){
     tone (salida,6000,400);

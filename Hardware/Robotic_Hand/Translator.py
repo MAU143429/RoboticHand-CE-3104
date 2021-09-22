@@ -3,11 +3,6 @@ import time
 import os
 
 class Translator:
-
-    def __init__(self):
-        print("LOAD INFO....")
-
-
     def Read(self,num):
         msg = []
         with open('../../Software/Lexical_Analysis/test.txt') as f:

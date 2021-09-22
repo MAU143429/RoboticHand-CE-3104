@@ -93,14 +93,13 @@ class Ui_MainWindow(object):
 
     def compile(self):
         self.save()
-
         time.sleep(1)
         t = Translator()
         error = ErrorLog()
         error.clean()
         t.Clean()
         lex_test()
-        if error.log != " ":
+        if error.log != "":
             self.output.setPlainText(error.print())
         else:
             print("NO HAY ERRORES")
@@ -114,7 +113,8 @@ class Ui_MainWindow(object):
         error.clean()
         t.Clean()
         lex_test()
-        if error.log != " ":
+        print("VOY A EJECUTAR EL CODIGO")
+        if error.log != "":
             error.print()
         else:
             print("VOY A ENVIAR LOS ARCHIVOS LA MANO")

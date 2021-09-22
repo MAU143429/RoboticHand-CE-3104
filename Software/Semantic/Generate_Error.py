@@ -63,7 +63,17 @@ class Generate_Error:
             self.error.log_error(e_msg)
 
         if self.code == 10:
-            e_msg = "SYNTAX ERROR AT LINE " + str(self.line) + ". INVALID FINGER KEYWORD"
+            e_msg = "SEMANTIC ERROR AT LINE " + str(self.line) + ". INVALID FINGER KEYWORD"
+            parser.syntax_error = True
+            self.error.log_error(e_msg)
+
+        if self.code == 11:
+            e_msg = "SEMANTIC ERROR AT LINE " + str(self.line) + ". INVALID FINGER IN A LIST"
+            parser.syntax_error = True
+            self.error.log_error(e_msg)
+
+        if self.code == 12:
+            e_msg = "SEMANTIC ERROR AT LINE " + str(self.line) + ". INVALID MOVEMENT VALUE"
             parser.syntax_error = True
             self.error.log_error(e_msg)
 

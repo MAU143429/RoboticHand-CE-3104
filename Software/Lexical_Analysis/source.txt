@@ -1,11 +1,8 @@
-fn main() {
-    let hola = True;
-    let dfghf = 454;
-    for cifra in 1..11 {
-        let var1 = Opera(-, Opera(+, 2, Opera(*, 3, 4)), 4);
-        let var2 = 90;
-        let var7 = var2;
-    }
-
-    Move("P", True);
+fn main(){
+    Move("P",true);
+    Move("T",sum);
+    Move("I",res);
+    Move("M",true);
+    let sum = true;
+    let res = false;
 }

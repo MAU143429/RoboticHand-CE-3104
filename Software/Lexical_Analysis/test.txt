@@ -1,1 +1,6 @@
+mov,"P";true/
+mov,"T";true/
+mov,"I";false/
+mov,"M";true/
+
 
