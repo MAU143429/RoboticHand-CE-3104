@@ -18,15 +18,12 @@ semantic_error = False
 myTable = SymbolsTable()
 
 
-def p_main(p):
-    '''
-    main : FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
-    '''
+
 
 
 def p_program(p):
     '''
-    line : main
+    line : main line
          | loop line
          | for line
          | while line
@@ -40,6 +37,10 @@ def p_program(p):
          | empty
     '''
 
+def p_main(p):
+    '''
+    main : FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
+    '''
 
 '''
 ###########################################################################
@@ -235,8 +236,11 @@ def p_compare(p):
 
 def p_expressions(p):
     '''
-    expression : operand
-               | bool
+    expression : INT
+               | TRUE
+               | FALSE
+               | opera
+               | ID
     '''
 
 
