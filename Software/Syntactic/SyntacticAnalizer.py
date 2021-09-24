@@ -199,8 +199,6 @@ def p_text(p):
 REGLAS PARA IF, ELSE IF and ELSE
 ###########################################################################
 '''
-
-
 def p_elseiforelse(p):
     '''
     elseiforelse : elseif line
@@ -213,7 +211,8 @@ def p_if(p):
     '''
     if : IF expression compare expression LCRLBRACKET line RCRLBRACKET
     '''
-    p[0] = If(p[2], p[3], p[4]).Comparison()
+    line = p.lineno(1)
+    p[0] = If(p[2], p[3], p[4], myTable.table, line).Comparison()
     print("if")
 
 def p_elseif(p):

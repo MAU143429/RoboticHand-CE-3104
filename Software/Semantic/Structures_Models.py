@@ -70,39 +70,48 @@ class Print:
 
 
 class If:
-    def __init__(self, expression1, comparisonSymbol, expression2, symbol_table):
+    def __init__(self, expression1, comparisonSymbol, expression2, symbol_table, line):
         self.expression1 = expression1
         self.comparisonSymbol = comparisonSymbol
         self.expression2 = expression2
         self.table = symbol_table
+        self.line = line
 
     def Comparison(self):
-        if isinstance(validate_real_bool(self.expression1), bool) and isinstance(validate_real_bool(self.expression2), bool):
+        if not isinstance(validate_real_bool(self.expression1), bool) or isinstance(self.expression1, int):
+            for var in self.table:
+                if (var == self.expression1):
+                    self.expression1 = self.table[var]["value"]
+        if not isinstance(validate_real_bool(self.expression2), bool) or isinstance(self.expression2, int):
+            for var in self.table:
+                if (var == self.expression2):
+                    self.expression2 = self.table[var]["value"]
+        self.Operate(self.expression1, self.expression2)
+
+    def Operate(self, var1, var2):
+        if isinstance(validate_real_bool(var1), bool) and isinstance(validate_real_bool(var2), bool):
             if (self.comparisonSymbol == "=="):
-                if (self.expression1 == self.expression2):
+                if (var1 == var2):
                     print("true")
-        elif isinstance(self.expression1, int) and isinstance(self.expression2, int):
-            self.Operate()
+        elif isinstance(var1, int) and isinstance(var2, int):
+            if (self.comparisonSymbol == "=="):
+                if (var1 == var2):
+                    print("true")
+            elif (self.comparisonSymbol == ">="):
+                if (var1 >= var2):
+                    print("true")
+            elif (self.comparisonSymbol == "<="):
+                if (var1 <= var2):
+                    print("true")
+            elif (self.comparisonSymbol == ">"):
+                if (var1 > var2):
+                    print("true")
+            else:
+                if (var1 < var2):
+                    print("true")
         else:
-
-            print("Soy una variable")
-
-    def Operate(self):
-        if (self.comparisonSymbol == "=="):
-            if (self.expression1 == self.expression2):
-                print("true")
-        elif (self.comparisonSymbol == ">="):
-            if (self.expression1 >= self.expression2):
-                print("true")
-        elif (self.comparisonSymbol == "<="):
-            if (self.expression1 <= self.expression2):
-                print("true")
-        elif (self.comparisonSymbol == ">"):
-            if (self.expression1 > self.expression2):
-                print("true")
-        else:
-            if (self.expression1 < self.expression2):
-                print("true")
+            errorHandler = Generate_Error(14, self.line)
+            errorHandler.Execute()
 
 class Opera:
     def __init__(self, operator, operand, operand2, line):

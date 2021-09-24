@@ -82,5 +82,9 @@ class Generate_Error:
             parser.syntax_error = True
             self.error.log_error(e_msg)
 
+        if self.code == 14:
+            e_msg = "SEMANTIC ERROR AT LINE " + str(self.line) + ". CAN´T COMPARE AN INTEGER WITH A BOOLEAN"
+            parser.syntax_error = True
+            self.error.log_error(e_msg)
         
         
