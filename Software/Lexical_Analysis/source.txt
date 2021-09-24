@@ -3,5 +3,12 @@ fn main(){
     let hola = 49;
     let var = sum;
     let hola = sum;
+    Println!(var3, var2, "patooooo");
+}
 
+fn main(){
+    let sum1 = true;
+    let hola1 = 49;
+    let var1 = sum;
+    let hola1 = sum;
 }
