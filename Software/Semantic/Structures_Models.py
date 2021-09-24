@@ -48,10 +48,26 @@ class Del:
             errorHandler.Execute()
 
 class Print:
-    def __init__(self, value, line):
+    def __init__(self, value, line, myTable):
         self.value = value
         self.line = line
-        print("SE IMPRIMIRA EN LA CONSOLA -->  " + str(self.value) + " EN LA LINEA " + str(self.line))
+        self.table = myTable
+        self.stringsList = myTable.getStringList()
+        self.printLogger = ""
+        self.printChecking()
+
+        print("SE IMPRIMIRA EN LA CONSOLA -->  " + str(self.printLogger) + " DESDE LA LINEA " + str(self.line))
+
+    def printChecking(self):
+
+        for var in self.value:
+            if var in self.stringsList:
+                self.printLogger = self.printLogger + var[1:-1]
+            else:
+                self.printLogger = self.printLogger + str(self.table.getValue(var, self.line))
+
+
+
 
 class If:
     def __init__(self, expression1, comparisonSymbol, expression2, symbol_table):
@@ -191,3 +207,4 @@ class simpleListBuilder:
             else:
                 simpleList.append(i)
         return simpleList
+

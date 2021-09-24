@@ -18,9 +18,18 @@ def lex_test():
             clone = lexer.clone()
             clone.input(source)
 
-            for token in clone:
+            error = ErrorLog()
 
+            for token in clone:
+                if myTable.mainCounter > 1:
+                    error_text = "Lexical error at line " + str(token.lineno) + " There can only be one main function"
+                    error.log_error(error_text)
+                    return
                 myTable.insertToken(token.type, token.value)
+
+
+
+            print("esta es mi tabla")
             myTable.printTable()
             parser = yacc.yacc()
             parser.parse(source)
@@ -28,7 +37,7 @@ def lex_test():
             print("Saliendo del parser...")
             print("TERMINE DE COMPILAR")
             print(" \n *********** ERRORES DE COMPILACION *********** \n")
-            error = ErrorLog()
+
             error.print()
             print(" \n ******************* FIN ********************** \n")
 
