@@ -156,7 +156,10 @@ def p_println(p):
 
     '''
     line = p.lineno(2)
-    p[0] = Print(simpleListBuilder().createList(p[4]), line)
+    if isinstance(p[4], list):
+        p[0] = Print(simpleListBuilder().createList(p[4]), line, myTable)
+    else:
+        p[0] = Print([p[4]], line)
 
 
 def p_args(p):

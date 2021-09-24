@@ -10,10 +10,25 @@ class SymbolsTable:
         self.table = {}
         self.mainCounter = 0
         self.exist = False
+        self.stringList = []
 
     def Clean(self):
         self.table = {}
         self.mainCounter = 0
+
+    def getValue(self, name, line):
+        found = False
+        for key in self.table:
+            if key == name:
+                found = True
+                return self.table[name]["value"]
+            else:
+                found = False
+        if not found:
+            errorHandler = Generate_Error(5, line)
+            errorHandler.Execute()
+    def getStringList(self):
+        return self.stringList
 
     def insertToken(self, key, name):
         key = str(key)
@@ -37,6 +52,9 @@ class SymbolsTable:
                 "cantidad": self.mainCounter,
                 "Scope": "Main block",
             }
+        elif key == "STRING":
+            self.stringList = self.stringList + [name]
+            self.table["strings"] = self.stringList
         else:
             pass
 
