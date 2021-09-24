@@ -78,15 +78,32 @@ class If:
         self.line = line
 
     def Comparison(self):
+        exist1 = True
+        exist2 = True
         if not isinstance(validate_real_bool(self.expression1), bool) or isinstance(self.expression1, int):
             for var in self.table:
                 if (var == self.expression1):
-                    self.expression1 = self.table[var]["value"]
+                    if self.table[var]["value"] != None:
+                        self.expression1 = self.table[var]["value"]
+                        exist1 = True
+                        break
+                    else:
+                        exist1 = False
         if not isinstance(validate_real_bool(self.expression2), bool) or isinstance(self.expression2, int):
             for var in self.table:
                 if (var == self.expression2):
-                    self.expression2 = self.table[var]["value"]
-        self.Operate(self.expression1, self.expression2)
+                    if self.table[var]["value"] != None:
+                        self.expression2 = self.table[var]["value"]
+                        exist2 = True
+                        break
+                    else:
+                        exist2 = False
+
+        if exist1 and exist2:
+            self.Operate(self.expression1, self.expression2)
+        else:
+            errorHandler = Generate_Error(5, self.line)
+            errorHandler.Execute()
 
     def Operate(self, var1, var2):
         if isinstance(validate_real_bool(var1), bool) and isinstance(validate_real_bool(var2), bool):
