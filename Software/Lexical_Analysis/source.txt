@@ -1,7 +1,15 @@
+fn funtest1(myparam1, myparam2) -> integer {
+    let numeral# = true;
+    let buenas = Opera(-, -40, 50);
+    for cifra in 1..11{
+        Println!("Prueba de fun var: ", buenas);
+    }
+    return numeral# ;
+
+}
+
 fn main(){
-    let sum = true;
-    let hola = 49;
-    let var = sum;
-    let hola = sum;
+    let var  = 45;
+    Println!(" Valor de var: ", var);
 
 }

@@ -19,7 +19,6 @@ def lex_test():
             clone.input(source)
 
             for token in clone:
-
                 myTable.insertToken(token.type, token.value)
             myTable.printTable()
             parser = yacc.yacc()
@@ -34,7 +33,6 @@ def lex_test():
 
     else:
         print("ESTA VACIO")
-    for Tok in lexer:
-        print(Tok)
+
 
 lex_test()
