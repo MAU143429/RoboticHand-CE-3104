@@ -28,6 +28,7 @@ def p_program(p):
          | for line
          | while line
          | if line
+         | if elseiforelse
          | let line
          | move line
          | moveList line
@@ -199,30 +200,30 @@ REGLAS PARA IF, ELSE IF and ELSE
 
 def p_elseiforelse(p):
     '''
-    elseiforelse : elseif
-                 | else
+    elseiforelse : elseif line
+                 | elseif elseiforelse
+                 | else line
     '''
 
 
 def p_if(p):
     '''
     if : IF expression compare expression LCRLBRACKET line RCRLBRACKET
-       | IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
     '''
-
+    p[0] = If(p[2], p[3], p[4]).Comparison()
+    print("if")
 
 def p_elseif(p):
     '''
-    elseif : ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET line
-           | ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
+    elseif : ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET
     '''
-
+    print("elseif")
 
 def p_else(p):
     '''
-    else : ELSE LCRLBRACKET line RCRLBRACKET line
+    else : ELSE LCRLBRACKET line RCRLBRACKET
     '''
-
+    print("else")
 
 def p_compare(p):
     '''
@@ -232,7 +233,7 @@ def p_compare(p):
             | LT
             | GT
     '''
-
+    p[0] = p[1]
 
 def p_expressions(p):
     '''
@@ -242,7 +243,7 @@ def p_expressions(p):
                | opera
                | ID
     '''
-
+    p[0] = p[1]
 
 '''
 ###########################################################################
@@ -259,9 +260,7 @@ def p_let(p):
 
     line = p.lineno(2)
     result = myTable.insertValue(p[4],p[2], line)
-    p[0] = Let(p[2], p[4], line, myTable.table,result)
-
-
+    p[0] = Let(p[2], p[4], line, myTable.table, result)
 '''
 ###########################################################################
 REGLAS PARA OPERA
@@ -310,7 +309,7 @@ def p_break(p):
     '''
     break : BREAK
     '''
-
+    p[0] = p[1]
 
 def p_error(p):
     if p == None:

@@ -1,7 +1,7 @@
 fn main(){
-    let sum = true;
-    let hola = 49;
-    let var = sum;
-    let hola = sum;
-
+    let hola = Opera(+, 7, 8);
+    if hola == hola {
+        let sum = true;
+        let hola = 49;
+    }
 }

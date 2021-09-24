@@ -27,11 +27,9 @@ class Let:
                         found = True
                         print("SE HA REGISTRADO EL LET  " + self.id + " CON EL VALOR DE " + str(self.value) + " EN LA LINEA " + str(self.line))
                         break
-
             if not found:
                 errorHandler = Generate_Error(5, self.line)
                 errorHandler.Execute()
-
 
 class Del:
     def __init__(self, value, unit ,table, line):
@@ -54,6 +52,41 @@ class Print:
         self.value = value
         self.line = line
         print("SE IMPRIMIRA EN LA CONSOLA -->  " + str(self.value) + " EN LA LINEA " + str(self.line))
+
+class If:
+    def __init__(self, expression1, comparisonSymbol, expression2, symbol_table):
+        self.expression1 = expression1
+        self.comparisonSymbol = comparisonSymbol
+        self.expression2 = expression2
+        self.table = symbol_table
+
+    def Comparison(self):
+        if isinstance(validate_real_bool(self.expression1), bool) and isinstance(validate_real_bool(self.expression2), bool):
+            if (self.comparisonSymbol == "=="):
+                if (self.expression1 == self.expression2):
+                    print("true")
+        elif isinstance(self.expression1, int) and isinstance(self.expression2, int):
+            self.Operate()
+        else:
+
+            print("Soy una variable")
+
+    def Operate(self):
+        if (self.comparisonSymbol == "=="):
+            if (self.expression1 == self.expression2):
+                print("true")
+        elif (self.comparisonSymbol == ">="):
+            if (self.expression1 >= self.expression2):
+                print("true")
+        elif (self.comparisonSymbol == "<="):
+            if (self.expression1 <= self.expression2):
+                print("true")
+        elif (self.comparisonSymbol == ">"):
+            if (self.expression1 > self.expression2):
+                print("true")
+        else:
+            if (self.expression1 < self.expression2):
+                print("true")
 
 class Opera:
     def __init__(self, operator, operand, operand2, line):
@@ -100,7 +133,7 @@ class While:
         print("WHILE")
 
 class Move:
-    def __init__(self, finger, movement,symbol_table, line):
+    def __init__(self, finger, movement, symbol_table, line):
         self.finger = finger
         self.movement = movement
         self.final_movement = None
