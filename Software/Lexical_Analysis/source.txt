@@ -1,13 +1,18 @@
-fn funtest1(myparam1, myparam2) -> integer {
+fn funtest1() -> boolean {
     let numeral# = true;
     let buenas = Opera(-, -40, 50);
     for cifra in 1..11{
         Println!("Prueba de fun var: ", buenas);
     }
-    return numeral# ;
+    return numeral#;
 
 }
 
+fn prodtest1(dummyArg){
+    let dummy = true;
+    let malas = Opera(-, -40, 50);
+    Println!("Prueba de prod dummy: ", dummy);
+ }
 fn main(){
     let var  = 45;
     Println!(" Valor de var: ", var);

@@ -44,7 +44,6 @@ class SymbolsTable:
                     "value": None,
                     "scope": None,
                 }
-                print("Soy: " + str(name))
 
         elif key == "MAIN":
             self.mainCounter += 1

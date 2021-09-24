@@ -27,6 +27,7 @@ def p_program(p):
     line : main line
          | loop line
          | function line
+         | procedure line
          | for line
          | while line
          | if line
@@ -46,6 +47,21 @@ def p_main(p):
 
 '''
 ###########################################################################
+REGLAS PARA PROCEDIMIENTOS
+###########################################################################
+'''
+def p_procedure(p):
+    '''
+    procedure : FN ID LPAREN params RPAREN prodbody
+    '''
+
+def p_prodbody(p):
+    '''
+    prodbody : LCRLBRACKET line RCRLBRACKET
+    '''
+
+'''
+###########################################################################
 REGLAS PARA FUNCIONES
 ###########################################################################
 '''
@@ -58,6 +74,7 @@ def p_function(p):
 def p_params(p):
     '''
     params : ID arg
+          | empty empty
     '''
     if not p[2] is None:
         p[0] = [p[1], p[2]]

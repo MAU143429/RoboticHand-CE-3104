@@ -11,7 +11,7 @@ reserved =  {
     'loop': 'LOOP',
     'fn': 'FN',
     'integer': 'INTEGER',
-    'bool' : 'BOOLEAN',
+    'boolean' : 'BOOLEAN',
     'true': 'TRUE',
     'false': 'FALSE',
     'range': 'RANGE',
