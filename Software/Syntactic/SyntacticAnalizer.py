@@ -17,10 +17,6 @@ syntax_error = False
 semantic_error = False
 myTable = SymbolsTable()
 
-
-
-
-
 def p_program(p):
     '''
     line : main line
@@ -42,7 +38,6 @@ def p_main(p):
     '''
     main : FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
     '''
-
 '''
 ###########################################################################
 REGLAS PARA LOOP
@@ -262,7 +257,8 @@ def p_let(p):
 
     line = p.lineno(2)
     result = myTable.insertValue(p[4],p[2], line)
-    p[0] = Let(p[2], p[4], line, myTable.table, result)
+    Let(p[2], p[4], line, myTable.table, result)
+    p[0] = [p[2], p[4], line, myTable.table, result]
 '''
 ###########################################################################
 REGLAS PARA OPERA

@@ -2,6 +2,11 @@ from Hardware.Robotic_Hand.Translator import Translator
 from Software.Semantic.reserved import *
 from Software.Semantic.Generate_Error import *
 from Software.Semantic.BooleanValue import *
+
+class Main():
+    def __init__(self, instructions):
+        self.instructions = instructions
+
 class Let:
     def __init__(self, id, value,line,symbol_table,result):
         self.id = id
