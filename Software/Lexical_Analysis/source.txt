@@ -7,7 +7,7 @@ fn main(){
         let hola = 49;
     }
     elseif res == true{
-            let var3 = true;
+        let var3 = true;
     }
     Println!("hola");
 }

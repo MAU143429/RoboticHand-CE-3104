@@ -24,8 +24,14 @@ def p_root(p):
          | function root
          | procedure root
          | let root
-         | empty
+         | empty empty
     '''
+    if p[2] != None:
+        p[0] = [p[1], p[2]]
+    else:
+        p[0] = p[1]
+    print("Lista de instrucciones a ejecutar:")
+    print(p[0])
 
 def p_functions(p):
     '''
@@ -36,7 +42,7 @@ def p_main(p):
     '''
     main : FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
     '''
-
+    p[0] = ["MAIN", simpleListBuilder().createListOfLists(p[6])]
 
 def p_program(p):
     '''
@@ -52,9 +58,12 @@ def p_program(p):
          | delay line
          | println line
          | break line
-         | empty
+         | empty empty
     '''
-
+    if p[2] != None:
+        p[0] = [p[1], p[2]]
+    else:
+        p[0] = p[1]
 '''
 ###########################################################################
 REGLAS PARA PROCEDIMIENTOS
@@ -355,7 +364,7 @@ def p_let(p):
     line = p.lineno(2)
     result = myTable.insertValue(p[4],p[2], line)
     Let(p[2], p[4], line, myTable.table, result)
-    p[0] = [p[2], p[4], line, myTable.table, result]
+    p[0] = ["LET", p[2], p[4], line, myTable.table, result]
 '''
 ###########################################################################
 REGLAS PARA OPERA

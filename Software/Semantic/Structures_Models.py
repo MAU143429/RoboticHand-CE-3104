@@ -255,3 +255,17 @@ class simpleListBuilder:
             else:
                 simpleList.append(i)
         return simpleList
+
+    def createListOfLists(self, lists):
+        simpleList = []
+        for i in lists:
+            if not isinstance(i[0], list):
+                sublists = []
+                for j in i:
+                    if not isinstance(j, list):
+                        sublists.append(j)
+                simpleList.append(sublists)
+            else:
+                simpleList += self.createListOfLists(i)
+        return simpleList
+
