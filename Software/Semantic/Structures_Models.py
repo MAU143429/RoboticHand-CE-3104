@@ -71,9 +71,6 @@ class Print:
             else:
                 self.printLogger = self.printLogger + str(self.table.getValue(var, self.line))
 
-
-
-
 class If:
     def __init__(self, expression1, comparisonSymbol, expression2, symbol_table, line):
         self.expression1 = expression1
@@ -105,35 +102,38 @@ class If:
                         exist2 = False
 
         if exist1 and exist2:
-            self.Operate(self.expression1, self.expression2)
+            return self.Operate(self.expression1, self.expression2)
         else:
             errorHandler = Generate_Error(5, self.line)
             errorHandler.Execute()
+            return False
 
     def Operate(self, var1, var2):
+        accepted = False
         if isinstance(validate_real_bool(var1), bool) and isinstance(validate_real_bool(var2), bool):
             if (self.comparisonSymbol == "=="):
                 if (var1 == var2):
-                    print("true")
+                    accepted = True
         elif isinstance(var1, int) and isinstance(var2, int):
             if (self.comparisonSymbol == "=="):
                 if (var1 == var2):
-                    print("true")
+                    accepted = True
             elif (self.comparisonSymbol == ">="):
                 if (var1 >= var2):
-                    print("true")
+                    accepted = True
             elif (self.comparisonSymbol == "<="):
                 if (var1 <= var2):
-                    print("true")
+                    accepted = True
             elif (self.comparisonSymbol == ">"):
                 if (var1 > var2):
-                    print("true")
+                    accepted = True
             else:
                 if (var1 < var2):
-                    print("true")
+                    accepted = True
         else:
             errorHandler = Generate_Error(14, self.line)
             errorHandler.Execute()
+        return accepted
 
 class Opera:
     def __init__(self, operator, operand, operand2, line):

@@ -1,8 +1,12 @@
 fn main(){
     let hola = Opera(+, 7, 8);
     let res = true;
-    if false == res {
+    if true == sum {
         let sum = true;
         let hola = 49;
     }
+    elseif res == true{
+            let var3 = true;
+    }
+    Println!("hola", "hola");
 }

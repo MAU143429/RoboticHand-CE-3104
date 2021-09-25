@@ -17,14 +17,31 @@ syntax_error = False
 semantic_error = False
 myTable = SymbolsTable()
 
+def p_root(p):
+    '''
+    root : main root
+         | functions root
+         | let root
+         | empty
+    '''
+
+def p_functions(p):
+    '''
+    functions : ID
+    '''
+
+def p_main(p):
+    '''
+    main : FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
+    '''
+
+
 def p_program(p):
     '''
-    line : main line
-         | loop line
+    line : loop line
          | for line
          | while line
          | if line
-         | if elseiforelse
          | let line
          | move line
          | moveList line
@@ -34,10 +51,6 @@ def p_program(p):
          | empty
     '''
 
-def p_main(p):
-    '''
-    main : FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
-    '''
 '''
 ###########################################################################
 REGLAS PARA LOOP
@@ -196,31 +209,46 @@ REGLAS PARA IF, ELSE IF and ELSE
 '''
 def p_elseiforelse(p):
     '''
-    elseiforelse : elseif line
-                 | elseif elseiforelse
-                 | else line
+    elseiforelse : elseif
+                 | else
     '''
-
+    p[0] =  p[1]
 
 def p_if(p):
     '''
-    if : IF expression compare expression LCRLBRACKET line RCRLBRACKET
+    if : IF expression compare expression LCRLBRACKET line RCRLBRACKET empty
+       | IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
     '''
-    line = p.lineno(1)
-    p[0] = If(p[2], p[3], p[4], myTable.table, line).Comparison()
     print("if")
+    line = p.lineno(1)
+    if If(p[2], p[3], p[4], myTable.table, line).Comparison():
+        p[0] = "Ejecutando if ..."
+        print(p[0])
+    elif p[8] != None:
+        print(p[8])
+    else:
+        print("No se ejecutó nada")
+        print(p[8])
 
 def p_elseif(p):
     '''
-    elseif : ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET
+    elseif : ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET empty
+           | ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
     '''
     print("elseif")
+    line = p.lineno(1)
+    if If(p[2], p[3], p[4], myTable.table, line).Comparison():
+        print("pasó")
+        p[0] = "Ejecutando elseif ..."
+    else:
+        p[0] = p[8]
 
 def p_else(p):
     '''
     else : ELSE LCRLBRACKET line RCRLBRACKET
     '''
     print("else")
+    p[0] = "Ejecutando el else ..."
 
 def p_compare(p):
     '''
