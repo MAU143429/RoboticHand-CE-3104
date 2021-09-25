@@ -226,7 +226,7 @@ def p_println(p):
     if isinstance(p[4], list):
         p[0] = Print(simpleListBuilder().createList(p[4]), line, myTable)
     else:
-        p[0] = Print([p[4]], line)
+        p[0] = Print([p[4]], line, myTable)
 
 
 def p_args(p):
