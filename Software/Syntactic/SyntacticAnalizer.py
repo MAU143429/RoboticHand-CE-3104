@@ -12,6 +12,7 @@ precedence = (
     ('left', 'PLUS', 'MINUS'),
     ('left', 'TIMES', 'DIVIDE'),
     ('left', 'LPAREN', 'RPAREN'),
+    ('nonassoc','UMINUS'),
 )
 syntax_error = False
 semantic_error = False
@@ -38,7 +39,10 @@ def p_main(p):
 
 def p_program(p):
     '''
-    line : loop line
+    line : main line
+         | loop line
+         | function line
+         | procedure line
          | for line
          | while line
          | if line
@@ -53,10 +57,74 @@ def p_program(p):
 
 '''
 ###########################################################################
-REGLAS PARA LOOP
+REGLAS PARA PROCEDIMIENTOS
+###########################################################################
+'''
+def p_procedure(p):
+    '''
+    procedure : FN ID LPAREN params RPAREN prodbody
+    '''
+
+def p_prodbody(p):
+    '''
+    prodbody : LCRLBRACKET line RCRLBRACKET
+    '''
+
+'''
+###########################################################################
+REGLAS PARA FUNCIONES
 ###########################################################################
 '''
 
+def p_function(p):
+    '''
+    function : FN ID LPAREN params RPAREN funbody
+    '''
+
+def p_params(p):
+    '''
+    params : ID arg
+          | empty empty
+    '''
+    if not p[2] is None:
+        p[0] = [p[1], p[2]]
+        print("Params detected : ", p[0])
+    else:
+        p[0] = p[1]
+        print("Param detected : ", p[0])
+
+def p_arg(p):
+    '''
+    arg : COMMA params
+        | COMMA arg
+        | empty empty
+    '''
+
+    p[0] = p[2]
+
+def p_funbody(p):
+    '''
+    funbody : ARROW output LCRLBRACKET line end RCRLBRACKET
+    '''
+
+
+def p_output(p):
+    '''
+    output : INTEGER
+            | BOOLEAN
+    '''
+    p[0] = p[1]
+
+def p_end(p):
+    '''
+    end : RETURN expression SEMICOLON
+    '''
+    p[0] = p[2]
+'''
+###########################################################################
+REGLAS PARA LOOP
+###########################################################################
+'''
 
 def p_loop(p):
     '''
@@ -168,7 +236,7 @@ def p_println(p):
     if isinstance(p[4], list):
         p[0] = Print(simpleListBuilder().createList(p[4]), line, myTable)
     else:
-        p[0] = Print([p[4]], line)
+        p[0] = Print([p[4]], line, myTable)
 
 
 def p_args(p):
@@ -267,6 +335,7 @@ def p_expressions(p):
                | FALSE
                | opera
                | ID
+               | negative
     '''
     p[0] = p[1]
 
@@ -318,9 +387,15 @@ def p_operand(p):
     operand : INT
             | opera
             | ID
+            | negative
     '''
     p[0] = p[1]
 
+def p_uminus(p):
+    '''
+    negative : MINUS INT %prec UMINUS
+    '''
+    p[0] = -p[2]
 
 def p_expression_bool(p):
     '''

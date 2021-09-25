@@ -33,7 +33,11 @@ def t_IF(t):
     t.type = 'IF'
     t.value = 'if'
     return t
-
+def t_INTEGER(t):
+    r'integer'
+    t.type = 'INTEGER'
+    t.value = 'integer'
+    return t
 def t_IN(t):
     r'in'
     t.type = 'IN'
