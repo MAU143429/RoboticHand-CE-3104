@@ -21,7 +21,8 @@ myTable = SymbolsTable()
 def p_root(p):
     '''
     root : main root
-         | functions root
+         | function root
+         | procedure root
          | let root
          | empty
     '''
@@ -39,8 +40,7 @@ def p_main(p):
 
 def p_program(p):
     '''
-    line : main line
-         | loop line
+    line : loop line
          | function line
          | procedure line
          | for line
