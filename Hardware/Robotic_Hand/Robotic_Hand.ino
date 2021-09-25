@@ -10,14 +10,15 @@ int salida = 2;
 
 
 void setup() {
-  
+    
   servo1.write(0);
   servo2.write(0);
   servo3.write(0);
   servo4.write(180);
   servo5.write(180);
-  
   tone (salida,2600,200);
+  
+  
   
   
   // Asignacion del pin digital para sonido.
@@ -102,48 +103,81 @@ void Create_delays(int timer, String unit){
   Serial.println("D"); 
 }
 
-int pos1,pos2,pos3,delay_time;
-String cad,action,unit,finger,status_mov;
+
+
+int pos4,pos5,pos6;
+String action1,act2,act3;
+
+String Convert_String(String cad){
+
+  pos4 = cad.indexOf(',');
+  pos5 = cad.indexOf(';');
+  pos6 = cad.indexOf('/');
+  action1 = cad.substring(0,pos4);
+  act2 = cad.substring(pos4+1,pos5);
+  act3 = cad.substring(pos5+1,pos6);
+
+  return (action1 + "," + act2 + ";" + act3 + "/");
+  }
+
+int pos1,pos2,pos3,delay_time,cont,subline;
+String cad,action,unit,finger,status_mov,txt,line,new_line;
+
 void loop() {
-
-  
-
-  servo1.write(0);
-  servo2.write(0);
-  servo3.write(0);
-  servo4.write(180);
-  servo5.write(180);
+   
   
   if(Serial.available()){
     tone (salida,6000,400);
-    //Serial.println("HOLA SOY LA PLACA");
     cad = Serial.readString(); // mov,T;false/ del,5000;Mil/
-    pos1 = cad.indexOf(',');
-    pos2 = cad.indexOf(';');
-    pos3 = cad.indexOf('/');
-    action  = cad.substring(0,pos1);
    
-    
-    
-    if(action == "mov"){
-      finger = cad.substring(pos1+1,pos2);
-      status_mov = cad.substring(pos2+1,pos3);
-      Move(finger,status_mov);
-    }else if(action == "del"){
-      delay_time = cad.substring(pos1+1,pos2).toInt();
-      unit = cad.substring(pos2+1,pos3);
-      Create_delays(delay_time,unit);
-    }else{
-      tone (salida,2600,300);
-      delay(500);
-      tone (salida,2600,300);
-      delay(500);
-      tone (salida,2600,300);
-      delay(500);
-      tone (salida,2600,300);
-      delay(500);
-    }
+    new_line = Convert_String(cad);
+    txt += String(new_line);   
+   
+    if (cad.toInt() == 1){
+      cont = 0;
+      subline = 0; 
+      line = "Start";
+      while (line.toInt() != 1){
+          subline = txt.indexOf('/');
+          line = txt.substring(cont,subline+1);
+          pos1 = line.indexOf(',');
+          pos2 = line.indexOf(';');
+          pos3 = line.indexOf('/');
+          action  = line.substring(0,pos1);
+          if(action == "mov"){
+            finger = line.substring(pos1+1,pos2);
+            status_mov = line.substring(pos2+1,pos3);
+            Move(finger,status_mov);
+          }else if(action == "del"){
+            delay_time = line.substring(pos1+1,pos2).toInt();
+            unit = line.substring(pos2+1,pos3);
+            Create_delays(delay_time,unit);
+          }else{
+            tone (salida,2600,300);
+            delay(500);
+            tone (salida,2600,300);
+            delay(500);
+            tone (salida,2600,300);
+            delay(500);
+            tone (salida,2600,300);
+            delay(500);
+        
+          }
+          
+        cont = subline+1;
+        txt = txt.substring(cont,txt.length());
+        cont= 0;
+      
+        }
+
+     }else{
+      Serial.println("P");
+     }
   }
+}
+
+    
+
 
 
   /**
@@ -220,6 +254,3 @@ void loop() {
    */
  
   
- 
- 
-}

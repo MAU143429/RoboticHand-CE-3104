@@ -117,6 +117,7 @@ class Ui_MainWindow(object):
         error.clean()
         myTable.Clean()
         lex_test()
+        t.Write("1")
         print("VOY A EJECUTAR EL CODIGO")
         if error.log != "":
             error.print()
