@@ -1,7 +1,8 @@
 fn main(){
-    let sum = true;
-    let hola = 49;
-    let var = sum;
-    let hola = sum;
 
+    let sum = true;
+    let sum = false;
+    let num = 14;
+    let num = 34;
+    Println!(num);
 }

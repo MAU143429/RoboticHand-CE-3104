@@ -1,4 +1,0 @@
-mov,"P";true/
-mov,"A";true/
-mov,"I";true/
-del,5;"Seg"/
