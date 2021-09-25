@@ -79,10 +79,14 @@ class Print:
     def printChecking(self):
 
         for var in self.value:
-            if var in self.stringsList:
-                self.printLogger = self.printLogger + var[1:-1]
+            if isinstance(var, int):
+                self.printLogger = self.printLogger + str(var) + " "
+            elif isinstance(validate_real_bool(self.value), bool):
+                self.printLogger = self.printLogger + str(self.value) + " "
+            elif var in self.stringsList:
+                self.printLogger = self.printLogger + var[1:-1] + " "
             else:
-                self.printLogger = self.printLogger + str(self.table.getValue(var, self.line))
+                self.printLogger = self.printLogger + str(self.table.getValue(var, self.line)) + " "
 
 class If:
     def __init__(self, expression1, comparisonSymbol, expression2, symbol_table, line):
