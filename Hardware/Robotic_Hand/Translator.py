@@ -39,7 +39,7 @@ class Translator:
         t.Write(result1)
 
     def Create_Move(self, finger, status):
-        result2 = ("mov," + str(finger) + ";" + str(status) + "/")
+        result2 = ("mov," + str(finger[1:-1]) + ";" + str(status) + "/")
         t = Translator()
         t.Write(result2)
 
@@ -80,9 +80,9 @@ class Execute:
         while(numline < len(send)):
             if not first:
                 result = ">" + serial_port.readline().decode('ascii') + "<"
-                print("MENSAJE DE LA PLACA---->" + result + "tengo tab")
+                print("MENSAJE DE LA PLACA---->" + result )
 
-            if result == "START" or result[1] == "D" or result[1] == "M" and result != "<":
+            if result == "START" or result[1] == "P"  and result != "<":
                 print("SOY EL RESULTADO -----> " + result)
                 first = False
                 result = ""
@@ -94,12 +94,9 @@ class Execute:
                     action = cad[0:step1]
                     print("MENSAJE HACIA LA PLACA---->" + cad)
                     if action == "del":
-                        #timer = cad[step1+1:step2]
-                        #unit = cad[step2+1:step3]
                         serial_port.write(cad.encode())
                         print("MENSAJE DELAY ENVIADO A LA PLACA SATISFACTORIAMENTE")
                         time.sleep(1)
-                        #self.Create_delays(timer, unit)
                         numline += 1
                     else:
                         serial_port.write(cad.encode())

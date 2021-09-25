@@ -34,13 +34,13 @@ mov,T;false/
 
 
 Delay(16000,"Mil");
-Move("T","true");
+Move("T",true);
 Delay(1000,"Mil");
-Move("P","false");
+Move("P",false);
 Delay(1166,"Mil");
-Move("I","false"); 
+Move("I",false); 
 Delay(1166,"Mil");
-Move("M","false"); 
+Move("M",false"); 
 Delay(1166,"Mil");
 Move("A", "false"); 
 Delay(200,"Mil");

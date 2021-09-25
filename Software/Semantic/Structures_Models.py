@@ -20,21 +20,34 @@ class Let:
         EXISTANCE ANALYSIS
         '''
         if self.exist_var:
-            found = False
-            for var in self.table:  
-                if var == str(value):
-                    if (self.table[self.value]["type"]) != (self.table[self.id]["type"]):
-                        errorHandler = Generate_Error(4, self.line)
-                        errorHandler.Execute()
-                        found = True
-                    else:
-                        self.table[self.id]["value"] = self.table[self.value]["value"]
-                        found = True
-                        print("SE HA REGISTRADO EL LET  " + self.id + " CON EL VALOR DE " + str(self.value) + " EN LA LINEA " + str(self.line))
-                        break
-            if not found:
-                errorHandler = Generate_Error(5, self.line)
-                errorHandler.Execute()
+            if isinstance(self.value, int) or isinstance(validate_real_bool(self.value), int):
+                if type(self.table[self.id]["value"]) == type(self.value):
+                    self.table[self.id]["value"] = self.value
+
+                elif type(validate_real_bool(self.table[self.id]["value"])) == type(validate_real_bool(self.value)):
+                    self.table[self.id]["value"] = validate_bool(self.value)
+
+                else:
+                    errorHandler = Generate_Error(4, self.line)
+                    errorHandler.Execute()
+                    return
+            else:
+                found = False
+                for var in self.table:
+                    if var == str(value):
+                        if (self.table[self.value]["type"]) != (self.table[self.id]["type"]):
+                            errorHandler = Generate_Error(4, self.line)
+                            errorHandler.Execute()
+                            found = True
+                        else:
+                            self.table[self.id]["value"] = self.table[self.value]["value"]
+                            found = True
+                            print("SE HA REGISTRADO EL LET  " + self.id + " CON EL VALOR DE " + str(self.value) + " EN LA LINEA " + str(self.line))
+                            break
+
+                if not found:
+                    errorHandler = Generate_Error(5, self.line)
+                    errorHandler.Execute()
 
 class Del:
     def __init__(self, value, unit ,table, line):
@@ -238,4 +251,3 @@ class simpleListBuilder:
             else:
                 simpleList.append(i)
         return simpleList
-
