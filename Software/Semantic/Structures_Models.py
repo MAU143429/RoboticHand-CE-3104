@@ -2,6 +2,8 @@ from Hardware.Robotic_Hand.Translator import Translator
 from Software.Semantic.reserved import *
 from Software.Semantic.Generate_Error import *
 from Software.Semantic.BooleanValue import *
+from Software.SymbolsTable import *
+myTable = SymbolsTable()
 
 class Main():
     def __init__(self, instructions):
@@ -17,14 +19,23 @@ class Main():
         for i in functionInstructions:
             if i[0] == "LET":
                 print("LET")
-                Let(i[1], i[2], i[3], i[4], i[5])
+                result = myTable.insertValue(i[2], i[1], i[3])
+                Let(i[1], i[2], i[3], myTable.table, result)
             elif i[0] == "MOVE":
                 print("MOVE")
+                Move(i[1], i[2], myTable.table, i[3])
             elif i[0] == "DELAY":
                 print("DELAY")
+                Del(i[1], i[2], myTable.table, i[3])
             elif i[0] == "PRINT":
                 print("PRINT")
-
+                Print(i[1], i[2], myTable)
+            elif i[0] == "IF" or i[0] == "ELSEIF":
+                if If(i[1], i[2], i[3], myTable.table, i[4]).Comparison():
+                    if i[5] != None:
+                        self.runCode(i[5])
+                elif i[6] != None:
+                    self.runCode(simpleListBuilder().createListOfLists(i[6]))
 
 class Let:
     def __init__(self, id, value,line,symbol_table,result):
@@ -267,6 +278,7 @@ class Move:
 
 class simpleListBuilder:
     def createList(self, fingers):
+
         simpleList = []
         for i in fingers:
             if isinstance(i, list):

@@ -69,10 +69,10 @@ class SymbolsTable:
 
         if not exist:
             t_value = value
-            if isinstance(value,int):
+            if isinstance(value, int):
                 self.table[name]["value"] = t_value
                 self.table[name]["type"] = int
-            elif isinstance(validate_real_bool(value),bool):
+            elif isinstance(validate_real_bool(value), bool):
                 self.table[name]["value"] = validate_bool(t_value)
                 self.table[name]["type"] = bool
             else:

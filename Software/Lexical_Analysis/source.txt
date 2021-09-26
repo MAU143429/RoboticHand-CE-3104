@@ -1,17 +1,19 @@
 fn main(){
-    if false == res {
+    let res = false;
+    Println!("Hola", res);
+    Move("T", res);
+    if true == res {
         let sum = true;
         let hola = 49;
-        let hola = 49;
     }
-    elseif true == res {
-        let sum = false;
+    elseif res == true{
+        let res = true;
+        let div = 67;
     }
     else {
-        let sum = false;
-        let var = false;
-        let tre = false;
+        if res == false{
+            Delay(2000, "Mil");
+        }
     }
-    Println!("Hola");
-    let res = true;
+    Move(["A", "T", "M"], res);
 }

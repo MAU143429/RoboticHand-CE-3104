@@ -3,7 +3,6 @@ from Software.Lexical_Analysis.Tokenize import tokens
 from Software.Lexical_Analysis.LexicalAnalizer import *
 from Software.Semantic.Structures_Models import *
 from sys import stdin
-from Software.SymbolsTable import *
 from Software.Error_Log import ErrorLog
 
 precedence = (
@@ -16,7 +15,6 @@ precedence = (
 )
 syntax_error = False
 semantic_error = False
-myTable = SymbolsTable()
 
 def p_root(p):
     '''
@@ -33,6 +31,7 @@ def p_root(p):
     if p[0] != None:
         p[0] = simpleListBuilder().createListOfLists(p[0])
     print("Lista de instrucciones a ejecutar:")
+    #print(p[0])
     Main(p[0])
 
 def p_functions(p):
@@ -190,8 +189,7 @@ def p_move(p):
     move : MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON
     '''
     line = p.lineno(2)
-    Move(p[3], p[5], myTable.table, line)
-    p[0] = ["MOVE", p[3], p[5], myTable.table, line]
+    p[0] = ["MOVE", p[3], p[5], line]
 
 
 def p_moveList(p):
@@ -199,8 +197,7 @@ def p_moveList(p):
     moveList : MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON
     '''
     line = p.lineno(2)
-    p[0] = Move(simpleListBuilder().createList(p[4]), p[7], myTable.table, line)
-
+    p[0] = ["MOVE", simpleListBuilder().createList(p[4]), p[7], line]
 
 def p_fingerList(p):
     '''
@@ -222,8 +219,7 @@ def p_delay(p):
     delay : DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON
     '''
     line = p.lineno(2)
-    Del(p[3], p[5], myTable.table, line)
-    p[0] = ["DELAY", p[3], p[5], myTable.table, line]
+    p[0] = ["DELAY", p[3], p[5], line]
 
 def p_unit(p):
     '''
@@ -248,11 +244,9 @@ def p_println(p):
     '''
     line = p.lineno(2)
     if isinstance(p[4], list):
-        Print(simpleListBuilder().createList(p[4]), line, myTable)
-        p[0] = ["PRINT", simpleListBuilder().createList(p[4]), line, myTable]
+        p[0] = ["PRINT", simpleListBuilder().createList(p[4]), line]
     else:
-        Print([p[4]], line, myTable)
-        p[0] = ["PRINT", [p[4]], line, myTable]
+        p[0] = ["PRINT", [p[4]], line]
 
 
 def p_args(p):
@@ -303,36 +297,22 @@ def p_if(p):
     if : IF expression compare expression LCRLBRACKET line RCRLBRACKET empty
        | IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
     '''
-    print("if")
     line = p.lineno(1)
-    p[0] = ["IF", p[2], p[3], p[4], myTable.table, line, p[6], p[8]]
-    print(p[0])
-    #if If(p[2], p[3], p[4], myTable.table, line).Comparison() and p[6] != None:
-    #    p[0] = p[6]
-    #    print(p[0])
-    #elif p[8] != None:
-    #    p[0] = p[8]
-    #    print(p[8])
+    p[0] = ["IF", p[2], p[3], p[4], line, p[6], p[8]]
 
 def p_elseif(p):
     '''
     elseif : ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET empty
            | ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
     '''
-    print("elseif")
     line = p.lineno(1)
-    p[0] = ["ELSEIF", p[2], p[3], p[4], myTable.table, line, p[6], p[8]]
-    #if If(p[2], p[3], p[4], myTable.table, line).Comparison():
-    #    p[0] = p[6]
-    #elif p[8] != None:
-    #    p[0] = p[8]
+    p[0] = ["ELSEIF", p[2], p[3], p[4], line, p[6], p[8]]
 
 def p_else(p):
     '''
     else : ELSE LCRLBRACKET line RCRLBRACKET
     '''
-    print("else")
-    p[0] = ["ELSE", p[3]]
+    p[0] = p[3]
 
 def p_compare(p):
     '''
@@ -369,9 +349,7 @@ def p_let(p):
     '''
 
     line = p.lineno(2)
-    result = myTable.insertValue(p[4], p[2], line)
-    Let(p[2], p[4], line, myTable.table, result)
-    p[0] = ["LET", p[2], p[4], line, myTable.table, result]
+    p[0] = ["LET", p[2], p[4], line]
 '''
 ###########################################################################
 REGLAS PARA OPERA
@@ -444,4 +422,3 @@ def p_empty(p):
     empty :
     '''
     pass
-    # p[0] = None
