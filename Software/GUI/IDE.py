@@ -36,6 +36,8 @@ class Ui_MainWindow(object):
         self.output.setGeometry(QtCore.QRect(0, 550, 1369, 250))
         self.output.setReadOnly(True)
         self.output.setObjectName("output")
+        self.output.setStyleSheet('color: rgb(255, 0, 0);'
+                                  'font: 75 13pt "Consolas";')
         self.compileButton = QtWidgets.QPushButton(self.centralwidget)
         self.compileButton.setGeometry(QtCore.QRect(1369, 0, 131, 400))
         self.compileButton.setObjectName("compileButton")
@@ -92,6 +94,7 @@ class Ui_MainWindow(object):
             f.close()
 
     def compile(self):
+        self.output.clear()
         self.save()
         time.sleep(1)
         t = Translator()
@@ -100,26 +103,34 @@ class Ui_MainWindow(object):
         error.clean()
         myTable.Clean()
         lex_test()
-        if error.log != "":
-            print(" \n ERRORES DE COMPILACION \n")
-            error.print()
-            self.output.setPlainText(error.print())
+
+        if main_checker():
+            print("Entre al checker de main del IDE")
+            error_text_ = "Compile error: there can only be one main function or main function is not defined"
+            self.output.setPlainText(error_text_)
+            print("TERMINE")
         else:
-            print("NO HAY ERRORES")
+            self.output.setPlainText(error.errors())
+
 
     def run_compile(self):
+        self.output.clear()
         self.save()
         #self.output.setPlainText(self.codeEditor.toPlainText())
         time.sleep(1)
         t = Translator()
         t.Clean()
+        printlog = PrintLog()
+        printlog.clean()
         error = ErrorLog()
         error.clean()
         myTable.Clean()
         lex_test()
         t.Write("1")
         print("VOY A EJECUTAR EL CODIGO")
+        self.output.setPlainText(printlog.prints())
         if error.log != "":
+            self.output.setPlainText(error.errors())
             error.print()
         else:
             print("VOY A ENVIAR LOS ARCHIVOS LA MANO")
@@ -129,17 +140,15 @@ class Ui_MainWindow(object):
             print("ARCHIVOS ENVIADOS")
 
     def start_compile(self):
-
-
         thread = Thread(target=self.compile(), args=())
         thread.start()
         thread.join()
+
         print("HILOS ACTIVOS")
 
 
 
     def start_run_compile(self):
-
         thread1 = Thread(target=self.run_compile(), args=())
         thread1.start()
         thread1.join()
@@ -149,10 +158,10 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+

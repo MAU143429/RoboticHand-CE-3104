@@ -5,6 +5,7 @@ from Software.Semantic.Structures_Models import *
 from sys import stdin
 from Software.SymbolsTable import *
 from Software.Error_Log import ErrorLog
+from Software.Print_Log import PrintLog
 
 precedence = (
     ('right', 'LET'),
@@ -413,6 +414,7 @@ def p_break(p):
     p[0] = p[1]
 
 def p_error(p):
+
     if p == None:
         token = "end of file"
     else:
@@ -420,7 +422,8 @@ def p_error(p):
 
     print(f"Syntax error: Unexpected {token}")
     error = ErrorLog()
-    error.log_error(f"Syntax error: Unexpected {token}")
+    error.log_error(f"Syntax error: Unexpected {token}", 2)
+
 
 
 def p_empty(p):

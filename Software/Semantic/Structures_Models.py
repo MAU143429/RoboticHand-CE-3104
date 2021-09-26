@@ -28,9 +28,10 @@ class Let:
                     self.table[self.id]["value"] = validate_bool(self.value)
 
                 else:
-                    errorHandler = Generate_Error(4, self.line)
+                    errorHandler=Generate_Error(4, self.line)
                     errorHandler.Execute()
-                    return
+
+
             else:
                 found = False
                 for var in self.table:

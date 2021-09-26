@@ -86,19 +86,18 @@ def t_INT(t):
 def t_error(t):
     if t.type == "length_err":
         error_text = "Lexical error at line " + str(t.lexer.lineno) + ": ID length must be between 3 and 15"
-        print(error_text)
         error = ErrorLog()
-        error.log_error(error_text)
+        error.log_error(error_text, 1)
         t.lexer.skip(1)
     elif t.type == "WRONG_ID":
 
         error_text = "Lexical error at line " + str(t.lexer.lineno) + ": Identifiers cannot start with a number"
-        print(error_text)
+
         error = ErrorLog()
-        error.log_error(error_text)
+        error.log_error(error_text, 1)
     else:
         error_text = "Illegal character '%s'" % t.value[0]
-        print(error_text)
+
         error = ErrorLog()
-        error.log_error(error_text)
+        error.log_error(error_text, 1)
         t.lexer.skip(1)
