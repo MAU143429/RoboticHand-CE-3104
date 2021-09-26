@@ -101,3 +101,44 @@ fn main(){
     Delay(6000,"Mil");
     Move("T",false);
 }
+
+
+
+
+Parte 2
+
+
+Delay(6000,"Mil");
+    Move("T",false);
+    Delay(1100,"Mil");
+    Move("P",true);
+    Delay(950,"Mil");
+    Move("I",true);
+    Delay(800,"Mil");
+    Move("M",true);
+    Delay(650,"Mil");
+    Move("A", true); 
+    Delay(1000,"Mil");
+    Move("Q",true);
+    Delay(3000,"Mil");
+    Move("T",false);
+    Delay(200,"Mil");
+    Move("P",true);
+    Delay(6000,"Mil");
+    Move("P",false);
+    Move("I",true);
+    Delay(6500,"Mil");
+    Move("P",false);
+    Move("I",true);
+    Delay(6500,"Mil");
+    Move("M",true);
+    Delay(6500,"Mil");
+    Move("I",false);
+    Move("M",false);
+    Move("A",true);
+    Delay(6500,"Mil");
+    Move("A",false);
+    Move("Q",true);
+    Delay(12000,"Mil");
+    Move("Q",false);
+    Delay(6000,"Mil");
