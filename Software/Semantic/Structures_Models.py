@@ -154,29 +154,72 @@ class If:
         return accepted
 
 class Opera:
-    def __init__(self, operator, operand, operand2, line):
+    def __init__(self, operator, operand, operand2,Symbol_table, line):
         self.operator = operator
         self.operand = operand
         self.operand2 = operand2
+        self.table = Symbol_table
         self.line = line
 
     def Operate(self):
         result = None
-        if not isinstance(self.operand, int) and isinstance(self.operand2, int):
-            result = (self.operator, self.operand, self.operand2)
+        var1 = None
+        var2 = None
+
+        '''
+        Revision del operando 1
+        '''
+
+        if not isinstance(self.operand, int): # Operando1 es variable
+            for var in self.table:
+                if var == str(self.operand):
+                    var1 = self.table[var]["value"]
+                    print("SOY VAR1 --> " + str(var1))
+            if var1 == None:
+                print("ES EL 1")
+                errorHandler = Generate_Error(5, self.line)
+                errorHandler.Execute()
+                return
         else:
+            var1 = self.operand
+
+        '''
+        Revision del operando 2
+        '''
+        if not isinstance(self.operand2, int): # Operando2 es variable
+            for var in self.table:
+                if var == str(self.operand2):
+                    var2 = self.table[var]["value"]
+                    print("SOY VAR2 --> " + str(var2))
+
+            if var2 == None:
+                errorHandler = Generate_Error(5, self.line)
+                errorHandler.Execute()
+                return
+        else:
+            var2 = self.operand2
+
+        '''
+        Resuelve la operacion.. 
+        '''
+        if isinstance(var1, int) and isinstance(var2, int):
             if self.operator == "+":
-                result = self.operand + self.operand2
+                result= var1 + var2
             elif self.operator == "-":
-                result = self.operand - self.operand2
+                result=  var1 - var2
             elif self.operator == "/":
-                result = self.operand / self.operand2
+                result=  var1 / var2
             elif self.operator == "**":
-                result = self.operand ** self.operand2
+                result=  var1 ** var2
             elif self.operator == "*":
-                result = self.operand * self.operand2
-        print("SE DETECTO UN OPERA DE FORMA (" + str(self.operator) + "," + str(self.operand) + ","+ str(self.operand2) + ")" + " CON RESULTADO " + str(result) + " EN LA LINEA " + str(self.line))
+                result= var1 * var2
+        else:
+            errorHandler = Generate_Error(4, self.line)
+            errorHandler.Execute()
+            return
+        print("SE DETECTO UN OPERA DE FORMA (" + str(self.operator) + "," + str(var1) + "," + str(var2) + ")" + " CON RESULTADO " + str(result) + " EN LA LINEA " + str(self.line))
         return result
+
 
 class Loop:
     def __init__(self, line):

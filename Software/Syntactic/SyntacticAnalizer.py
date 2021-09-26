@@ -369,7 +369,7 @@ def p_opera(p):
     opera : OPERA LPAREN operator COMMA operand COMMA operand RPAREN
     '''
     line = p.lineno(2)
-    p[0] = Opera(p[3], p[5], p[7], line).Operate()
+    p[0] = Opera(p[3], p[5], p[7],myTable.table, line).Operate()
 
 
 def p_operators(p):

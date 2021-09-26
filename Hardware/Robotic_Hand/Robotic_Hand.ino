@@ -134,6 +134,7 @@ void loop() {
     txt += String(new_line);   
    
     if (cad.toInt() == 1){
+      tone (salida,4000,3000);
       cont = 0;
       subline = 0; 
       line = "Start";
