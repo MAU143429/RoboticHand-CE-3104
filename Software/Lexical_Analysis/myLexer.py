@@ -4,6 +4,7 @@ from Software.Syntactic.SyntacticAnalizer import *
 
 
 def lex_test():
+
     sourceFile = "../Lexical_Analysis/source.txt"
     if sourceFile is not None:
         with open(sourceFile, 'r') as file:
@@ -17,33 +18,34 @@ def lex_test():
             lexer.input(source)
             clone = lexer.clone()
             clone.input(source)
-
             error = ErrorLog()
 
             for token in clone:
-                if myTable.mainCounter > 1:
-                    error_text = "Lexical error at line " + str(token.lineno) + " There can only be one main function"
-                    error.log_error(error_text)
-                    return
+                print("metiendo token ", token)
                 myTable.insertToken(token.type, token.value)
-
-
 
             print("esta es mi tabla")
             myTable.printTable()
-            parser = yacc.yacc()
-            parser.parse(source)
+
+            if not main_checker():
+                print("Voy a crear el parser")
+                parser = yacc.yacc()
+                parser.parse(source)
+
+
+
             myTable.printTable()
             print("Saliendo del parser...")
             print("TERMINE DE COMPILAR")
             print(" \n *********** ERRORES DE COMPILACION *********** \n")
-
             error.print()
+
             print(" \n ******************* FIN ********************** \n")
 
+def main_checker():
+    if myTable.mainCounter != 1:
+        print("Debe haber un solo main")
+        return True
     else:
-        print("ESTA VACIO")
-    for Tok in lexer:
-        print(Tok)
-
-lex_test()
+        return False
+#lex_test()

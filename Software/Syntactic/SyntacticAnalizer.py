@@ -4,6 +4,7 @@ from Software.Lexical_Analysis.LexicalAnalizer import *
 from Software.Semantic.Structures_Models import *
 from sys import stdin
 from Software.Error_Log import ErrorLog
+from Software.Print_Log import PrintLog
 
 precedence = (
     ('right', 'LET'),
@@ -362,7 +363,7 @@ def p_opera(p):
     opera : OPERA LPAREN operator COMMA operand COMMA operand RPAREN
     '''
     line = p.lineno(2)
-    p[0] = Opera(p[3], p[5], p[7], line).Operate()
+    p[0] = Opera(p[3], p[5], p[7],myTable.table, line).Operate()
 
 
 def p_operators(p):
@@ -407,6 +408,7 @@ def p_break(p):
     p[0] = p[1]
 
 def p_error(p):
+
     if p == None:
         token = "end of file"
     else:
@@ -414,7 +416,8 @@ def p_error(p):
 
     print(f"Syntax error: Unexpected {token}")
     error = ErrorLog()
-    error.log_error(f"Syntax error: Unexpected {token}")
+    error.log_error(f"Syntax error: Unexpected {token}", 2)
+
 
 
 def p_empty(p):

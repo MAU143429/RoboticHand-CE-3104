@@ -4,6 +4,7 @@ from Software.Semantic.Generate_Error import *
 from Software.Semantic.BooleanValue import *
 from Software.SymbolsTable import *
 myTable = SymbolsTable()
+from Software.Print_Log import *
 
 class Main():
     def __init__(self, instructions):
@@ -58,9 +59,10 @@ class Let:
                     self.table[self.id]["value"] = validate_bool(self.value)
 
                 else:
-                    errorHandler = Generate_Error(4, self.line)
+                    errorHandler=Generate_Error(4, self.line)
                     errorHandler.Execute()
-                    return
+
+
             else:
                 found = False
                 for var in self.table:
@@ -102,6 +104,7 @@ class Print:
         self.table = myTable
         self.stringsList = myTable.getStringList()
         self.printLogger = ""
+        self.logger = PrintLog()
         self.printChecking()
 
         print("SE IMPRIMIRA EN LA CONSOLA -->  " + str(self.printLogger) + " DESDE LA LINEA " + str(self.line))
@@ -111,12 +114,16 @@ class Print:
         for var in self.value:
             if isinstance(var, int):
                 self.printLogger = self.printLogger + str(var) + " "
+                self.logger.log_print(self.printLogger)
             elif isinstance(validate_real_bool(self.value), bool):
                 self.printLogger = self.printLogger + str(self.value) + " "
+                self.logger.log_print(self.printLogger)
             elif var in self.stringsList:
                 self.printLogger = self.printLogger + var[1:-1] + " "
+                self.logger.log_print(self.printLogger)
             else:
                 self.printLogger = self.printLogger + str(self.table.getValue(var, self.line)) + " "
+                self.logger.log_print(self.printLogger)
 
 class If:
     def __init__(self, expression1, comparisonSymbol, expression2, symbol_table, line):
@@ -183,29 +190,72 @@ class If:
         return accepted
 
 class Opera:
-    def __init__(self, operator, operand, operand2, line):
+    def __init__(self, operator, operand, operand2,Symbol_table, line):
         self.operator = operator
         self.operand = operand
         self.operand2 = operand2
+        self.table = Symbol_table
         self.line = line
 
     def Operate(self):
         result = None
-        if not isinstance(self.operand, int) and isinstance(self.operand2, int):
-            result = (self.operator, self.operand, self.operand2)
+        var1 = None
+        var2 = None
+
+        '''
+        Revision del operando 1
+        '''
+
+        if not isinstance(self.operand, int): # Operando1 es variable
+            for var in self.table:
+                if var == str(self.operand):
+                    var1 = self.table[var]["value"]
+                    print("SOY VAR1 --> " + str(var1))
+            if var1 == None:
+                print("ES EL 1")
+                errorHandler = Generate_Error(5, self.line)
+                errorHandler.Execute()
+                return
         else:
+            var1 = self.operand
+
+        '''
+        Revision del operando 2
+        '''
+        if not isinstance(self.operand2, int): # Operando2 es variable
+            for var in self.table:
+                if var == str(self.operand2):
+                    var2 = self.table[var]["value"]
+                    print("SOY VAR2 --> " + str(var2))
+
+            if var2 == None:
+                errorHandler = Generate_Error(5, self.line)
+                errorHandler.Execute()
+                return
+        else:
+            var2 = self.operand2
+
+        '''
+        Resuelve la operacion.. 
+        '''
+        if isinstance(var1, int) and isinstance(var2, int):
             if self.operator == "+":
-                result = self.operand + self.operand2
+                result= var1 + var2
             elif self.operator == "-":
-                result = self.operand - self.operand2
+                result=  var1 - var2
             elif self.operator == "/":
-                result = self.operand / self.operand2
+                result=  var1 / var2
             elif self.operator == "**":
-                result = self.operand ** self.operand2
+                result=  var1 ** var2
             elif self.operator == "*":
-                result = self.operand * self.operand2
-        print("SE DETECTO UN OPERA DE FORMA (" + str(self.operator) + "," + str(self.operand) + ","+ str(self.operand2) + ")" + " CON RESULTADO " + str(result) + " EN LA LINEA " + str(self.line))
+                result= var1 * var2
+        else:
+            errorHandler = Generate_Error(6, self.line)
+            errorHandler.Execute()
+            return
+        print("SE DETECTO UN OPERA DE FORMA (" + str(self.operator) + "," + str(var1) + "," + str(var2) + ")" + " CON RESULTADO " + str(result) + " EN LA LINEA " + str(self.line))
         return result
+
 
 class Loop:
     def __init__(self, line):
