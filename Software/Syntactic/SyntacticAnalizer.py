@@ -12,7 +12,7 @@ precedence = (
     ('left', 'PLUS', 'MINUS'),
     ('left', 'TIMES', 'DIVIDE'),
     ('left', 'LPAREN', 'RPAREN'),
-    ('nonassoc','UMINUS'),
+    ('nonassoc', 'UMINUS')
 )
 syntax_error = False
 semantic_error = False
@@ -30,8 +30,10 @@ def p_root(p):
         p[0] = [p[1], p[2]]
     else:
         p[0] = p[1]
+    if p[0] != None:
+        p[0] = simpleListBuilder().createListOfLists(p[0])
     print("Lista de instrucciones a ejecutar:")
-    print(p[0])
+    Main(p[0])
 
 def p_functions(p):
     '''
@@ -42,7 +44,7 @@ def p_main(p):
     '''
     main : FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
     '''
-    p[0] = ["MAIN", simpleListBuilder().createListOfLists(p[6])]
+    p[0] = ["MAIN", p[6]]
 
 def p_program(p):
     '''
@@ -64,6 +66,8 @@ def p_program(p):
         p[0] = [p[1], p[2]]
     else:
         p[0] = p[1]
+    if p[0] != None:
+        p[0] = simpleListBuilder().createListOfLists(p[0])
 '''
 ###########################################################################
 REGLAS PARA PROCEDIMIENTOS
@@ -186,7 +190,8 @@ def p_move(p):
     move : MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON
     '''
     line = p.lineno(2)
-    p[0] = Move(p[3], p[5], myTable.table, line)
+    Move(p[3], p[5], myTable.table, line)
+    p[0] = ["MOVE", p[3], p[5], myTable.table, line]
 
 
 def p_moveList(p):
@@ -217,8 +222,8 @@ def p_delay(p):
     delay : DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON
     '''
     line = p.lineno(2)
-    p[0] = Del(p[3], p[5], myTable.table, line)
-
+    Del(p[3], p[5], myTable.table, line)
+    p[0] = ["DELAY", p[3], p[5], myTable.table, line]
 
 def p_unit(p):
     '''
@@ -243,9 +248,11 @@ def p_println(p):
     '''
     line = p.lineno(2)
     if isinstance(p[4], list):
-        p[0] = Print(simpleListBuilder().createList(p[4]), line, myTable)
+        Print(simpleListBuilder().createList(p[4]), line, myTable)
+        p[0] = ["PRINT", simpleListBuilder().createList(p[4]), line, myTable]
     else:
-        p[0] = Print([p[4]], line, myTable)
+        Print([p[4]], line, myTable)
+        p[0] = ["PRINT", [p[4]], line, myTable]
 
 
 def p_args(p):
@@ -298,14 +305,14 @@ def p_if(p):
     '''
     print("if")
     line = p.lineno(1)
-    if If(p[2], p[3], p[4], myTable.table, line).Comparison():
-        p[0] = "Ejecutando if ..."
-        print(p[0])
-    elif p[8] != None:
-        print(p[8])
-    else:
-        print("No se ejecutó nada")
-        print(p[8])
+    p[0] = ["IF", p[2], p[3], p[4], myTable.table, line, p[6], p[8]]
+    print(p[0])
+    #if If(p[2], p[3], p[4], myTable.table, line).Comparison() and p[6] != None:
+    #    p[0] = p[6]
+    #    print(p[0])
+    #elif p[8] != None:
+    #    p[0] = p[8]
+    #    print(p[8])
 
 def p_elseif(p):
     '''
@@ -314,18 +321,18 @@ def p_elseif(p):
     '''
     print("elseif")
     line = p.lineno(1)
-    if If(p[2], p[3], p[4], myTable.table, line).Comparison():
-        print("pasó")
-        p[0] = "Ejecutando elseif ..."
-    else:
-        p[0] = p[8]
+    p[0] = ["ELSEIF", p[2], p[3], p[4], myTable.table, line, p[6], p[8]]
+    #if If(p[2], p[3], p[4], myTable.table, line).Comparison():
+    #    p[0] = p[6]
+    #elif p[8] != None:
+    #    p[0] = p[8]
 
 def p_else(p):
     '''
     else : ELSE LCRLBRACKET line RCRLBRACKET
     '''
     print("else")
-    p[0] = "Ejecutando el else ..."
+    p[0] = ["ELSE", p[3]]
 
 def p_compare(p):
     '''
@@ -362,7 +369,7 @@ def p_let(p):
     '''
 
     line = p.lineno(2)
-    result = myTable.insertValue(p[4],p[2], line)
+    result = myTable.insertValue(p[4], p[2], line)
     Let(p[2], p[4], line, myTable.table, result)
     p[0] = ["LET", p[2], p[4], line, myTable.table, result]
 '''

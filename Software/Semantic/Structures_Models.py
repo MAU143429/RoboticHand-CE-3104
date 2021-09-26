@@ -6,6 +6,25 @@ from Software.Semantic.BooleanValue import *
 class Main():
     def __init__(self, instructions):
         self.instructions = instructions
+        if self.instructions != None:
+            for i in self.instructions:
+                if i[0] == "MAIN":
+                    if i[1] != None:
+                        self.runCode(i[1])
+
+    def runCode(self, functionInstructions):
+        print(functionInstructions)
+        for i in functionInstructions:
+            if i[0] == "LET":
+                print("LET")
+                Let(i[1], i[2], i[3], i[4], i[5])
+            elif i[0] == "MOVE":
+                print("MOVE")
+            elif i[0] == "DELAY":
+                print("DELAY")
+            elif i[0] == "PRINT":
+                print("PRINT")
+
 
 class Let:
     def __init__(self, id, value,line,symbol_table,result):
@@ -258,14 +277,15 @@ class simpleListBuilder:
 
     def createListOfLists(self, lists):
         simpleList = []
-        for i in lists:
-            if not isinstance(i[0], list):
-                sublists = []
-                for j in i:
-                    if not isinstance(j, list):
-                        sublists.append(j)
-                simpleList.append(sublists)
-            else:
-                simpleList += self.createListOfLists(i)
+        if isinstance(lists[0], list):
+            for i in lists:
+                if not isinstance(i[0], list):
+                    sublists = []
+                    for j in i:
+                            sublists.append(j)
+                    simpleList.append(sublists)
+                else:
+                    simpleList += self.createListOfLists(i)
+        else:
+            simpleList = [lists]
         return simpleList
-
