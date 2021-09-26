@@ -1,5 +1,6 @@
 fn main(){
-    let sum = true;
+    let sum = 3;
     let res = 14;
-    let down = Opera(+,sum,14);
+    let total = Opera(+, Opera(-, Opera(*, 3, 100), sum), res);
+    Println!(total); 
 }

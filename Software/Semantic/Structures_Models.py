@@ -2,6 +2,7 @@ from Hardware.Robotic_Hand.Translator import Translator
 from Software.Semantic.reserved import *
 from Software.Semantic.Generate_Error import *
 from Software.Semantic.BooleanValue import *
+from Software.Print_Log import *
 
 class Main():
     def __init__(self, instructions):
@@ -73,6 +74,7 @@ class Print:
         self.table = myTable
         self.stringsList = myTable.getStringList()
         self.printLogger = ""
+        self.logger = PrintLog()
         self.printChecking()
 
         print("SE IMPRIMIRA EN LA CONSOLA -->  " + str(self.printLogger) + " DESDE LA LINEA " + str(self.line))
@@ -82,12 +84,16 @@ class Print:
         for var in self.value:
             if isinstance(var, int):
                 self.printLogger = self.printLogger + str(var) + " "
+                self.logger.log_print(self.printLogger)
             elif isinstance(validate_real_bool(self.value), bool):
                 self.printLogger = self.printLogger + str(self.value) + " "
+                self.logger.log_print(self.printLogger)
             elif var in self.stringsList:
                 self.printLogger = self.printLogger + var[1:-1] + " "
+                self.logger.log_print(self.printLogger)
             else:
                 self.printLogger = self.printLogger + str(self.table.getValue(var, self.line)) + " "
+                self.logger.log_print(self.printLogger)
 
 class If:
     def __init__(self, expression1, comparisonSymbol, expression2, symbol_table, line):
@@ -214,7 +220,7 @@ class Opera:
             elif self.operator == "*":
                 result= var1 * var2
         else:
-            errorHandler = Generate_Error(4, self.line)
+            errorHandler = Generate_Error(6, self.line)
             errorHandler.Execute()
             return
         print("SE DETECTO UN OPERA DE FORMA (" + str(self.operator) + "," + str(var1) + "," + str(var2) + ")" + " CON RESULTADO " + str(result) + " EN LA LINEA " + str(self.line))

@@ -103,14 +103,16 @@ class Ui_MainWindow(object):
         error.clean()
         myTable.Clean()
         lex_test()
-
         if main_checker():
             print("Entre al checker de main del IDE")
             error_text_ = "Compile error: there can only be one main function or main function is not defined"
             self.output.setPlainText(error_text_)
             print("TERMINE")
-        else:
+
+        if error.errors() != "":
             self.output.setPlainText(error.errors())
+            error.print()
+
 
 
     def run_compile(self):
@@ -126,17 +128,25 @@ class Ui_MainWindow(object):
         error.clean()
         myTable.Clean()
         lex_test()
+        if main_checker():
+            print("Entre al checker de main del IDE")
+            error_text_ = "Compile error: there can only be one main function or main function is not defined"
+            self.output.setPlainText(error_text_)
+            print("TERMINE")
+            return
+
         t.Write("1")
         print("VOY A EJECUTAR EL CODIGO")
-        self.output.setPlainText(printlog.prints())
-        if error.log != "":
+        print("LOG DE PRINTS: ", printlog.log)
+        if error.errors() != "":
             self.output.setPlainText(error.errors())
             error.print()
         else:
+            self.output.setPlainText(printlog.prints())
             print("VOY A ENVIAR LOS ARCHIVOS LA MANO")
             time.sleep(1)
-            e = Execute()
-            e.execute()
+            #e = Execute()
+            #e.execute()
             print("ARCHIVOS ENVIADOS")
 
     def start_compile(self):
