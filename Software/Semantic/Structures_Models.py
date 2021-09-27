@@ -37,6 +37,10 @@ class Main():
                         self.runCode(i[5])
                 elif i[6] != None:
                     self.runCode(simpleListBuilder().createListOfLists(i[6]))
+            elif i[0] == "FOR":
+                print("FOR")
+                For(i[1], i[2], i[3], i[4], i[5], i[6])
+
 
 class Let:
     def __init__(self, id, value,line,symbol_table,result):
@@ -101,7 +105,7 @@ class Print:
     def __init__(self, value, line, myTable):
         self.value = value
         self.line = line
-        self.table = myTable
+        self.table = myTable.table
         self.stringsList = myTable.getStringList()
         self.printLogger = ""
         self.logger = PrintLog()
@@ -113,17 +117,26 @@ class Print:
 
         for var in self.value:
             if isinstance(var, int):
-                self.printLogger = self.printLogger + str(var) + " "
+                self.printLogger = self.printLogger + str(var)
                 self.logger.log_print(self.printLogger)
-            elif isinstance(validate_real_bool(self.value), bool):
-                self.printLogger = self.printLogger + str(self.value) + " "
+            elif isinstance(validate_real_bool(var), bool):
+                self.printLogger = self.printLogger + str(var)
                 self.logger.log_print(self.printLogger)
             elif var in self.stringsList:
-                self.printLogger = self.printLogger + var[1:-1] + " "
+                self.printLogger = self.printLogger + var[1:-1]
                 self.logger.log_print(self.printLogger)
             else:
-                self.printLogger = self.printLogger + str(self.table.getValue(var, self.line)) + " "
-                self.logger.log_print(self.printLogger)
+                exist = False
+                for i in self.table:
+                    if i == var:
+                        exist = True
+                        break
+                if exist:
+                    self.printLogger = self.printLogger + str(self.table[i]["value"]) + " "
+                    self.logger.log_print(self.printLogger)
+                else:
+                    errorHandler = Generate_Error(5, self.line)
+                    errorHandler.Execute()
 
 class If:
     def __init__(self, expression1, comparisonSymbol, expression2, symbol_table, line):
@@ -263,13 +276,33 @@ class Loop:
         print("LOOP")
 
 class For:
-    def __init__(self, id, const1, range, const2, line):
+    def __init__(self, id, const1, range, const2, instructions, line):
         self.id = id
         self.const1 = const1
         self.range = range
         self.const2 = const2
+        self.instructions = instructions
         self.line = line
-        print("FOR")
+        self.table = myTable.table
+
+        for var in self.table:
+            if var == self.id:
+                if self.table[var]["value"] != None:
+                    errorHandler = Generate_Error(15, self.line)
+                    errorHandler.Execute()
+                else:
+                    self.table[var]["type"] = int
+                    self.runFor()
+
+    def runFor(self):
+        loops = self.const2 - self.const1
+
+        for i in range(loops):
+            for var in self.table:
+                if var == self.id:
+                    self.table[var]["value"] = self.const1 + i
+            
+        #Main(None).runCode(self.instructions)
 
 class While:
     def __init__(self, line):
@@ -328,7 +361,6 @@ class Move:
 
 class simpleListBuilder:
     def createList(self, fingers):
-
         simpleList = []
         for i in fingers:
             if isinstance(i, list):

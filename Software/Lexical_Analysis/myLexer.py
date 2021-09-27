@@ -48,4 +48,4 @@ def main_checker():
         return True
     else:
         return False
-#lex_test()
+lex_test()

@@ -86,5 +86,8 @@ class Generate_Error:
             e_msg = "SEMANTIC ERROR AT LINE " + str(self.line) + ". CAN´T COMPARE AN INTEGER WITH A BOOLEAN"
             parser.syntax_error = True
             self.error.log_error(e_msg, 3)
-        
-        
+
+        if self.code == 15:
+            e_msg = "SEMANTIC ERROR AT LINE " + str(self.line) + ". A DECLARED VARIABLE WAS CALLED"
+            parser.syntax_error = True
+            self.error.log_error(e_msg, 3)
