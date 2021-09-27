@@ -91,3 +91,8 @@ class Generate_Error:
             e_msg = "SEMANTIC ERROR AT LINE " + str(self.line) + ". A DECLARED VARIABLE WAS CALLED"
             parser.syntax_error = True
             self.error.log_error(e_msg, 3)
+
+        if self.code == 16:
+            e_msg = "SEMANTIC ERROR AT LINE " + str(self.line) + ". FOR LOOP OUT OF RANGE"
+            parser.syntax_error = True
+            self.error.log_error(e_msg, 3)

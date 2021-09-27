@@ -17,29 +17,30 @@ class Main():
 
     def runCode(self, functionInstructions):
         print(functionInstructions)
-        for i in functionInstructions:
-            if i[0] == "LET":
-                print("LET")
-                result = myTable.insertValue(i[2], i[1], i[3])
-                Let(i[1], i[2], i[3], myTable.table, result)
-            elif i[0] == "MOVE":
-                print("MOVE")
-                Move(i[1], i[2], myTable.table, i[3])
-            elif i[0] == "DELAY":
-                print("DELAY")
-                Del(i[1], i[2], myTable.table, i[3])
-            elif i[0] == "PRINT":
-                print("PRINT")
-                Print(i[1], i[2], myTable)
-            elif i[0] == "IF" or i[0] == "ELSEIF":
-                if If(i[1], i[2], i[3], myTable.table, i[4]).Comparison():
-                    if i[5] != None:
-                        self.runCode(i[5])
-                elif i[6] != None:
-                    self.runCode(simpleListBuilder().createListOfLists(i[6]))
-            elif i[0] == "FOR":
-                print("FOR")
-                For(i[1], i[2], i[3], i[4], i[5], i[6])
+        if functionInstructions != None:
+            for i in functionInstructions:
+                if i[0] == "LET":
+                    print("LET")
+                    result = myTable.insertValue(i[2], i[1], i[3])
+                    Let(i[1], i[2], i[3], myTable.table, result)
+                elif i[0] == "MOVE":
+                    print("MOVE")
+                    Move(i[1], i[2], myTable.table, i[3])
+                elif i[0] == "DELAY":
+                    print("DELAY")
+                    Del(i[1], i[2], myTable.table, i[3])
+                elif i[0] == "PRINT":
+                    print("PRINT")
+                    Print(i[1], i[2], myTable)
+                elif i[0] == "IF" or i[0] == "ELSEIF":
+                    if If(i[1], i[2], i[3], myTable.table, i[4]).Comparison():
+                        if i[5] != None:
+                            self.runCode(i[5])
+                    elif i[6] != None:
+                        self.runCode(simpleListBuilder().createListOfLists(i[6]))
+                elif i[0] == "FOR":
+                    print("FOR")
+                    For(i[1], i[2], i[3], i[4], i[5], i[6])
 
 
 class Let:
@@ -291,18 +292,22 @@ class For:
                     errorHandler = Generate_Error(15, self.line)
                     errorHandler.Execute()
                 else:
-                    self.table[var]["type"] = int
-                    self.runFor()
+                    if self.const1 <= self.const2:
+                        self.table[var]["type"] = int
+                        self.runFor()
+                    else:
+                        errorHandler = Generate_Error(16, self.line)
+                        errorHandler.Execute()
 
     def runFor(self):
         loops = self.const2 - self.const1
 
         for i in range(loops):
-            for var in self.table:
-                if var == self.id:
-                    self.table[var]["value"] = self.const1 + i
-            
-        #Main(None).runCode(self.instructions)
+            self.table[self.id]["value"] = self.const1 + i
+            Main(None).runCode(self.instructions)
+
+        self.table[self.id]["value"] = None
+        self.table[self.id]["type"] = None
 
 class While:
     def __init__(self, line):

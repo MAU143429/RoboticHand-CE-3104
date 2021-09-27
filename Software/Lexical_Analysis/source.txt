@@ -1,19 +1,9 @@
 fn main(){
     let res = false;
+    let num = 49;
     Println!("Hola", res);
-    Move("T", res);
-    if true == res {
-        let sum = true;
-        let hola = 49;
-    }
-    elseif res == true{
-        let res = true;
-        let div = 67;
-    }
-    else {
-        if res == false{
-            Delay(2000, "Mil");
-        }
+    for cifra in 6..6 {
+        let num = cifra;
     }
     Move(["A", "T", "M"], res);
 }
