@@ -2,8 +2,8 @@ fn main(){
     let res = false;
     let num = 49;
     Println!("Hola", res);
-    for cifra in 6..6 {
-        let num = cifra;
-    }
     Move(["A", "T", "M"], res);
+    for var in 1..=10{
+        let var1 = Opera(+ ,1 ,var);
+    }
 }

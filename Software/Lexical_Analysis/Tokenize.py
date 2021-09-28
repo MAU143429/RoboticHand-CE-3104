@@ -38,6 +38,7 @@ t_EXPR              = r'\!'
 t_EQEQ              = r'\=='
 t_LTE               = r'\<='
 t_GTE               = r'\>='
+t_DOTDOTEQ          = r'\..='
 t_LT                = r'\<'
 t_GT                = r'\>'
 t_ARROW             = r'\->'
@@ -67,6 +68,7 @@ tokens = [
 'EQEQ',
 'LTE',
 'GTE',
+'DOTDOTEQ',
 'LT',
 'GT',
 'ARROW',
