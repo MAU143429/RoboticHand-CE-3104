@@ -42,6 +42,21 @@ class Main():
                     print("FOR")
                     For(i[1], i[2], i[3], i[4], i[5], i[6])
 
+                elif i[0] == "LOOP":
+                    print("LOOP")
+                    Loop(i[1],i[2])
+
+                elif i[0] == "WTRUE":
+                    print("WHILE TRUE")
+                    Wtrue(i[1],i[2])
+                    
+                elif i[0] == "BREAK":
+                    return True
+
+                elif i[0] == "WHILE":
+                    print("WHILE")
+                    While(i[1],i[2],i[3],i[4],i[5])
+
 
 class Let:
     def __init__(self, id, value,line,symbol_table,result):
@@ -272,9 +287,19 @@ class Opera:
 
 
 class Loop:
-    def __init__(self, line):
+    def __init__(self, instructions,line):
         self.line = line
         print("LOOP")
+
+class Wtrue:
+    def __init__(self, instructions, line):
+        self.line = line
+        print("WHILE_TRUE")
+
+class While:
+    def __init__(self, line):
+        self.line = line
+        print("WHILE")
 
 class For:
     def __init__(self, id, const1, range, const2, instructions, line):
@@ -309,10 +334,6 @@ class For:
         self.table[self.id]["value"] = None
         self.table[self.id]["type"] = None
 
-class While:
-    def __init__(self, line):
-        self.line = line
-        print("WHILE")
 
 class Move:
     def __init__(self, finger, movement, symbol_table, line):

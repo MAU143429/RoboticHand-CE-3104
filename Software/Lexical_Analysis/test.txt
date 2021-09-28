@@ -17,3 +17,6 @@ mov,M;false/
 mov,A;false/
 mov,T;false/
 mov,M;false/
+mov,A;false/
+mov,T;false/
+mov,M;false/

@@ -144,7 +144,7 @@ def p_loop(p):
     loop : LOOP LCRLBRACKET line RCRLBRACKET
     '''
     line = p.lineno(2)
-    p[0] = Loop(line)
+    p[0] = ["LOOP",p[3],line]
 
 
 '''
@@ -170,10 +170,26 @@ REGLAS PARA WHILE
 def p_while(p):
     '''
     while : WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET
-          | WHILE TRUE LCRLBRACKET line RCRLBRACKET
+
     '''
     line = p.lineno(2)
-    p[0] = While(line)
+    p[0] = ["WHILE",p[3],p[4],p[5],p[8],line]
+
+'''
+###########################################################################
+REGLAS PARA WHILE TRUE
+###########################################################################
+'''
+
+
+def p_while_true(p):
+    '''
+    while : WHILE TRUE LCRLBRACKET line RCRLBRACKET
+
+    '''
+    line = p.lineno(2)
+    p[0] = ["WTRUE",p[4], line]
+
 
 
 '''
@@ -403,7 +419,7 @@ def p_break(p):
     '''
     break : BREAK
     '''
-    p[0] = p[1]
+    p[0] = ["BREAK"]
 
 def p_error(p):
 
