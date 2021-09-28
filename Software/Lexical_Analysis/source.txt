@@ -1,9 +1,12 @@
 fn main(){
-    let res = false;
-    let num = 49;
-    Println!("Hola", res);
-    for cifra in 6..6 {
-        let num = cifra;
+    while true {
+        let num = 3;
+        Println!("SOY EL NUM", num);
+        if num == 3{
+            Println!("TERMINE");
+            break
+        }
+
     }
-    Move(["A", "T", "M"], res);
+
 }

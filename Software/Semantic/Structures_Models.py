@@ -44,11 +44,11 @@ class Main():
 
                 elif i[0] == "LOOP":
                     print("LOOP")
-                    Loop(i[1],i[2])
+                    Loop(i[1],i[2]).execute()
 
                 elif i[0] == "WTRUE":
                     print("WHILE TRUE")
-                    Wtrue(i[1],i[2])
+                    Wtrue(i[1],i[2]).execute()
                     
                 elif i[0] == "BREAK":
                     return True
@@ -289,12 +289,60 @@ class Opera:
 class Loop:
     def __init__(self, instructions,line):
         self.line = line
-        print("LOOP")
+        self.instructions = instructions
+        print("SOY LAS INSTRUCCIONES ---> " + str(self.instructions))
+
+    def execute(self):
+        exist = False;
+        for ins in self.instructions:
+            if ins[0] == "BREAK":
+                exist = True
+            elif ins[0] == "IF" or ins[0] == "ELSEIF":
+                for i in ins[5]:
+                    if i[0] == "BREAK":
+                        exist = True
+            elif ins[0] == "FOR":
+                for i in ins[5]:
+                    if i[0] == "BREAK":
+                        exist = True
+
+        if exist:
+            if Main(None).runCode(self.instructions):
+                print("LOOP EJECUTADO")
+            else:
+                print("SIGUIENTE INSTRUCCION")
+        else:
+            errorHandler = Generate_Error(17, self.line)
+            errorHandler.Execute()
+
 
 class Wtrue:
     def __init__(self, instructions, line):
         self.line = line
+        self.instructions = instructions
         print("WHILE_TRUE")
+
+    def execute(self):
+        exist = False;
+        for ins in self.instructions:
+            if ins[0] == "BREAK":
+                exist = True
+            elif ins[0] == "IF" or ins[0] == "ELSEIF":
+                for i in ins[5]:
+                    if i[0] == "BREAK":
+                        exist = True
+            elif ins[0] == "FOR":
+                for i in ins[5]:
+                    if i[0] == "BREAK":
+                        exist = True
+        if exist:
+            if Main(None).runCode(self.instructions):
+                print("WHILE TRUE EJECUTADO")
+            else:
+                print("SIGUIENTE INSTRUCCION")
+        else:
+            errorHandler = Generate_Error(17, self.line)
+            errorHandler.Execute()
 
 class While:
     def __init__(self, line):
