@@ -32,7 +32,7 @@ def p_root(p):
     if p[0] != None:
         p[0] = simpleListBuilder().createListOfLists(p[0])
     print("Lista de instrucciones a ejecutar:")
-    #print(p[0])
+    print(p[0])
     Main(p[0])
 
 def p_functions(p):
