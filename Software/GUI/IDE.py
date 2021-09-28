@@ -145,8 +145,8 @@ class Ui_MainWindow(object):
             self.output.setPlainText(printlog.prints())
             print("VOY A ENVIAR LOS ARCHIVOS LA MANO")
             time.sleep(1)
-            #e = Execute()
-            #e.execute()
+            e = Execute()
+            e.execute()
             print("ARCHIVOS ENVIADOS")
 
     def start_compile(self):

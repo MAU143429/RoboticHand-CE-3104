@@ -1,14 +1,7 @@
 fn main(){
-    let res = false;
-    let num = 49;
-    Println!("Hola", res);
-    Move(["A", "T", "M"], res);
-    for var in 1..=10{
-        let var1 = Opera(+ ,1 ,var);
-    }
+    let num = 3;
+    While num < 10{
 
-    while true {
-        let num = 3;
         Println!("SOY EL NUM", num);
         if num == 3{
             Println!("TERMINE");

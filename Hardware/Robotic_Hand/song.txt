@@ -1,117 +1,10 @@
-del,16000;Mil/ 
-mov,T;true/
-del,1000;Mil/
-mov,P;false/
-del,1166;Mil/ 
-mov,I;false/
-del,1166;Mil/
-mov,M;false/
-del,1166;Mil/
-mov,A;false/
-del,200;Mil/
-mov,Q;false/
-del,3000;Mil/
-mov,T;true/
-del,200;Mil/
-mov,P;false/
-del,6000;Mil/
-mov,P;true/
-mov,I;false/ 
-del,6000;Mil/
-mov,M;false/ 
-del,6000;Mil/
-mov,I;true/
-mov,M;true/
-mov,A;false/
-del,7000;Mil/
-mov,A;true/
-mov,Q;false/
-del,13000;Mil/ 
-mov,Q;true/
-del,6000;Mil/
-mov,T;false/
-
-
-
-Delay(16000,"Mil");
-Move("T",true);
-Delay(1000,"Mil");
-Move("P",false);
-Delay(1166,"Mil");
-Move("I",false); 
-Delay(1166,"Mil");
-Move("M",false"); 
-Delay(1166,"Mil");
-Move("A", "false"); 
-Delay(200,"Mil");
-Move("Q","false");
-Delay(3000,"Mil");
-Move("T","true");
-Delay(200,"Mil");
-Move("P","false");
-Delay(6000,"Mil");
-Move("P","true");
-Move("I","false"); 
-Delay(6000,"Mil");
-Move("M","false"); 
-Delay(6000,"Mil");
-Move("I","true");
-Move("M","true");
-Move("A","false"); 
-Delay(7000,"Mil");
-Move("A","true");
-Move("Q","false"); 
-Delay(13000,"Mil"); 
-Move("Q","true");
-Delay(6000,"Mil");
-Move("T","false");
-
-
-fn main(){
-    Delay(16000,"Mil");
-    Move("T",true);
-    Delay(1000,"Mil");
-    Move("P",false);
-    Delay(1166,"Mil");
-    Move("I",false); 
-    Delay(1166,"Mil");
-    Move("M",false); 
-    Delay(1166,"Mil");
-    Move("A", false); 
-    Delay(200,"Mil");
-    Move("Q",false);
-    Delay(3000,"Mil");
-    Move("T",true);
-    Delay(200,"Mil");
-    Move("P",false);
-    Delay(6000,"Mil");
-    Move("P",true);
-    Move("I",false); 
-    Delay(6000,"Mil");
-    Move("M",false); 
-    Delay(6000,"Mil");
-    Move("I",true);
-    Move("M",true);
-    Move("A",false); 
-    Delay(7000,"Mil");
-    Move("A",true);
-    Move("Q",false); 
-    Delay(13000,"Mil"); 
-    Move("Q",true);
-    Delay(6000,"Mil");
-    Move("T",false);
-}
-
-
-
-
-Parte 2
-
-
-Delay(6000,"Mil");
-    Move("T",false);
-    Delay(1100,"Mil");
-    Move("P",true);
+fn main(){ 
+    let up# = true;
+    let down = false;
+    Delay(19800,"Mil");
+    Move(["P","I","M","A","Q"],down);
+    Delay(900,"Mil");
+    Move("P",up#);
     Delay(950,"Mil");
     Move("I",true);
     Delay(800,"Mil");
@@ -128,9 +21,6 @@ Delay(6000,"Mil");
     Move("P",false);
     Move("I",true);
     Delay(6500,"Mil");
-    Move("P",false);
-    Move("I",true);
-    Delay(6500,"Mil");
     Move("M",true);
     Delay(6500,"Mil");
     Move("I",false);
@@ -142,3 +32,5 @@ Delay(6000,"Mil");
     Delay(12000,"Mil");
     Move("Q",false);
     Delay(6000,"Mil");
+    Move("T",true);
+}

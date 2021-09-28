@@ -55,7 +55,7 @@ class Main():
 
                 elif i[0] == "WHILE":
                     print("WHILE")
-                    While(i[1],i[2],i[3],i[4],i[5])
+                    While(i[1],i[2],i[3],i[4],i[5]).execute()
 
 
 class Let:
@@ -295,10 +295,12 @@ class Loop:
     def execute(self):
         exist = False;
         for ins in self.instructions:
+            print("SOY LAS INS ---> " + str(ins))
             if ins[0] == "BREAK":
                 exist = True
             elif ins[0] == "IF" or ins[0] == "ELSEIF":
                 for i in ins[5]:
+                    print("SOY LAS I ---> " + str(i))
                     if i[0] == "BREAK":
                         exist = True
             elif ins[0] == "FOR":
@@ -345,9 +347,35 @@ class Wtrue:
             errorHandler.Execute()
 
 class While:
-    def __init__(self, line):
+    def __init__(self, expr1,compare,expr2,instructions,line):
         self.line = line
+        self.expr1 = expr1
+        self.expr2 = expr2
+        self.compare = compare
+        self.instructions = instructions
         print("WHILE")
+
+    def execute(self):
+
+        '''
+        Comparaciones
+        '''
+        valid = False
+        total_recursion = 0
+
+        valid = True # si la comparacion es valida
+
+        if total_recursion < 900:
+
+            if valid:
+                Main(None).runCode(self.instructions)
+                total_recursion +=1
+
+            else:
+                print("WHILE EJECUTADO")
+
+        else:
+            #ERROR RECURSION EXCEDIDA
 
 class For:
     def __init__(self, id, const1, range, const2, instructions, line):
