@@ -16,6 +16,13 @@ class Main():
                     if i[1] != None:
                         self.runCode(i[1])
 
+    def validateOpera(self, operator, operand1, operand2, line):
+        if isinstance(operand1, list):
+            operand1 = self.validateOpera(operand1[1], operand1[2], operand1[3], operand1[4])
+        if isinstance(operand2, list):
+            operand2 = self.validateOpera(operand2[1], operand2[2], operand2[3], operand2[4])
+        return Opera(operator, operand1, operand2, myTable.table, line).Operate()
+
     def runCode(self, functionInstructions):
         print(functionInstructions)
         if functionInstructions != None:
@@ -25,7 +32,7 @@ class Main():
                     if isinstance(i[2], list):
                         if i[2][0] == "OPERA":
                             print("OPERA")
-                            operation = Opera(i[2][1], i[2][2], i[2][3], myTable.table, i[2][4]).Operate()
+                            operation = self.validateOpera(i[2][1], i[2][2], i[2][3], i[2][4])
                             result = myTable.insertValue(operation, i[1], i[3])
                             Let(i[1], operation, i[3], myTable.table, result)
                     else:
@@ -65,6 +72,24 @@ class Main():
                     print("WHILE")
                     While(i[1],i[2],i[3],i[4],i[5], myTable.table).execute()
 
+                elif i[0] == "DECLARATION":
+                    print("DECLARATION")
+                    for j in self.instructions:
+                        if j[1] == i[1]:
+                            Procedure(i[2], j[2], j[3], i[3])
+
+class Procedure:
+    def __init__(self, declarationParams, procedureParams, instructions, line):
+        self.declarationParams = declarationParams
+        self.procedureParams = procedureParams
+        self.instructions = instructions
+        self.line = line
+
+        if len(declarationParams) == len(procedureParams):
+            print("Los parametros coinciden")
+        else:
+            errorHandler = Generate_Error(4, self.line)
+            errorHandler.Execute()
 
 class Let:
     def __init__(self, id, value,line,symbol_table,result):
@@ -87,7 +112,7 @@ class Let:
                     self.table[self.id]["value"] = validate_bool(self.value)
 
                 else:
-                    errorHandler=Generate_Error(4, self.line)
+                    errorHandler=Generate_Error(15, self.line)
                     errorHandler.Execute()
 
 

@@ -41,11 +41,6 @@ def p_main(p):
     '''
     p[0] = ["MAIN", p[6]]
 
-def p_declarations(p):
-    '''
-    declaration : ID
-    '''
-
 '''
 ###########################################################################
 REGLAS PARA PROCEDIMIENTOS
@@ -80,7 +75,7 @@ def p_function(p):
 def p_params(p):
     '''
     params : ID arg
-          | empty empty
+           | empty empty
     '''
     if not p[2] is None:
         p[0] = [p[1], p[2]]
@@ -90,7 +85,6 @@ def p_params(p):
 def p_arg(p):
     '''
     arg : COMMA params
-        | COMMA arg
         | empty empty
     '''
 
@@ -105,7 +99,7 @@ def p_funbody(p):
 def p_output(p):
     '''
     output : INTEGER
-            | BOOLEAN
+           | BOOLEAN
     '''
     p[0] = p[1]
 
@@ -129,6 +123,7 @@ def p_program(p):
          | delay line
          | println line
          | break line
+         | declaration line
          | empty empty
     '''
     if p[2] != None:
@@ -137,6 +132,34 @@ def p_program(p):
         p[0] = p[1]
     if p[0] != None:
         p[0] = simpleListBuilder().createListOfLists(p[0])
+
+def p_declarations(p):
+    '''
+    declaration : ID LPAREN params RPAREN SEMICOLON
+    '''
+    line = p.lineno(2)
+    p[0] = ["DECLARATION", p[1], simpleListBuilder().createList(p[3]), line]
+
+def p_params(p):
+    '''
+    params : ID arg
+           | INT arg
+           | TRUE arg
+           | FALSE arg
+           | empty empty
+    '''
+    if not p[2] is None:
+        p[0] = [p[1], p[2]]
+    else:
+        p[0] = [p[1]]
+
+def p_arg(p):
+    '''
+    arg : COMMA params
+        | empty empty
+    '''
+
+    p[0] = p[2]
 
 '''
 ###########################################################################
