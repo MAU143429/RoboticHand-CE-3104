@@ -197,14 +197,37 @@ class Del:
         self.table = table
         self.checker = MoveDelayCheck(self.unit)
 
-        if self.checker.check_units():
-            print("SE HA REGISTRADO EL DELAY CON DURACION DE " + str(self.value) + " " + self.unit +  " EN LA LINEA " + str(self.line))
-            t = Translator()
-            t.Create_Delay(self.value,self.unit)
+        if isinstance(self.getExpr(self.value), int):
+            if self.checker.check_units():
+                print("SE HA REGISTRADO EL DELAY CON DURACION DE " + str(self.getExpr(self.value)) + " " + self.unit +  " EN LA LINEA " + str(self.line))
+                t = Translator()
+                t.Create_Delay(self.getExpr(self.value),self.unit)
+            else:
+                e_msg = "SYNTAX ERROR AT LINE " + str(self.line) + ". INVALID TIME SUFFIX"
+                errorHandler = Generate_Error(9, self.line)
+                errorHandler.Execute()
         else:
-            e_msg = "SYNTAX ERROR AT LINE " + str(self.line) + ". INVALID TIME SUFFIX"
-            errorHandler = Generate_Error(9, self.line)
+            errorHandler = Generate_Error(4, self.line)
             errorHandler.Execute()
+
+    def getExpr(self, expr):
+        exists = False
+        for var in self.table:
+            if var == str(expr):
+                if self.table[expr]["value"] != None:
+                    return self.table[expr]["value"]
+                else:
+                    errorHandler = Generate_Error(18, self.line)
+                    errorHandler.Execute()
+        if isinstance(int(expr), int):
+            return int(expr)
+        if isinstance(validate_real_bool(expr), bool):
+            return  validate_real_bool(expr)
+        if not exists:
+            errorHandler = Generate_Error(5, self.line)
+            errorHandler.Execute()
+
+
 
 class Print:
     def __init__(self, value, line, myTable):

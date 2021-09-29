@@ -262,6 +262,7 @@ REGLAS PARA DELAY
 def p_delay(p):
     '''
     delay : DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON
+          | DELAY LPAREN ID COMMA STRING RPAREN SEMICOLON
     '''
     line = p.lineno(2)
     p[0] = ["DELAY", p[3], p[5], line]
