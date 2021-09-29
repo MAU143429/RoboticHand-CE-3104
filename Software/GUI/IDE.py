@@ -66,7 +66,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.compileButton.clicked.connect(self.start_compile)
         self.runButton.clicked.connect(self.start_run_compile)
-        self.menuFile
+        #self.menuFile
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -81,21 +81,27 @@ class Ui_MainWindow(object):
         self.actionLoad.setText(_translate("MainWindow", "Load"))
 
     def save(self):
-        with open('../Lexical_Analysis/source.txt', 'w') as f:
-            code = self.codeEditor.toPlainText()
-            f.write(code)
-            f.close()
+        filename = QFileDialog.getSaveFileName()
+        code = self.codeEditor.toPlainText()
+        if filename[0]:
+            with open(filename[0], 'w') as f:
+                f.write(code)
+                f.close()
 
     def load(self):
         filename = QFileDialog.getOpenFileName()
         path = filename[0]
-        with open(path, "r") as f:
-            self.codeEditor.setPlainText(f.read())
-            f.close()
+        if filename[0]:
+            with open(path, "r") as f:
+                self.codeEditor.setPlainText(f.read())
+                f.close()
 
     def compile(self):
         self.output.clear()
-        self.save()
+        with open('../Lexical_Analysis/source.txt', 'w') as f:
+            code = self.codeEditor.toPlainText()
+            f.write(code)
+            f.close()
         time.sleep(1)
         t = Translator()
         t.Clean()
@@ -117,11 +123,14 @@ class Ui_MainWindow(object):
 
     def run_compile(self):
         self.output.clear()
-        self.save()
+        with open('../Lexical_Analysis/source.txt', 'w') as f:
+            code = self.codeEditor.toPlainText()
+            f.write(code)
+            f.close()
         #self.output.setPlainText(self.codeEditor.toPlainText())
         time.sleep(1)
-        t = Translator()
-        t.Clean()
+        #t = Translator()
+        #t.Clean()
         printlog = PrintLog()
         printlog.clean()
         error = ErrorLog()
@@ -135,7 +144,7 @@ class Ui_MainWindow(object):
             print("TERMINE")
             return
 
-        t.Write("1")
+        #t.Write("1")
         print("VOY A EJECUTAR EL CODIGO")
         print("LOG DE PRINTS: ", printlog.log)
         if error.errors() != "":
@@ -144,9 +153,9 @@ class Ui_MainWindow(object):
         else:
             self.output.setPlainText(printlog.prints())
             print("VOY A ENVIAR LOS ARCHIVOS LA MANO")
-            time.sleep(1)
-            e = Execute()
-            e.execute()
+            #time.sleep(1)
+            #e = Execute()
+            #e.execute()
             print("ARCHIVOS ENVIADOS")
 
     def start_compile(self):
