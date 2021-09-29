@@ -216,6 +216,7 @@ class Print:
         self.logger = PrintLog()
         self.printChecking()
 
+
         print("SE IMPRIMIRA EN LA CONSOLA -->  " + str(self.printLogger) + " DESDE LA LINEA " + str(self.line))
 
     def printChecking(self):
@@ -381,9 +382,6 @@ class Loop:
 
         print("SOY LAS INSTRUCCIONES ---> " + str(self.instructions))
 
-    def setStop(self):
-        self.stop = True
-
     def execute(self):
         global stop
         exist = False;
@@ -402,9 +400,17 @@ class Loop:
                         exist = True
 
         if exist:
+            total_recursion = 0
             while not stop:
-                Main(None).runCode(self.instructions)
-                print("Ejecutando")
+                if total_recursion < 200:
+                    print("SOY EL TOTAL RECURSION --> " + str(total_recursion))
+                    Main(None).runCode(self.instructions)
+                    print("Ejecutando")
+                    total_recursion += 1
+                else:
+                    errorHandler = Generate_Error(19, self.line)
+                    errorHandler.Execute()
+                    break
             stop = False
 
         else:
@@ -419,6 +425,7 @@ class Wtrue:
         print("WHILE_TRUE")
 
     def execute(self):
+        global stop
         exist = False;
         for ins in self.instructions:
             if ins[0] == "BREAK":
@@ -432,10 +439,18 @@ class Wtrue:
                     if i[0] == "BREAK":
                         exist = True
         if exist:
+            total_recursion = 0
             while not stop:
-                Main(None).runCode(self.instructions)
-                print("Ejecutando")
+                if total_recursion < 200:
+                    Main(None).runCode(self.instructions)
+                    print("Ejecutando")
+                    total_recursion += 1
+                else:
+                    errorHandler = Generate_Error(19, self.line)
+                    errorHandler.Execute()
+                    break
             stop = False
+
         else:
             errorHandler = Generate_Error(17, self.line)
             errorHandler.Execute()

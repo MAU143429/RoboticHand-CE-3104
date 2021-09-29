@@ -29,8 +29,8 @@ fn main(){
     let div = 49;
     let cifra2 = false;
     procedimiento(cifra2, div);
-    loop{
-        if max == 7 {
+    while true{
+        if max < 0 {
             break
         }else{
             Move(["P","Q"],upp);
