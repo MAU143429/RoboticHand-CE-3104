@@ -76,19 +76,26 @@ class Main():
                     print("DECLARATION")
                     for j in self.instructions:
                         if j[1] == i[1]:
-                            Procedure(i[2], j[2], j[3], i[3])
+                            Procedure(i[2], j[2], j[3], myTable.table, i[3])
 
 class Procedure:
-    def __init__(self, declarationParams, procedureParams, instructions, line):
+    def __init__(self, declarationParams, procedureParams, instructions, table, line):
         self.declarationParams = declarationParams
         self.procedureParams = procedureParams
         self.instructions = instructions
+        self.table = table
         self.line = line
 
         if len(declarationParams) == len(procedureParams):
-            print("Los parametros coinciden")
+            var = 0
+            if declarationParams[0] != None:
+                while len(declarationParams) != var:
+                    self.table[procedureParams[var]]["value"] = declarationParams[var]
+                    var+=1
+            Main(None).runCode(self.instructions)
+
         else:
-            errorHandler = Generate_Error(4, self.line)
+            errorHandler = Generate_Error(20, self.line)
             errorHandler.Execute()
 
 class Let:
