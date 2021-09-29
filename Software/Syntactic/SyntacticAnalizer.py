@@ -35,39 +35,17 @@ def p_root(p):
     print(p[0])
     Main(p[0])
 
-def p_functions(p):
-    '''
-    functions : ID
-    '''
-
 def p_main(p):
     '''
     main : FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
     '''
     p[0] = ["MAIN", p[6]]
 
-def p_program(p):
+def p_declarations(p):
     '''
-    line : loop line
-         | function line
-         | procedure line
-         | for line
-         | while line
-         | if line
-         | let line
-         | move line
-         | moveList line
-         | delay line
-         | println line
-         | break line
-         | empty empty
+    declaration : ID
     '''
-    if p[2] != None:
-        p[0] = [p[1], p[2]]
-    else:
-        p[0] = p[1]
-    if p[0] != None:
-        p[0] = simpleListBuilder().createListOfLists(p[0])
+
 '''
 ###########################################################################
 REGLAS PARA PROCEDIMIENTOS
@@ -77,12 +55,16 @@ def p_procedure(p):
     '''
     procedure : FN ID LPAREN params RPAREN prodbody
     '''
+    myTable.table[p[2]]["scope"] = 'procedure block'
+    p[0] = ["PROCEDURE", p[2], simpleListBuilder().createList(p[4]), p[6]]
+    print("procedimiento")
+    print("Params detected : ", p[0])
 
 def p_prodbody(p):
     '''
     prodbody : LCRLBRACKET line RCRLBRACKET
     '''
-
+    p[0] = p[2]
 '''
 ###########################################################################
 REGLAS PARA FUNCIONES
@@ -93,6 +75,7 @@ def p_function(p):
     '''
     function : FN ID LPAREN params RPAREN funbody
     '''
+    print("Params detected : ", p[0])
 
 def p_params(p):
     '''
@@ -101,10 +84,8 @@ def p_params(p):
     '''
     if not p[2] is None:
         p[0] = [p[1], p[2]]
-        print("Params detected : ", p[0])
     else:
-        p[0] = p[1]
-        print("Param detected : ", p[0])
+        p[0] = [p[1]]
 
 def p_arg(p):
     '''
@@ -133,6 +114,30 @@ def p_end(p):
     end : RETURN expression SEMICOLON
     '''
     p[0] = p[2]
+
+def p_program(p):
+    '''
+    line : loop line
+         | function line
+         | procedure line
+         | for line
+         | while line
+         | if line
+         | let line
+         | move line
+         | moveList line
+         | delay line
+         | println line
+         | break line
+         | empty empty
+    '''
+    if p[2] != None:
+        p[0] = [p[1], p[2]]
+    else:
+        p[0] = p[1]
+    if p[0] != None:
+        p[0] = simpleListBuilder().createListOfLists(p[0])
+
 '''
 ###########################################################################
 REGLAS PARA LOOP
@@ -155,7 +160,8 @@ REGLAS PARA FOR
 
 def p_for(p):
     '''
-    for : FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET
+    for : FOR ID IN INT DOTDOTEQ INT LCRLBRACKET line RCRLBRACKET
+        | FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET
     '''
     line = p.lineno(2)
     p[0] = ["FOR", p[2], p[4], p[5], p[6], p[8], line]
@@ -378,8 +384,7 @@ def p_opera(p):
     opera : OPERA LPAREN operator COMMA operand COMMA operand RPAREN
     '''
     line = p.lineno(2)
-    p[0] = Opera(p[3], p[5], p[7],myTable.table, line).Operate()
-
+    p[0] = ["OPERA", p[3], p[5], p[7], line]
 
 def p_operators(p):
     '''

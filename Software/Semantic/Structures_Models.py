@@ -22,8 +22,15 @@ class Main():
             for i in functionInstructions:
                 if i[0] == "LET":
                     print("LET")
-                    result = myTable.insertValue(i[2], i[1], i[3])
-                    Let(i[1], i[2], i[3], myTable.table, result)
+                    if isinstance(i[2], list):
+                        if i[2][0] == "OPERA":
+                            print("OPERA")
+                            operation = Opera(i[2][1], i[2][2], i[2][3], myTable.table, i[2][4]).Operate()
+                            result = myTable.insertValue(operation, i[1], i[3])
+                            Let(i[1], operation, i[3], myTable.table, result)
+                    else:
+                        result = myTable.insertValue(i[2], i[1], i[3])
+                        Let(i[1], i[2], i[3], myTable.table, result)
                 elif i[0] == "MOVE":
                     print("MOVE")
                     Move(i[1], i[2], myTable.table, i[3])
@@ -288,7 +295,7 @@ class Opera:
 
 
 class Loop:
-    def __init__(self, instructions,line):
+    def __init__(self, instructions, line):
         self.line = line
         self.instructions = instructions
         print("SOY LAS INSTRUCCIONES ---> " + str(self.instructions))
@@ -465,7 +472,10 @@ class For:
                         errorHandler.Execute()
 
     def runFor(self):
-        loops = self.const2 - self.const1
+        if self.range == "..=":
+            loops = self.const2+1 - self.const1
+        else:
+            loops = self.const2 - self.const1
 
         for i in range(loops):
             self.table[self.id]["value"] = self.const1 + i
