@@ -96,7 +96,7 @@ def t_error(t):
         error = ErrorLog()
         error.log_error(error_text, 1)
     else:
-        error_text = "Illegal character '%s'" % t.value[0]
+        error_text = "Illegal character '%s'" % t.value[0] + " in line: " + str(t.lexer.lineno)
 
         error = ErrorLog()
         error.log_error(error_text, 1)

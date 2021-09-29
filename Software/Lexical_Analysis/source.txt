@@ -1,22 +1,233 @@
-fn main(){
-    let time = 1000;
-    let num = 0;
-    let down = false;
-    let upp = true;
-    let res = Opera(*,4,7);
-    let max = Opera(-,14,Opera(+,res,-14));
-    let div = 49;
-    let cifra2 = false;
-    procedimiento(cifra2, div);
-}
-
-fn procedimiento(cifra1, cifra3) {
-    let var = true;
-    for cifra in 6..8 {
-        let num = cifra;
-        let newNum = Opera(+, num, Opera(+, Opera(+, num, 4), 4));
-        Println!("SOY EL NUM ",num);
-        Println!("SOY EL NEWNUM ",newNum);
-
-    }
-}
+fn rutina() { 	
+ @Linea1	
+ @Esta es una linea de comentario	
+	
+ @Linea2	
+let edad = 42;	
+	
+ @Linea3: Variables minimo de 3 posiciones	
+let abc = 49; 	
+	
+ @Linea4: Variables maximo 15 posiciones	
+let a123456789012345 = 49; 	
+	
+ @Linea5: Variables con caracteres especiales	
+let a#_? = 55;	
+	
+ @Linea6: Variable con carateres especiales	
+let abc# = 55;	
+	
+ @Linea7: Variable con carateres especiales	
+let abc_d = 55;	
+	
+ @Linea8: Variable con carateres especiales	
+let abc? = 55;	
+	
+ @Linea9: Tipos de datos	
+let edad = 42; @ La variable edad es numerica 	
+let casado = true; @ La variable casado es booleana 	
+	
+ @Linea10:  Operación OPERA	
+let abc = OPERA(+, 1, 2);	
+	
+ @Linea11:  Operación OPERA	
+let abc = OPERA(-, 1, 2);	
+	
+ @Linea12:  Operación OPERA	
+let abc = OPERA(*, 1, 2);	
+	
+ @Linea13:  Operación OPERA	
+let abc = OPERA(**, 1, 2);	
+	
+ @Linea14:  Operación OPERA	
+let abc = OPERA(/, 1, 2);	
+	
+ @Linea15:   Usa OPERA en un IF	
+ IF OPERA(+, 1, 2) = 3 {	
+	}
+	
+ @Linea16: OPERA anidado	
+LET abc  = OPERA(*, OPERA(+, OPERA(-, 10, OPERA(/, 20, 2)) , 5), 	
+OPERA(*, OPERA(+, OPERA(**, 2, 2), OPERA(+, 1,2)), 2 ) ) ;	
+	 @Verificar que el resultado es 70
+println!("Valor retornado: ", abc); 	
+	
+	
+ @Linea17: Usando Bucle	
+   @ Introducir las cifras del ‘1’ al ‘10’	
+  @ bucle ‘for’ con iterador ‘range’	
+   @ Importante: el rango no contiene la cifra final	
+for cifra in 1..11 { 	
+    println!("Cifra: ", cifra); @ Imprime en pantalla	
+} 	
+	
+ @Linea18: Usando Bucle	
+@ alternativa que incluye la notación del rango 	
+for cifra in 1..=10 { 	
+   println!("Cifra:", cifra); @ Imprime en pantalla	
+} 	
+	
+	
+ @Linea19:  Usando Bucle While	
+  @ emitir las cifras del ‘1’ al ‘10’ a través del bucle ‘while’	
+let cifra = 1; 	
+while (cifra <= 10) { 	
+   println!("Cifra: ", cifra);	
+    Let cifra = Opera(+, cifra, 1);	
+} 	
+	
+ @Linea20: Usando Bucle While usando ==	
+let cifra = 1; 	
+while (cifra <= 10) { 	
+   println!("Cifra: ", cifra);	
+    Let cifra = Opera(+, cifra, 1);	
+} 	
+	
+ @Linea21: Usando Bucle While usando <>	
+let cifra = 1; 	
+while (cifra <> 10) { 	
+   println!("Cifra: ", cifra);	
+    Let cifra = Opera(+, cifra, 1);	
+} 	
+	
+ @Linea22: Usando Bucle While usando <=	
+let cifra = 1; 	
+while (cifra <= 10) { 	
+   println!("Cifra: ", cifra);	
+    Let cifra = Opera(+, cifra, 1);	
+} 	
+	
+ @Linea23: Usando Bucle While usando >=	
+let cifra = 1; 	
+while (cifra >= 10) { 	
+   println!("Cifra: ", cifra);	
+    Let cifra = Opera(+, cifra, 1);	
+} 	
+	
+ @Linea24: Usando Bucle While usando >	
+let cifra = 1; 	
+while (cifra > 10) { 	
+   println!("Cifra: ", cifra);	
+    Let cifra = Opera(+, cifra, 1);	
+} 	
+	
+ @Linea25: Usando Bucle While usando <	
+let cifra = 1; 	
+while (cifra < 10) { 	
+   println!("Cifra: ", cifra);	
+    Let cifra = Opera(+, cifra, 1);	
+} 	
+	
+	
+ @ Linea 26: Bucle infinito con ‘while’ 	
+@ while true { 	
+   println!("Loop");	
+break ;	
+} 	
+	
+ @Linea 27: Bucle infinito con ‘loop’ 	
+loop { 	
+   println!("Loop");	
+break ;	
+} 	
+	
+	
+ @Linea28: Ramificaciones	
+let limit = 42; 	
+let cifra = 43; 	
+if cifra < límite { 	
+println!("Por debajo del límite."); 	
+} 	
+else if cifra == limit { 	
+println!("En el límite…"); 	
+} 	
+else { 	
+println!("Sobre el límite"); 	
+} 	
+	
+	
+ @Linea29: Funcion	
+fn procedimiento() { 	
+println!("Este procedimiento no devuelve ningún valor."); 	
+} 	
+	
+	
+ @Linea30: Funcion retorna dato	
+ @ Tipo de retorno tras el operador ‘->’ 	
+fn negado(cifra) -> integer { 	
+return Opera(*,cifra,-1); 	
+} 	
+	
+ @Linea31: Llama un procedimiento	
+procedimiento(); 	
+	
+ @Linea32: Llama una función	
+let limit = 0;	
+let limit = negado(25); 	
+if negado(limit) > 0 	
+      println!("Limit: ", limit);	
+} 	
+	
+ @Linea33: Operación primitiva	
+Let curso = 1; 	
+println! ("Este es el proyecto número ", curso, " de Compiladores ", 2021 ); 	
+   @Verificar que imprime "“Este es el proyecto número 1 de Compiladores 2021”	
+	
+	
+ @Linea34: Operación primitiva	
+Move( “P”, True) 	
+	
+ @Linea35: Operación primitiva	
+Move( “I”, True) 	
+	
+ @Linea36: Operación primitiva	
+Move( “M”, True) 	
+	
+ @Linea37: Operación primitiva	
+Move( “A”, True) 	
+	
+ @Linea38: Operación primitiva	
+Move( “Q”, True) 	
+	
+ @Linea39: Operación primitiva	
+Move( “T”, True) 	
+	
+ @Linea40: Operación primitiva	
+Move( [“P”, “Q”], Si) @Levanta el Pulgar y el Meñique 	
+	
+ @Linea41: Operación primitiva	
+Move( [“P”], Si) @Levanta el Pulgar 	
+	
+ @Linea42: Operación primitiva	
+Move( [“P”,"I", "M", “Q”, "T"], Si) @Levanta el Pulgar y el Meñique 	
+	
+ @Linea43: Temporalizador	
+Delay( 5, “Mil” ) @ Ejecuta un temporalizador de 5 milisegundos. 	
+	
+ @Linea43: Temporalizador	
+Delay( 5, “Seg” ) @ Ejecuta un temporalizador de 5 segundos. 	
+	
+ @Linea44: Temporalizador	
+Delay( 5, “Min” ) @ Ejecuta un temporalizador de 5 minutos. 	
+	
+  @Linea45: Inicializa variable global	
+let xyz = 0;	
+	
+ @Linea46: Cierra rutina	
+} 	
+	
+	
+ @Linea47:  Uso de rutina principal	
+fn main() { 	
+	
+ @Linea48: Inicializa variable global	
+let xyz = 5;	
+	
+ @Linea49:  Llama a rutina	
+rutina();	
+	
+ @Linea50:  Imprime valor variable global	
+   println!("xyz: ", xyz);	
+      @Debe retornar el valor de 0	
+	
+} 
