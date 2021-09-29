@@ -116,8 +116,11 @@ class Procedure:
                                 self.table[procedureParams[var]]["type"] = bool
                             var += 1
                         Main(None).runCode(self.instructions)
-                        #for j in procedureParams:
-                            #self.table[j]["value"] = None
+                        for j in procedureParams:
+                            self.table[j]["value"] = None
+                            self.table[j]["type"] = None
+            else:
+                Main(None).runCode(self.instructions)
 
         else:
             errorHandler = Generate_Error(20, self.line)
