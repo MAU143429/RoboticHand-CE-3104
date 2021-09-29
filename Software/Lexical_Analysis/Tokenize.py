@@ -34,6 +34,7 @@ t_PLUS              = r'\+'
 t_MINUS             = r'\-'
 t_TIMES             = r'\*'
 t_DIVIDE            = r'\/'
+t_DIF               = r'\!='
 t_EXPR              = r'\!'
 t_EQEQ              = r'\=='
 t_LTE               = r'\<='
@@ -84,5 +85,6 @@ tokens = [
 'LCRLBRACKET',
 'EXPR',
 'RCRLBRACKET',
+'DIF',
 'STRING'] + list(reserved.values())
 

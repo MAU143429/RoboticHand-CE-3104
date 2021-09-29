@@ -76,83 +76,85 @@ Rule 64    compare -> LTE
 Rule 65    compare -> GTE
 Rule 66    compare -> LT
 Rule 67    compare -> GT
-Rule 68    expression -> INT
-Rule 69    expression -> TRUE
-Rule 70    expression -> FALSE
-Rule 71    expression -> opera
-Rule 72    expression -> ID
-Rule 73    expression -> negative
-Rule 74    let -> LET ID ASSIGN operand SEMICOLON
-Rule 75    let -> LET ID ASSIGN bool SEMICOLON
-Rule 76    opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN
-Rule 77    operator -> PLUS
-Rule 78    operator -> MINUS
-Rule 79    operator -> DIVIDE
-Rule 80    operator -> ASTR
-Rule 81    operator -> TIMES
-Rule 82    operand -> INT
-Rule 83    operand -> opera
-Rule 84    operand -> ID
-Rule 85    operand -> negative
-Rule 86    negative -> MINUS INT
-Rule 87    bool -> TRUE
-Rule 88    bool -> FALSE
-Rule 89    bool -> ID
-Rule 90    break -> BREAK
-Rule 91    empty -> <empty>
+Rule 68    compare -> DIF
+Rule 69    expression -> INT
+Rule 70    expression -> TRUE
+Rule 71    expression -> FALSE
+Rule 72    expression -> opera
+Rule 73    expression -> ID
+Rule 74    expression -> negative
+Rule 75    let -> LET ID ASSIGN operand SEMICOLON
+Rule 76    let -> LET ID ASSIGN bool SEMICOLON
+Rule 77    opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+Rule 78    operator -> PLUS
+Rule 79    operator -> MINUS
+Rule 80    operator -> DIVIDE
+Rule 81    operator -> ASTR
+Rule 82    operator -> TIMES
+Rule 83    operand -> INT
+Rule 84    operand -> opera
+Rule 85    operand -> ID
+Rule 86    operand -> negative
+Rule 87    negative -> MINUS INT
+Rule 88    bool -> TRUE
+Rule 89    bool -> FALSE
+Rule 90    bool -> ID
+Rule 91    break -> BREAK
+Rule 92    empty -> <empty>
 
 Terminals, with rules where they appear
 
 ARROW                : 29
-ASSIGN               : 74 75
-ASTR                 : 80
+ASSIGN               : 75 76
+ASTR                 : 81
 BOOLEAN              : 31
-BREAK                : 90
-COMMA                : 26 27 37 38 39 40 41 52 53 76 76
+BREAK                : 91
+COMMA                : 26 27 37 38 39 40 41 52 53 77 77
 DELAY                : 41
-DIVIDE               : 79
+DIF                  : 68
+DIVIDE               : 80
 DOTDOT               : 34
 DOTDOTEQ             : 
 ELSE                 : 62
 ELSEIF               : 60 61
 EQEQ                 : 63
 EXPR                 : 45
-FALSE                : 50 70 88
+FALSE                : 50 71 89
 FN                   : 7 21 23
 FOR                  : 34
 GT                   : 67
 GTE                  : 65
-ID                   : 6 21 23 24 34 47 55 72 74 75 84 89
+ID                   : 6 21 23 24 34 47 55 73 75 76 85 90
 IF                   : 58 59
 IN                   : 34
-INT                  : 34 34 41 46 68 82 86
+INT                  : 34 34 41 46 69 83 87
 INTEGER              : 30
 LCRLBRACKET          : 7 22 29 33 34 35 36 58 59 60 61 62
-LET                  : 74 75
+LET                  : 75 76
 LOOP                 : 33
-LPAREN               : 7 21 23 35 37 38 41 45 76
+LPAREN               : 7 21 23 35 37 38 41 45 77
 LSQRBRACKET          : 38
 LT                   : 66
 LTE                  : 64
 MAIN                 : 7
 MIL                  : 43
 MIN                  : 42
-MINUS                : 78 86
+MINUS                : 79 87
 MOVE                 : 37 38
-OPERA                : 76
-PLUS                 : 77
+OPERA                : 77
+PLUS                 : 78
 PRINT                : 45
 QUOT                 : 42 42 43 43 44 44 55 55
 RANGE                : 
 RCRLBRACKET          : 7 22 29 33 34 35 36 58 59 60 61 62
 RETURN               : 32
-RPAREN               : 7 21 23 35 37 38 41 45 76
+RPAREN               : 7 21 23 35 37 38 41 45 77
 RSQRBRACKET          : 38
 SEG                  : 44
-SEMICOLON            : 32 37 38 41 45 74 75
+SEMICOLON            : 32 37 38 41 45 75 76
 STRING               : 37 39 39 40 41 51
-TIMES                : 81
-TRUE                 : 36 49 69 87
+TIMES                : 82
+TRUE                 : 36 49 70 88
 WHILE                : 35 36
 WRONG_ID             : 
 error                : 
@@ -162,7 +164,7 @@ Nonterminals, with rules where they appear
 arg                  : 24 27
 args                 : 45 52
 body                 : 46 47 48 49 50 51 53
-bool                 : 37 38 75
+bool                 : 37 38 76
 break                : 19
 compare              : 35 58 59 60 61
 delay                : 17
@@ -184,10 +186,10 @@ loop                 : 8
 main                 : 1
 move                 : 15
 moveList             : 16
-negative             : 73 85
-opera                : 48 71 83
-operand              : 74 76 76
-operator             : 76
+negative             : 74 86
+opera                : 48 72 84
+operand              : 75 77 77
+operator             : 77
 output               : 29
 params               : 21 23 26
 println              : 18
@@ -211,13 +213,13 @@ state 0
     (7) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
     (23) function -> . FN ID LPAREN params RPAREN funbody
     (21) procedure -> . FN ID LPAREN params RPAREN prodbody
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
-    (91) empty -> .
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
+    (92) empty -> .
 
     FN              shift and go to state 7
     LET             shift and go to state 8
-    $end            reduce using rule 91 (empty -> .)
+    $end            reduce using rule 92 (empty -> .)
 
     root                           shift and go to state 1
     main                           shift and go to state 2
@@ -243,13 +245,13 @@ state 2
     (7) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
     (23) function -> . FN ID LPAREN params RPAREN funbody
     (21) procedure -> . FN ID LPAREN params RPAREN prodbody
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
-    (91) empty -> .
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
+    (92) empty -> .
 
     FN              shift and go to state 7
     LET             shift and go to state 8
-    $end            reduce using rule 91 (empty -> .)
+    $end            reduce using rule 92 (empty -> .)
 
     main                           shift and go to state 2
     root                           shift and go to state 9
@@ -269,13 +271,13 @@ state 3
     (7) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
     (23) function -> . FN ID LPAREN params RPAREN funbody
     (21) procedure -> . FN ID LPAREN params RPAREN prodbody
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
-    (91) empty -> .
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
+    (92) empty -> .
 
     FN              shift and go to state 7
     LET             shift and go to state 8
-    $end            reduce using rule 91 (empty -> .)
+    $end            reduce using rule 92 (empty -> .)
 
     function                       shift and go to state 3
     root                           shift and go to state 10
@@ -295,13 +297,13 @@ state 4
     (7) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
     (23) function -> . FN ID LPAREN params RPAREN funbody
     (21) procedure -> . FN ID LPAREN params RPAREN prodbody
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
-    (91) empty -> .
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
+    (92) empty -> .
 
     FN              shift and go to state 7
     LET             shift and go to state 8
-    $end            reduce using rule 91 (empty -> .)
+    $end            reduce using rule 92 (empty -> .)
 
     procedure                      shift and go to state 4
     root                           shift and go to state 11
@@ -321,13 +323,13 @@ state 5
     (7) main -> . FN MAIN LPAREN RPAREN LCRLBRACKET line RCRLBRACKET
     (23) function -> . FN ID LPAREN params RPAREN funbody
     (21) procedure -> . FN ID LPAREN params RPAREN prodbody
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
-    (91) empty -> .
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
+    (92) empty -> .
 
     FN              shift and go to state 7
     LET             shift and go to state 8
-    $end            reduce using rule 91 (empty -> .)
+    $end            reduce using rule 92 (empty -> .)
 
     let                            shift and go to state 5
     root                           shift and go to state 12
@@ -339,9 +341,9 @@ state 5
 state 6
 
     (5) root -> empty . empty
-    (91) empty -> .
+    (92) empty -> .
 
-    $end            reduce using rule 91 (empty -> .)
+    $end            reduce using rule 92 (empty -> .)
 
     empty                          shift and go to state 13
 
@@ -357,8 +359,8 @@ state 7
 
 state 8
 
-    (74) let -> LET . ID ASSIGN operand SEMICOLON
-    (75) let -> LET . ID ASSIGN bool SEMICOLON
+    (75) let -> LET . ID ASSIGN operand SEMICOLON
+    (76) let -> LET . ID ASSIGN bool SEMICOLON
 
     ID              shift and go to state 16
 
@@ -415,8 +417,8 @@ state 15
 
 state 16
 
-    (74) let -> LET ID . ASSIGN operand SEMICOLON
-    (75) let -> LET ID . ASSIGN bool SEMICOLON
+    (75) let -> LET ID . ASSIGN operand SEMICOLON
+    (76) let -> LET ID . ASSIGN bool SEMICOLON
 
     ASSIGN          shift and go to state 19
 
@@ -434,27 +436,27 @@ state 18
     (21) procedure -> FN ID LPAREN . params RPAREN prodbody
     (24) params -> . ID arg
     (25) params -> . empty empty
-    (91) empty -> .
+    (92) empty -> .
 
     ID              shift and go to state 21
-    RPAREN          reduce using rule 91 (empty -> .)
+    RPAREN          reduce using rule 92 (empty -> .)
 
     params                         shift and go to state 22
     empty                          shift and go to state 23
 
 state 19
 
-    (74) let -> LET ID ASSIGN . operand SEMICOLON
-    (75) let -> LET ID ASSIGN . bool SEMICOLON
-    (82) operand -> . INT
-    (83) operand -> . opera
-    (84) operand -> . ID
-    (85) operand -> . negative
-    (87) bool -> . TRUE
-    (88) bool -> . FALSE
-    (89) bool -> . ID
-    (76) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
-    (86) negative -> . MINUS INT
+    (75) let -> LET ID ASSIGN . operand SEMICOLON
+    (76) let -> LET ID ASSIGN . bool SEMICOLON
+    (83) operand -> . INT
+    (84) operand -> . opera
+    (85) operand -> . ID
+    (86) operand -> . negative
+    (88) bool -> . TRUE
+    (89) bool -> . FALSE
+    (90) bool -> . ID
+    (77) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+    (87) negative -> . MINUS INT
 
     INT             shift and go to state 27
     ID              shift and go to state 24
@@ -481,10 +483,10 @@ state 21
     (26) arg -> . COMMA params
     (27) arg -> . COMMA arg
     (28) arg -> . empty empty
-    (91) empty -> .
+    (92) empty -> .
 
     COMMA           shift and go to state 36
-    RPAREN          reduce using rule 91 (empty -> .)
+    RPAREN          reduce using rule 92 (empty -> .)
 
     arg                            shift and go to state 35
     empty                          shift and go to state 37
@@ -500,90 +502,90 @@ state 22
 state 23
 
     (25) params -> empty . empty
-    (91) empty -> .
+    (92) empty -> .
 
-    RPAREN          reduce using rule 91 (empty -> .)
+    RPAREN          reduce using rule 92 (empty -> .)
 
     empty                          shift and go to state 39
 
 state 24
 
-    (84) operand -> ID .
-    (89) bool -> ID .
+    (85) operand -> ID .
+    (90) bool -> ID .
 
-  ! reduce/reduce conflict for SEMICOLON resolved using rule 84 (operand -> ID .)
-    SEMICOLON       reduce using rule 84 (operand -> ID .)
+  ! reduce/reduce conflict for SEMICOLON resolved using rule 85 (operand -> ID .)
+    SEMICOLON       reduce using rule 85 (operand -> ID .)
 
-  ! SEMICOLON       [ reduce using rule 89 (bool -> ID .) ]
+  ! SEMICOLON       [ reduce using rule 90 (bool -> ID .) ]
 
 
 state 25
 
-    (74) let -> LET ID ASSIGN operand . SEMICOLON
+    (75) let -> LET ID ASSIGN operand . SEMICOLON
 
     SEMICOLON       shift and go to state 40
 
 
 state 26
 
-    (75) let -> LET ID ASSIGN bool . SEMICOLON
+    (76) let -> LET ID ASSIGN bool . SEMICOLON
 
     SEMICOLON       shift and go to state 41
 
 
 state 27
 
-    (82) operand -> INT .
+    (83) operand -> INT .
 
-    SEMICOLON       reduce using rule 82 (operand -> INT .)
-    COMMA           reduce using rule 82 (operand -> INT .)
-    RPAREN          reduce using rule 82 (operand -> INT .)
+    SEMICOLON       reduce using rule 83 (operand -> INT .)
+    COMMA           reduce using rule 83 (operand -> INT .)
+    RPAREN          reduce using rule 83 (operand -> INT .)
 
 
 state 28
 
-    (83) operand -> opera .
+    (84) operand -> opera .
 
-    SEMICOLON       reduce using rule 83 (operand -> opera .)
-    COMMA           reduce using rule 83 (operand -> opera .)
-    RPAREN          reduce using rule 83 (operand -> opera .)
+    SEMICOLON       reduce using rule 84 (operand -> opera .)
+    COMMA           reduce using rule 84 (operand -> opera .)
+    RPAREN          reduce using rule 84 (operand -> opera .)
 
 
 state 29
 
-    (85) operand -> negative .
+    (86) operand -> negative .
 
-    SEMICOLON       reduce using rule 85 (operand -> negative .)
-    COMMA           reduce using rule 85 (operand -> negative .)
-    RPAREN          reduce using rule 85 (operand -> negative .)
+    SEMICOLON       reduce using rule 86 (operand -> negative .)
+    COMMA           reduce using rule 86 (operand -> negative .)
+    RPAREN          reduce using rule 86 (operand -> negative .)
 
 
 state 30
 
-    (87) bool -> TRUE .
+    (88) bool -> TRUE .
 
-    SEMICOLON       reduce using rule 87 (bool -> TRUE .)
-    RPAREN          reduce using rule 87 (bool -> TRUE .)
+    SEMICOLON       reduce using rule 88 (bool -> TRUE .)
+    RPAREN          reduce using rule 88 (bool -> TRUE .)
 
 
 state 31
 
-    (88) bool -> FALSE .
+    (89) bool -> FALSE .
 
-    SEMICOLON       reduce using rule 88 (bool -> FALSE .)
-    RPAREN          reduce using rule 88 (bool -> FALSE .)
+    SEMICOLON       reduce using rule 89 (bool -> FALSE .)
+    RPAREN          reduce using rule 89 (bool -> FALSE .)
 
 
 state 32
 
-    (76) opera -> OPERA . LPAREN operator COMMA operand COMMA operand RPAREN
+    (77) opera -> OPERA . LPAREN operator COMMA operand COMMA operand RPAREN
 
     LPAREN          shift and go to state 42
 
 
 state 33
 
-    (86) negative -> MINUS . INT
+    (87) negative -> MINUS . INT
 
     INT             shift and go to state 43
 
@@ -612,14 +614,14 @@ state 34
     (36) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET
     (58) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET empty
     (59) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
     (37) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON
     (38) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON
     (41) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON
     (45) println -> . PRINT EXPR LPAREN args RPAREN SEMICOLON
-    (90) break -> . BREAK
-    (91) empty -> .
+    (91) break -> . BREAK
+    (92) empty -> .
 
     LOOP            shift and go to state 59
     FN              shift and go to state 44
@@ -631,7 +633,7 @@ state 34
     DELAY           shift and go to state 64
     PRINT           shift and go to state 65
     BREAK           shift and go to state 66
-    RCRLBRACKET     reduce using rule 91 (empty -> .)
+    RCRLBRACKET     reduce using rule 92 (empty -> .)
 
     line                           shift and go to state 45
     loop                           shift and go to state 46
@@ -664,11 +666,11 @@ state 36
     (26) arg -> . COMMA params
     (27) arg -> . COMMA arg
     (28) arg -> . empty empty
-    (91) empty -> .
+    (92) empty -> .
 
     ID              shift and go to state 21
     COMMA           shift and go to state 36
-    RPAREN          reduce using rule 91 (empty -> .)
+    RPAREN          reduce using rule 92 (empty -> .)
 
     params                         shift and go to state 67
     arg                            shift and go to state 68
@@ -677,9 +679,9 @@ state 36
 state 37
 
     (28) arg -> empty . empty
-    (91) empty -> .
+    (92) empty -> .
 
-    RPAREN          reduce using rule 91 (empty -> .)
+    RPAREN          reduce using rule 92 (empty -> .)
 
     empty                          shift and go to state 70
 
@@ -705,50 +707,50 @@ state 39
 
 state 40
 
-    (74) let -> LET ID ASSIGN operand SEMICOLON .
+    (75) let -> LET ID ASSIGN operand SEMICOLON .
 
-    FN              reduce using rule 74 (let -> LET ID ASSIGN operand SEMICOLON .)
-    LET             reduce using rule 74 (let -> LET ID ASSIGN operand SEMICOLON .)
-    $end            reduce using rule 74 (let -> LET ID ASSIGN operand SEMICOLON .)
-    LOOP            reduce using rule 74 (let -> LET ID ASSIGN operand SEMICOLON .)
-    FOR             reduce using rule 74 (let -> LET ID ASSIGN operand SEMICOLON .)
-    WHILE           reduce using rule 74 (let -> LET ID ASSIGN operand SEMICOLON .)
-    IF              reduce using rule 74 (let -> LET ID ASSIGN operand SEMICOLON .)
-    MOVE            reduce using rule 74 (let -> LET ID ASSIGN operand SEMICOLON .)
-    DELAY           reduce using rule 74 (let -> LET ID ASSIGN operand SEMICOLON .)
-    PRINT           reduce using rule 74 (let -> LET ID ASSIGN operand SEMICOLON .)
-    BREAK           reduce using rule 74 (let -> LET ID ASSIGN operand SEMICOLON .)
-    RCRLBRACKET     reduce using rule 74 (let -> LET ID ASSIGN operand SEMICOLON .)
-    RETURN          reduce using rule 74 (let -> LET ID ASSIGN operand SEMICOLON .)
+    FN              reduce using rule 75 (let -> LET ID ASSIGN operand SEMICOLON .)
+    LET             reduce using rule 75 (let -> LET ID ASSIGN operand SEMICOLON .)
+    $end            reduce using rule 75 (let -> LET ID ASSIGN operand SEMICOLON .)
+    LOOP            reduce using rule 75 (let -> LET ID ASSIGN operand SEMICOLON .)
+    FOR             reduce using rule 75 (let -> LET ID ASSIGN operand SEMICOLON .)
+    WHILE           reduce using rule 75 (let -> LET ID ASSIGN operand SEMICOLON .)
+    IF              reduce using rule 75 (let -> LET ID ASSIGN operand SEMICOLON .)
+    MOVE            reduce using rule 75 (let -> LET ID ASSIGN operand SEMICOLON .)
+    DELAY           reduce using rule 75 (let -> LET ID ASSIGN operand SEMICOLON .)
+    PRINT           reduce using rule 75 (let -> LET ID ASSIGN operand SEMICOLON .)
+    BREAK           reduce using rule 75 (let -> LET ID ASSIGN operand SEMICOLON .)
+    RCRLBRACKET     reduce using rule 75 (let -> LET ID ASSIGN operand SEMICOLON .)
+    RETURN          reduce using rule 75 (let -> LET ID ASSIGN operand SEMICOLON .)
 
 
 state 41
 
-    (75) let -> LET ID ASSIGN bool SEMICOLON .
+    (76) let -> LET ID ASSIGN bool SEMICOLON .
 
-    FN              reduce using rule 75 (let -> LET ID ASSIGN bool SEMICOLON .)
-    LET             reduce using rule 75 (let -> LET ID ASSIGN bool SEMICOLON .)
-    $end            reduce using rule 75 (let -> LET ID ASSIGN bool SEMICOLON .)
-    LOOP            reduce using rule 75 (let -> LET ID ASSIGN bool SEMICOLON .)
-    FOR             reduce using rule 75 (let -> LET ID ASSIGN bool SEMICOLON .)
-    WHILE           reduce using rule 75 (let -> LET ID ASSIGN bool SEMICOLON .)
-    IF              reduce using rule 75 (let -> LET ID ASSIGN bool SEMICOLON .)
-    MOVE            reduce using rule 75 (let -> LET ID ASSIGN bool SEMICOLON .)
-    DELAY           reduce using rule 75 (let -> LET ID ASSIGN bool SEMICOLON .)
-    PRINT           reduce using rule 75 (let -> LET ID ASSIGN bool SEMICOLON .)
-    BREAK           reduce using rule 75 (let -> LET ID ASSIGN bool SEMICOLON .)
-    RCRLBRACKET     reduce using rule 75 (let -> LET ID ASSIGN bool SEMICOLON .)
-    RETURN          reduce using rule 75 (let -> LET ID ASSIGN bool SEMICOLON .)
+    FN              reduce using rule 76 (let -> LET ID ASSIGN bool SEMICOLON .)
+    LET             reduce using rule 76 (let -> LET ID ASSIGN bool SEMICOLON .)
+    $end            reduce using rule 76 (let -> LET ID ASSIGN bool SEMICOLON .)
+    LOOP            reduce using rule 76 (let -> LET ID ASSIGN bool SEMICOLON .)
+    FOR             reduce using rule 76 (let -> LET ID ASSIGN bool SEMICOLON .)
+    WHILE           reduce using rule 76 (let -> LET ID ASSIGN bool SEMICOLON .)
+    IF              reduce using rule 76 (let -> LET ID ASSIGN bool SEMICOLON .)
+    MOVE            reduce using rule 76 (let -> LET ID ASSIGN bool SEMICOLON .)
+    DELAY           reduce using rule 76 (let -> LET ID ASSIGN bool SEMICOLON .)
+    PRINT           reduce using rule 76 (let -> LET ID ASSIGN bool SEMICOLON .)
+    BREAK           reduce using rule 76 (let -> LET ID ASSIGN bool SEMICOLON .)
+    RCRLBRACKET     reduce using rule 76 (let -> LET ID ASSIGN bool SEMICOLON .)
+    RETURN          reduce using rule 76 (let -> LET ID ASSIGN bool SEMICOLON .)
 
 
 state 42
 
-    (76) opera -> OPERA LPAREN . operator COMMA operand COMMA operand RPAREN
-    (77) operator -> . PLUS
-    (78) operator -> . MINUS
-    (79) operator -> . DIVIDE
-    (80) operator -> . ASTR
-    (81) operator -> . TIMES
+    (77) opera -> OPERA LPAREN . operator COMMA operand COMMA operand RPAREN
+    (78) operator -> . PLUS
+    (79) operator -> . MINUS
+    (80) operator -> . DIVIDE
+    (81) operator -> . ASTR
+    (82) operator -> . TIMES
 
     PLUS            shift and go to state 76
     MINUS           shift and go to state 77
@@ -760,17 +762,18 @@ state 42
 
 state 43
 
-    (86) negative -> MINUS INT .
+    (87) negative -> MINUS INT .
 
-    SEMICOLON       reduce using rule 86 (negative -> MINUS INT .)
-    EQEQ            reduce using rule 86 (negative -> MINUS INT .)
-    LTE             reduce using rule 86 (negative -> MINUS INT .)
-    GTE             reduce using rule 86 (negative -> MINUS INT .)
-    LT              reduce using rule 86 (negative -> MINUS INT .)
-    GT              reduce using rule 86 (negative -> MINUS INT .)
-    COMMA           reduce using rule 86 (negative -> MINUS INT .)
-    LCRLBRACKET     reduce using rule 86 (negative -> MINUS INT .)
-    RPAREN          reduce using rule 86 (negative -> MINUS INT .)
+    SEMICOLON       reduce using rule 87 (negative -> MINUS INT .)
+    EQEQ            reduce using rule 87 (negative -> MINUS INT .)
+    LTE             reduce using rule 87 (negative -> MINUS INT .)
+    GTE             reduce using rule 87 (negative -> MINUS INT .)
+    LT              reduce using rule 87 (negative -> MINUS INT .)
+    GT              reduce using rule 87 (negative -> MINUS INT .)
+    DIF             reduce using rule 87 (negative -> MINUS INT .)
+    COMMA           reduce using rule 87 (negative -> MINUS INT .)
+    LCRLBRACKET     reduce using rule 87 (negative -> MINUS INT .)
+    RPAREN          reduce using rule 87 (negative -> MINUS INT .)
 
 
 state 44
@@ -812,14 +815,14 @@ state 46
     (36) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET
     (58) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET empty
     (59) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
     (37) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON
     (38) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON
     (41) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON
     (45) println -> . PRINT EXPR LPAREN args RPAREN SEMICOLON
-    (90) break -> . BREAK
-    (91) empty -> .
+    (91) break -> . BREAK
+    (92) empty -> .
 
     LOOP            shift and go to state 59
     FN              shift and go to state 44
@@ -831,8 +834,8 @@ state 46
     DELAY           shift and go to state 64
     PRINT           shift and go to state 65
     BREAK           shift and go to state 66
-    RCRLBRACKET     reduce using rule 91 (empty -> .)
-    RETURN          reduce using rule 91 (empty -> .)
+    RCRLBRACKET     reduce using rule 92 (empty -> .)
+    RETURN          reduce using rule 92 (empty -> .)
 
     loop                           shift and go to state 46
     line                           shift and go to state 82
@@ -873,14 +876,14 @@ state 47
     (36) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET
     (58) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET empty
     (59) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
     (37) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON
     (38) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON
     (41) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON
     (45) println -> . PRINT EXPR LPAREN args RPAREN SEMICOLON
-    (90) break -> . BREAK
-    (91) empty -> .
+    (91) break -> . BREAK
+    (92) empty -> .
 
     LOOP            shift and go to state 59
     FN              shift and go to state 44
@@ -892,8 +895,8 @@ state 47
     DELAY           shift and go to state 64
     PRINT           shift and go to state 65
     BREAK           shift and go to state 66
-    RCRLBRACKET     reduce using rule 91 (empty -> .)
-    RETURN          reduce using rule 91 (empty -> .)
+    RCRLBRACKET     reduce using rule 92 (empty -> .)
+    RETURN          reduce using rule 92 (empty -> .)
 
     function                       shift and go to state 47
     line                           shift and go to state 83
@@ -934,14 +937,14 @@ state 48
     (36) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET
     (58) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET empty
     (59) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
     (37) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON
     (38) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON
     (41) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON
     (45) println -> . PRINT EXPR LPAREN args RPAREN SEMICOLON
-    (90) break -> . BREAK
-    (91) empty -> .
+    (91) break -> . BREAK
+    (92) empty -> .
 
     LOOP            shift and go to state 59
     FN              shift and go to state 44
@@ -953,8 +956,8 @@ state 48
     DELAY           shift and go to state 64
     PRINT           shift and go to state 65
     BREAK           shift and go to state 66
-    RCRLBRACKET     reduce using rule 91 (empty -> .)
-    RETURN          reduce using rule 91 (empty -> .)
+    RCRLBRACKET     reduce using rule 92 (empty -> .)
+    RETURN          reduce using rule 92 (empty -> .)
 
     procedure                      shift and go to state 48
     line                           shift and go to state 84
@@ -995,14 +998,14 @@ state 49
     (36) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET
     (58) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET empty
     (59) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
     (37) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON
     (38) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON
     (41) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON
     (45) println -> . PRINT EXPR LPAREN args RPAREN SEMICOLON
-    (90) break -> . BREAK
-    (91) empty -> .
+    (91) break -> . BREAK
+    (92) empty -> .
 
     LOOP            shift and go to state 59
     FN              shift and go to state 44
@@ -1014,8 +1017,8 @@ state 49
     DELAY           shift and go to state 64
     PRINT           shift and go to state 65
     BREAK           shift and go to state 66
-    RCRLBRACKET     reduce using rule 91 (empty -> .)
-    RETURN          reduce using rule 91 (empty -> .)
+    RCRLBRACKET     reduce using rule 92 (empty -> .)
+    RETURN          reduce using rule 92 (empty -> .)
 
     for                            shift and go to state 49
     line                           shift and go to state 85
@@ -1056,14 +1059,14 @@ state 50
     (36) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET
     (58) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET empty
     (59) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
     (37) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON
     (38) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON
     (41) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON
     (45) println -> . PRINT EXPR LPAREN args RPAREN SEMICOLON
-    (90) break -> . BREAK
-    (91) empty -> .
+    (91) break -> . BREAK
+    (92) empty -> .
 
     LOOP            shift and go to state 59
     FN              shift and go to state 44
@@ -1075,8 +1078,8 @@ state 50
     DELAY           shift and go to state 64
     PRINT           shift and go to state 65
     BREAK           shift and go to state 66
-    RCRLBRACKET     reduce using rule 91 (empty -> .)
-    RETURN          reduce using rule 91 (empty -> .)
+    RCRLBRACKET     reduce using rule 92 (empty -> .)
+    RETURN          reduce using rule 92 (empty -> .)
 
     while                          shift and go to state 50
     line                           shift and go to state 86
@@ -1117,14 +1120,14 @@ state 51
     (36) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET
     (58) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET empty
     (59) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
     (37) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON
     (38) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON
     (41) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON
     (45) println -> . PRINT EXPR LPAREN args RPAREN SEMICOLON
-    (90) break -> . BREAK
-    (91) empty -> .
+    (91) break -> . BREAK
+    (92) empty -> .
 
     LOOP            shift and go to state 59
     FN              shift and go to state 44
@@ -1136,8 +1139,8 @@ state 51
     DELAY           shift and go to state 64
     PRINT           shift and go to state 65
     BREAK           shift and go to state 66
-    RCRLBRACKET     reduce using rule 91 (empty -> .)
-    RETURN          reduce using rule 91 (empty -> .)
+    RCRLBRACKET     reduce using rule 92 (empty -> .)
+    RETURN          reduce using rule 92 (empty -> .)
 
     if                             shift and go to state 51
     line                           shift and go to state 87
@@ -1178,14 +1181,14 @@ state 52
     (36) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET
     (58) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET empty
     (59) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
     (37) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON
     (38) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON
     (41) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON
     (45) println -> . PRINT EXPR LPAREN args RPAREN SEMICOLON
-    (90) break -> . BREAK
-    (91) empty -> .
+    (91) break -> . BREAK
+    (92) empty -> .
 
     LOOP            shift and go to state 59
     FN              shift and go to state 44
@@ -1197,8 +1200,8 @@ state 52
     DELAY           shift and go to state 64
     PRINT           shift and go to state 65
     BREAK           shift and go to state 66
-    RCRLBRACKET     reduce using rule 91 (empty -> .)
-    RETURN          reduce using rule 91 (empty -> .)
+    RCRLBRACKET     reduce using rule 92 (empty -> .)
+    RETURN          reduce using rule 92 (empty -> .)
 
     let                            shift and go to state 52
     line                           shift and go to state 88
@@ -1239,14 +1242,14 @@ state 53
     (36) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET
     (58) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET empty
     (59) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
     (37) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON
     (38) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON
     (41) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON
     (45) println -> . PRINT EXPR LPAREN args RPAREN SEMICOLON
-    (90) break -> . BREAK
-    (91) empty -> .
+    (91) break -> . BREAK
+    (92) empty -> .
 
     LOOP            shift and go to state 59
     FN              shift and go to state 44
@@ -1258,8 +1261,8 @@ state 53
     DELAY           shift and go to state 64
     PRINT           shift and go to state 65
     BREAK           shift and go to state 66
-    RCRLBRACKET     reduce using rule 91 (empty -> .)
-    RETURN          reduce using rule 91 (empty -> .)
+    RCRLBRACKET     reduce using rule 92 (empty -> .)
+    RETURN          reduce using rule 92 (empty -> .)
 
     move                           shift and go to state 53
     line                           shift and go to state 89
@@ -1300,14 +1303,14 @@ state 54
     (36) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET
     (58) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET empty
     (59) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
     (37) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON
     (38) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON
     (41) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON
     (45) println -> . PRINT EXPR LPAREN args RPAREN SEMICOLON
-    (90) break -> . BREAK
-    (91) empty -> .
+    (91) break -> . BREAK
+    (92) empty -> .
 
     LOOP            shift and go to state 59
     FN              shift and go to state 44
@@ -1319,8 +1322,8 @@ state 54
     DELAY           shift and go to state 64
     PRINT           shift and go to state 65
     BREAK           shift and go to state 66
-    RCRLBRACKET     reduce using rule 91 (empty -> .)
-    RETURN          reduce using rule 91 (empty -> .)
+    RCRLBRACKET     reduce using rule 92 (empty -> .)
+    RETURN          reduce using rule 92 (empty -> .)
 
     moveList                       shift and go to state 54
     line                           shift and go to state 90
@@ -1361,14 +1364,14 @@ state 55
     (36) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET
     (58) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET empty
     (59) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
     (37) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON
     (38) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON
     (41) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON
     (45) println -> . PRINT EXPR LPAREN args RPAREN SEMICOLON
-    (90) break -> . BREAK
-    (91) empty -> .
+    (91) break -> . BREAK
+    (92) empty -> .
 
     LOOP            shift and go to state 59
     FN              shift and go to state 44
@@ -1380,8 +1383,8 @@ state 55
     DELAY           shift and go to state 64
     PRINT           shift and go to state 65
     BREAK           shift and go to state 66
-    RCRLBRACKET     reduce using rule 91 (empty -> .)
-    RETURN          reduce using rule 91 (empty -> .)
+    RCRLBRACKET     reduce using rule 92 (empty -> .)
+    RETURN          reduce using rule 92 (empty -> .)
 
     delay                          shift and go to state 55
     line                           shift and go to state 91
@@ -1422,14 +1425,14 @@ state 56
     (36) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET
     (58) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET empty
     (59) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
     (37) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON
     (38) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON
     (41) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON
     (45) println -> . PRINT EXPR LPAREN args RPAREN SEMICOLON
-    (90) break -> . BREAK
-    (91) empty -> .
+    (91) break -> . BREAK
+    (92) empty -> .
 
     LOOP            shift and go to state 59
     FN              shift and go to state 44
@@ -1441,8 +1444,8 @@ state 56
     DELAY           shift and go to state 64
     PRINT           shift and go to state 65
     BREAK           shift and go to state 66
-    RCRLBRACKET     reduce using rule 91 (empty -> .)
-    RETURN          reduce using rule 91 (empty -> .)
+    RCRLBRACKET     reduce using rule 92 (empty -> .)
+    RETURN          reduce using rule 92 (empty -> .)
 
     println                        shift and go to state 56
     line                           shift and go to state 92
@@ -1483,14 +1486,14 @@ state 57
     (36) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET
     (58) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET empty
     (59) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
     (37) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON
     (38) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON
     (41) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON
     (45) println -> . PRINT EXPR LPAREN args RPAREN SEMICOLON
-    (90) break -> . BREAK
-    (91) empty -> .
+    (91) break -> . BREAK
+    (92) empty -> .
 
     LOOP            shift and go to state 59
     FN              shift and go to state 44
@@ -1502,8 +1505,8 @@ state 57
     DELAY           shift and go to state 64
     PRINT           shift and go to state 65
     BREAK           shift and go to state 66
-    RCRLBRACKET     reduce using rule 91 (empty -> .)
-    RETURN          reduce using rule 91 (empty -> .)
+    RCRLBRACKET     reduce using rule 92 (empty -> .)
+    RETURN          reduce using rule 92 (empty -> .)
 
     break                          shift and go to state 57
     line                           shift and go to state 93
@@ -1523,10 +1526,10 @@ state 57
 state 58
 
     (20) line -> empty . empty
-    (91) empty -> .
+    (92) empty -> .
 
-    RCRLBRACKET     reduce using rule 91 (empty -> .)
-    RETURN          reduce using rule 91 (empty -> .)
+    RCRLBRACKET     reduce using rule 92 (empty -> .)
+    RETURN          reduce using rule 92 (empty -> .)
 
     empty                          shift and go to state 94
 
@@ -1557,14 +1560,14 @@ state 62
 
     (58) if -> IF . expression compare expression LCRLBRACKET line RCRLBRACKET empty
     (59) if -> IF . expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (68) expression -> . INT
-    (69) expression -> . TRUE
-    (70) expression -> . FALSE
-    (71) expression -> . opera
-    (72) expression -> . ID
-    (73) expression -> . negative
-    (76) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
-    (86) negative -> . MINUS INT
+    (69) expression -> . INT
+    (70) expression -> . TRUE
+    (71) expression -> . FALSE
+    (72) expression -> . opera
+    (73) expression -> . ID
+    (74) expression -> . negative
+    (77) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+    (87) negative -> . MINUS INT
 
     INT             shift and go to state 100
     TRUE            shift and go to state 101
@@ -1601,20 +1604,20 @@ state 65
 
 state 66
 
-    (90) break -> BREAK .
+    (91) break -> BREAK .
 
-    LOOP            reduce using rule 90 (break -> BREAK .)
-    FN              reduce using rule 90 (break -> BREAK .)
-    FOR             reduce using rule 90 (break -> BREAK .)
-    WHILE           reduce using rule 90 (break -> BREAK .)
-    IF              reduce using rule 90 (break -> BREAK .)
-    LET             reduce using rule 90 (break -> BREAK .)
-    MOVE            reduce using rule 90 (break -> BREAK .)
-    DELAY           reduce using rule 90 (break -> BREAK .)
-    PRINT           reduce using rule 90 (break -> BREAK .)
-    BREAK           reduce using rule 90 (break -> BREAK .)
-    RCRLBRACKET     reduce using rule 90 (break -> BREAK .)
-    RETURN          reduce using rule 90 (break -> BREAK .)
+    LOOP            reduce using rule 91 (break -> BREAK .)
+    FN              reduce using rule 91 (break -> BREAK .)
+    FOR             reduce using rule 91 (break -> BREAK .)
+    WHILE           reduce using rule 91 (break -> BREAK .)
+    IF              reduce using rule 91 (break -> BREAK .)
+    LET             reduce using rule 91 (break -> BREAK .)
+    MOVE            reduce using rule 91 (break -> BREAK .)
+    DELAY           reduce using rule 91 (break -> BREAK .)
+    PRINT           reduce using rule 91 (break -> BREAK .)
+    BREAK           reduce using rule 91 (break -> BREAK .)
+    RCRLBRACKET     reduce using rule 91 (break -> BREAK .)
+    RETURN          reduce using rule 91 (break -> BREAK .)
 
 
 state 67
@@ -1635,9 +1638,9 @@ state 69
 
     (25) params -> empty . empty
     (28) arg -> empty . empty
-    (91) empty -> .
+    (92) empty -> .
 
-    RPAREN          reduce using rule 91 (empty -> .)
+    RPAREN          reduce using rule 92 (empty -> .)
 
     empty                          shift and go to state 109
 
@@ -1721,14 +1724,14 @@ state 74
     (36) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET
     (58) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET empty
     (59) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
     (37) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON
     (38) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON
     (41) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON
     (45) println -> . PRINT EXPR LPAREN args RPAREN SEMICOLON
-    (90) break -> . BREAK
-    (91) empty -> .
+    (91) break -> . BREAK
+    (92) empty -> .
 
     LOOP            shift and go to state 59
     FN              shift and go to state 44
@@ -1740,7 +1743,7 @@ state 74
     DELAY           shift and go to state 64
     PRINT           shift and go to state 65
     BREAK           shift and go to state 66
-    RCRLBRACKET     reduce using rule 91 (empty -> .)
+    RCRLBRACKET     reduce using rule 92 (empty -> .)
 
     line                           shift and go to state 113
     loop                           shift and go to state 46
@@ -1759,44 +1762,44 @@ state 74
 
 state 75
 
-    (76) opera -> OPERA LPAREN operator . COMMA operand COMMA operand RPAREN
+    (77) opera -> OPERA LPAREN operator . COMMA operand COMMA operand RPAREN
 
     COMMA           shift and go to state 114
 
 
 state 76
 
-    (77) operator -> PLUS .
+    (78) operator -> PLUS .
 
-    COMMA           reduce using rule 77 (operator -> PLUS .)
+    COMMA           reduce using rule 78 (operator -> PLUS .)
 
 
 state 77
 
-    (78) operator -> MINUS .
+    (79) operator -> MINUS .
 
-    COMMA           reduce using rule 78 (operator -> MINUS .)
+    COMMA           reduce using rule 79 (operator -> MINUS .)
 
 
 state 78
 
-    (79) operator -> DIVIDE .
+    (80) operator -> DIVIDE .
 
-    COMMA           reduce using rule 79 (operator -> DIVIDE .)
+    COMMA           reduce using rule 80 (operator -> DIVIDE .)
 
 
 state 79
 
-    (80) operator -> ASTR .
+    (81) operator -> ASTR .
 
-    COMMA           reduce using rule 80 (operator -> ASTR .)
+    COMMA           reduce using rule 81 (operator -> ASTR .)
 
 
 state 80
 
-    (81) operator -> TIMES .
+    (82) operator -> TIMES .
 
-    COMMA           reduce using rule 81 (operator -> TIMES .)
+    COMMA           reduce using rule 82 (operator -> TIMES .)
 
 
 state 81
@@ -1936,14 +1939,14 @@ state 95
     (36) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET
     (58) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET empty
     (59) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
     (37) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON
     (38) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON
     (41) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON
     (45) println -> . PRINT EXPR LPAREN args RPAREN SEMICOLON
-    (90) break -> . BREAK
-    (91) empty -> .
+    (91) break -> . BREAK
+    (92) empty -> .
 
     LOOP            shift and go to state 59
     FN              shift and go to state 44
@@ -1955,7 +1958,7 @@ state 95
     DELAY           shift and go to state 64
     PRINT           shift and go to state 65
     BREAK           shift and go to state 66
-    RCRLBRACKET     reduce using rule 91 (empty -> .)
+    RCRLBRACKET     reduce using rule 92 (empty -> .)
 
     line                           shift and go to state 115
     loop                           shift and go to state 46
@@ -1982,14 +1985,14 @@ state 96
 state 97
 
     (35) while -> WHILE LPAREN . expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET
-    (68) expression -> . INT
-    (69) expression -> . TRUE
-    (70) expression -> . FALSE
-    (71) expression -> . opera
-    (72) expression -> . ID
-    (73) expression -> . negative
-    (76) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
-    (86) negative -> . MINUS INT
+    (69) expression -> . INT
+    (70) expression -> . TRUE
+    (71) expression -> . FALSE
+    (72) expression -> . opera
+    (73) expression -> . ID
+    (74) expression -> . negative
+    (77) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+    (87) negative -> . MINUS INT
 
     INT             shift and go to state 100
     TRUE            shift and go to state 101
@@ -2018,97 +2021,105 @@ state 99
     (65) compare -> . GTE
     (66) compare -> . LT
     (67) compare -> . GT
+    (68) compare -> . DIF
 
     EQEQ            shift and go to state 120
     LTE             shift and go to state 121
     GTE             shift and go to state 122
     LT              shift and go to state 123
     GT              shift and go to state 124
+    DIF             shift and go to state 125
 
     compare                        shift and go to state 119
 
 state 100
 
-    (68) expression -> INT .
+    (69) expression -> INT .
 
-    EQEQ            reduce using rule 68 (expression -> INT .)
-    LTE             reduce using rule 68 (expression -> INT .)
-    GTE             reduce using rule 68 (expression -> INT .)
-    LT              reduce using rule 68 (expression -> INT .)
-    GT              reduce using rule 68 (expression -> INT .)
-    LCRLBRACKET     reduce using rule 68 (expression -> INT .)
-    RPAREN          reduce using rule 68 (expression -> INT .)
-    SEMICOLON       reduce using rule 68 (expression -> INT .)
+    EQEQ            reduce using rule 69 (expression -> INT .)
+    LTE             reduce using rule 69 (expression -> INT .)
+    GTE             reduce using rule 69 (expression -> INT .)
+    LT              reduce using rule 69 (expression -> INT .)
+    GT              reduce using rule 69 (expression -> INT .)
+    DIF             reduce using rule 69 (expression -> INT .)
+    LCRLBRACKET     reduce using rule 69 (expression -> INT .)
+    RPAREN          reduce using rule 69 (expression -> INT .)
+    SEMICOLON       reduce using rule 69 (expression -> INT .)
 
 
 state 101
 
-    (69) expression -> TRUE .
+    (70) expression -> TRUE .
 
-    EQEQ            reduce using rule 69 (expression -> TRUE .)
-    LTE             reduce using rule 69 (expression -> TRUE .)
-    GTE             reduce using rule 69 (expression -> TRUE .)
-    LT              reduce using rule 69 (expression -> TRUE .)
-    GT              reduce using rule 69 (expression -> TRUE .)
-    LCRLBRACKET     reduce using rule 69 (expression -> TRUE .)
-    RPAREN          reduce using rule 69 (expression -> TRUE .)
-    SEMICOLON       reduce using rule 69 (expression -> TRUE .)
+    EQEQ            reduce using rule 70 (expression -> TRUE .)
+    LTE             reduce using rule 70 (expression -> TRUE .)
+    GTE             reduce using rule 70 (expression -> TRUE .)
+    LT              reduce using rule 70 (expression -> TRUE .)
+    GT              reduce using rule 70 (expression -> TRUE .)
+    DIF             reduce using rule 70 (expression -> TRUE .)
+    LCRLBRACKET     reduce using rule 70 (expression -> TRUE .)
+    RPAREN          reduce using rule 70 (expression -> TRUE .)
+    SEMICOLON       reduce using rule 70 (expression -> TRUE .)
 
 
 state 102
 
-    (70) expression -> FALSE .
+    (71) expression -> FALSE .
 
-    EQEQ            reduce using rule 70 (expression -> FALSE .)
-    LTE             reduce using rule 70 (expression -> FALSE .)
-    GTE             reduce using rule 70 (expression -> FALSE .)
-    LT              reduce using rule 70 (expression -> FALSE .)
-    GT              reduce using rule 70 (expression -> FALSE .)
-    LCRLBRACKET     reduce using rule 70 (expression -> FALSE .)
-    RPAREN          reduce using rule 70 (expression -> FALSE .)
-    SEMICOLON       reduce using rule 70 (expression -> FALSE .)
+    EQEQ            reduce using rule 71 (expression -> FALSE .)
+    LTE             reduce using rule 71 (expression -> FALSE .)
+    GTE             reduce using rule 71 (expression -> FALSE .)
+    LT              reduce using rule 71 (expression -> FALSE .)
+    GT              reduce using rule 71 (expression -> FALSE .)
+    DIF             reduce using rule 71 (expression -> FALSE .)
+    LCRLBRACKET     reduce using rule 71 (expression -> FALSE .)
+    RPAREN          reduce using rule 71 (expression -> FALSE .)
+    SEMICOLON       reduce using rule 71 (expression -> FALSE .)
 
 
 state 103
 
-    (71) expression -> opera .
+    (72) expression -> opera .
 
-    EQEQ            reduce using rule 71 (expression -> opera .)
-    LTE             reduce using rule 71 (expression -> opera .)
-    GTE             reduce using rule 71 (expression -> opera .)
-    LT              reduce using rule 71 (expression -> opera .)
-    GT              reduce using rule 71 (expression -> opera .)
-    LCRLBRACKET     reduce using rule 71 (expression -> opera .)
-    RPAREN          reduce using rule 71 (expression -> opera .)
-    SEMICOLON       reduce using rule 71 (expression -> opera .)
+    EQEQ            reduce using rule 72 (expression -> opera .)
+    LTE             reduce using rule 72 (expression -> opera .)
+    GTE             reduce using rule 72 (expression -> opera .)
+    LT              reduce using rule 72 (expression -> opera .)
+    GT              reduce using rule 72 (expression -> opera .)
+    DIF             reduce using rule 72 (expression -> opera .)
+    LCRLBRACKET     reduce using rule 72 (expression -> opera .)
+    RPAREN          reduce using rule 72 (expression -> opera .)
+    SEMICOLON       reduce using rule 72 (expression -> opera .)
 
 
 state 104
 
-    (72) expression -> ID .
+    (73) expression -> ID .
 
-    EQEQ            reduce using rule 72 (expression -> ID .)
-    LTE             reduce using rule 72 (expression -> ID .)
-    GTE             reduce using rule 72 (expression -> ID .)
-    LT              reduce using rule 72 (expression -> ID .)
-    GT              reduce using rule 72 (expression -> ID .)
-    LCRLBRACKET     reduce using rule 72 (expression -> ID .)
-    RPAREN          reduce using rule 72 (expression -> ID .)
-    SEMICOLON       reduce using rule 72 (expression -> ID .)
+    EQEQ            reduce using rule 73 (expression -> ID .)
+    LTE             reduce using rule 73 (expression -> ID .)
+    GTE             reduce using rule 73 (expression -> ID .)
+    LT              reduce using rule 73 (expression -> ID .)
+    GT              reduce using rule 73 (expression -> ID .)
+    DIF             reduce using rule 73 (expression -> ID .)
+    LCRLBRACKET     reduce using rule 73 (expression -> ID .)
+    RPAREN          reduce using rule 73 (expression -> ID .)
+    SEMICOLON       reduce using rule 73 (expression -> ID .)
 
 
 state 105
 
-    (73) expression -> negative .
+    (74) expression -> negative .
 
-    EQEQ            reduce using rule 73 (expression -> negative .)
-    LTE             reduce using rule 73 (expression -> negative .)
-    GTE             reduce using rule 73 (expression -> negative .)
-    LT              reduce using rule 73 (expression -> negative .)
-    GT              reduce using rule 73 (expression -> negative .)
-    LCRLBRACKET     reduce using rule 73 (expression -> negative .)
-    RPAREN          reduce using rule 73 (expression -> negative .)
-    SEMICOLON       reduce using rule 73 (expression -> negative .)
+    EQEQ            reduce using rule 74 (expression -> negative .)
+    LTE             reduce using rule 74 (expression -> negative .)
+    GTE             reduce using rule 74 (expression -> negative .)
+    LT              reduce using rule 74 (expression -> negative .)
+    GT              reduce using rule 74 (expression -> negative .)
+    DIF             reduce using rule 74 (expression -> negative .)
+    LCRLBRACKET     reduce using rule 74 (expression -> negative .)
+    RPAREN          reduce using rule 74 (expression -> negative .)
+    SEMICOLON       reduce using rule 74 (expression -> negative .)
 
 
 state 106
@@ -2116,22 +2127,22 @@ state 106
     (37) move -> MOVE LPAREN . STRING COMMA bool RPAREN SEMICOLON
     (38) moveList -> MOVE LPAREN . LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON
 
-    STRING          shift and go to state 125
-    LSQRBRACKET     shift and go to state 126
+    STRING          shift and go to state 126
+    LSQRBRACKET     shift and go to state 127
 
 
 state 107
 
     (41) delay -> DELAY LPAREN . INT COMMA STRING RPAREN SEMICOLON
 
-    INT             shift and go to state 127
+    INT             shift and go to state 128
 
 
 state 108
 
     (45) println -> PRINT EXPR . LPAREN args RPAREN SEMICOLON
 
-    LPAREN          shift and go to state 128
+    LPAREN          shift and go to state 129
 
 
 state 109
@@ -2149,7 +2160,7 @@ state 110
 
     (29) funbody -> ARROW output . LCRLBRACKET line end RCRLBRACKET
 
-    LCRLBRACKET     shift and go to state 129
+    LCRLBRACKET     shift and go to state 130
 
 
 state 111
@@ -2170,25 +2181,25 @@ state 113
 
     (22) prodbody -> LCRLBRACKET line . RCRLBRACKET
 
-    RCRLBRACKET     shift and go to state 130
+    RCRLBRACKET     shift and go to state 131
 
 
 state 114
 
-    (76) opera -> OPERA LPAREN operator COMMA . operand COMMA operand RPAREN
-    (82) operand -> . INT
-    (83) operand -> . opera
-    (84) operand -> . ID
-    (85) operand -> . negative
-    (76) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
-    (86) negative -> . MINUS INT
+    (77) opera -> OPERA LPAREN operator COMMA . operand COMMA operand RPAREN
+    (83) operand -> . INT
+    (84) operand -> . opera
+    (85) operand -> . ID
+    (86) operand -> . negative
+    (77) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+    (87) negative -> . MINUS INT
 
     INT             shift and go to state 27
-    ID              shift and go to state 132
+    ID              shift and go to state 133
     OPERA           shift and go to state 32
     MINUS           shift and go to state 33
 
-    operand                        shift and go to state 131
+    operand                        shift and go to state 132
     opera                          shift and go to state 28
     negative                       shift and go to state 29
 
@@ -2196,14 +2207,14 @@ state 115
 
     (33) loop -> LOOP LCRLBRACKET line . RCRLBRACKET
 
-    RCRLBRACKET     shift and go to state 133
+    RCRLBRACKET     shift and go to state 134
 
 
 state 116
 
     (34) for -> FOR ID IN . INT DOTDOT INT LCRLBRACKET line RCRLBRACKET
 
-    INT             shift and go to state 134
+    INT             shift and go to state 135
 
 
 state 117
@@ -2214,14 +2225,16 @@ state 117
     (65) compare -> . GTE
     (66) compare -> . LT
     (67) compare -> . GT
+    (68) compare -> . DIF
 
     EQEQ            shift and go to state 120
     LTE             shift and go to state 121
     GTE             shift and go to state 122
     LT              shift and go to state 123
     GT              shift and go to state 124
+    DIF             shift and go to state 125
 
-    compare                        shift and go to state 135
+    compare                        shift and go to state 136
 
 state 118
 
@@ -2247,14 +2260,14 @@ state 118
     (36) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET
     (58) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET empty
     (59) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
     (37) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON
     (38) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON
     (41) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON
     (45) println -> . PRINT EXPR LPAREN args RPAREN SEMICOLON
-    (90) break -> . BREAK
-    (91) empty -> .
+    (91) break -> . BREAK
+    (92) empty -> .
 
     LOOP            shift and go to state 59
     FN              shift and go to state 44
@@ -2266,9 +2279,9 @@ state 118
     DELAY           shift and go to state 64
     PRINT           shift and go to state 65
     BREAK           shift and go to state 66
-    RCRLBRACKET     reduce using rule 91 (empty -> .)
+    RCRLBRACKET     reduce using rule 92 (empty -> .)
 
-    line                           shift and go to state 136
+    line                           shift and go to state 137
     loop                           shift and go to state 46
     function                       shift and go to state 47
     procedure                      shift and go to state 48
@@ -2287,14 +2300,14 @@ state 119
 
     (58) if -> IF expression compare . expression LCRLBRACKET line RCRLBRACKET empty
     (59) if -> IF expression compare . expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (68) expression -> . INT
-    (69) expression -> . TRUE
-    (70) expression -> . FALSE
-    (71) expression -> . opera
-    (72) expression -> . ID
-    (73) expression -> . negative
-    (76) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
-    (86) negative -> . MINUS INT
+    (69) expression -> . INT
+    (70) expression -> . TRUE
+    (71) expression -> . FALSE
+    (72) expression -> . opera
+    (73) expression -> . ID
+    (74) expression -> . negative
+    (77) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+    (87) negative -> . MINUS INT
 
     INT             shift and go to state 100
     TRUE            shift and go to state 101
@@ -2303,7 +2316,7 @@ state 119
     OPERA           shift and go to state 32
     MINUS           shift and go to state 33
 
-    expression                     shift and go to state 137
+    expression                     shift and go to state 138
     opera                          shift and go to state 103
     negative                       shift and go to state 105
 
@@ -2369,29 +2382,41 @@ state 124
 
 state 125
 
-    (37) move -> MOVE LPAREN STRING . COMMA bool RPAREN SEMICOLON
+    (68) compare -> DIF .
 
-    COMMA           shift and go to state 138
+    INT             reduce using rule 68 (compare -> DIF .)
+    TRUE            reduce using rule 68 (compare -> DIF .)
+    FALSE           reduce using rule 68 (compare -> DIF .)
+    ID              reduce using rule 68 (compare -> DIF .)
+    OPERA           reduce using rule 68 (compare -> DIF .)
+    MINUS           reduce using rule 68 (compare -> DIF .)
 
 
 state 126
+
+    (37) move -> MOVE LPAREN STRING . COMMA bool RPAREN SEMICOLON
+
+    COMMA           shift and go to state 139
+
+
+state 127
 
     (38) moveList -> MOVE LPAREN LSQRBRACKET . fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON
     (39) fingerList -> . STRING COMMA STRING
     (40) fingerList -> . STRING COMMA fingerList
 
-    STRING          shift and go to state 140
+    STRING          shift and go to state 141
 
-    fingerList                     shift and go to state 139
+    fingerList                     shift and go to state 140
 
-state 127
+state 128
 
     (41) delay -> DELAY LPAREN INT . COMMA STRING RPAREN SEMICOLON
 
-    COMMA           shift and go to state 141
+    COMMA           shift and go to state 142
 
 
-state 128
+state 129
 
     (45) println -> PRINT EXPR LPAREN . args RPAREN SEMICOLON
     (46) args -> . INT body
@@ -2400,19 +2425,19 @@ state 128
     (49) args -> . TRUE body
     (50) args -> . FALSE body
     (51) args -> . STRING body
-    (76) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+    (77) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
 
-    INT             shift and go to state 143
-    ID              shift and go to state 144
-    TRUE            shift and go to state 146
-    FALSE           shift and go to state 147
-    STRING          shift and go to state 148
+    INT             shift and go to state 144
+    ID              shift and go to state 145
+    TRUE            shift and go to state 147
+    FALSE           shift and go to state 148
+    STRING          shift and go to state 149
     OPERA           shift and go to state 32
 
-    args                           shift and go to state 142
-    opera                          shift and go to state 145
+    args                           shift and go to state 143
+    opera                          shift and go to state 146
 
-state 129
+state 130
 
     (29) funbody -> ARROW output LCRLBRACKET . line end RCRLBRACKET
     (8) line -> . loop line
@@ -2436,14 +2461,14 @@ state 129
     (36) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET
     (58) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET empty
     (59) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
     (37) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON
     (38) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON
     (41) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON
     (45) println -> . PRINT EXPR LPAREN args RPAREN SEMICOLON
-    (90) break -> . BREAK
-    (91) empty -> .
+    (91) break -> . BREAK
+    (92) empty -> .
 
     LOOP            shift and go to state 59
     FN              shift and go to state 44
@@ -2455,9 +2480,9 @@ state 129
     DELAY           shift and go to state 64
     PRINT           shift and go to state 65
     BREAK           shift and go to state 66
-    RETURN          reduce using rule 91 (empty -> .)
+    RETURN          reduce using rule 92 (empty -> .)
 
-    line                           shift and go to state 149
+    line                           shift and go to state 150
     loop                           shift and go to state 46
     function                       shift and go to state 47
     procedure                      shift and go to state 48
@@ -2472,7 +2497,7 @@ state 129
     break                          shift and go to state 57
     empty                          shift and go to state 58
 
-state 130
+state 131
 
     (22) prodbody -> LCRLBRACKET line RCRLBRACKET .
 
@@ -2491,22 +2516,22 @@ state 130
     RETURN          reduce using rule 22 (prodbody -> LCRLBRACKET line RCRLBRACKET .)
 
 
-state 131
-
-    (76) opera -> OPERA LPAREN operator COMMA operand . COMMA operand RPAREN
-
-    COMMA           shift and go to state 150
-
-
 state 132
 
-    (84) operand -> ID .
+    (77) opera -> OPERA LPAREN operator COMMA operand . COMMA operand RPAREN
 
-    COMMA           reduce using rule 84 (operand -> ID .)
-    RPAREN          reduce using rule 84 (operand -> ID .)
+    COMMA           shift and go to state 151
 
 
 state 133
+
+    (85) operand -> ID .
+
+    COMMA           reduce using rule 85 (operand -> ID .)
+    RPAREN          reduce using rule 85 (operand -> ID .)
+
+
+state 134
 
     (33) loop -> LOOP LCRLBRACKET line RCRLBRACKET .
 
@@ -2524,24 +2549,24 @@ state 133
     RETURN          reduce using rule 33 (loop -> LOOP LCRLBRACKET line RCRLBRACKET .)
 
 
-state 134
+state 135
 
     (34) for -> FOR ID IN INT . DOTDOT INT LCRLBRACKET line RCRLBRACKET
 
-    DOTDOT          shift and go to state 151
+    DOTDOT          shift and go to state 152
 
 
-state 135
+state 136
 
     (35) while -> WHILE LPAREN expression compare . expression RPAREN LCRLBRACKET line RCRLBRACKET
-    (68) expression -> . INT
-    (69) expression -> . TRUE
-    (70) expression -> . FALSE
-    (71) expression -> . opera
-    (72) expression -> . ID
-    (73) expression -> . negative
-    (76) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
-    (86) negative -> . MINUS INT
+    (69) expression -> . INT
+    (70) expression -> . TRUE
+    (71) expression -> . FALSE
+    (72) expression -> . opera
+    (73) expression -> . ID
+    (74) expression -> . negative
+    (77) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+    (87) negative -> . MINUS INT
 
     INT             shift and go to state 100
     TRUE            shift and go to state 101
@@ -2550,194 +2575,194 @@ state 135
     OPERA           shift and go to state 32
     MINUS           shift and go to state 33
 
-    expression                     shift and go to state 152
+    expression                     shift and go to state 153
     opera                          shift and go to state 103
     negative                       shift and go to state 105
 
-state 136
+state 137
 
     (36) while -> WHILE TRUE LCRLBRACKET line . RCRLBRACKET
 
-    RCRLBRACKET     shift and go to state 153
-
-
-state 137
-
-    (58) if -> IF expression compare expression . LCRLBRACKET line RCRLBRACKET empty
-    (59) if -> IF expression compare expression . LCRLBRACKET line RCRLBRACKET elseiforelse
-
-    LCRLBRACKET     shift and go to state 154
+    RCRLBRACKET     shift and go to state 154
 
 
 state 138
 
-    (37) move -> MOVE LPAREN STRING COMMA . bool RPAREN SEMICOLON
-    (87) bool -> . TRUE
-    (88) bool -> . FALSE
-    (89) bool -> . ID
+    (58) if -> IF expression compare expression . LCRLBRACKET line RCRLBRACKET empty
+    (59) if -> IF expression compare expression . LCRLBRACKET line RCRLBRACKET elseiforelse
 
-    TRUE            shift and go to state 30
-    FALSE           shift and go to state 31
-    ID              shift and go to state 156
+    LCRLBRACKET     shift and go to state 155
 
-    bool                           shift and go to state 155
 
 state 139
 
-    (38) moveList -> MOVE LPAREN LSQRBRACKET fingerList . RSQRBRACKET COMMA bool RPAREN SEMICOLON
+    (37) move -> MOVE LPAREN STRING COMMA . bool RPAREN SEMICOLON
+    (88) bool -> . TRUE
+    (89) bool -> . FALSE
+    (90) bool -> . ID
 
-    RSQRBRACKET     shift and go to state 157
+    TRUE            shift and go to state 30
+    FALSE           shift and go to state 31
+    ID              shift and go to state 157
 
+    bool                           shift and go to state 156
 
 state 140
 
-    (39) fingerList -> STRING . COMMA STRING
-    (40) fingerList -> STRING . COMMA fingerList
+    (38) moveList -> MOVE LPAREN LSQRBRACKET fingerList . RSQRBRACKET COMMA bool RPAREN SEMICOLON
 
-    COMMA           shift and go to state 158
+    RSQRBRACKET     shift and go to state 158
 
 
 state 141
 
-    (41) delay -> DELAY LPAREN INT COMMA . STRING RPAREN SEMICOLON
+    (39) fingerList -> STRING . COMMA STRING
+    (40) fingerList -> STRING . COMMA fingerList
 
-    STRING          shift and go to state 159
+    COMMA           shift and go to state 159
 
 
 state 142
 
-    (45) println -> PRINT EXPR LPAREN args . RPAREN SEMICOLON
+    (41) delay -> DELAY LPAREN INT COMMA . STRING RPAREN SEMICOLON
 
-    RPAREN          shift and go to state 160
+    STRING          shift and go to state 160
 
 
 state 143
+
+    (45) println -> PRINT EXPR LPAREN args . RPAREN SEMICOLON
+
+    RPAREN          shift and go to state 161
+
+
+state 144
 
     (46) args -> INT . body
     (52) body -> . COMMA args
     (53) body -> . COMMA body
     (54) body -> . empty empty
-    (91) empty -> .
+    (92) empty -> .
 
-    COMMA           shift and go to state 162
-    RPAREN          reduce using rule 91 (empty -> .)
+    COMMA           shift and go to state 163
+    RPAREN          reduce using rule 92 (empty -> .)
 
-    body                           shift and go to state 161
-    empty                          shift and go to state 163
+    body                           shift and go to state 162
+    empty                          shift and go to state 164
 
-state 144
+state 145
 
     (47) args -> ID . body
     (52) body -> . COMMA args
     (53) body -> . COMMA body
     (54) body -> . empty empty
-    (91) empty -> .
+    (92) empty -> .
 
-    COMMA           shift and go to state 162
-    RPAREN          reduce using rule 91 (empty -> .)
+    COMMA           shift and go to state 163
+    RPAREN          reduce using rule 92 (empty -> .)
 
-    body                           shift and go to state 164
-    empty                          shift and go to state 163
+    body                           shift and go to state 165
+    empty                          shift and go to state 164
 
-state 145
+state 146
 
     (48) args -> opera . body
     (52) body -> . COMMA args
     (53) body -> . COMMA body
     (54) body -> . empty empty
-    (91) empty -> .
+    (92) empty -> .
 
-    COMMA           shift and go to state 162
-    RPAREN          reduce using rule 91 (empty -> .)
+    COMMA           shift and go to state 163
+    RPAREN          reduce using rule 92 (empty -> .)
 
-    body                           shift and go to state 165
-    empty                          shift and go to state 163
+    body                           shift and go to state 166
+    empty                          shift and go to state 164
 
-state 146
+state 147
 
     (49) args -> TRUE . body
     (52) body -> . COMMA args
     (53) body -> . COMMA body
     (54) body -> . empty empty
-    (91) empty -> .
+    (92) empty -> .
 
-    COMMA           shift and go to state 162
-    RPAREN          reduce using rule 91 (empty -> .)
+    COMMA           shift and go to state 163
+    RPAREN          reduce using rule 92 (empty -> .)
 
-    body                           shift and go to state 166
-    empty                          shift and go to state 163
+    body                           shift and go to state 167
+    empty                          shift and go to state 164
 
-state 147
+state 148
 
     (50) args -> FALSE . body
     (52) body -> . COMMA args
     (53) body -> . COMMA body
     (54) body -> . empty empty
-    (91) empty -> .
+    (92) empty -> .
 
-    COMMA           shift and go to state 162
-    RPAREN          reduce using rule 91 (empty -> .)
+    COMMA           shift and go to state 163
+    RPAREN          reduce using rule 92 (empty -> .)
 
-    body                           shift and go to state 167
-    empty                          shift and go to state 163
+    body                           shift and go to state 168
+    empty                          shift and go to state 164
 
-state 148
+state 149
 
     (51) args -> STRING . body
     (52) body -> . COMMA args
     (53) body -> . COMMA body
     (54) body -> . empty empty
-    (91) empty -> .
+    (92) empty -> .
 
-    COMMA           shift and go to state 162
-    RPAREN          reduce using rule 91 (empty -> .)
+    COMMA           shift and go to state 163
+    RPAREN          reduce using rule 92 (empty -> .)
 
-    body                           shift and go to state 168
-    empty                          shift and go to state 163
+    body                           shift and go to state 169
+    empty                          shift and go to state 164
 
-state 149
+state 150
 
     (29) funbody -> ARROW output LCRLBRACKET line . end RCRLBRACKET
     (32) end -> . RETURN expression SEMICOLON
 
-    RETURN          shift and go to state 170
+    RETURN          shift and go to state 171
 
-    end                            shift and go to state 169
-
-state 150
-
-    (76) opera -> OPERA LPAREN operator COMMA operand COMMA . operand RPAREN
-    (82) operand -> . INT
-    (83) operand -> . opera
-    (84) operand -> . ID
-    (85) operand -> . negative
-    (76) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
-    (86) negative -> . MINUS INT
-
-    INT             shift and go to state 27
-    ID              shift and go to state 132
-    OPERA           shift and go to state 32
-    MINUS           shift and go to state 33
-
-    operand                        shift and go to state 171
-    opera                          shift and go to state 28
-    negative                       shift and go to state 29
+    end                            shift and go to state 170
 
 state 151
 
-    (34) for -> FOR ID IN INT DOTDOT . INT LCRLBRACKET line RCRLBRACKET
+    (77) opera -> OPERA LPAREN operator COMMA operand COMMA . operand RPAREN
+    (83) operand -> . INT
+    (84) operand -> . opera
+    (85) operand -> . ID
+    (86) operand -> . negative
+    (77) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+    (87) negative -> . MINUS INT
 
-    INT             shift and go to state 172
+    INT             shift and go to state 27
+    ID              shift and go to state 133
+    OPERA           shift and go to state 32
+    MINUS           shift and go to state 33
 
+    operand                        shift and go to state 172
+    opera                          shift and go to state 28
+    negative                       shift and go to state 29
 
 state 152
 
-    (35) while -> WHILE LPAREN expression compare expression . RPAREN LCRLBRACKET line RCRLBRACKET
+    (34) for -> FOR ID IN INT DOTDOT . INT LCRLBRACKET line RCRLBRACKET
 
-    RPAREN          shift and go to state 173
+    INT             shift and go to state 173
 
 
 state 153
+
+    (35) while -> WHILE LPAREN expression compare expression . RPAREN LCRLBRACKET line RCRLBRACKET
+
+    RPAREN          shift and go to state 174
+
+
+state 154
 
     (36) while -> WHILE TRUE LCRLBRACKET line RCRLBRACKET .
 
@@ -2755,7 +2780,7 @@ state 153
     RETURN          reduce using rule 36 (while -> WHILE TRUE LCRLBRACKET line RCRLBRACKET .)
 
 
-state 154
+state 155
 
     (58) if -> IF expression compare expression LCRLBRACKET . line RCRLBRACKET empty
     (59) if -> IF expression compare expression LCRLBRACKET . line RCRLBRACKET elseiforelse
@@ -2780,14 +2805,14 @@ state 154
     (36) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET
     (58) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET empty
     (59) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
     (37) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON
     (38) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON
     (41) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON
     (45) println -> . PRINT EXPR LPAREN args RPAREN SEMICOLON
-    (90) break -> . BREAK
-    (91) empty -> .
+    (91) break -> . BREAK
+    (92) empty -> .
 
     LOOP            shift and go to state 59
     FN              shift and go to state 44
@@ -2799,9 +2824,9 @@ state 154
     DELAY           shift and go to state 64
     PRINT           shift and go to state 65
     BREAK           shift and go to state 66
-    RCRLBRACKET     reduce using rule 91 (empty -> .)
+    RCRLBRACKET     reduce using rule 92 (empty -> .)
 
-    line                           shift and go to state 174
+    line                           shift and go to state 175
     empty                          shift and go to state 58
     loop                           shift and go to state 46
     function                       shift and go to state 47
@@ -2816,60 +2841,60 @@ state 154
     println                        shift and go to state 56
     break                          shift and go to state 57
 
-state 155
+state 156
 
     (37) move -> MOVE LPAREN STRING COMMA bool . RPAREN SEMICOLON
 
-    RPAREN          shift and go to state 175
-
-
-state 156
-
-    (89) bool -> ID .
-
-    RPAREN          reduce using rule 89 (bool -> ID .)
+    RPAREN          shift and go to state 176
 
 
 state 157
 
-    (38) moveList -> MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET . COMMA bool RPAREN SEMICOLON
+    (90) bool -> ID .
 
-    COMMA           shift and go to state 176
+    RPAREN          reduce using rule 90 (bool -> ID .)
 
 
 state 158
+
+    (38) moveList -> MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET . COMMA bool RPAREN SEMICOLON
+
+    COMMA           shift and go to state 177
+
+
+state 159
 
     (39) fingerList -> STRING COMMA . STRING
     (40) fingerList -> STRING COMMA . fingerList
     (39) fingerList -> . STRING COMMA STRING
     (40) fingerList -> . STRING COMMA fingerList
 
-    STRING          shift and go to state 177
+    STRING          shift and go to state 178
 
-    fingerList                     shift and go to state 178
-
-state 159
-
-    (41) delay -> DELAY LPAREN INT COMMA STRING . RPAREN SEMICOLON
-
-    RPAREN          shift and go to state 179
-
+    fingerList                     shift and go to state 179
 
 state 160
 
-    (45) println -> PRINT EXPR LPAREN args RPAREN . SEMICOLON
+    (41) delay -> DELAY LPAREN INT COMMA STRING . RPAREN SEMICOLON
 
-    SEMICOLON       shift and go to state 180
+    RPAREN          shift and go to state 180
 
 
 state 161
+
+    (45) println -> PRINT EXPR LPAREN args RPAREN . SEMICOLON
+
+    SEMICOLON       shift and go to state 181
+
+
+state 162
 
     (46) args -> INT body .
 
     RPAREN          reduce using rule 46 (args -> INT body .)
 
 
-state 162
+state 163
 
     (52) body -> COMMA . args
     (53) body -> COMMA . body
@@ -2882,85 +2907,85 @@ state 162
     (52) body -> . COMMA args
     (53) body -> . COMMA body
     (54) body -> . empty empty
-    (76) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
-    (91) empty -> .
+    (77) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+    (92) empty -> .
 
-    INT             shift and go to state 143
-    ID              shift and go to state 144
-    TRUE            shift and go to state 146
-    FALSE           shift and go to state 147
-    STRING          shift and go to state 148
-    COMMA           shift and go to state 162
+    INT             shift and go to state 144
+    ID              shift and go to state 145
+    TRUE            shift and go to state 147
+    FALSE           shift and go to state 148
+    STRING          shift and go to state 149
+    COMMA           shift and go to state 163
     OPERA           shift and go to state 32
-    RPAREN          reduce using rule 91 (empty -> .)
+    RPAREN          reduce using rule 92 (empty -> .)
 
-    args                           shift and go to state 181
-    body                           shift and go to state 182
-    opera                          shift and go to state 145
-    empty                          shift and go to state 163
-
-state 163
-
-    (54) body -> empty . empty
-    (91) empty -> .
-
-    RPAREN          reduce using rule 91 (empty -> .)
-
-    empty                          shift and go to state 183
+    args                           shift and go to state 182
+    body                           shift and go to state 183
+    opera                          shift and go to state 146
+    empty                          shift and go to state 164
 
 state 164
+
+    (54) body -> empty . empty
+    (92) empty -> .
+
+    RPAREN          reduce using rule 92 (empty -> .)
+
+    empty                          shift and go to state 184
+
+state 165
 
     (47) args -> ID body .
 
     RPAREN          reduce using rule 47 (args -> ID body .)
 
 
-state 165
+state 166
 
     (48) args -> opera body .
 
     RPAREN          reduce using rule 48 (args -> opera body .)
 
 
-state 166
+state 167
 
     (49) args -> TRUE body .
 
     RPAREN          reduce using rule 49 (args -> TRUE body .)
 
 
-state 167
+state 168
 
     (50) args -> FALSE body .
 
     RPAREN          reduce using rule 50 (args -> FALSE body .)
 
 
-state 168
+state 169
 
     (51) args -> STRING body .
 
     RPAREN          reduce using rule 51 (args -> STRING body .)
 
 
-state 169
+state 170
 
     (29) funbody -> ARROW output LCRLBRACKET line end . RCRLBRACKET
 
-    RCRLBRACKET     shift and go to state 184
+    RCRLBRACKET     shift and go to state 185
 
 
-state 170
+state 171
 
     (32) end -> RETURN . expression SEMICOLON
-    (68) expression -> . INT
-    (69) expression -> . TRUE
-    (70) expression -> . FALSE
-    (71) expression -> . opera
-    (72) expression -> . ID
-    (73) expression -> . negative
-    (76) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
-    (86) negative -> . MINUS INT
+    (69) expression -> . INT
+    (70) expression -> . TRUE
+    (71) expression -> . FALSE
+    (72) expression -> . opera
+    (73) expression -> . ID
+    (74) expression -> . negative
+    (77) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+    (87) negative -> . MINUS INT
 
     INT             shift and go to state 100
     TRUE            shift and go to state 101
@@ -2969,84 +2994,84 @@ state 170
     OPERA           shift and go to state 32
     MINUS           shift and go to state 33
 
-    expression                     shift and go to state 185
+    expression                     shift and go to state 186
     opera                          shift and go to state 103
     negative                       shift and go to state 105
 
-state 171
-
-    (76) opera -> OPERA LPAREN operator COMMA operand COMMA operand . RPAREN
-
-    RPAREN          shift and go to state 186
-
-
 state 172
 
-    (34) for -> FOR ID IN INT DOTDOT INT . LCRLBRACKET line RCRLBRACKET
+    (77) opera -> OPERA LPAREN operator COMMA operand COMMA operand . RPAREN
 
-    LCRLBRACKET     shift and go to state 187
+    RPAREN          shift and go to state 187
 
 
 state 173
 
-    (35) while -> WHILE LPAREN expression compare expression RPAREN . LCRLBRACKET line RCRLBRACKET
+    (34) for -> FOR ID IN INT DOTDOT INT . LCRLBRACKET line RCRLBRACKET
 
     LCRLBRACKET     shift and go to state 188
 
 
 state 174
 
-    (58) if -> IF expression compare expression LCRLBRACKET line . RCRLBRACKET empty
-    (59) if -> IF expression compare expression LCRLBRACKET line . RCRLBRACKET elseiforelse
+    (35) while -> WHILE LPAREN expression compare expression RPAREN . LCRLBRACKET line RCRLBRACKET
 
-    RCRLBRACKET     shift and go to state 189
+    LCRLBRACKET     shift and go to state 189
 
 
 state 175
 
-    (37) move -> MOVE LPAREN STRING COMMA bool RPAREN . SEMICOLON
+    (58) if -> IF expression compare expression LCRLBRACKET line . RCRLBRACKET empty
+    (59) if -> IF expression compare expression LCRLBRACKET line . RCRLBRACKET elseiforelse
 
-    SEMICOLON       shift and go to state 190
+    RCRLBRACKET     shift and go to state 190
 
 
 state 176
 
+    (37) move -> MOVE LPAREN STRING COMMA bool RPAREN . SEMICOLON
+
+    SEMICOLON       shift and go to state 191
+
+
+state 177
+
     (38) moveList -> MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA . bool RPAREN SEMICOLON
-    (87) bool -> . TRUE
-    (88) bool -> . FALSE
-    (89) bool -> . ID
+    (88) bool -> . TRUE
+    (89) bool -> . FALSE
+    (90) bool -> . ID
 
     TRUE            shift and go to state 30
     FALSE           shift and go to state 31
-    ID              shift and go to state 156
+    ID              shift and go to state 157
 
-    bool                           shift and go to state 191
+    bool                           shift and go to state 192
 
-state 177
+state 178
 
     (39) fingerList -> STRING COMMA STRING .
     (39) fingerList -> STRING . COMMA STRING
     (40) fingerList -> STRING . COMMA fingerList
 
     RSQRBRACKET     reduce using rule 39 (fingerList -> STRING COMMA STRING .)
-    COMMA           shift and go to state 158
+    COMMA           shift and go to state 159
 
 
-state 178
+state 179
 
     (40) fingerList -> STRING COMMA fingerList .
 
     RSQRBRACKET     reduce using rule 40 (fingerList -> STRING COMMA fingerList .)
 
 
-state 179
+state 180
 
     (41) delay -> DELAY LPAREN INT COMMA STRING RPAREN . SEMICOLON
 
-    SEMICOLON       shift and go to state 192
+    SEMICOLON       shift and go to state 193
 
 
-state 180
+state 181
 
     (45) println -> PRINT EXPR LPAREN args RPAREN SEMICOLON .
 
@@ -3064,28 +3089,28 @@ state 180
     RETURN          reduce using rule 45 (println -> PRINT EXPR LPAREN args RPAREN SEMICOLON .)
 
 
-state 181
+state 182
 
     (52) body -> COMMA args .
 
     RPAREN          reduce using rule 52 (body -> COMMA args .)
 
 
-state 182
+state 183
 
     (53) body -> COMMA body .
 
     RPAREN          reduce using rule 53 (body -> COMMA body .)
 
 
-state 183
+state 184
 
     (54) body -> empty empty .
 
     RPAREN          reduce using rule 54 (body -> empty empty .)
 
 
-state 184
+state 185
 
     (29) funbody -> ARROW output LCRLBRACKET line end RCRLBRACKET .
 
@@ -3104,29 +3129,30 @@ state 184
     RETURN          reduce using rule 29 (funbody -> ARROW output LCRLBRACKET line end RCRLBRACKET .)
 
 
-state 185
+state 186
 
     (32) end -> RETURN expression . SEMICOLON
 
-    SEMICOLON       shift and go to state 193
-
-
-state 186
-
-    (76) opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .
-
-    SEMICOLON       reduce using rule 76 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
-    EQEQ            reduce using rule 76 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
-    LTE             reduce using rule 76 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
-    GTE             reduce using rule 76 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
-    LT              reduce using rule 76 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
-    GT              reduce using rule 76 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
-    COMMA           reduce using rule 76 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
-    LCRLBRACKET     reduce using rule 76 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
-    RPAREN          reduce using rule 76 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
+    SEMICOLON       shift and go to state 194
 
 
 state 187
+
+    (77) opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .
+
+    SEMICOLON       reduce using rule 77 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
+    EQEQ            reduce using rule 77 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
+    LTE             reduce using rule 77 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
+    GTE             reduce using rule 77 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
+    LT              reduce using rule 77 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
+    GT              reduce using rule 77 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
+    DIF             reduce using rule 77 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
+    COMMA           reduce using rule 77 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
+    LCRLBRACKET     reduce using rule 77 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
+    RPAREN          reduce using rule 77 (opera -> OPERA LPAREN operator COMMA operand COMMA operand RPAREN .)
+
+
+state 188
 
     (34) for -> FOR ID IN INT DOTDOT INT LCRLBRACKET . line RCRLBRACKET
     (8) line -> . loop line
@@ -3150,14 +3176,14 @@ state 187
     (36) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET
     (58) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET empty
     (59) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
     (37) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON
     (38) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON
     (41) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON
     (45) println -> . PRINT EXPR LPAREN args RPAREN SEMICOLON
-    (90) break -> . BREAK
-    (91) empty -> .
+    (91) break -> . BREAK
+    (92) empty -> .
 
     LOOP            shift and go to state 59
     FN              shift and go to state 44
@@ -3169,9 +3195,9 @@ state 187
     DELAY           shift and go to state 64
     PRINT           shift and go to state 65
     BREAK           shift and go to state 66
-    RCRLBRACKET     reduce using rule 91 (empty -> .)
+    RCRLBRACKET     reduce using rule 92 (empty -> .)
 
-    line                           shift and go to state 194
+    line                           shift and go to state 195
     loop                           shift and go to state 46
     function                       shift and go to state 47
     procedure                      shift and go to state 48
@@ -3186,7 +3212,7 @@ state 187
     break                          shift and go to state 57
     empty                          shift and go to state 58
 
-state 188
+state 189
 
     (35) while -> WHILE LPAREN expression compare expression RPAREN LCRLBRACKET . line RCRLBRACKET
     (8) line -> . loop line
@@ -3210,14 +3236,14 @@ state 188
     (36) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET
     (58) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET empty
     (59) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
     (37) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON
     (38) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON
     (41) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON
     (45) println -> . PRINT EXPR LPAREN args RPAREN SEMICOLON
-    (90) break -> . BREAK
-    (91) empty -> .
+    (91) break -> . BREAK
+    (92) empty -> .
 
     LOOP            shift and go to state 59
     FN              shift and go to state 44
@@ -3229,9 +3255,9 @@ state 188
     DELAY           shift and go to state 64
     PRINT           shift and go to state 65
     BREAK           shift and go to state 66
-    RCRLBRACKET     reduce using rule 91 (empty -> .)
+    RCRLBRACKET     reduce using rule 92 (empty -> .)
 
-    line                           shift and go to state 195
+    line                           shift and go to state 196
     loop                           shift and go to state 46
     function                       shift and go to state 47
     procedure                      shift and go to state 48
@@ -3246,38 +3272,38 @@ state 188
     break                          shift and go to state 57
     empty                          shift and go to state 58
 
-state 189
+state 190
 
     (58) if -> IF expression compare expression LCRLBRACKET line RCRLBRACKET . empty
     (59) if -> IF expression compare expression LCRLBRACKET line RCRLBRACKET . elseiforelse
-    (91) empty -> .
+    (92) empty -> .
     (56) elseiforelse -> . elseif
     (57) elseiforelse -> . else
     (60) elseif -> . ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET empty
     (61) elseif -> . ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
     (62) else -> . ELSE LCRLBRACKET line RCRLBRACKET
 
-    LOOP            reduce using rule 91 (empty -> .)
-    FN              reduce using rule 91 (empty -> .)
-    FOR             reduce using rule 91 (empty -> .)
-    WHILE           reduce using rule 91 (empty -> .)
-    IF              reduce using rule 91 (empty -> .)
-    LET             reduce using rule 91 (empty -> .)
-    MOVE            reduce using rule 91 (empty -> .)
-    DELAY           reduce using rule 91 (empty -> .)
-    PRINT           reduce using rule 91 (empty -> .)
-    BREAK           reduce using rule 91 (empty -> .)
-    RCRLBRACKET     reduce using rule 91 (empty -> .)
-    RETURN          reduce using rule 91 (empty -> .)
-    ELSEIF          shift and go to state 200
-    ELSE            shift and go to state 201
+    LOOP            reduce using rule 92 (empty -> .)
+    FN              reduce using rule 92 (empty -> .)
+    FOR             reduce using rule 92 (empty -> .)
+    WHILE           reduce using rule 92 (empty -> .)
+    IF              reduce using rule 92 (empty -> .)
+    LET             reduce using rule 92 (empty -> .)
+    MOVE            reduce using rule 92 (empty -> .)
+    DELAY           reduce using rule 92 (empty -> .)
+    PRINT           reduce using rule 92 (empty -> .)
+    BREAK           reduce using rule 92 (empty -> .)
+    RCRLBRACKET     reduce using rule 92 (empty -> .)
+    RETURN          reduce using rule 92 (empty -> .)
+    ELSEIF          shift and go to state 201
+    ELSE            shift and go to state 202
 
-    empty                          shift and go to state 196
-    elseiforelse                   shift and go to state 197
-    elseif                         shift and go to state 198
-    else                           shift and go to state 199
+    empty                          shift and go to state 197
+    elseiforelse                   shift and go to state 198
+    elseif                         shift and go to state 199
+    else                           shift and go to state 200
 
-state 190
+state 191
 
     (37) move -> MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON .
 
@@ -3295,14 +3321,14 @@ state 190
     RETURN          reduce using rule 37 (move -> MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON .)
 
 
-state 191
+state 192
 
     (38) moveList -> MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool . RPAREN SEMICOLON
 
-    RPAREN          shift and go to state 202
+    RPAREN          shift and go to state 203
 
 
-state 192
+state 193
 
     (41) delay -> DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON .
 
@@ -3320,28 +3346,28 @@ state 192
     RETURN          reduce using rule 41 (delay -> DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON .)
 
 
-state 193
+state 194
 
     (32) end -> RETURN expression SEMICOLON .
 
     RCRLBRACKET     reduce using rule 32 (end -> RETURN expression SEMICOLON .)
 
 
-state 194
-
-    (34) for -> FOR ID IN INT DOTDOT INT LCRLBRACKET line . RCRLBRACKET
-
-    RCRLBRACKET     shift and go to state 203
-
-
 state 195
 
-    (35) while -> WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line . RCRLBRACKET
+    (34) for -> FOR ID IN INT DOTDOT INT LCRLBRACKET line . RCRLBRACKET
 
     RCRLBRACKET     shift and go to state 204
 
 
 state 196
+
+    (35) while -> WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line . RCRLBRACKET
+
+    RCRLBRACKET     shift and go to state 205
+
+
+state 197
 
     (58) if -> IF expression compare expression LCRLBRACKET line RCRLBRACKET empty .
 
@@ -3359,7 +3385,7 @@ state 196
     RETURN          reduce using rule 58 (if -> IF expression compare expression LCRLBRACKET line RCRLBRACKET empty .)
 
 
-state 197
+state 198
 
     (59) if -> IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse .
 
@@ -3377,7 +3403,7 @@ state 197
     RETURN          reduce using rule 59 (if -> IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse .)
 
 
-state 198
+state 199
 
     (56) elseiforelse -> elseif .
 
@@ -3395,7 +3421,7 @@ state 198
     RETURN          reduce using rule 56 (elseiforelse -> elseif .)
 
 
-state 199
+state 200
 
     (57) elseiforelse -> else .
 
@@ -3413,18 +3439,18 @@ state 199
     RETURN          reduce using rule 57 (elseiforelse -> else .)
 
 
-state 200
+state 201
 
     (60) elseif -> ELSEIF . expression compare expression LCRLBRACKET line RCRLBRACKET empty
     (61) elseif -> ELSEIF . expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (68) expression -> . INT
-    (69) expression -> . TRUE
-    (70) expression -> . FALSE
-    (71) expression -> . opera
-    (72) expression -> . ID
-    (73) expression -> . negative
-    (76) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
-    (86) negative -> . MINUS INT
+    (69) expression -> . INT
+    (70) expression -> . TRUE
+    (71) expression -> . FALSE
+    (72) expression -> . opera
+    (73) expression -> . ID
+    (74) expression -> . negative
+    (77) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+    (87) negative -> . MINUS INT
 
     INT             shift and go to state 100
     TRUE            shift and go to state 101
@@ -3433,25 +3459,25 @@ state 200
     OPERA           shift and go to state 32
     MINUS           shift and go to state 33
 
-    expression                     shift and go to state 205
+    expression                     shift and go to state 206
     opera                          shift and go to state 103
     negative                       shift and go to state 105
 
-state 201
+state 202
 
     (62) else -> ELSE . LCRLBRACKET line RCRLBRACKET
 
-    LCRLBRACKET     shift and go to state 206
-
-
-state 202
-
-    (38) moveList -> MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN . SEMICOLON
-
-    SEMICOLON       shift and go to state 207
+    LCRLBRACKET     shift and go to state 207
 
 
 state 203
+
+    (38) moveList -> MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN . SEMICOLON
+
+    SEMICOLON       shift and go to state 208
+
+
+state 204
 
     (34) for -> FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET .
 
@@ -3469,7 +3495,7 @@ state 203
     RETURN          reduce using rule 34 (for -> FOR ID IN INT DOTDOT INT LCRLBRACKET line RCRLBRACKET .)
 
 
-state 204
+state 205
 
     (35) while -> WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET .
 
@@ -3487,7 +3513,7 @@ state 204
     RETURN          reduce using rule 35 (while -> WHILE LPAREN expression compare expression RPAREN LCRLBRACKET line RCRLBRACKET .)
 
 
-state 205
+state 206
 
     (60) elseif -> ELSEIF expression . compare expression LCRLBRACKET line RCRLBRACKET empty
     (61) elseif -> ELSEIF expression . compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
@@ -3496,16 +3522,18 @@ state 205
     (65) compare -> . GTE
     (66) compare -> . LT
     (67) compare -> . GT
+    (68) compare -> . DIF
 
     EQEQ            shift and go to state 120
     LTE             shift and go to state 121
     GTE             shift and go to state 122
     LT              shift and go to state 123
     GT              shift and go to state 124
+    DIF             shift and go to state 125
 
-    compare                        shift and go to state 208
+    compare                        shift and go to state 209
 
-state 206
+state 207
 
     (62) else -> ELSE LCRLBRACKET . line RCRLBRACKET
     (8) line -> . loop line
@@ -3529,14 +3557,14 @@ state 206
     (36) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET
     (58) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET empty
     (59) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
     (37) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON
     (38) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON
     (41) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON
     (45) println -> . PRINT EXPR LPAREN args RPAREN SEMICOLON
-    (90) break -> . BREAK
-    (91) empty -> .
+    (91) break -> . BREAK
+    (92) empty -> .
 
     LOOP            shift and go to state 59
     FN              shift and go to state 44
@@ -3548,9 +3576,9 @@ state 206
     DELAY           shift and go to state 64
     PRINT           shift and go to state 65
     BREAK           shift and go to state 66
-    RCRLBRACKET     reduce using rule 91 (empty -> .)
+    RCRLBRACKET     reduce using rule 92 (empty -> .)
 
-    line                           shift and go to state 209
+    line                           shift and go to state 210
     loop                           shift and go to state 46
     function                       shift and go to state 47
     procedure                      shift and go to state 48
@@ -3565,7 +3593,7 @@ state 206
     break                          shift and go to state 57
     empty                          shift and go to state 58
 
-state 207
+state 208
 
     (38) moveList -> MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON .
 
@@ -3583,18 +3611,18 @@ state 207
     RETURN          reduce using rule 38 (moveList -> MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON .)
 
 
-state 208
+state 209
 
     (60) elseif -> ELSEIF expression compare . expression LCRLBRACKET line RCRLBRACKET empty
     (61) elseif -> ELSEIF expression compare . expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (68) expression -> . INT
-    (69) expression -> . TRUE
-    (70) expression -> . FALSE
-    (71) expression -> . opera
-    (72) expression -> . ID
-    (73) expression -> . negative
-    (76) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
-    (86) negative -> . MINUS INT
+    (69) expression -> . INT
+    (70) expression -> . TRUE
+    (71) expression -> . FALSE
+    (72) expression -> . opera
+    (73) expression -> . ID
+    (74) expression -> . negative
+    (77) opera -> . OPERA LPAREN operator COMMA operand COMMA operand RPAREN
+    (87) negative -> . MINUS INT
 
     INT             shift and go to state 100
     TRUE            shift and go to state 101
@@ -3603,26 +3631,26 @@ state 208
     OPERA           shift and go to state 32
     MINUS           shift and go to state 33
 
-    expression                     shift and go to state 210
+    expression                     shift and go to state 211
     opera                          shift and go to state 103
     negative                       shift and go to state 105
 
-state 209
+state 210
 
     (62) else -> ELSE LCRLBRACKET line . RCRLBRACKET
 
-    RCRLBRACKET     shift and go to state 211
+    RCRLBRACKET     shift and go to state 212
 
 
-state 210
+state 211
 
     (60) elseif -> ELSEIF expression compare expression . LCRLBRACKET line RCRLBRACKET empty
     (61) elseif -> ELSEIF expression compare expression . LCRLBRACKET line RCRLBRACKET elseiforelse
 
-    LCRLBRACKET     shift and go to state 212
+    LCRLBRACKET     shift and go to state 213
 
 
-state 211
+state 212
 
     (62) else -> ELSE LCRLBRACKET line RCRLBRACKET .
 
@@ -3640,7 +3668,7 @@ state 211
     RETURN          reduce using rule 62 (else -> ELSE LCRLBRACKET line RCRLBRACKET .)
 
 
-state 212
+state 213
 
     (60) elseif -> ELSEIF expression compare expression LCRLBRACKET . line RCRLBRACKET empty
     (61) elseif -> ELSEIF expression compare expression LCRLBRACKET . line RCRLBRACKET elseiforelse
@@ -3665,14 +3693,14 @@ state 212
     (36) while -> . WHILE TRUE LCRLBRACKET line RCRLBRACKET
     (58) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET empty
     (59) if -> . IF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
-    (74) let -> . LET ID ASSIGN operand SEMICOLON
-    (75) let -> . LET ID ASSIGN bool SEMICOLON
+    (75) let -> . LET ID ASSIGN operand SEMICOLON
+    (76) let -> . LET ID ASSIGN bool SEMICOLON
     (37) move -> . MOVE LPAREN STRING COMMA bool RPAREN SEMICOLON
     (38) moveList -> . MOVE LPAREN LSQRBRACKET fingerList RSQRBRACKET COMMA bool RPAREN SEMICOLON
     (41) delay -> . DELAY LPAREN INT COMMA STRING RPAREN SEMICOLON
     (45) println -> . PRINT EXPR LPAREN args RPAREN SEMICOLON
-    (90) break -> . BREAK
-    (91) empty -> .
+    (91) break -> . BREAK
+    (92) empty -> .
 
     LOOP            shift and go to state 59
     FN              shift and go to state 44
@@ -3684,9 +3712,9 @@ state 212
     DELAY           shift and go to state 64
     PRINT           shift and go to state 65
     BREAK           shift and go to state 66
-    RCRLBRACKET     reduce using rule 91 (empty -> .)
+    RCRLBRACKET     reduce using rule 92 (empty -> .)
 
-    line                           shift and go to state 213
+    line                           shift and go to state 214
     empty                          shift and go to state 58
     loop                           shift and go to state 46
     function                       shift and go to state 47
@@ -3701,46 +3729,46 @@ state 212
     println                        shift and go to state 56
     break                          shift and go to state 57
 
-state 213
+state 214
 
     (60) elseif -> ELSEIF expression compare expression LCRLBRACKET line . RCRLBRACKET empty
     (61) elseif -> ELSEIF expression compare expression LCRLBRACKET line . RCRLBRACKET elseiforelse
 
-    RCRLBRACKET     shift and go to state 214
+    RCRLBRACKET     shift and go to state 215
 
 
-state 214
+state 215
 
     (60) elseif -> ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET . empty
     (61) elseif -> ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET . elseiforelse
-    (91) empty -> .
+    (92) empty -> .
     (56) elseiforelse -> . elseif
     (57) elseiforelse -> . else
     (60) elseif -> . ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET empty
     (61) elseif -> . ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse
     (62) else -> . ELSE LCRLBRACKET line RCRLBRACKET
 
-    LOOP            reduce using rule 91 (empty -> .)
-    FN              reduce using rule 91 (empty -> .)
-    FOR             reduce using rule 91 (empty -> .)
-    WHILE           reduce using rule 91 (empty -> .)
-    IF              reduce using rule 91 (empty -> .)
-    LET             reduce using rule 91 (empty -> .)
-    MOVE            reduce using rule 91 (empty -> .)
-    DELAY           reduce using rule 91 (empty -> .)
-    PRINT           reduce using rule 91 (empty -> .)
-    BREAK           reduce using rule 91 (empty -> .)
-    RCRLBRACKET     reduce using rule 91 (empty -> .)
-    RETURN          reduce using rule 91 (empty -> .)
-    ELSEIF          shift and go to state 200
-    ELSE            shift and go to state 201
+    LOOP            reduce using rule 92 (empty -> .)
+    FN              reduce using rule 92 (empty -> .)
+    FOR             reduce using rule 92 (empty -> .)
+    WHILE           reduce using rule 92 (empty -> .)
+    IF              reduce using rule 92 (empty -> .)
+    LET             reduce using rule 92 (empty -> .)
+    MOVE            reduce using rule 92 (empty -> .)
+    DELAY           reduce using rule 92 (empty -> .)
+    PRINT           reduce using rule 92 (empty -> .)
+    BREAK           reduce using rule 92 (empty -> .)
+    RCRLBRACKET     reduce using rule 92 (empty -> .)
+    RETURN          reduce using rule 92 (empty -> .)
+    ELSEIF          shift and go to state 201
+    ELSE            shift and go to state 202
 
-    empty                          shift and go to state 215
-    elseiforelse                   shift and go to state 216
-    elseif                         shift and go to state 198
-    else                           shift and go to state 199
+    empty                          shift and go to state 216
+    elseiforelse                   shift and go to state 217
+    elseif                         shift and go to state 199
+    else                           shift and go to state 200
 
-state 215
+state 216
 
     (60) elseif -> ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET empty .
 
@@ -3758,7 +3786,7 @@ state 215
     RETURN          reduce using rule 60 (elseif -> ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET empty .)
 
 
-state 216
+state 217
 
     (61) elseif -> ELSEIF expression compare expression LCRLBRACKET line RCRLBRACKET elseiforelse .
 

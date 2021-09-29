@@ -336,6 +336,7 @@ def p_compare(p):
             | GTE
             | LT
             | GT
+            | DIF
     '''
     p[0] = p[1]
 

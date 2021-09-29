@@ -34,7 +34,7 @@ class Translator:
         file.close()
 
     def Create_Delay(self, time,unit):
-        result1 = ("del," + str(time) + ";" + str(unit) + "/")
+        result1 = ("del," + str(time) + ";" + str(unit[1:-1]) + "/")
         t = Translator()
         t.Write(result1)
 

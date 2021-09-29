@@ -1,12 +1,9 @@
 fn main(){
-    let num = 3;
-    While num < 10{
-
-        Println!("SOY EL NUM", num);
-        if num == 3{
-            Println!("TERMINE");
-            break
-        }
-
-    }
+    Move("T",false);
+    Delay(10000,"Mil");
+    Move("T",true);
+    Delay(10,"Seg");
+    Move("T",false);
+    Delay(1,"Min");
+    Move("T",true);
 }

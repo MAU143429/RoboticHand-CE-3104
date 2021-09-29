@@ -50,7 +50,7 @@ class Main():
                 elif i[0] == "WTRUE":
                     print("WHILE TRUE")
                     Wtrue(i[1],i[2]).execute()
-                    
+
                 elif i[0] == "BREAK":
                     return True
 
@@ -266,7 +266,7 @@ class Opera:
             var2 = self.operand2
 
         '''
-        Resuelve la operacion.. 
+        Resuelve la operacion..
         '''
         if isinstance(var1, int) and isinstance(var2, int):
             if self.operator == "+":
@@ -357,14 +357,9 @@ class While:
         self.table = table
         self.t_expr1 = None
         self.t_expr2 = None
-
-
         print("WHILE")
+
     def getExpr(self, expr):
-        if isinstance(int(expr), int):
-            return int(expr)
-        if isinstance(validate_real_bool(expr), bool):
-            return  validate_real_bool(expr)
         exists = False
         for var in self.table:
             if var == str(expr):
@@ -373,6 +368,10 @@ class While:
                 else:
                     errorHandler = Generate_Error(18, self.line)
                     errorHandler.Execute()
+        if isinstance(int(expr), int):
+            return int(expr)
+        if isinstance(validate_real_bool(expr), bool):
+            return  validate_real_bool(expr)
         if not exists:
             errorHandler = Generate_Error(5, self.line)
             errorHandler.Execute()

@@ -1,0 +1,8 @@
+mov,T;false/
+del,10000;Mil/
+mov,T;true/
+del,10;Seg/
+mov,T;false/
+del,1;Min/
+mov,T;true/
+1

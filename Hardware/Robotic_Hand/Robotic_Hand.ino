@@ -94,9 +94,9 @@ void Move(String finger, String status_mov){
 void Create_delays(int timer, String unit){
 
   if(unit == "Seg"){
-    delay(timer*1000);
+    delay((timer*1000));
   }else if(unit == "Min"){
-      delay(timer*10000);
+      delay((timer*60)*1000);
   }else{
     delay(timer);
   }
