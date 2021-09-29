@@ -6,7 +6,7 @@ from Software.SymbolsTable import *
 myTable = SymbolsTable()
 from Software.Print_Log import *
 
-
+stop = False
 class Main():
     def __init__(self, instructions):
         self.instructions = instructions
@@ -24,6 +24,7 @@ class Main():
         return Opera(operator, operand1, operand2, myTable.table, line).Operate()
 
     def runCode(self, functionInstructions):
+        global stop
         print(functionInstructions)
         if functionInstructions != None:
             for i in functionInstructions:
@@ -61,12 +62,16 @@ class Main():
                     print("LOOP")
                     Loop(i[1],i[2]).execute()
 
+
+
                 elif i[0] == "WTRUE":
                     print("WHILE TRUE")
                     Wtrue(i[1],i[2]).execute()
 
                 elif i[0] == "BREAK":
-                    return True
+                    print("DETECTE QUE TENGO QUE PARAR")
+                    stop = True
+
 
                 elif i[0] == "WHILE":
                     print("WHILE")
@@ -141,6 +146,7 @@ class Del:
         self.line = line
         self.table = table
         self.checker = MoveDelayCheck(self.unit)
+
         if self.checker.check_units():
             print("SE HA REGISTRADO EL DELAY CON DURACION DE " + str(self.value) + " " + self.unit +  " EN LA LINEA " + str(self.line))
             t = Translator()
@@ -272,9 +278,7 @@ class Opera:
             for var in self.table:
                 if var == str(self.operand):
                     var1 = self.table[var]["value"]
-                    print("SOY VAR1 --> " + str(var1))
             if var1 == None:
-                print("ES EL 1")
                 errorHandler = Generate_Error(5, self.line)
                 errorHandler.Execute()
                 return
@@ -323,9 +327,15 @@ class Loop:
     def __init__(self, instructions, line):
         self.line = line
         self.instructions = instructions
+        self.stop = False
+
         print("SOY LAS INSTRUCCIONES ---> " + str(self.instructions))
 
+    def setStop(self):
+        self.stop = True
+
     def execute(self):
+        global stop
         exist = False;
         for ins in self.instructions:
             print("SOY LAS INS ---> " + str(ins))
@@ -342,10 +352,11 @@ class Loop:
                         exist = True
 
         if exist:
-            if Main(None).runCode(self.instructions):
-                print("LOOP EJECUTADO")
-            else:
-                print("SIGUIENTE INSTRUCCION")
+            while not stop:
+                Main(None).runCode(self.instructions)
+                print("Ejecutando")
+            stop = False
+
         else:
             errorHandler = Generate_Error(17, self.line)
             errorHandler.Execute()
@@ -371,10 +382,10 @@ class Wtrue:
                     if i[0] == "BREAK":
                         exist = True
         if exist:
-            if Main(None).runCode(self.instructions):
-                print("WHILE TRUE EJECUTADO")
-            else:
-                print("SIGUIENTE INSTRUCCION")
+            while not stop:
+                Main(None).runCode(self.instructions)
+                print("Ejecutando")
+            stop = False
         else:
             errorHandler = Generate_Error(17, self.line)
             errorHandler.Execute()
@@ -415,63 +426,92 @@ class While:
         '''
         valid = False
         total_recursion = 0
-
         self.t_expr1 = self.getExpr(self.expr1)
         self.t_expr2 = self.getExpr(self.expr2)
 
         if type(self.t_expr1) == type(self.t_expr2):
             if self.compare == "==":
-                if self.t_expr1 == self.t_expr2:
-                    valid = True
-                else:
-                    valid = False
+                while self.t_expr1 == self.t_expr2:
+                    if total_recursion < 200:
+                        self.t_expr1 = self.getExpr(self.expr1)
+                        self.t_expr2 = self.getExpr(self.expr2)
+                        Main(None).runCode(self.instructions)
+                        self.t_expr1 = self.getExpr(self.expr1)
+                        self.t_expr2 = self.getExpr(self.expr2)
+                        total_recursion += 1
+                    else:
+                        errorHandler = Generate_Error(19, self.line)
+                        errorHandler.Execute()
+                        break
 
             if self.compare == "!=":
-                if self.t_expr1 != self.t_expr2:
-                    valid = True
-                else:
-                    valid = False
-
+                while self.t_expr1 != self.t_expr2:
+                    if total_recursion < 200:
+                        self.t_expr1 = self.getExpr(self.expr1)
+                        self.t_expr2 = self.getExpr(self.expr2)
+                        Main(None).runCode(self.instructions)
+                        self.t_expr1 = self.getExpr(self.expr1)
+                        self.t_expr2 = self.getExpr(self.expr2)
+                        total_recursion +=1
+                    else:
+                        errorHandler = Generate_Error(19, self.line)
+                        errorHandler.Execute()
+                        break
             if self.compare == ">":
-                if self.t_expr1 > self.t_expr2:
-                    valid = True
-                else:
-                    valid = False
+                while self.t_expr1 > self.t_expr2:
+                    if total_recursion < 200:
+                        self.t_expr1 = self.getExpr(self.expr1)
+                        self.t_expr2 = self.getExpr(self.expr2)
+                        Main(None).runCode(self.instructions)
+                        self.t_expr1 = self.getExpr(self.expr1)
+                        self.t_expr2 = self.getExpr(self.expr2)
+                    else:
+                        errorHandler = Generate_Error(19, self.line)
+                        errorHandler.Execute()
+                        break
 
             if self.compare == ">=":
-                if self.t_expr1 >= self.t_expr2:
-                    valid = True
-                else:
-                    valid = False
+                while self.t_expr1 >= self.t_expr2:
+                    if total_recursion < 200:
+                        self.t_expr1 = self.getExpr(self.expr1)
+                        self.t_expr2 = self.getExpr(self.expr2)
+                        Main(None).runCode(self.instructions)
+                        self.t_expr1 = self.getExpr(self.expr1)
+                        self.t_expr2 = self.getExpr(self.expr2)
+                    else:
+                        errorHandler = Generate_Error(19, self.line)
+                        errorHandler.Execute()
+                        break
 
             if self.compare == "<":
-                if self.t_expr1 < self.t_expr2:
-                    valid = True
-                else:
-                    valid = False
+                while self.t_expr1 < self.t_expr2:
+                    if total_recursion < 200:
+                        self.t_expr1 = self.getExpr(self.expr1)
+                        self.t_expr2 = self.getExpr(self.expr2)
+                        Main(None).runCode(self.instructions)
+                        self.t_expr1 = self.getExpr(self.expr1)
+                        self.t_expr2 = self.getExpr(self.expr2)
+                    else:
+                        errorHandler = Generate_Error(19, self.line)
+                        errorHandler.Execute()
+                        break
 
             if self.compare == "<=":
-                if self.t_expr1 <= self.t_expr2:
-                    valid = True
-                else:
-                    valid = False
-
+                while self.t_expr1 <= self.t_expr2:
+                    if total_recursion < 200:
+                        self.t_expr1 = self.getExpr(self.expr1)
+                        self.t_expr2 = self.getExpr(self.expr2)
+                        Main(None).runCode(self.instructions)
+                        self.t_expr1 = self.getExpr(self.expr1)
+                        self.t_expr2 = self.getExpr(self.expr2)
+                        total_recursion += 1
+                    else:
+                        errorHandler = Generate_Error(19, self.line)
+                        errorHandler.Execute()
+                        break
         else:
             errorHandler = Generate_Error(8, self.line)
             errorHandler.Execute()
-
-        if total_recursion < 900:
-            if valid:
-                Main(None).runCode(self.instructions)
-                total_recursion +=1
-
-            else:
-                print("WHILE EJECUTADO")
-
-        else:
-            errorHandler = Generate_Error(19, self.line)
-            errorHandler.Execute()
-            #ERROR RECURSION EXCEDIDA
 
 class For:
     def __init__(self, id, const1, range, const2, instructions, line):

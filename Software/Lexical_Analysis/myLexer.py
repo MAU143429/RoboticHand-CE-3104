@@ -21,7 +21,6 @@ def lex_test():
             error = ErrorLog()
 
             for token in clone:
-                print("metiendo token ", token)
                 myTable.insertToken(token.type, token.value)
 
             print("esta es mi tabla")

@@ -107,8 +107,8 @@ class Generate_Error:
             parser.syntax_error = True
             self.error.log_error(e_msg, 3)
 
-            if self.code == 19:
-                e_msg = "SEMANTIC ERROR AT LINE " + str(self.line) + ". MAXIMUM RECURSION DEPTH EXCEEDED IN COMPARISON"
-                parser.syntax_error = True
-                self.error.log_error(e_msg, 3)
+        if self.code == 19:
+            e_msg = "SEMANTIC ERROR AT LINE " + str(self.line) + ". MAXIMUM RECURSION DEPTH EXCEEDED IN COMPARISON"
+            parser.syntax_error = True
+            self.error.log_error(e_msg, 3)
 
