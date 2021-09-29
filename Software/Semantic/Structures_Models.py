@@ -6,6 +6,7 @@ from Software.SymbolsTable import *
 myTable = SymbolsTable()
 from Software.Print_Log import *
 
+
 class Main():
     def __init__(self, instructions):
         self.instructions = instructions
@@ -55,7 +56,7 @@ class Main():
 
                 elif i[0] == "WHILE":
                     print("WHILE")
-                    While(i[1],i[2],i[3],i[4],i[5]).execute()
+                    While(i[1],i[2],i[3],i[4],i[5], myTable.table).execute()
 
 
 class Let:
@@ -347,13 +348,34 @@ class Wtrue:
             errorHandler.Execute()
 
 class While:
-    def __init__(self, expr1,compare,expr2,instructions,line):
+    def __init__(self, expr1,compare,expr2,instructions,line,table):
         self.line = line
         self.expr1 = expr1
         self.expr2 = expr2
         self.compare = compare
         self.instructions = instructions
+        self.table = table
+        self.t_expr1 = None
+        self.t_expr2 = None
+
+
         print("WHILE")
+    def getExpr(self, expr):
+        if isinstance(int(expr), int):
+            return int(expr)
+        if isinstance(validate_real_bool(expr), bool):
+            return  validate_real_bool(expr)
+        exists = False
+        for var in self.table:
+            if var == str(expr):
+                if self.table[expr]["value"] != None:
+                    return self.table[expr]["value"]
+                else:
+                    errorHandler = Generate_Error(18, self.line)
+                    errorHandler.Execute()
+        if not exists:
+            errorHandler = Generate_Error(5, self.line)
+            errorHandler.Execute()
 
     def execute(self):
 
@@ -363,10 +385,51 @@ class While:
         valid = False
         total_recursion = 0
 
-        valid = True # si la comparacion es valida
+        self.t_expr1 = self.getExpr(self.expr1)
+        self.t_expr2 = self.getExpr(self.expr2)
+
+        if type(self.t_expr1) == type(self.t_expr2):
+            if self.compare == "==":
+                if self.t_expr1 == self.t_expr2:
+                    valid = True
+                else:
+                    valid = False
+
+            if self.compare == "!=":
+                if self.t_expr1 != self.t_expr2:
+                    valid = True
+                else:
+                    valid = False
+
+            if self.compare == ">":
+                if self.t_expr1 > self.t_expr2:
+                    valid = True
+                else:
+                    valid = False
+
+            if self.compare == ">=":
+                if self.t_expr1 >= self.t_expr2:
+                    valid = True
+                else:
+                    valid = False
+
+            if self.compare == "<":
+                if self.t_expr1 < self.t_expr2:
+                    valid = True
+                else:
+                    valid = False
+
+            if self.compare == "<=":
+                if self.t_expr1 <= self.t_expr2:
+                    valid = True
+                else:
+                    valid = False
+
+        else:
+            errorHandler = Generate_Error(8, self.line)
+            errorHandler.Execute()
 
         if total_recursion < 900:
-
             if valid:
                 Main(None).runCode(self.instructions)
                 total_recursion +=1
@@ -375,6 +438,8 @@ class While:
                 print("WHILE EJECUTADO")
 
         else:
+            errorHandler = Generate_Error(19, self.line)
+            errorHandler.Execute()
             #ERROR RECURSION EXCEDIDA
 
 class For:

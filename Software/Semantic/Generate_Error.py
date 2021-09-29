@@ -101,3 +101,14 @@ class Generate_Error:
             e_msg = "SEMANTIC ERROR AT LINE " + str(self.line) + ". MISSING BREAK EXPRESSION"
             parser.syntax_error = True
             self.error.log_error(e_msg, 3)
+
+        if self.code == 18:
+            e_msg = "SEMANTIC ERROR AT LINE " + str(self.line) + ". INVALID VARIABLE"
+            parser.syntax_error = True
+            self.error.log_error(e_msg, 3)
+
+            if self.code == 19:
+                e_msg = "SEMANTIC ERROR AT LINE " + str(self.line) + ". MAXIMUM RECURSION DEPTH EXCEEDED IN COMPARISON"
+                parser.syntax_error = True
+                self.error.log_error(e_msg, 3)
+
