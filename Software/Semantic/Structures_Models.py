@@ -238,22 +238,23 @@ class Print:
         self.printLogger = ""
         self.logger = PrintLog()
         self.printChecking()
-
+        self.logger.log_print(self.printLogger)
 
         print("SE IMPRIMIRA EN LA CONSOLA -->  " + str(self.printLogger) + " DESDE LA LINEA " + str(self.line))
 
     def printChecking(self):
 
         for var in self.value:
+
             if isinstance(var, int):
                 self.printLogger = self.printLogger + str(var)
-                self.logger.log_print(self.printLogger)
+
             elif isinstance(validate_real_bool(var), bool):
                 self.printLogger = self.printLogger + str(var)
-                self.logger.log_print(self.printLogger)
+
             elif var in self.stringsList:
+
                 self.printLogger = self.printLogger + var[1:-1]
-                self.logger.log_print(self.printLogger)
             else:
                 exist = False
                 for i in self.table:
@@ -262,7 +263,6 @@ class Print:
                         break
                 if exist:
                     self.printLogger = self.printLogger + str(self.table[i]["value"]) + " "
-                    self.logger.log_print(self.printLogger)
                 else:
                     errorHandler = Generate_Error(5, self.line)
                     errorHandler.Execute()

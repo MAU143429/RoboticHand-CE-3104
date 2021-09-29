@@ -3,49 +3,16 @@ fn main(){
     let num = 0;
     let down = false;
     let upp = true;
-    while(num != 3){
-        if num == 0 {
-
-            Move("T",down);
-            Delay(500,"Mil");
-            Println!("SE CREO UN NUEVO MOVIMIENTO");
-
-        }elseif num == 1{
-
-            Move(["P","I","M","A","Q"],upp);
-            Delay(500,"Mil");
-            Println!("SE CREO UN MOVIMIENTO EN LISTA");
-
-        }elseif num == 2 {
-
-            Move("T",false);
-            Delay(500,"Mil");
-            Println!("EL VALOR DE NUM",num);
-        }
-        let num = Opera(+,num,1);
-    }
     let res = Opera(*,4,7);
     let max = Opera(-,14,Opera(+,res,-14));
     let div = 49;
     let cifra2 = false;
     procedimiento(cifra2, div);
-    while true{
-        if max < 0 {
-            break
-        }else{
-            Move(["P","Q"],upp);
-            for var2 in 1..2{
-                Delay(1,"Seg");
-            }
-            Move(["P","Q"],down);
-            let max = Opera(+, max ,1);
-        }
-    }
 }
 
 fn procedimiento(cifra1, cifra3) {
     let var = true;
-    for cifra in 6..7 {
+    for cifra in 6..8 {
         let num = cifra;
         let newNum = Opera(+, num, Opera(+, Opera(+, num, 4), 4));
         Println!("SOY EL NUM ",num);
