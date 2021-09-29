@@ -3,10 +3,11 @@ fn main(){
     let num = 49;
     Println!("Hola", res);
     Move(["A", "T", "M"], res);
-    procedimiento();
+    let cifra2 = false;
+    procedimiento(cifra2, num);
 }
 
-fn procedimiento() {
+fn procedimiento(cifra1, cifra3) {
     let var = true;
     for cifra in 6..7 {
         let num = cifra;

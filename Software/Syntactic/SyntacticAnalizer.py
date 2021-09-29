@@ -50,8 +50,9 @@ def p_procedure(p):
     '''
     procedure : FN ID LPAREN params RPAREN prodbody
     '''
+    line = p.lineno(2)
     myTable.table[p[2]]["scope"] = 'procedure block'
-    p[0] = ["PROCEDURE", p[2], simpleListBuilder().createList(p[4]), p[6]]
+    p[0] = ["PROCEDURE", p[2], simpleListBuilder().createList(p[4]), p[6], line]
     print("procedimiento")
     print("Params detected : ", p[0])
 

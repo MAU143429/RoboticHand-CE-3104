@@ -76,27 +76,71 @@ class Main():
                     print("DECLARATION")
                     for j in self.instructions:
                         if j[1] == i[1]:
-                            Procedure(i[2], j[2], j[3], myTable.table, i[3])
+                            Procedure(i[2], j[2], j[3], myTable.table, i[3], j[4])
 
 class Procedure:
-    def __init__(self, declarationParams, procedureParams, instructions, table, line):
+    def __init__(self, declarationParams, procedureParams, instructions, table, line, lineP):
         self.declarationParams = declarationParams
         self.procedureParams = procedureParams
         self.instructions = instructions
         self.table = table
         self.line = line
+        self.lineP = lineP
 
         if len(declarationParams) == len(procedureParams):
-            var = 0
             if declarationParams[0] != None:
-                while len(declarationParams) != var:
-                    self.table[procedureParams[var]]["value"] = declarationParams[var]
-                    var+=1
-            Main(None).runCode(self.instructions)
+                exist = False
+                for i in procedureParams:
+                    for param in self.table:
+                        if (param == i):
+                            if self.table[param]["value"] != None:
+                                errorHandler = Generate_Error(15, self.lineP)
+                                errorHandler.Execute()
+                                exist = True
+                                break
+                    if exist:
+                        break
+                if not exist:
+                    if self.validateParams(declarationParams):
+                        var = 0
+                        while len(declarationParams) != var:
+                            self.table[procedureParams[var]]["value"] = declarationParams[var]
+                            if isinstance(self.table[procedureParams[var]]["value"], int):
+                                self.table[procedureParams[var]]["type"] = int
+                            elif isinstance(validate_real_bool(self.table[procedureParams[var]]["value"]), bool):
+                                self.table[procedureParams[var]]["type"] = bool
+                            var += 1
+                        Main(None).runCode(self.instructions)
+                        #for j in procedureParams:
+                            #self.table[j]["value"] = None
 
         else:
             errorHandler = Generate_Error(20, self.line)
             errorHandler.Execute()
+
+    def validateParams(self, params):
+        errorFound = False
+        param = 0
+        for i in params:
+            exist = True
+            if not isinstance(validate_real_bool(i), bool) or isinstance(i, int):
+                for var in self.table:
+                    if (var == i):
+                        if self.table[var]["value"] != None:
+                            exist = True
+                            self.declarationParams[param] = self.table[var]["value"]
+                            break
+                        else:
+                            exist = False
+            if not exist:
+                errorFound = True
+                errorHandler = Generate_Error(5, self.line)
+                errorHandler.Execute()
+            param += 1
+        if errorFound == False:
+            return True
+        else:
+            return False
 
 class Let:
     def __init__(self, id, value,line,symbol_table,result):
@@ -121,7 +165,6 @@ class Let:
                 else:
                     errorHandler=Generate_Error(15, self.line)
                     errorHandler.Execute()
-
 
             else:
                 found = False
