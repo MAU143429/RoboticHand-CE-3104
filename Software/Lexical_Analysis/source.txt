@@ -1,13 +1,19 @@
 fn main(){
     let res = false;
+    let sum = funcion(65, true);
     let num = 49;
     Println!("Hola", res);
     Move(["A", "T", "M"], res);
     let cifra2 = false;
-    procedimiento(cifra2, num);
+    procedimiento();
 }
 
-fn procedimiento(cifra1, cifra3) {
+fn funcion(rere, tun) -> integer{
+    let var53 = 54;
+    return tun;
+}
+
+fn procedimiento() {
     let var = true;
     for cifra in 6..7 {
         let num = cifra;

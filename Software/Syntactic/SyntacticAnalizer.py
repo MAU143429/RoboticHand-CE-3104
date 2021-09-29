@@ -53,8 +53,6 @@ def p_procedure(p):
     line = p.lineno(2)
     myTable.table[p[2]]["scope"] = 'procedure block'
     p[0] = ["PROCEDURE", p[2], simpleListBuilder().createList(p[4]), p[6], line]
-    print("procedimiento")
-    print("Params detected : ", p[0])
 
 def p_prodbody(p):
     '''
@@ -69,9 +67,11 @@ REGLAS PARA FUNCIONES
 
 def p_function(p):
     '''
-    function : FN ID LPAREN params RPAREN funbody
+    function : FN ID LPAREN params RPAREN funbody LCRLBRACKET line end RCRLBRACKET
     '''
-    print("Params detected : ", p[0])
+    line = p.lineno(2)
+    myTable.table[p[2]]["scope"] = 'function block'
+    p[0] = ["FUNCTION", p[2], simpleListBuilder().createList(p[4]), p[6], p[8], p[9], line]
 
 def p_params(p):
     '''
@@ -93,9 +93,9 @@ def p_arg(p):
 
 def p_funbody(p):
     '''
-    funbody : ARROW output LCRLBRACKET line end RCRLBRACKET
+    funbody : ARROW output
     '''
-
+    p[0] = p[2]
 
 def p_output(p):
     '''
@@ -113,8 +113,6 @@ def p_end(p):
 def p_program(p):
     '''
     line : loop line
-         | function line
-         | procedure line
          | for line
          | while line
          | if line
@@ -137,6 +135,13 @@ def p_program(p):
 def p_declarations(p):
     '''
     declaration : ID LPAREN params RPAREN SEMICOLON
+    '''
+    line = p.lineno(2)
+    p[0] = ["DECLARATION", p[1], simpleListBuilder().createList(p[3]), line]
+
+def p_declarations2(p):
+    '''
+    declaration2 : ID LPAREN params RPAREN
     '''
     line = p.lineno(2)
     p[0] = ["DECLARATION", p[1], simpleListBuilder().createList(p[3]), line]
@@ -387,11 +392,11 @@ REGLAS PARA LET
 ###########################################################################
 '''
 
-
 def p_let(p):
     '''
     let : LET ID ASSIGN operand SEMICOLON
         | LET ID ASSIGN bool SEMICOLON
+        | LET ID ASSIGN declaration2 SEMICOLON
     '''
 
     line = p.lineno(2)

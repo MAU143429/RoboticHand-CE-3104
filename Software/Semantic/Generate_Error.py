@@ -116,3 +116,23 @@ class Generate_Error:
             e_msg = "SEMANTIC ERROR AT LINE " + str(self.line) + ". PARAMETERS DO NOT MATCH"
             parser.syntax_error = True
             self.error.log_error(e_msg, 3)
+
+        if self.code == 21:
+            e_msg = "SEMANTIC ERROR AT LINE " + str(self.line) + ". AN UNEXISTING FUNCTION WAS CALLED"
+            parser.syntax_error = True
+            self.error.log_error(e_msg, 3)
+
+        if self.code == 22:
+            e_msg = "SEMANTIC ERROR AT LINE " + str(self.line) + ". AN UNEXISTING PROCEDURE WAS CALLED"
+            parser.syntax_error = True
+            self.error.log_error(e_msg, 3)
+
+        if self.code == 23:
+            e_msg = "SEMANTIC ERROR. AN UNDECLARED VARIABLE WAS RETURNED IN A FUNCTION AT LINE " + str(self.line)
+            parser.syntax_error = True
+            self.error.log_error(e_msg, 3)
+
+        if self.code == 24:
+            e_msg = "SEMANTIC ERROR. A WRONG VALUE WAS RETURNED IN A FUNCTION AT LINE " + str(self.line)
+            parser.syntax_error = True
+            self.error.log_error(e_msg, 3)

@@ -35,6 +35,24 @@ class Main():
                             operation = self.validateOpera(i[2][1], i[2][2], i[2][3], i[2][4])
                             result = myTable.insertValue(operation, i[1], i[3])
                             Let(i[1], operation, i[3], myTable.table, result)
+                        if i[2][0] == "DECLARATION":
+                            print("DECLARATION")
+                            exist = False
+                            for j in self.instructions:
+                                if not isinstance(j[1], list):
+                                    if j[0] == "FUNCTION":
+                                        if j[1] == i[2][1]:
+                                            print("paso")
+                                            resFunc = Function(i[2][2], j[2], j[4], myTable.table, i[2][3], j[6], j[1], j[3], j[5]).result()
+                                            resultFunc = myTable.insertValue(resFunc, i[1], i[3])
+                                            Let(i[1], resFunc, i[3], myTable.table, resultFunc)
+                                            exist = True
+                                            break
+                                        else:
+                                            exist = False
+                            if not exist:
+                                errorHandler = Generate_Error(21, i[3])
+                                errorHandler.Execute()
                     else:
                         result = myTable.insertValue(i[2], i[1], i[3])
                         Let(i[1], i[2], i[3], myTable.table, result)
@@ -74,9 +92,124 @@ class Main():
 
                 elif i[0] == "DECLARATION":
                     print("DECLARATION")
+                    exist = False
                     for j in self.instructions:
                         if j[1] == i[1]:
                             Procedure(i[2], j[2], j[3], myTable.table, i[3], j[4])
+                            exist = True
+                            break
+                        else:
+                            exist = False
+                    if not exist:
+                        errorHandler = Generate_Error(22, i[3])
+                        errorHandler.Execute()
+
+class Function:
+    def __init__(self, declarationParams, procedureParams, instructions, table, line, lineP, id, output, retorno):
+        self.declarationParams = declarationParams
+        self.procedureParams = procedureParams
+        self.instructions = instructions
+        self.table = table
+        self.line = line
+        self.lineP = lineP
+        self.id = id
+        self.output = output
+        self.retorno = retorno
+
+        if len(declarationParams) == len(procedureParams):
+            if declarationParams[0] != None:
+                exist = False
+                for i in procedureParams:
+                    for param in self.table:
+                        if (param == i):
+                            if self.table[param]["value"] != None:
+                                errorHandler = Generate_Error(15, self.lineP)
+                                errorHandler.Execute()
+                                exist = True
+                                break
+                    if exist:
+                        break
+                if not exist:
+                    if self.validateParams(declarationParams):
+                        var = 0
+                        while len(declarationParams) != var:
+                            self.table[procedureParams[var]]["value"] = declarationParams[var]
+                            if isinstance(self.table[procedureParams[var]]["value"], int):
+                                self.table[procedureParams[var]]["type"] = int
+                            elif isinstance(validate_real_bool(self.table[procedureParams[var]]["value"]), bool):
+                                self.table[procedureParams[var]]["type"] = bool
+                            var += 1
+                        Main(None).runCode(self.instructions)
+                        #for j in procedureParams:
+                            #self.table[j]["value"] = None
+                            #self.table[j]["type"] = None
+            else:
+                Main(None).runCode(self.instructions)
+        else:
+            errorHandler = Generate_Error(20, self.line)
+            errorHandler.Execute()
+
+    def result(self):
+        if str(self.output) == "integer":
+            if isinstance(validate_real_bool(self.retorno), bool):
+                errorHandler = Generate_Error(24, self.line)
+                errorHandler.Execute()
+                return
+            if isinstance(self.retorno, int):
+                return self.retorno
+            else:
+                if isinstance(validate_real_bool(self.table[self.retorno]["value"]), bool):
+                    errorHandler = Generate_Error(24, self.line)
+                    errorHandler.Execute()
+                    return
+                if isinstance(self.table[self.retorno]["value"], int):
+                    return self.table[self.retorno]["value"]
+                else:
+                    errorHandler = Generate_Error(23, self.line)
+                    errorHandler.Execute()
+                    return
+        else:
+            if isinstance(validate_real_bool(self.retorno), bool):
+                return self.retorno
+            if isinstance(self.retorno, int):
+                errorHandler = Generate_Error(24, self.line)
+                errorHandler.Execute()
+                return
+            else:
+                if isinstance(validate_real_bool(self.table[self.retorno]["value"]), bool):
+                    return self.table[self.retorno]["value"]
+                if isinstance(self.table[self.retorno]["value"], int):
+                    errorHandler = Generate_Error(24, self.line)
+                    errorHandler.Execute()
+                    return
+                else:
+                    errorHandler = Generate_Error(23, self.line)
+                    errorHandler.Execute()
+                    return
+
+    def validateParams(self, params):
+        errorFound = False
+        param = 0
+        for i in params:
+            exist = True
+            if not isinstance(validate_real_bool(i), bool) or isinstance(i, int):
+                for var in self.table:
+                    if (var == i):
+                        if self.table[var]["value"] != None:
+                            exist = True
+                            self.declarationParams[param] = self.table[var]["value"]
+                            break
+                        else:
+                            exist = False
+            if not exist:
+                errorFound = True
+                errorHandler = Generate_Error(5, self.line)
+                errorHandler.Execute()
+            param += 1
+        if errorFound == False:
+            return True
+        else:
+            return False
 
 class Procedure:
     def __init__(self, declarationParams, procedureParams, instructions, table, line, lineP):
@@ -111,8 +244,11 @@ class Procedure:
                                 self.table[procedureParams[var]]["type"] = bool
                             var += 1
                         Main(None).runCode(self.instructions)
-                        #for j in procedureParams:
-                            #self.table[j]["value"] = None
+                        for j in procedureParams:
+                            self.table[j]["value"] = None
+                            self.table[j]["type"] = None
+            else:
+                Main(None).runCode(self.instructions)
 
         else:
             errorHandler = Generate_Error(20, self.line)
