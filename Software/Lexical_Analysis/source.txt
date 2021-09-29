@@ -26,8 +26,10 @@ fn main(){
     }
     let res = Opera(*,4,7);
     let max = Opera(-,14,Opera(+,res,-14));
+    let div = 49;
+    let cifra2 = false;
+    procedimiento(cifra2, div);
     loop{
-        Println!(max);
         if max == 7 {
             break
         }else{
@@ -38,5 +40,16 @@ fn main(){
             Move(["P","Q"],down);
             let max = Opera(+, max ,1);
         }
+    }
+}
+
+fn procedimiento(cifra1, cifra3) {
+    let var = true;
+    for cifra in 6..7 {
+        let num = cifra;
+        let newNum = Opera(+, num, Opera(+, Opera(+, num, 4), 4));
+        Println!("SOY EL NUM ",num);
+        Println!("SOY EL NEWNUM ",newNum);
+
     }
 }
