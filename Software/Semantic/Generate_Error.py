@@ -112,3 +112,7 @@ class Generate_Error:
             parser.syntax_error = True
             self.error.log_error(e_msg, 3)
 
+        if self.code == 20:
+            e_msg = "SEMANTIC ERROR AT LINE " + str(self.line) + ". PARAMETERS DO NOT MATCH"
+            parser.syntax_error = True
+            self.error.log_error(e_msg, 3)
